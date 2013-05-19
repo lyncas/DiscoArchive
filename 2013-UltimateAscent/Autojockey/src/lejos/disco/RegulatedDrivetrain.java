@@ -424,19 +424,19 @@ public class RegulatedDrivetrain implements RegulatedMotor, PIDTuneable
     protected class Regulator
     {
         // PID constants for move and for hold
-        // Old values
-        //static final float MOVE_P = 4f;
-        //static final float MOVE_I = 0.04f;
-        //static final float MOVE_D = 32f;
-        // New values
-        //static final float MOVE_P = 7f;
-	//TODO: FIND PARAMETERS IF NEEDED SMD 20130511
-        float MOVE_P = 6f;
-        float MOVE_I = 0.04f;
-        float MOVE_D = 22f;
+        // leJOS default values
+//        float MOVE_P = 6f;
+//        float MOVE_I = 0.04f;
+//        float MOVE_D = 22f;
         float HOLD_P = 2f;
         float HOLD_I = 0.04f;
         float HOLD_D = 8f;
+	//TODO: FIND PARAMETERS IF NEEDED SMD 20130511
+	//values from DriveDistance, ocnverted to inches to start (*16.297)
+	float MOVE_P=0.147f;
+	float MOVE_I=0.000489f;
+	float MOVE_D=0.1303f;
+
         float basePower = 0; //used to calculate power
         float err1 = 0; // used in smoothing
         float err2 = 0; // used in smoothing
