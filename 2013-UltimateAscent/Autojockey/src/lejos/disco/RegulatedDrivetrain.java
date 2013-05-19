@@ -2,6 +2,7 @@ package lejos.disco;
 
 import java.lejoslang.Math;
 import disco.HW;
+import disco.utils.PIDTuneable;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import lejos.robotics.RegulatedMotor;
@@ -13,7 +14,7 @@ import lejos.util.Delay;
  * speeds and degrees/sec are measured at motor output end.
  * @author Roger Glassey/Andy Shaw
  */
-public class RegulatedDrivetrain implements RegulatedMotor
+public class RegulatedDrivetrain implements RegulatedMotor, PIDTuneable
 {
 
     protected static final int NO_LIMIT = 0x7fffffff;
@@ -378,6 +379,28 @@ public class RegulatedDrivetrain implements RegulatedMotor
 	return motor1.get();
     }
 
+    public double getP() {
+	return reg.MOVE_P;
+    }
+
+    public double getI() {
+	return reg.MOVE_I;
+    }
+
+    public double getD() {
+	return reg.MOVE_D;
+    }
+
+    public double getF() {
+	return 0;
+    }
+
+    public void setPID(double p, double i, double d, double f) {
+	reg.MOVE_P=(float) p;
+	reg.MOVE_I=(float)i;
+	reg.MOVE_D=(float)d;
+    }
+
 
     /**
      * Inner class to regulate velocity; also stop motor at desired rotation angle.
@@ -408,12 +431,12 @@ public class RegulatedDrivetrain implements RegulatedMotor
         // New values
         //static final float MOVE_P = 7f;
 	//TODO: FIND PARAMETERS IF NEEDED SMD 20130511
-        static final float MOVE_P = 6f;
-        static final float MOVE_I = 0.04f;
-        static final float MOVE_D = 22f;
-        static final float HOLD_P = 2f;
-        static final float HOLD_I = 0.04f;
-        static final float HOLD_D = 8f;
+        float MOVE_P = 6f;
+        float MOVE_I = 0.04f;
+        float MOVE_D = 22f;
+        float HOLD_P = 2f;
+        float HOLD_I = 0.04f;
+        float HOLD_D = 8f;
         float basePower = 0; //used to calculate power
         float err1 = 0; // used in smoothing
         float err2 = 0; // used in smoothing
