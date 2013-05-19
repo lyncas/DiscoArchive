@@ -106,7 +106,7 @@ public class LerpDrive extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-	drivetrain.arcadeDrive(0, 0);
+	drivetrain.tankDrive(0, 0);
 	turnControl.disable();
     }
 

@@ -7,9 +7,9 @@ package disco.commands.drivetrain;
 import disco.commands.CommandBase;
 
 public class cycleDrive extends CommandBase {
-    private static int mode=1;
+    private static int mode=0;
     private boolean done;
-    private static final int numModes=1;
+    private static final int numModes=2;
 
     public cycleDrive() {
 
@@ -25,6 +25,7 @@ public class cycleDrive extends CommandBase {
         switch(mode){
             case 0: new LerpDrive().start();
                     break;
+	    case 1: new FloatDrive().start();
         }
         mode= mode<numModes-1 ? mode+1 : 0;
         done=true;
