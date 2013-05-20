@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
@@ -15,6 +17,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import res.MenuStrings;
 
 /**
@@ -36,6 +43,8 @@ public class DriveVis {
     public static final int size = 800;
     //Flags
     private static boolean b_fastRefresh = false;
+    private static boolean b_hc=false;
+    private static boolean b_nums=true;
 
     public static void main(String[] args) {
 	createTopLevel();
@@ -68,12 +77,20 @@ public class DriveVis {
 	//GRID OPTIONS MENU
 	menu = new JMenu(MenuStrings.menu_title);
 	menuBar.add(menu);
+
 	cbMenuItem = new JCheckBoxMenuItem(MenuStrings.btn_fast_refresh);
 	cbMenuItem.setToolTipText(MenuStrings.bth_fast_refresh_tooltip);
 	cbMenuItem.addItemListener(new menuListener());
 	menu.add(cbMenuItem);
+
 	cbMenuItem = new JCheckBoxMenuItem(MenuStrings.btn_high_contrast);
 	cbMenuItem.setToolTipText(MenuStrings.btn_high_contrast_tooltip);
+	cbMenuItem.addItemListener(new menuListener());
+	menu.add(cbMenuItem);
+
+	cbMenuItem=new JCheckBoxMenuItem(MenuStrings.btn_disp_numbers);
+	cbMenuItem.setToolTipText(MenuStrings.btn_disp_numbers_tooltip);
+	cbMenuItem.setSelected(true);
 	cbMenuItem.addItemListener(new menuListener());
 	menu.add(cbMenuItem);
 
@@ -100,7 +117,31 @@ public class DriveVis {
 	    modeButs.add(but);
 	    options.add(but);
 	}
+	//Grid resolution spinner
+	SpinnerModel sp = new SpinnerNumberModel(divisions < 30 && divisions > 2 ? divisions : 5, 2, 30, 1);
+	JSpinner resolutionSpinner=new JSpinner(sp);
+	resolutionSpinner.setToolTipText(MenuStrings.spinner_resolution_tooltip);
+	resolutionSpinner.addChangeListener(new spinnerListener());
+	options.add(resolutionSpinner);
+
 	main_panel.add(options);
+    }
+
+    static class spinnerListener implements ChangeListener{
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+	    JSpinner spin=(JSpinner)e.getSource();
+	    int value=((SpinnerNumberModel)spin.getModel()).getNumber().intValue();
+	    //g.reset(value,size);
+	    g=new Grid(value,size);
+	    main_panel.remove(0);
+	    main_panel.add(g, 0);
+	    g.setHighContrast(b_hc);
+	    g.setNumbers(b_nums);
+	    main_panel.repaint();
+	}
+
     }
 
     static class modeListener implements ActionListener {
@@ -132,6 +173,11 @@ public class DriveVis {
 		    break;
 		case MenuStrings.btn_high_contrast:
 		    g.setHighContrast(selected);
+		    b_hc=selected;
+		    break;
+		case MenuStrings.btn_disp_numbers:
+		    g.setNumbers(selected);
+		    b_nums=selected;
 		    break;
 	    }
 	}

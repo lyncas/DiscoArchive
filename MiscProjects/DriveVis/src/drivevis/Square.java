@@ -15,6 +15,7 @@ public class Square extends JLabel {
     private double joy_x = 0, joy_y = 0;
     int quadrant = 0;
     private boolean hc = false;//high contrast
+    private boolean nums = true;//display output on square
 
     public Square(int x_pos, int y_pos, int side, double positionDivision) {
 	super();
@@ -28,7 +29,11 @@ public class Square extends JLabel {
     public void setOutput(double l, double r) {
 	left = l;
 	right = r;
-	this.setText(left + " , " + right);
+	if (nums) {
+	    this.setText(left + " , " + right);
+	} else {
+	    this.setText(" ");
+	}
 	this.setOpaque(true);
 	if (hc) {
 	    int bw = (Math.abs(computeBW(left)) + Math.abs(computeBW(right))) / 2;
@@ -40,12 +45,16 @@ public class Square extends JLabel {
 	}
     }
 
-    public void refresh(){
-	setOutput(left,right);
+    public void refresh() {
+	setOutput(left, right);
     }
 
     public void setHC(boolean hc) {
 	this.hc = hc;
+    }
+
+    public void setDispNums(boolean nums){
+	this.nums=nums;
     }
 
     public double getJoyX() {

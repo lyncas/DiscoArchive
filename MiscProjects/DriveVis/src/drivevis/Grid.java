@@ -41,6 +41,20 @@ public class Grid extends JPanel {
 	createGrid();
     }
 
+    public void reset(int div_quad,int parentSize){
+	squares=null;
+	this.removeAll();
+	thisMode = modes.get(0);
+	squaresPerRow = div_quad * 2 + 1;
+	squares = new Square[squaresPerRow][squaresPerRow];
+	center = div_quad - 1;//start at 0
+	square_size = parentSize / (squaresPerRow);
+	GridLayout layout = new GridLayout(squaresPerRow, squaresPerRow);
+	this.setLayout(layout);
+
+	createGrid();
+    }
+
     private void createGrid() {
 	for (int x = 0; x < squares.length; x++) {
 	    for (int y = 0; y < squares[x].length; y++) {
@@ -71,6 +85,15 @@ public class Grid extends JPanel {
 	    for (Square[] sarr : squares) {
 	    for (Square s : sarr) {
 		s.setHC(hc);
+		s.refresh();
+	    }
+	}
+    }
+
+    public void setNumbers(boolean nums){
+	    for (Square[] sarr : squares) {
+	    for (Square s : sarr) {
+		s.setDispNums(nums);
 		s.refresh();
 	    }
 	}
