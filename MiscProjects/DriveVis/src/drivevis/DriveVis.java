@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import res.MenuStrings;
 
 /**
  *
@@ -65,14 +66,14 @@ public class DriveVis {
 	JCheckBoxMenuItem cbMenuItem;
 
 	//GRID OPTIONS MENU
-	menu = new JMenu("Grid options");
+	menu = new JMenu(MenuStrings.menu_title);
 	menuBar.add(menu);
-	cbMenuItem = new JCheckBoxMenuItem("Fast refresh");
-	cbMenuItem.setToolTipText("Easier to see differences, but doesn't look as cool");
+	cbMenuItem = new JCheckBoxMenuItem(MenuStrings.btn_fast_refresh);
+	cbMenuItem.setToolTipText(MenuStrings.bth_fast_refresh_tooltip);
 	cbMenuItem.addItemListener(new menuListener());
 	menu.add(cbMenuItem);
-	cbMenuItem = new JCheckBoxMenuItem("High contrast");
-	cbMenuItem.setToolTipText("Turn on high contrast mode");
+	cbMenuItem = new JCheckBoxMenuItem(MenuStrings.btn_high_contrast);
+	cbMenuItem.setToolTipText(MenuStrings.btn_high_contrast_tooltip);
 	cbMenuItem.addItemListener(new menuListener());
 	menu.add(cbMenuItem);
 
@@ -102,7 +103,7 @@ public class DriveVis {
 	main_panel.add(options);
     }
 
-    static class modeListener implements ActionListener { //why does this need to be static? please tell me
+    static class modeListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -126,10 +127,10 @@ public class DriveVis {
 	    JMenuItem source = (JMenuItem) e.getItemSelectable();
 	    boolean selected = e.getStateChange() == ItemEvent.SELECTED ? true : false;
 	    switch (source.getText()) {
-	    	case "Fast refresh":
+		case MenuStrings.btn_fast_refresh:
 		    b_fastRefresh = selected;
 		    break;
-	    	case "High contrast":
+		case MenuStrings.btn_high_contrast:
 		    g.setHighContrast(selected);
 		    break;
 	    }
