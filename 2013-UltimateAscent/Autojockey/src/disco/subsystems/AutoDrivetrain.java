@@ -21,7 +21,7 @@ import lejos.robotics.navigation.Pose;
 
 public class AutoDrivetrain extends Subsystem {
 
-    private int accel = 4;//in/sec/sec
+    private int accel = 8;//in/sec/sec
     private double max_speed = 36;
     private Victor leftDrive1;
     private Victor leftDrive2;
@@ -65,6 +65,7 @@ public class AutoDrivetrain extends Subsystem {
 	pilot = new DifferentialPilot(2 * HW.wheelRadius, HW.wheelSeparation, leftDrive, rightDrive);
 	pilot.setAcceleration(accel);
 	pilot.setTravelSpeed(max_speed);
+        pilot.setRotateSpeed(30);
 	op = new OdometryPoseProvider(pilot);
 	//This ensures that the position is correct when we do moves not using the navigator
 	pilot.addMoveListener(op);
@@ -156,4 +157,10 @@ public class AutoDrivetrain extends Subsystem {
     public Navigator getNavigator() {
 	return nav;
     }
+    
+    public void disableControl() {
+        rightDrive.flt(true);
+        leftDrive.flt(true);
+    }
+    
 }

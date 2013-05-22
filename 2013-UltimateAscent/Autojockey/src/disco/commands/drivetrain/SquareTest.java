@@ -56,6 +56,8 @@ public class SquareTest extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
 	p.stop();
+        drivetrain.tankDrive(0, 0);
+        drivetrain.disableControl();
     }
 
     // Called when another command which requires one or more of the same

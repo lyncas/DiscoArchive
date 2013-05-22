@@ -8,6 +8,7 @@ package disco;
 
 import disco.commands.Autonomous;
 import disco.commands.CommandBase;
+import disco.commands.drivetrain.FloatDrive;
 import disco.utils.Dashboard;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -50,6 +51,7 @@ public class MainAscent extends IterativeRobot {
 
     public void disabledInit() {
         HW.preferences.save();
+        new FloatDrive().start();
     }
 
     public void disabledPeriodic() {
@@ -100,4 +102,5 @@ public class MainAscent extends IterativeRobot {
     public static double getExecutionTime(){
         return executionTimeMillis;
     }
+    
 }

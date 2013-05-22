@@ -433,9 +433,10 @@ public class RegulatedDrivetrain implements RegulatedMotor, PIDTuneable
         float HOLD_D = 8f;
 	//TODO: FIND PARAMETERS IF NEEDED SMD 20130511
 	//values from DriveDistance, ocnverted to inches to start (*16.297)
-	float MOVE_P=0.147f;
-	float MOVE_I=0.000489f;
-	float MOVE_D=0.1303f;
+        final float scalePIDConst = 10f;
+	float MOVE_P=0.147f * scalePIDConst * 2.1f;
+	float MOVE_I=0.000489f * scalePIDConst * 2.1f;
+	float MOVE_D=0.1303f * scalePIDConst * 1.5f;
 
         float basePower = 0; //used to calculate power
         float err1 = 0; // used in smoothing

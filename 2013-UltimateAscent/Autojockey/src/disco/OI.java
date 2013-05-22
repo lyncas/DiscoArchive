@@ -66,10 +66,10 @@ public class OI {
 	 */
         b_Start.whenPressed(new cycleDrive());
 	b_Y.whenPressed(new SquareTest());
-	b_dpadU.whenPressed(new PilotDrive(24));
-	b_dpadD.whenPressed(new PilotDrive(-24));
-	b_dpadR.whenPressed(new PilotTurn(-90));
-	b_dpadL.whenPressed(new PilotTurn(90));
+	b_dpadU.whenPressed(new PilotDrive(240));
+	b_dpadD.whenPressed(new PilotDrive(-240));
+	b_dpadR.whenPressed(new PilotTurn(-1440));
+	b_dpadL.whenPressed(new PilotTurn(1440));
 
 	/*
 	 * Pneumatics
