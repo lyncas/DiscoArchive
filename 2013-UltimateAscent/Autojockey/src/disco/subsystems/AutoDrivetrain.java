@@ -13,8 +13,11 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import lejos.FRC.RegulatedDrivetrain;
+import lejos.geom.Line;
+import lejos.geom.Rectangle;
 import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.localization.PoseProvider;
+import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
 import lejos.robotics.navigation.Pose;
@@ -37,6 +40,7 @@ public class AutoDrivetrain extends Subsystem {
     private DifferentialPilot pilot;
     private OdometryPoseProvider op;
     private Navigator nav;//Formerly NavPathController
+    private LineMap env;
 
     public AutoDrivetrain() {
 	super("Drivetrain");
@@ -72,6 +76,7 @@ public class AutoDrivetrain extends Subsystem {
 	//Tell it that we are initially pointing in the positive Y direction, instead of positive X.
 	op.setPose(new Pose(0, 0, 90));
 	nav = new Navigator(pilot, op);
+        generateMap();
 
 //        gyro = new Gyro(HW.gyroSlot, HW.gyroChannel);
 //        gyro.setSensitivity(0.007);
@@ -80,6 +85,17 @@ public class AutoDrivetrain extends Subsystem {
     public void initDefaultCommand() {
 	new LerpDrive();
     }
+    
+    private void generateMap(){
+        Line[] lines=new Line[4];
+        Rectangle boundary=new Rectangle(-30,60,60,60);
+        lines[0]=new Line(-30,60,30,60);
+        lines[0]=new Line(30,60,30,0);
+        lines[0]=new Line(30,0,-30,0);
+        lines[0]=new Line(-30,0,-30,60);
+        env=new LineMap(lines,boundary);
+    }
+    
 
     public void tankDrive(double left, double right) {
 	//set up for tank
@@ -161,6 +177,14 @@ public class AutoDrivetrain extends Subsystem {
     public void disableControl() {
         rightDrive.flt(true);
         leftDrive.flt(true);
+    }
+    
+    public LineMap getMap(){
+        return env;
+    }
+    
+    public void setMap(LineMap map){
+        env=map;
     }
     
 }

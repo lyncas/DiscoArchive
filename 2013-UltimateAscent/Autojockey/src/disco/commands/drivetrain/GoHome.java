@@ -9,14 +9,14 @@ import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
 
 
-public class MoveHome extends CommandBase {
+public class GoHome extends CommandBase {
     DifferentialPilot p;
     Navigator nav;
 
     /*
      * distance in wheel diameter units
      */
-    public MoveHome() {
+    public GoHome() {
         // Use requires() here to declare subsystem dependencies
         requires(drivetrain);
 	nav=drivetrain.getNavigator();
