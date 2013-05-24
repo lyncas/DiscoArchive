@@ -93,18 +93,6 @@ public class LineMap implements RangeMap {
   }
 
   /**
-   * Dump the map to a DataOutputStream
-   * @param dos the stream
-   * @throws IOException
-   */
-  /**
-   * Load a map from a DataInputStream
-   *
-   * @param dis the stream
-   * @throws IOException
-   */
-
-  /**
    * Get the lines as an array
    *
    * @return the lines as an array
@@ -112,14 +100,6 @@ public class LineMap implements RangeMap {
   public Line[] getLines() {
 	  return lines;
   }
-
-  /**
-   * Create an SVG map file
-   *
-   * @param fileName the name of the file to create or overwrite
-   * @throws IOException
-   */
-//DELETED
 
   /**
    * Create a line map with the y axis flipped

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import lejos.disco.RegulatedDrivetrain;
+import lejos.FRC.RegulatedDrivetrain;
 import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.localization.PoseProvider;
 import lejos.robotics.navigation.DifferentialPilot;
@@ -59,8 +59,8 @@ public class AutoDrivetrain extends Subsystem {
 	leftEncoder.start();
 	rightEncoder.start();
 
-	leftDrive = new RegulatedDrivetrain(leftDrive1, leftDrive2, true, true, leftEncoder);
-	rightDrive = new RegulatedDrivetrain(rightDrive1, rightDrive2, false, false, rightEncoder);
+	leftDrive = new RegulatedDrivetrain(leftDrive1, leftDrive2, true, true, leftEncoder,HW.encoderTicksPerRev);
+	rightDrive = new RegulatedDrivetrain(rightDrive1, rightDrive2, false, false, rightEncoder,HW.encoderTicksPerRev);
 
 	pilot = new DifferentialPilot(2 * HW.wheelRadius, HW.wheelSeparation, leftDrive, rightDrive);
 	pilot.setAcceleration(accel);
