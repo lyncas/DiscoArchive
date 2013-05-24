@@ -66,6 +66,7 @@ public class OI {
 	 */
         b_Start.whenPressed(new cycleDrive());
 	b_Y.whenPressed(new SquareTest());
+	b_X.whenPressed(new MoveHome());
 	b_dpadU.whenPressed(new PilotDrive(240));
 	b_dpadD.whenPressed(new PilotDrive(-240));
 	b_dpadR.whenPressed(new PilotTurn(-1440));

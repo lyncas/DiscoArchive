@@ -15,7 +15,7 @@ public class HW {
      */
 
     //REGULAR 3CIM GEARBOXES. MUST UPDATE VALUES AFTER LSR
-    public static final double wheelRadius=2.125;//in
+    public static final double wheelRadius=1.985;//in
     public static final double wheelSeparation=20.0;//in
     public static final double driveReduction=15.0/24.0;  //NOT EXACT //wheel side : encoder side
     public static final double maxFPS=7;    //KNOWN INCORRECT
