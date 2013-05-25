@@ -440,7 +440,7 @@ public class RegulatedDrivetrain implements RegulatedMotor, PIDTuneable {
         final float scalePIDConst = 10f;
         float MOVE_P = 0.147f * scalePIDConst * 2.05f;
         float MOVE_I = 0.000489f * scalePIDConst * 2.1f;
-        float MOVE_D = 0.1303f * scalePIDConst * 1.6f;
+        float MOVE_D = 0.1303f * scalePIDConst * 1.0f;
         float basePower = 0; //used to calculate power
         float err1 = 0; // used in smoothing
         float err2 = 0; // used in smoothing

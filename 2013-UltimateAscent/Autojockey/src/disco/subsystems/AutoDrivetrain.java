@@ -21,11 +21,13 @@ import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
 import lejos.robotics.navigation.Pose;
+import lejos.robotics.navigation.Waypoint;
+import lejos.robotics.pathfinding.Path;
 
 public class AutoDrivetrain extends Subsystem {
 
-    private int accel = 8;//in/sec/sec
-    private double max_speed = 36;
+    private int accel = 7;//in/sec/sec
+    private double max_speed = 40;
     private Victor leftDrive1;
     private Victor leftDrive2;
     private Victor rightDrive1;
@@ -41,6 +43,8 @@ public class AutoDrivetrain extends Subsystem {
     private OdometryPoseProvider op;
     private Navigator nav;//Formerly NavPathController
     private LineMap env;
+    
+    public Path default_path;
 
     public AutoDrivetrain() {
 	super("Drivetrain");
@@ -76,7 +80,9 @@ public class AutoDrivetrain extends Subsystem {
 	//Tell it that we are initially pointing in the positive Y direction, instead of positive X.
 	op.setPose(new Pose(0, 0, 90));
 	nav = new Navigator(pilot, op);
+        
         generateMap();
+        generatePath();
 
 //        gyro = new Gyro(HW.gyroSlot, HW.gyroChannel);
 //        gyro.setSensitivity(0.007);
@@ -96,6 +102,14 @@ public class AutoDrivetrain extends Subsystem {
         env=new LineMap(lines,boundary);
     }
     
+    public void generatePath(){
+        Path p=new Path();
+        p.add(new Waypoint(-65,118));
+        p.add(new Waypoint(48,156));
+        p.add(new Waypoint(0,240));
+        p.add(new Waypoint(0,0));
+        default_path=p;
+    }
 
     public void tankDrive(double left, double right) {
 	//set up for tank

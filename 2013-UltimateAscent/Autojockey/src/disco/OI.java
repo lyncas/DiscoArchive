@@ -69,10 +69,11 @@ public class OI {
 	b_Y.whenPressed(new SquareTest());
 	b_X.whenPressed(new GoHome());
         b_A.whenPressed(new GoToRandom(CommandBase.drivetrain.getMap().getBoundingRect()));
-	b_dpadU.whenPressed(new PilotDrive(240));
-	b_dpadD.whenPressed(new PilotDrive(-240));
-	b_dpadR.whenPressed(new PilotTurn(-1440));
-	b_dpadL.whenPressed(new PilotTurn(1440));
+        b_B.whenPressed(new FollowPath(CommandBase.drivetrain.default_path));
+	b_dpadU.whenPressed(new PilotDrive(24));
+	b_dpadD.whenPressed(new PilotDrive(-24));
+	b_dpadR.whenPressed(new PilotTurn(-90));
+	b_dpadL.whenPressed(new PilotTurn(90));
 
 	/*
 	 * Pneumatics
