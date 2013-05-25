@@ -11,6 +11,7 @@ package disco.utils;
 import com.sun.squawk.util.Arrays;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.parsing.ISensor;
+import lejos.robotics.RangeFinder;
 
 /**
  *
@@ -19,10 +20,15 @@ import edu.wpi.first.wpilibj.parsing.ISensor;
 /**
  * Maxbotix sonar MB 1240
  */
-public class MaxbotixSonar extends SensorBase implements PIDSource, ISensor {
+public class MaxbotixSonar extends SensorBase implements PIDSource, ISensor, RangeFinder {
     protected static final double k_CentimeterFactor=204.8;
     protected static final double k_InchesFactor = k_CentimeterFactor*0.393;
     protected static final double k_MillimetersFactor = 10*k_CentimeterFactor;
+    public static final double MAX_RANGE=254;//inches. about 20 feet.
+    public static final double MAX_PEOPLE_RANGE=12*5;//inches. Maximum range for detecting objects the size of people.
+    public static final double MIN_RANGE=20;
+    public static final int MIN_READING_DELAY=100;//msec
+
 
     /**
      * The units to return when PIDGet is called
@@ -162,15 +168,19 @@ public class MaxbotixSonar extends SensorBase implements PIDSource, ISensor {
      * @return double Range in inches of the target returned from the MaxbotixSonarsensor. If there is
      * no valid value yet then return 0.
      */
-    public double getRange() {
+    public float getRange() {
         double result=0;
         if(m_units==Unit.kInches) {
-            return getVoltage() * k_InchesFactor;
+            return (float) (getVoltage() * k_InchesFactor);
         }
         if(m_units==Unit.kMillimeter){
-            return getVoltage() *k_MillimetersFactor;
+            return (float) (getVoltage() *k_MillimetersFactor);
         }
-        return getVoltage() * k_InchesFactor;
+        return (float) (getVoltage() * k_InchesFactor);
+    }
+
+    public float[] getRanges() {
+	return new float[]{getRange()};
     }
 
     public double getMedianRange() {
