@@ -68,7 +68,7 @@ public class OI {
         b_Start.whenPressed(new cycleDrive());
 	b_Y.whenPressed(new SquareTest());
 	b_X.whenPressed(new GoHome());
-        b_A.whenPressed(new GoToRandom(CommandBase.drivetrain.getMap()));
+        b_A.whenPressed(new GoToRandom(CommandBase.drivetrain.getMap().getBoundingRect()));
 	b_dpadU.whenPressed(new PilotDrive(240));
 	b_dpadD.whenPressed(new PilotDrive(-240));
 	b_dpadR.whenPressed(new PilotTurn(-1440));
