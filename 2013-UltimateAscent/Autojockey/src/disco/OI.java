@@ -66,10 +66,12 @@ public class OI {
 	 * Drivetrain
 	 */
         b_Start.whenPressed(new cycleDrive());
+
 	b_Y.whenPressed(new SquareTest());
 	b_X.whenPressed(new GoHome());
         b_A.whenPressed(new GoToRandom(CommandBase.drivetrain.getMap().getBoundingRect()));
         b_B.whenPressed(new FollowPath(CommandBase.drivetrain.default_path));
+	
 	b_dpadU.whenPressed(new PilotDrive(24));
 	b_dpadD.whenPressed(new PilotDrive(-24));
 	b_dpadR.whenPressed(new PilotTurn(-90));
