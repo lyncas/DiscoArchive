@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class RobotMapperExtension extends StaticWidget {
 
     private NetworkTable table;
-    private static final String CONST_RobotMapperTableLocation = "LocationInformation";
+    private final String RobotMapperTableLocation = "LocationInformation";
     private double robotPositionX = 0.0, robotPositionY = 0.0;
     private double heading = 0.0;
     private int robotWidth = 0, robotLength = 0;
@@ -34,10 +34,8 @@ public class RobotMapperExtension extends StaticWidget {
     public void init() {
 	setPreferredSize(new Dimension(200, 200));
 	try {
-	    table.setIPAddress("127.0.0.1");
-	    //Should this be an assignment? for example:
-	    //table=NetworkTable.getTable(whatever); I think this would make more sense.
-	    table.getTable(RobotMapperExtension.CONST_RobotMapperTableLocation);
+	    table.setIPAddress("127.0.0.1"); // Temporary for testing. Should be 10.25.87.whatever
+	    NetworkTable.getTable(RobotMapperTableLocation);
 	    robotPositionX = table.getNumber("xPosition");
 	    robotPositionY = table.getNumber("yPosition");
 	    heading = table.getNumber("heading");
@@ -70,15 +68,14 @@ public class RobotMapperExtension extends StaticWidget {
 	try {
 	    int panelCenterX = getSize().width / 2;
 	    int panelCenterY = getSize().height / 2;
-	    if (!connected) { // <-------------------------------------------------- REMOVE ! WHEN TESTING WITH NETWORK TABLES WORKING. ADD IT WHEN TESTING CODE W/O NETWORK TABLES
+	    if (!connected) { // <--- REMOVE ! WHEN TESTING WITH NETWORK TABLES WORKING. ADD IT WHEN TESTING CODE W/O NETWORK TABLES
 		double scaleWidth = 1.0;
 		double scaleHeight = 1.0;
 		double robotCenterX = (double) panelCenterX + robotPositionX * scaleWidth;
 		double robotCenterY = (double) panelCenterY - robotPositionY * scaleHeight;
 		robot.drawRobot(g,robotCenterX,robotCenterY,heading);
 	    } else {
-		g.setColor(Color.BLUE);
-		g.drawOval(panelCenterX - 20, panelCenterY - 20, 40, 40);
+		robot.drawDisabledRobot(g, this.getSize().height / 2, this.getSize().width / 2);
 	    }
 	} catch (Exception e) {
 	    g.setColor(Color.ORANGE);
