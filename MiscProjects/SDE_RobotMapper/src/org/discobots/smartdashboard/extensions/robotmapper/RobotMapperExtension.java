@@ -7,6 +7,7 @@ import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 /**
@@ -24,14 +25,17 @@ public class RobotMapperExtension extends StaticWidget {
     public void setValue(Object o) {
     }
 
-    public void init() {      
-        table.getTable(RobotMapperExtension.CONST_RobotMapperTableLocation);
+    public void init() {
+        setPreferredSize(new Dimension(200, 200));
         try {
+            table.setIPAddress("127.0.0.1");
+            table.getTable(RobotMapperExtension.CONST_RobotMapperTableLocation);
             robotPositionX = table.getNumber("xPosition");
             robotPositionY = table.getNumber("yPosition");
             heading = table.getNumber("heading");
             connected = true;
-        } catch (TableKeyNotDefinedException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             connected = false;
         }
     }
@@ -40,30 +44,40 @@ public class RobotMapperExtension extends StaticWidget {
         
     }
     
-    public void paintComponent(Graphics g) {
+    public void paint(Graphics g) {
         g.setColor(Color.BLACK);
-        g.drawRect(0, 0, this.getWidth(), this.getHeight());
+        g.fillRect(0, 0, getSize().width, getSize().height);
+        g.setColor(Color.GREEN);
+        g.drawString("" + robotPositionX + " " + robotPositionY + " " + heading + " " + connected, 0, 20);
         try {
-            robotPositionX = table.getNumber("xPosition");
-            robotPositionY = table.getNumber("yPosition");
-            heading = table.getNumber("heading");
-            connected = true;
-        } catch (TableKeyNotDefinedException e) {
-            connected = false;
+            try {
+                robotPositionX = table.getNumber("xPosition");
+                robotPositionY = table.getNumber("yPosition");
+                heading = table.getNumber("heading");
+                connected = true;
+            } catch (Exception e) {
+                connected = false;
+                g.setColor(Color.ORANGE);
+                g.drawString("EXCEPTION A", 0, 40);
+            }
+            int panelCenterX = getSize().width / 2;
+            int panelCenterY = getSize().height / 2;
+            if (!connected) { // <-------------------------------------------------- REMOVE ! WHEN TESTING WITH NETWORK TABLES WORKING. ADD IT WHEN TESTING CODE W/O NETWORK TABLES
+                double scaleWidth = 1.0;
+                double scaleHeight = 1.0;
+                double robotCenterX = (double) panelCenterX - robotPositionX * scaleWidth;
+                double robotCenterY = (double) panelCenterY + robotPositionY * scaleHeight;
+                g.setColor(Color.CYAN);
+                g.fillOval((int) robotCenterX - 20, (int) robotCenterY - 20, (int) (40.0 * scaleWidth), (int) (40.0 * scaleHeight));
+                g.setColor(Color.YELLOW);
+                g.fillArc((int) robotCenterX - 20, (int) robotCenterY - 20, (int) (40.0 * scaleWidth), (int) (40.0 * scaleHeight), (int) (heading - 10), (int) (heading + 10));
+            } else {
+                g.setColor(Color.BLUE);
+                g.drawOval(panelCenterX - 20, panelCenterY - 20, 40, 40);
+            }
+        } catch (Exception e) {
+            g.setColor(Color.ORANGE);
+            g.drawString("EXCEPTION B", 0, 40);
         }
-        int panelCenterX = this.getWidth() / 2;
-        int panelCenterY = this.getHeight() / 2;
-        double scaleWidth = this.getWidth() * 0.05;
-        double scaleHeight = this.getHeight() * 0.05;
-        if (connected) {
-            double robotCenterX = (double) panelCenterX - robotPositionX * scaleWidth;
-            double robotCenterY = (double) panelCenterY + robotPositionY * scaleHeight;
-            g.setColor(Color.BLUE);
-            g.drawOval((int) robotCenterX - 20, (int) robotCenterY - 20, (int) (40.0 * scaleWidth), (int) (40.0 * scaleHeight));
-            g.drawArc((int) robotCenterX - 20, (int) robotCenterY - 20, (int) (40.0 * scaleWidth), (int) (40.0 * scaleHeight), (int) (heading - 10), (int) (heading + 10));
-        } else {
-            g.drawOval(panelCenterX - 20, panelCenterY - 20, 40, 40);
-        }
-        
     }
 }
