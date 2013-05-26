@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +24,7 @@ public class RobotMapperExtension extends StaticWidget {
     private double heading = 0.0;
     private int robotWidth = 0, robotLength = 0;
     private boolean connected = false;
+    private dataReader reader;
 
     public void setValue(Object o) {
     }
@@ -30,6 +33,8 @@ public class RobotMapperExtension extends StaticWidget {
 	setPreferredSize(new Dimension(200, 200));
 	try {
 	    table.setIPAddress("127.0.0.1");
+	    //Should this be an assignment? for example:
+	    //table=NetworkTable.getTable(whatever); I think this would make more sense.
 	    table.getTable(RobotMapperExtension.CONST_RobotMapperTableLocation);
 	    robotPositionX = table.getNumber("xPosition");
 	    robotPositionY = table.getNumber("yPosition");
@@ -37,6 +42,8 @@ public class RobotMapperExtension extends StaticWidget {
 	    robotWidth = (int) table.getNumber("robot_Width", 20);
 	    robotLength = (int) table.getNumber("robot_Length", 20);
 	    connected = true;
+	    reader = new dataReader();
+	    reader.start();
 	} catch (Exception e) {
 	    e.printStackTrace();
 	    connected = false;
@@ -51,17 +58,11 @@ public class RobotMapperExtension extends StaticWidget {
 	g.fillRect(0, 0, getSize().width, getSize().height);
 	g.setColor(Color.GREEN);
 	g.drawString("" + robotPositionX + " " + robotPositionY + " " + heading + " " + connected, 0, 20);
+	if (!connected) {
+	    g.setColor(Color.ORANGE);
+	    g.drawString("EXCEPTION A", 0, 40);
+	}
 	try {
-	    try {
-		robotPositionX = table.getNumber("xPosition");
-		robotPositionY = table.getNumber("yPosition");
-		heading = table.getNumber("heading");
-		connected = true;
-	    } catch (Exception e) {
-		connected = false;
-		g.setColor(Color.ORANGE);
-		g.drawString("EXCEPTION A", 0, 40);
-	    }
 	    int panelCenterX = getSize().width / 2;
 	    int panelCenterY = getSize().height / 2;
 	    if (!connected) { // <-------------------------------------------------- REMOVE ! WHEN TESTING WITH NETWORK TABLES WORKING. ADD IT WHEN TESTING CODE W/O NETWORK TABLES
@@ -79,7 +80,30 @@ public class RobotMapperExtension extends StaticWidget {
 	    }
 	} catch (Exception e) {
 	    g.setColor(Color.ORANGE);
-	    g.drawString("EXCEPTION B", 0, 40);
+	    g.drawString("EXCEPTION B", 0, 80);
+	}
+    }
+
+    private class dataReader extends Thread {
+
+	@Override
+	public void run() {
+	    while (true) {
+		try {
+		    //update robot pose
+		    robotPositionX = table.getNumber("xPosition");
+		    robotPositionY = table.getNumber("yPosition");
+		    heading = table.getNumber("heading");
+		    connected = true;
+		} catch (Exception e) {
+		    connected = false;
+		}
+		//wait a while to do it again.
+		try {
+		    sleep(200);
+		} catch (InterruptedException ex) {
+		}
+	    }
 	}
     }
 }
