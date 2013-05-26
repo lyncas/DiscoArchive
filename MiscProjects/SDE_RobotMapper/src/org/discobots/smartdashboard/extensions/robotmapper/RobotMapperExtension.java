@@ -25,10 +25,12 @@ public class RobotMapperExtension extends StaticWidget {
     private int robotWidth = 0, robotLength = 0;
     private boolean connected = false;
     private dataReader reader;
+    private Robot robot;
 
     public void setValue(Object o) {
     }
 
+    @Override
     public void init() {
 	setPreferredSize(new Dimension(200, 200));
 	try {
@@ -48,11 +50,14 @@ public class RobotMapperExtension extends StaticWidget {
 	    e.printStackTrace();
 	    connected = false;
 	}
+	robot=new Robot(robotWidth,robotLength);
     }
 
+    @Override
     public void propertyChanged(Property p) {
     }
 
+    @Override
     public void paint(Graphics g) {
 	g.setColor(Color.BLACK);
 	g.fillRect(0, 0, getSize().width, getSize().height);
@@ -70,10 +75,7 @@ public class RobotMapperExtension extends StaticWidget {
 		double scaleHeight = 1.0;
 		double robotCenterX = (double) panelCenterX + robotPositionX * scaleWidth;
 		double robotCenterY = (double) panelCenterY - robotPositionY * scaleHeight;
-		g.setColor(Color.CYAN);
-		g.fillRect((int) (robotCenterX - robotWidth / 2 * scaleWidth), (int) (robotCenterY - robotLength / 2 * scaleHeight), (int) (robotWidth * scaleWidth), (int) (robotLength / 2 * scaleHeight));
-		g.setColor(Color.YELLOW);
-		g.fillArc((int) robotCenterX - 20, (int) robotCenterY - 20, (int) (40.0 * scaleWidth), (int) (40.0 * scaleHeight), (int) (heading - 10), (int) (heading + 10));
+		robot.drawRobot(g,robotCenterX,robotCenterY,heading);
 	    } else {
 		g.setColor(Color.BLUE);
 		g.drawOval(panelCenterX - 20, panelCenterY - 20, 40, 40);
