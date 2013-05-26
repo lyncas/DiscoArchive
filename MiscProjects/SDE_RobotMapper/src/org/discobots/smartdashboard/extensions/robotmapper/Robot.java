@@ -6,6 +6,7 @@ package org.discobots.smartdashboard.extensions.robotmapper;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Robot {
     }
 
     public void drawRobot(Graphics g, double centerX, double centerY, double heading) {
+	Graphics2D g2=(Graphics2D)g;
 	g.setColor(Color.CYAN);
 	g.fillRect((int) (centerX - robotWidth / 2), (int) (centerY - robotLength / 2), (int) (robotWidth), (int) (robotLength / 2));
 	g.setColor(Color.YELLOW);
@@ -30,6 +32,6 @@ public class Robot {
     public void drawDisabledRobot(Graphics g, double centerX, double centerY) {
         g.setColor(Color.RED);
 	g.fillRect((int) (centerX - robotWidth / 2), (int) (centerY - robotLength / 2), (int) (robotWidth), (int) (robotLength / 2));
-	
+
     }
 }
