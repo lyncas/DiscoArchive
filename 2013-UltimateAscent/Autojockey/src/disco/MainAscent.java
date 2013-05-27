@@ -50,7 +50,10 @@ public class MainAscent extends IterativeRobot {
     }
 
     public void disabledInit() {
-        new FloatDrive().start();
+	if(CommandBase.drivetrain.getCurrentCommand() != null){
+	    CommandBase.drivetrain.getCurrentCommand().cancel();
+	}
+	CommandBase.drivetrain.disableControl();
     }
 
     public void disabledPeriodic() {
