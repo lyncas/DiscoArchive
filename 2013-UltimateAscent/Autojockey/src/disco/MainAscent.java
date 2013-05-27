@@ -50,7 +50,6 @@ public class MainAscent extends IterativeRobot {
     }
 
     public void disabledInit() {
-        HW.preferences.save();
         new FloatDrive().start();
     }
 
@@ -102,5 +101,5 @@ public class MainAscent extends IterativeRobot {
     public static double getExecutionTime(){
         return executionTimeMillis;
     }
-    
+
 }

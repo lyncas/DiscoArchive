@@ -35,12 +35,6 @@ public class HW {
     public static final double distancePerTick=distancePerRev/encoderTicksPerRev;
     public static final double encoderDegreesPerRev=360/driveReduction;
 
-    /*
-     * User Variables
-     */
-    public static Preferences preferences=Preferences.getInstance();
-
-
 
     /** -------------------------------------------------------
     Motors
