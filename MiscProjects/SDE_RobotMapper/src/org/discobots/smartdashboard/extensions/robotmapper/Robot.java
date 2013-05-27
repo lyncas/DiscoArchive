@@ -14,7 +14,7 @@ import java.awt.geom.Path2D;
 
 /**
  *
- * @author Sam Dietrich
+ * @author Sam Dietrich, Nolan Shah
  */
 public class Robot {
 
@@ -48,15 +48,17 @@ public class Robot {
 	Graphics2D g2=(Graphics2D)g;
 	AffineTransform robotTrans=new AffineTransform();
 	//May have to do these in the other order. Rotate robot components and translate them to robot location.
-	robotTrans.rotate(heading-Math.PI/2);
 	robotTrans.translate(centerX-robotWidth/2, centerY-robotLength/2);
+	robotTrans.rotate(Math.toRadians(heading) - Math.PI/2);
 	//Create properly transformed robot and draw it
 	g2.setColor(Color.CYAN);
 	g2.fill(robotTrans.createTransformedShape(robotRect));
-	g2.setColor(Color.YELLOW);
+	g2.setColor(Color.RED);
+        g2.setStroke(new BasicStroke(2.0f));
+        
 	g2.draw(robotTrans.createTransformedShape(arrow));
 	if(disabled){
-	    g2.setColor(Color.red);
+	    g2.setColor(Color.RED);
 	    g2.setStroke(new BasicStroke(5.0f));
 	    g2.draw(robotTrans.createTransformedShape(disabledX));
 	}
