@@ -4,9 +4,11 @@
  */
 package disco.utils;
 
+import disco.HW;
 import disco.MainAscent;
 import disco.commands.Autonomous;
 import disco.commands.CommandBase;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lejos.robotics.navigation.Pose;
@@ -15,15 +17,24 @@ public class Dashboard {
 
     public static SendableChooser autonChooser;
     public static double autonSetpoint = 5400;
+    private static NetworkTable table;
+    //These must be the same as in the RobotMapperExtension
+    private static final String RobotMapperTableLocation = "LocationInformation",
+	    KEY_X_POSITION = "xPosition",
+	    KEY_Y_POSITION = "yPosition",
+	    KEY_HEADING = "heading",
+	    KEY_ROBOT_WIDTH = "robot_Width",
+	    KEY_ROBOT_LENGTH = "robot_Length";
 
     public static void init() {
 	putStuff();
+	table = NetworkTable.getTable(RobotMapperTableLocation);
     }
 
     public static void putStuff() {
 	putSubsystems();
 	putSensors();
-	//       putTest();
+	sendleJOS();
     }
 
     //Only call this once or we overflow the memory. Bad day.
@@ -42,10 +53,6 @@ public class Dashboard {
 	SmartDashboard.putNumber("Right joy Y", ((GamePad) (CommandBase.oi.getJoy1())).getRY());
 	//Encoder information
 	SmartDashboard.putNumber("Left Encoder", CommandBase.drivetrain.getLeftEncoder());
-        SmartDashboard.putNumber("Left degrees", CommandBase.drivetrain.leftDrive.getTachoCount());
-        SmartDashboard.putNumber("left speed lejos", CommandBase.drivetrain.leftDrive.getSpeed());
-        SmartDashboard.putNumber("right speed lejos", CommandBase.drivetrain.rightDrive.getSpeed());
-        SmartDashboard.putNumber("Right degrees", CommandBase.drivetrain.rightDrive.getTachoCount());
 	SmartDashboard.putNumber("Right Encoder", CommandBase.drivetrain.getRightEncoder());
 	putTest();
 	//Drive power information
@@ -60,6 +67,15 @@ public class Dashboard {
 	//COMPRESSOR
 	SmartDashboard.putBoolean("Air Full", CommandBase.compressor.getPressureSwitch());
 	SmartDashboard.putString("Compressor State", CommandBase.compressor.getEnabled() ? "ON" : "OFF");
+    }
+
+    public static void sendleJOS(){
+	Pose p = CommandBase.drivetrain.getPoseProvider().getPose();
+	table.putNumber(KEY_X_POSITION, p.getX());
+	table.putNumber(KEY_Y_POSITION, p.getY());
+	table.putNumber(KEY_HEADING, p.getHeading());
+	table.putNumber(KEY_ROBOT_WIDTH, HW.wheelSeparation+4);
+	table.putNumber(KEY_ROBOT_LENGTH, HW.robotLength);
     }
 
     public static void putTest() {

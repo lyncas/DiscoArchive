@@ -17,6 +17,7 @@ public class HW {
     //REGULAR 3CIM GEARBOXES. MUST UPDATE VALUES AFTER LSR
     public static final double wheelRadius=1.985;//in
     public static final double wheelSeparation=18.7;//in
+    public static final double robotLength=40;//in //KNOWN INCORRECT
     public static final double driveReduction=15.0/24.0;  //NOT EXACT //wheel side : encoder side
     public static final double maxFPS=7;    //KNOWN INCORRECT
     public static final double encoderTicks=128;//should be 256? is WPIlib doing something wrong? but 128 works.
