@@ -1,16 +1,11 @@
 package org.discobots.smartdashboard.extensions.robotmapper;
 
 import edu.wpi.first.smartdashboard.gui.StaticWidget;
-import edu.wpi.first.smartdashboard.gui.Widget;
-import edu.wpi.first.smartdashboard.properties.MultiProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -48,7 +43,7 @@ public class RobotMapperExtension extends StaticWidget {
 	    e.printStackTrace();
 	    connected = false;
 	}
-	robot=new Robot(robotWidth,robotLength);
+	robot = new Robot(robotWidth, robotLength);
     }
 
     @Override
@@ -68,15 +63,11 @@ public class RobotMapperExtension extends StaticWidget {
 	try {
 	    int panelCenterX = getSize().width / 2;
 	    int panelCenterY = getSize().height / 2;
-	    if (!connected) { // <--- REMOVE ! WHEN TESTING WITH NETWORK TABLES WORKING. ADD IT WHEN TESTING CODE W/O NETWORK TABLES
-		double scaleWidth = 1.0;
-		double scaleHeight = 1.0;
-		double robotCenterX = (double) panelCenterX + robotPositionX * scaleWidth;
-		double robotCenterY = (double) panelCenterY - robotPositionY * scaleHeight;
-		robot.drawRobot(g,robotCenterX,robotCenterY,heading);
-	    } else {
-		robot.drawDisabledRobot(g, this.getSize().height / 2, this.getSize().width / 2);
-	    }
+	    double scaleWidth = 1.0;
+	    double scaleHeight = 1.0;
+	    double robotCenterX = (double) panelCenterX + robotPositionX * scaleWidth;
+	    double robotCenterY = (double) panelCenterY - robotPositionY * scaleHeight;
+	    robot.drawRobot(g, robotCenterX, robotCenterY, heading, !connected);
 	} catch (Exception e) {
 	    g.setColor(Color.ORANGE);
 	    g.drawString("EXCEPTION B", 0, 80);
@@ -90,13 +81,14 @@ public class RobotMapperExtension extends StaticWidget {
 	    while (true) {
 		try {
 		    //update robot pose
-		    robotPositionX = table.getNumber("xPosition");
-		    robotPositionY = table.getNumber("yPosition");
-		    heading = table.getNumber("heading");
+		    robotPositionX = table.getNumber("xPosition", robotPositionX);
+		    robotPositionY = table.getNumber("yPosition", robotPositionY);
+		    heading = table.getNumber("heading", heading);
 		    connected = true;
 		} catch (Exception e) {
 		    connected = false;
 		}
+		repaint();
 		//wait a while to do it again.
 		try {
 		    sleep(200);
