@@ -23,7 +23,7 @@ import lejos.robotics.navigation.Pose;
 public class OdometryPoseProvider implements PoseProvider, MoveListener
 {
 
-  private float x = 0, y = 0, heading = 0;
+  protected float x = 0, y = 0, heading = 0;
   private float angle0, distance0;
   MoveProvider mp;
   boolean current = true;
@@ -63,13 +63,13 @@ public class OdometryPoseProvider implements PoseProvider, MoveListener
     current = false;
     this.mp = mp;
   }
-  
+
   public synchronized void   setPose(Pose aPose )
   {
     setPosition(aPose.getLocation());
     setHeading(aPose.getHeading());
   }
-  
+
   /**
    * called by a MoveProvider when movement ends
    * @param move - the event that just started
@@ -82,9 +82,9 @@ public class OdometryPoseProvider implements PoseProvider, MoveListener
 
   /*
    * Update the pose with the incremental movement that has occurred since the
-   * movementStarted 
+   * movementStarted
    */
-  private synchronized void  updatePose(Move event)
+  protected synchronized void  updatePose(Move event)
   {
     float angle = event.getAngleTurned() - angle0;
     float distance = event.getDistanceTraveled() - distance0;
@@ -114,7 +114,7 @@ public class OdometryPoseProvider implements PoseProvider, MoveListener
   /*
    * returns equivalent angle between -180 and +180
    */
-  private float normalize(float angle)
+  protected float normalize(float angle)
   {
     float a = angle;
     while (a > 180)a -= 360;
