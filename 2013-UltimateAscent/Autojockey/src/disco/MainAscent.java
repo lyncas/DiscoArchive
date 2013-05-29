@@ -53,6 +53,7 @@ public class MainAscent extends IterativeRobot {
 	if(CommandBase.drivetrain.getCurrentCommand() != null){
 	    CommandBase.drivetrain.getCurrentCommand().cancel();
 	}
+        CommandBase.drivetrain.getNavigator().stop();
 	CommandBase.drivetrain.disableControl();
     }
 

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import lejos.FRC.OdometryGyroPoseProvider;
 import lejos.FRC.RegulatedDrivetrain;
 import lejos.geom.Line;
 import lejos.geom.Rectangle;
@@ -47,7 +48,7 @@ public class AutoDrivetrain extends Subsystem {
     //leJOS stuff
     public RegulatedDrivetrain leftDrive, rightDrive;
     private DifferentialPilot pilot;
-    private OdometryPoseProvider op;
+    private OdometryGyroPoseProvider op;
     private Navigator nav;//Formerly NavPathController
     //leJOS navigation objects
     private LineMap env;
@@ -102,8 +103,8 @@ public class AutoDrivetrain extends Subsystem {
     }
 
     private void gyroInit(){
-//	gyro = new DiscoGyro(HW.gyroSlot, HW.gyroChannel);
-//	gyro.setSensitivity(0.007);
+	gyro = new DiscoGyro(HW.gyroSlot, HW.gyroChannel);
+	gyro.setSensitivity(0.007);
     }
 
     private void leJOSDriveInit() {
@@ -114,7 +115,7 @@ public class AutoDrivetrain extends Subsystem {
 	pilot.setAcceleration(accel);
 	pilot.setTravelSpeed(max_speed);
 	pilot.setRotateSpeed(30);
-	op = new OdometryPoseProvider(pilot);
+	op = new OdometryGyroPoseProvider(pilot,gyro);
 	//This ensures that the position is correct when we do moves not using the navigator
 	pilot.addMoveListener(op);
 	//Tell it that we are initially pointing in the positive Y direction, instead of positive X.
@@ -195,6 +196,10 @@ public class AutoDrivetrain extends Subsystem {
 	return rightEncoder.getRate() / 12.0;
     }
 
+    public double getRawGyroAngle() {
+	return gyro.getRawAngle();
+    }
+    
     public double getGyroAngle() {
 	return gyro.getAngle();
     }

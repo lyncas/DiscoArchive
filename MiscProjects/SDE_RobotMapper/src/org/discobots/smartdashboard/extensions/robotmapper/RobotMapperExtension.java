@@ -13,7 +13,7 @@ import java.awt.Graphics;
  */
 public class RobotMapperExtension extends StaticWidget {
 
-    private static final boolean DEBUGGING = true;
+    private static final boolean DEBUGGING = false;
     private NetworkTable table;
 
     private final String    RobotMapperTableLocation = "LocationInformation",

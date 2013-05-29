@@ -29,13 +29,13 @@ public class OdometryGyroPoseProvider extends OdometryPoseProvider {
     public OdometryGyroPoseProvider(MoveProvider mp, DiscoGyro gyro) {
         super(mp);
         this.gyro = gyro;
-        gyro.setOffset(gyro.getRawAngle());
+        gyro.reset();
         gyroAngle = gyro.getAngle();
     }
 
     public synchronized void moveStarted(Move move, MoveProvider mp) {
         super.moveStarted(move, mp);
-        gyro.setOffset(gyro.getRawAngle());//this is 0
+        gyro.reset();
     }
 
     protected synchronized void updatePose(Move event) {
