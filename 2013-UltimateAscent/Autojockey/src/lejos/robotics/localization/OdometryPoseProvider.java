@@ -24,9 +24,9 @@ public class OdometryPoseProvider implements PoseProvider, MoveListener
 {
 
   protected float x = 0, y = 0, heading = 0;
-  private float angle0, distance0;
+  protected float angle0, distance0;
   MoveProvider mp;
-  boolean current = true;
+  protected boolean current = true;
 
   /**
    *Allocates a new OdometryPoseProivder and registers it  with the  MovePovider as a listener.

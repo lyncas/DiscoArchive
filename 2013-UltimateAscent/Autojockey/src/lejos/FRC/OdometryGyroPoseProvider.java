@@ -4,6 +4,7 @@
  */
 package lejos.FRC;
 
+import disco.utils.DiscoGyro;
 import edu.wpi.first.wpilibj.Gyro;
 import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.navigation.Move;
@@ -19,54 +20,50 @@ import lejos.util.Matrix;
 public class OdometryGyroPoseProvider extends OdometryPoseProvider {
 
     /*Gyro datasheet: http://www.analog.com/static/imported-files/data_sheets/ADXRS652.pdf if that helps
-    * Run the Kalman update in a thread to update more?
-    */
-    private Gyro gyro;
+     * Run the Kalman update in a thread to update more?
+     */
+    private DiscoGyro gyro;
     private double oldHeading;
     private double gyroAngle;
-    private double gyroAngleOffset=0;
-    protected KalmanFilter headingFilter;
 
-    public OdometryGyroPoseProvider(MoveProvider mp, Gyro gyro) {
-	super(mp);
-	this.gyro = gyro;
-	gyroAngleOffset = -getRangedGyro();//start at 0
-	gyroAngle=getRangedGyro();
-	Matrix F = new Matrix(new double[][]{{1}});//Identity: State transforms to itself
-	Matrix B = new Matrix(new double[][]{{1}});//Identity: Gyro give degrees, we use degrees.
-	Matrix H = new Matrix(new double[][]{{1}});//Identity: Still degrees.
-	Matrix R = new Matrix(new double[][]{{2}});//TODO: Observation noise? (gyro)
-	Matrix Q = new Matrix(new double[][]{{5}});//TODO: Process noise? (wheel slip)
-	Matrix state = new Matrix(new double[][]{{0}}); //Start at heading 0
-	Matrix covariance = new Matrix(new double[][]{{0}}); //Certain about starting point. We told it to be there.
-	headingFilter = new KalmanFilter(F, B, H, R, Q);
-	headingFilter.setState(state, covariance);
+    public OdometryGyroPoseProvider(MoveProvider mp, DiscoGyro gyro) {
+        super(mp);
+        this.gyro = gyro;
+        gyro.setOffset(gyro.getRawAngle());
+        gyroAngle = gyro.getAngle();
+    }
+
+    public synchronized void moveStarted(Move move, MoveProvider mp) {
+        super.moveStarted(move, mp);
+        gyro.setOffset(gyro.getRawAngle());//this is 0
     }
 
     protected synchronized void updatePose(Move event) {
-	super.updatePose(event);//among other things, find encoder based heading
-	Matrix Control = new Matrix(new double[][]{{this.heading-oldHeading}});//Heading update from encoders
-	Matrix Measurement = new Matrix(new double[][]{{getRangedGyro()}});//Heading measurement from gyro
-	headingFilter.update(Control, Measurement);//Predict the real heading
-	this.heading=(float) headingFilter.getMean().get(0, 0);
-	oldHeading=heading;
+        float angle = (float) (gyro.getAngle() - angle0);
+        float distance = event.getDistanceTraveled() - distance0;
+        double dx = 0, dy = 0;
+        double headingRad = (java.lejoslang.Math.toRadians(heading));
+
+        if (event.getMoveType() == Move.MoveType_TRAVEL || java.lejoslang.Math.abs(angle) < 0.2f) {
+            dx = (distance) * (float) java.lejoslang.Math.cos(headingRad);
+            dy = (distance) * (float) java.lejoslang.Math.sin(headingRad);
+        } else if (event.getMoveType() == Move.MoveType_ARC) {
+            double turnRad = java.lejoslang.Math.toRadians(angle);
+            double radius = distance / turnRad;
+            dy = radius * (java.lejoslang.Math.cos(headingRad) - java.lejoslang.Math.cos(headingRad + turnRad));
+            dx = radius * (java.lejoslang.Math.sin(headingRad + turnRad) - java.lejoslang.Math.sin(headingRad));
+        }
+        x += dx;
+        y += dy;
+        heading = normalize(heading + angle); // keep angle between -180 and 180
+        super.angle0 = (float) gyro.getAngle();
+        super.distance0 = event.getDistanceTraveled();
+        super.current = !event.isMoving();
     }
 
     public synchronized void setPose(Pose aPose) {
-	super.setPose(aPose);
-	Matrix newState = new Matrix(new double[][]{{aPose.getHeading()}});
-	Matrix newCovariance = new Matrix(new double[][]{{0}});//Certain about this heading. We told it to be there.
-	headingFilter.setState(newState, newCovariance);
-	gyroAngleOffset=aPose.getHeading()-getRangedGyro();
+        super.setPose(aPose);
+        gyro.setOffset(aPose.getHeading() - gyro.getRawAngle());
     }
 
-    /*
-     * Return the gyro value, scaled to [-180,180] and offset to agree with set location
-     */
-    private double getRangedGyro(){
-	//make [-180,180]
-	double gyroTemp=gyro.getAngle()+gyroAngleOffset;
-	//offset
-	return normalize((float)gyroTemp);
-    }
 }
