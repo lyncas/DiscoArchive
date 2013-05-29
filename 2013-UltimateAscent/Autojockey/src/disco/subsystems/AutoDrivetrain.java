@@ -5,11 +5,10 @@
 package disco.subsystems;
 
 import disco.HW;
-import disco.commands.drivetrain.LerpDrive;
+import disco.utils.DiscoGyro;
 import disco.utils.MaxbotixSonar;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import lejos.FRC.RegulatedDrivetrain;
@@ -22,9 +21,7 @@ import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
 import lejos.robotics.navigation.Pose;
 import lejos.robotics.navigation.Waypoint;
-import lejos.robotics.objectdetection.FeatureDetector;
 import lejos.robotics.objectdetection.FusorDetector;
-import lejos.robotics.objectdetection.RangeFeatureDetector;
 import lejos.robotics.pathfinding.Path;
 
 public class AutoDrivetrain extends Subsystem {
@@ -46,7 +43,7 @@ public class AutoDrivetrain extends Subsystem {
     private Encoder leftEncoder;
     private Encoder rightEncoder;
     //Gyro
-    private Gyro gyro;
+    private DiscoGyro gyro;
     //leJOS stuff
     public RegulatedDrivetrain leftDrive, rightDrive;
     private DifferentialPilot pilot;
@@ -69,7 +66,6 @@ public class AutoDrivetrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-	new LerpDrive();
     }
 
     private void motorsInit() {
@@ -106,7 +102,7 @@ public class AutoDrivetrain extends Subsystem {
     }
 
     private void gyroInit(){
-//	gyro = new Gyro(HW.gyroSlot, HW.gyroChannel);
+//	gyro = new DiscoGyro(HW.gyroSlot, HW.gyroChannel);
 //	gyro.setSensitivity(0.007);
     }
 
@@ -145,6 +141,7 @@ public class AutoDrivetrain extends Subsystem {
 	default_path = p;
     }
 
+    //BUG: drives too slow
     public void tankDrive(double left, double right) {
 	//set up for tank
 	//pilot.setAcceleration(9999);
