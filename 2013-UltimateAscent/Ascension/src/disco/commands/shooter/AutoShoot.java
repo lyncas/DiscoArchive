@@ -10,22 +10,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoShoot extends CommandGroup {
 
-    private int number;
-    private int number2 = 1;
-    private double maxDelay;
+    private int number_to_shoot;
+    private double maxDelay=1000;
     private double minDelay = 250;
     private int count;
     private long shotTime;
     private long nowTime;
 
     public AutoShoot(int number, int maxDelay) {
-        this.number = number;
+        this.number_to_shoot = number;
         this.maxDelay = maxDelay;
         count = 0;
     }
 
     public AutoShoot(int number, int maxDelay, int minDelay) {
-        this.number = number;
+        this.number_to_shoot = number;
         this.maxDelay = maxDelay;
         this.minDelay = minDelay;
         count = 0;
@@ -49,7 +48,7 @@ public class AutoShoot extends CommandGroup {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return count >= number;
+        return count >= number_to_shoot;
     }
 
     // Called once after isFinished returns true
