@@ -53,8 +53,8 @@ public class Square extends JLabel {
 	this.hc = hc;
     }
 
-    public void setDispNums(boolean nums){
-	this.nums=nums;
+    public void setDispNums(boolean nums) {
+	this.nums = nums;
     }
 
     public double getJoyX() {

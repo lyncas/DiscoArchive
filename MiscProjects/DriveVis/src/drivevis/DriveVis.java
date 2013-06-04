@@ -43,8 +43,8 @@ public class DriveVis {
     public static final int size = 800;
     //Flags
     private static boolean b_fastRefresh = false;
-    private static boolean b_hc=false;
-    private static boolean b_nums=true;
+    private static boolean b_hc = false;
+    private static boolean b_nums = true;
 
     public static void main(String[] args) {
 	createTopLevel();
@@ -88,7 +88,7 @@ public class DriveVis {
 	cbMenuItem.addItemListener(new menuListener());
 	menu.add(cbMenuItem);
 
-	cbMenuItem=new JCheckBoxMenuItem(MenuStrings.btn_disp_numbers);
+	cbMenuItem = new JCheckBoxMenuItem(MenuStrings.btn_disp_numbers);
 	cbMenuItem.setToolTipText(MenuStrings.btn_disp_numbers_tooltip);
 	cbMenuItem.setSelected(true);
 	cbMenuItem.addItemListener(new menuListener());
@@ -119,7 +119,7 @@ public class DriveVis {
 	}
 	//Grid resolution spinner
 	SpinnerModel sp = new SpinnerNumberModel(divisions < 30 && divisions > 2 ? divisions : 5, 2, 30, 1);
-	JSpinner resolutionSpinner=new JSpinner(sp);
+	JSpinner resolutionSpinner = new JSpinner(sp);
 	resolutionSpinner.setToolTipText(MenuStrings.spinner_resolution_tooltip);
 	resolutionSpinner.addChangeListener(new spinnerListener());
 	options.add(resolutionSpinner);
@@ -127,21 +127,23 @@ public class DriveVis {
 	main_panel.add(options);
     }
 
-    static class spinnerListener implements ChangeListener{
+    static class spinnerListener implements ChangeListener {
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-	    JSpinner spin=(JSpinner)e.getSource();
-	    int value=((SpinnerNumberModel)spin.getModel()).getNumber().intValue();
+	    //we need to do this first because without it it won't draw. Don't ask. noone knows.
+	    g.setNumbers(false);
+
+	    JSpinner spin = (JSpinner) e.getSource();
+	    int value = ((SpinnerNumberModel) spin.getModel()).getNumber().intValue();
 	    //g.reset(value,size);
-	    g=new Grid(value,size);
+	    g = new Grid(value, size);
 	    main_panel.remove(0);
 	    main_panel.add(g, 0);
 	    g.setHighContrast(b_hc);
 	    g.setNumbers(b_nums);
 	    main_panel.repaint();
 	}
-
     }
 
     static class modeListener implements ActionListener {
@@ -173,11 +175,11 @@ public class DriveVis {
 		    break;
 		case MenuStrings.btn_high_contrast:
 		    g.setHighContrast(selected);
-		    b_hc=selected;
+		    b_hc = selected;
 		    break;
 		case MenuStrings.btn_disp_numbers:
 		    g.setNumbers(selected);
-		    b_nums=selected;
+		    b_nums = selected;
 		    break;
 	    }
 	}

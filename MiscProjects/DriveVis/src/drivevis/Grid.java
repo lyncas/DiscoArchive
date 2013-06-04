@@ -41,8 +41,8 @@ public class Grid extends JPanel {
 	createGrid();
     }
 
-    public void reset(int div_quad,int parentSize){
-	squares=null;
+    public void reset(int div_quad, int parentSize) {
+	squares = null;
 	this.removeAll();
 	thisMode = modes.get(0);
 	squaresPerRow = div_quad * 2 + 1;
@@ -59,7 +59,7 @@ public class Grid extends JPanel {
 	for (int x = 0; x < squares.length; x++) {
 	    for (int y = 0; y < squares[x].length; y++) {
 		squares[y][x] = new Square(y - center - 1, center + 1 - x, square_size, (squaresPerRow - 1) / 2.0);//it's backwards
-		Powers p=thisMode.calcLR(squares[y][x].getJoyY(), squares[y][x].getJoyX());
+		Powers p = thisMode.calcLR(squares[y][x].getJoyY(), squares[y][x].getJoyX());
 		squares[y][x].setOutput(round01(p.getLeftPower()), round01(p.getRightPower()));
 		squares[y][x].setBorder(BorderFactory.createLineBorder(Color.black));
 		this.add(squares[y][x]);
@@ -70,7 +70,7 @@ public class Grid extends JPanel {
     private void recalculate() {
 	for (Square[] sarr : squares) {
 	    for (Square s : sarr) {
-		Powers p=thisMode.calcLR(s.getJoyY(), s.getJoyX());
+		Powers p = thisMode.calcLR(s.getJoyY(), s.getJoyX());
 		s.setOutput(round01(p.getLeftPower()), round01(p.getRightPower()));
 	    }
 	}
@@ -81,8 +81,8 @@ public class Grid extends JPanel {
 	recalculate();
     }
 
-    public void setHighContrast(boolean hc){
-	    for (Square[] sarr : squares) {
+    public void setHighContrast(boolean hc) {
+	for (Square[] sarr : squares) {
 	    for (Square s : sarr) {
 		s.setHC(hc);
 		s.refresh();
@@ -90,8 +90,8 @@ public class Grid extends JPanel {
 	}
     }
 
-    public void setNumbers(boolean nums){
-	    for (Square[] sarr : squares) {
+    public void setNumbers(boolean nums) {
+	for (Square[] sarr : squares) {
 	    for (Square s : sarr) {
 		s.setDispNums(nums);
 		s.refresh();
@@ -99,14 +99,14 @@ public class Grid extends JPanel {
 	}
     }
 
-    public static LinkedList<DriveMode> getModes(){
+    public static LinkedList<DriveMode> getModes() {
 	return modes;
     }
 
     /*
      * rounds to the hundredths place
      */
-    public double round01(double in){
+    public double round01(double in) {
 	return Math.round(in * 100) / 100.0;
     }
 }
