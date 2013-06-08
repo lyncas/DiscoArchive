@@ -8,7 +8,7 @@ import disco.commands.CommandBase;
 import disco.commands.pneumatics.Shoot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutoShoot extends CommandGroup {
+public class AutoShoot extends CommandBase {
 
     private int number_to_shoot;
     private double maxDelay=1000;
