@@ -32,8 +32,8 @@ public class DiscoGyro extends Gyro {
     }
 
     public double getAngle() {
-        double res = super.getAngle();
-        return normalize(res + offset);
+        double res = -1*super.getAngle();
+        return res + offset;
     }
 
     public double getRawAngle() {
