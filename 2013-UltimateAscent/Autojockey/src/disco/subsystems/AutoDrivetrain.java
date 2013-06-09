@@ -7,6 +7,7 @@ package disco.subsystems;
 import disco.HW;
 import disco.utils.DiscoGyro;
 import disco.utils.MaxbotixSonar;
+import disco.utils.MaxbotixSonarYellowDot;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
@@ -22,7 +23,9 @@ import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
 import lejos.robotics.navigation.Pose;
 import lejos.robotics.navigation.Waypoint;
+import lejos.robotics.objectdetection.FeatureDetector;
 import lejos.robotics.objectdetection.FusorDetector;
+import lejos.robotics.objectdetection.RangeFeatureDetector;
 import lejos.robotics.pathfinding.Path;
 
 public class AutoDrivetrain extends Subsystem {
@@ -36,9 +39,10 @@ public class AutoDrivetrain extends Subsystem {
     private Victor rightDrive1;
     private Victor rightDrive2;
     //Sonars
-    private MaxbotixSonar frontSonar1;
-    private MaxbotixSonar frontSonar2;
+    private MaxbotixSonar frontSonar;
     private MaxbotixSonar leftSonar;
+    private MaxbotixSonar rightSonar;
+    private MaxbotixSonar backSonar;
     private FusorDetector sonars;
     //Encoders
     private Encoder leftEncoder;
@@ -89,17 +93,19 @@ public class AutoDrivetrain extends Subsystem {
     }
 
     private void sonarsInit() {
-//	frontSonar1 = new MaxbotixSonar(HW.frontsonar1Slot, HW.frontsonar1Channel, MaxbotixSonar.Unit.kInches);
-//	FeatureDetector frontSonar1_detector=new RangeFeatureDetector(frontSonar1,(float)frontSonar1.MAX_PEOPLE_RANGE,frontSonar1.MIN_READING_DELAY,0);
-//	frontSonar2 = new MaxbotixSonar(HW.frontsonar2Slot, HW.frontsonar2Channel, MaxbotixSonar.Unit.kInches);
-//	FeatureDetector frontSonar2_detector=new RangeFeatureDetector(frontSonar2,(float)frontSonar2.MAX_PEOPLE_RANGE,frontSonar2.MIN_READING_DELAY,0);
-//	leftSonar = new MaxbotixSonar(HW.leftsonarSlot,HW.leftsoarChannel,MaxbotixSonar.Unit.kInches);
-//	FeatureDetector leftSonar_detector=new RangeFeatureDetector(leftSonar,(float)leftSonar.MAX_PEOPLE_RANGE,leftSonar.MIN_READING_DELAY,90);
-//	sonars=new FusorDetector();
-//	sonars.addDetector(frontSonar1_detector);
-//	sonars.addDetector(frontSonar2_detector);
-//	sonars.addDetector(leftSonar_detector);
-//	sonars.enableDetection(false);
+	frontSonar = new MaxbotixSonarYellowDot(HW.frontsonarSlot, HW.frontsonarChannel, MaxbotixSonar.Unit.kInches);
+	FeatureDetector frontSonar_detector=new RangeFeatureDetector(frontSonar,(float)frontSonar.MAX_PEOPLE_RANGE,frontSonar.MIN_READING_DELAY,0);
+	leftSonar = new MaxbotixSonar(HW.leftsonarSlot,HW.leftsonarChannel,MaxbotixSonar.Unit.kInches);
+	FeatureDetector leftSonar_detector=new RangeFeatureDetector(leftSonar,(float)leftSonar.MAX_PEOPLE_RANGE,leftSonar.MIN_READING_DELAY,90);
+	rightSonar = new MaxbotixSonar(HW.rightsonarSlot,HW.rightsonarChannel,MaxbotixSonar.Unit.kInches);
+	FeatureDetector rightSonar_detector=new RangeFeatureDetector(rightSonar,(float)rightSonar.MAX_PEOPLE_RANGE,rightSonar.MIN_READING_DELAY,90);
+	backSonar = new MaxbotixSonar(HW.backsonarSlot,HW.backsonarChannel,MaxbotixSonar.Unit.kInches);
+	FeatureDetector backSonar_detector=new RangeFeatureDetector(backSonar,(float)backSonar.MAX_PEOPLE_RANGE,backSonar.MIN_READING_DELAY,90);
+	sonars=new FusorDetector();
+	sonars.addDetector(frontSonar_detector);
+	//sonars.addDetector(frontSonar2_detector);
+	sonars.addDetector(leftSonar_detector);
+	sonars.enableDetection(false);
     }
 
     private void gyroInit(){
@@ -168,16 +174,20 @@ public class AutoDrivetrain extends Subsystem {
 	//Use DiferentialPilot or whatever it is
     }
 
-    public double getFrontSonar1() {
-	return frontSonar1.getMedianRange();
-    }
-
-    public double getFrontSonar2() {
-	return frontSonar2.getMedianRange();
+    public double getFrontSonar() {
+	return frontSonar.getMedianRange();
     }
 
     public double getLeftSonar() {
 	return leftSonar.getMedianRange();
+    }
+
+    public double getRightSonar() {
+	return rightSonar.getMedianRange();
+    }
+
+    public double getBackSonar() {
+	return backSonar.getMedianRange();
     }
 
     public int getLeftEncoder() {

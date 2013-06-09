@@ -71,6 +71,8 @@ public class OI {
 	b_X.whenPressed(new GoHome());
         b_A.whenPressed(new GoToRandom(CommandBase.drivetrain.getMap().getBoundingRect()));
         b_B.whenPressed(new FollowPath(CommandBase.drivetrain.default_path));
+        
+        b_bumpR.whenPressed(new SetHome());
 	
 	b_dpadU.whenPressed(new PilotDrive(24));
 	b_dpadD.whenPressed(new PilotDrive(-24));

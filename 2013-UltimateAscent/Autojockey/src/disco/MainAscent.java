@@ -88,6 +88,11 @@ public class MainAscent extends IterativeRobot {
         if(autonomousCommand!=null) {
             autonomousCommand.cancel();
         }
+        if(CommandBase.drivetrain.getCurrentCommand() != null){
+	    CommandBase.drivetrain.getCurrentCommand().cancel();
+	}
+        CommandBase.drivetrain.getNavigator().stop();
+	CommandBase.drivetrain.disableControl();
     }
     public void teleopPeriodic() {
         //System.out.println(CommandBase.drivetrain.getCurrentCommand().toString() + " " + CommandBase.drivetrain.getPWMRight() + " " + CommandBase.drivetrain.getPWMLeft());

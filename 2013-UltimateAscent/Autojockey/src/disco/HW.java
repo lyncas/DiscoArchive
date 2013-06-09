@@ -72,9 +72,9 @@ public class HW {
             limitSwitchRightChannel = 12, limitSwitchRightSlot = 1,
             arduinoChannel = 2, arduinoSlot = 2,
             //Analog
-            gyroChannel = 1, gyroSlot = 1
-            //                            maxbotixsonar1Channel=4,    maxbotixsonar1Slot=1,
-            //                            maxbotixsonar2Channel=5,    maxbotixsonar2Slot=1,
-            //                            maxbotixsonar3Channel=6,    maxbotixsonar3Slot=1,
-            ;
+            gyroChannel = 1, gyroSlot = 1,
+            frontsonarChannel = 2, frontsonarSlot = 1,
+            leftsonarChannel = 3, leftsonarSlot = 1,
+            rightsonarChannel = 4, rightsonarSlot = 1,
+            backsonarChannel = 5, backsonarSlot = 1;
 }

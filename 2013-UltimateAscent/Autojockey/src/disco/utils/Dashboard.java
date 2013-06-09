@@ -53,18 +53,17 @@ public class Dashboard {
         SmartDashboard.putNumber("Execution loop time", MainAscent.getExecutionTime());
 
         //DRIVETRAIN
-        //Joystick information
-        SmartDashboard.putNumber("Left joy Y", ((GamePad) (CommandBase.oi.getJoy1())).getLY());
-        SmartDashboard.putNumber("Right joy Y", ((GamePad) (CommandBase.oi.getJoy1())).getRY());
         //Encoder information
         SmartDashboard.putNumber("Left Encoder", CommandBase.drivetrain.getLeftEncoder());
         SmartDashboard.putNumber("Right Encoder", CommandBase.drivetrain.getRightEncoder());
         putTest();
-        //Drive power information
-        SmartDashboard.putNumber("Left Drive Output", CommandBase.drivetrain.getPWMLeft());
-        SmartDashboard.putNumber("Right Drive Output", CommandBase.drivetrain.getPWMRight());
         SmartDashboard.putNumber("Raw Gyro", CommandBase.drivetrain.getRawGyroAngle());
         SmartDashboard.putNumber("Gyro", CommandBase.drivetrain.getGyroAngle());
+        //Sonar information
+        SmartDashboard.putNumber("Front sonar", CommandBase.drivetrain.getFrontSonar());
+        SmartDashboard.putNumber("Left sonar", CommandBase.drivetrain.getLeftSonar());
+        SmartDashboard.putNumber("Right sonar", CommandBase.drivetrain.getRightSonar());
+        SmartDashboard.putNumber("Back sonar", CommandBase.drivetrain.getBackSonar());
         
         //Location information
         Pose p = CommandBase.drivetrain.getPoseProvider().getPose();
