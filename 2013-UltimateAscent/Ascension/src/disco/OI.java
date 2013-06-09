@@ -96,9 +96,7 @@ public class OI {
 	 */
         b_Start.whenPressed(new cycleDrive());
         b_Y.whenPressed(new NegateDrive());
-	//HW: not supported
-	    //b2_A.whenPressed(new AutoShift());
-	    //b_bumpL.whileHeld(new ShiftDown());
+	b_A.whenPressed(new AutoShoot(5,1000,200));
 
 	/*
 	 * Pneumatics
