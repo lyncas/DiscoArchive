@@ -37,7 +37,7 @@ public class RobotMapperExtension extends StaticWidget {
     public void init() {
         setPreferredSize(new Dimension(200, 200));
         try {
-            table.setIPAddress("127.0.0.1"); // Temporary for testing. Should be 10.25.87.whatever
+            table.setIPAddress("10.25.87.7"); // Temporary for testing. Should be 10.25.87.7
             table = NetworkTable.getTable(RobotMapperTableLocation);
             robotPositionX = table.getNumber(KEY_X_POSITION);
             robotPositionY = table.getNumber(KEY_Y_POSITION);
