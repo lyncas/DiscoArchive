@@ -4,7 +4,9 @@
  */
 package disco.commands.drivetrain;
 
+import com.sun.squawk.util.Arrays;
 import disco.commands.CommandBase;
+import java.lejosutil.ListIterator;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
 import lejos.robotics.navigation.Waypoint;
@@ -20,7 +22,9 @@ public class FollowPath extends CommandBase {
      */
     public FollowPath(Path path) {
         // Use requires() here to declare subsystem dependencies
+        
         requires(drivetrain);
+        System.out.println("INIT 0");
 	p=drivetrain.getPilot();
         nav=drivetrain.getNavigator();
         this.path=path;
@@ -35,8 +39,13 @@ public class FollowPath extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("INIT");
 	nav.clearPath();
-        nav.setPath(path);
+        //nav.setPath(path);
+        ListIterator it=path.listIterator();
+        while (it.hasNext()){
+            nav.addWaypoint((Waypoint)it.next());
+        }
         nav.followPath();
     }
 
@@ -46,11 +55,13 @@ public class FollowPath extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        System.out.println(nav.pathCompleted());
         return nav.pathCompleted();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("ENDING");
 	p.stop();
         drivetrain.tankDrive(0, 0);
         drivetrain.disableControl();

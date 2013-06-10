@@ -57,7 +57,9 @@ public class Navigator implements WaypointListener
       //_nav.setDaemon(true);
       _nav.start();
    }
-
+   public void resetPath(Path p) {
+       this._path = p;
+   }
    /**
     * Sets  the PoseProvider after construction of the Navigator
     * @param aProvider  the PoseProvider
