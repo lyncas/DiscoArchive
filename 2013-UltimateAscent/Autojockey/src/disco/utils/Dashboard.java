@@ -57,7 +57,6 @@ public class Dashboard {
         SmartDashboard.putNumber("Left Encoder", CommandBase.drivetrain.getLeftEncoder());
         SmartDashboard.putNumber("Right Encoder", CommandBase.drivetrain.getRightEncoder());
         putTest();
-        SmartDashboard.putNumber("Raw Gyro", CommandBase.drivetrain.getRawGyroAngle());
         SmartDashboard.putNumber("Gyro", CommandBase.drivetrain.getGyroAngle());
         //Sonar information
         SmartDashboard.putNumber("Front sonar", CommandBase.drivetrain.getFrontSonar());

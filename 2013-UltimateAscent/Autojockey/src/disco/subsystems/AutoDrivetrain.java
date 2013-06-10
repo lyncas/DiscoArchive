@@ -12,10 +12,12 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import lejos.FRC.GyroPilot;
 import lejos.FRC.OdometryGyroPoseProvider;
 import lejos.FRC.RegulatedDrivetrain;
 import lejos.geom.Line;
 import lejos.geom.Rectangle;
+import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.localization.PoseProvider;
 import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.DifferentialPilot;
@@ -50,8 +52,8 @@ public class AutoDrivetrain extends Subsystem {
     private DiscoGyro gyro;
     //leJOS stuff
     public RegulatedDrivetrain leftDrive, rightDrive;
-    private DifferentialPilot pilot;
-    private OdometryGyroPoseProvider op;
+    private GyroPilot pilot;
+    private OdometryPoseProvider op;
     private Navigator nav;//Formerly NavPathController
     //leJOS navigation objects
     private LineMap env;
@@ -116,11 +118,11 @@ public class AutoDrivetrain extends Subsystem {
 	leftDrive = new RegulatedDrivetrain(leftDrive1, leftDrive2, true, true, leftEncoder, HW.encoderTicksPerRev);
 	rightDrive = new RegulatedDrivetrain(rightDrive1, rightDrive2, false, false, rightEncoder, HW.encoderTicksPerRev);
 
-	pilot = new DifferentialPilot(2 * HW.wheelRadius, HW.wheelSeparation, leftDrive, rightDrive);
+	pilot = new GyroPilot(gyro,(float)(2 * HW.wheelRadius),(float) HW.wheelSeparation, leftDrive, rightDrive);
 	pilot.setAcceleration(accel);
 	pilot.setTravelSpeed(max_speed);
 	pilot.setRotateSpeed(30);
-	op = new OdometryGyroPoseProvider(pilot,gyro);
+	op = new OdometryPoseProvider(pilot);
 	//This ensures that the position is correct when we do moves not using the navigator
 	pilot.addMoveListener(op);
 	//Tell it that we are initially pointing in the positive Y direction, instead of positive X.
@@ -203,10 +205,6 @@ public class AutoDrivetrain extends Subsystem {
 
     public double getRightRate() {
 	return rightEncoder.getRate() / 12.0;
-    }
-
-    public double getRawGyroAngle() {
-	return gyro.getRawAngle();
     }
     
     public double getGyroAngle() {

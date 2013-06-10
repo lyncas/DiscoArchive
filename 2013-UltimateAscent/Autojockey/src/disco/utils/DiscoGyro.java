@@ -14,31 +14,28 @@ import lejos.robotics.DirectionFinder;
  */
 public class DiscoGyro extends Gyro implements DirectionFinder {
 
-    double offset = 0;
+    boolean reversed = true;
+    double cartesianZeroOffset = 0;
 
     public DiscoGyro(int channel) {
         super(channel);
     }
 
     public DiscoGyro(int slot, int channel) {
+        this(slot, channel, true);
+    }
+
+    public DiscoGyro(int slot, int channel, boolean reversed) {
         super(slot, channel);
+        this.reversed = reversed;
     }
 
     public DiscoGyro(AnalogChannel channel) {
         super(channel);
     }
 
-    public void setOffset(double offset) {
-        this.offset = offset;
-    }
-
     public double getAngle() {
-        double res = -1*super.getAngle();
-        return res + offset;
-    }
-
-    public double getRawAngle() {
-        return (super.getAngle());
+        return reversed ? -1 : 1 * super.getAngle();
     }
 
     public void reset() {
@@ -60,14 +57,18 @@ public class DiscoGyro extends Gyro implements DirectionFinder {
     }
 
     public float getDegreesCartesian() {
+        return (float) ((getAngle() - cartesianZeroOffset) % 360);
     }
 
     public void startCalibration() {
+        //do nothing
     }
 
     public void stopCalibration() {
+        //do nothing
     }
 
     public void resetCartesianZero() {
+        cartesianZeroOffset = getAngle();
     }
 }
