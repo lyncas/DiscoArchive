@@ -35,7 +35,7 @@ public class DiscoGyro extends Gyro implements DirectionFinder {
     }
 
     public double getAngle() {
-        return reversed ? -1 : 1 * super.getAngle();
+        return (reversed ? -1 : 1) * super.getAngle();
     }
 
     public void reset() {
@@ -62,6 +62,7 @@ public class DiscoGyro extends Gyro implements DirectionFinder {
 
     public void startCalibration() {
         //do nothing
+        stopCalibration();
     }
 
     public void stopCalibration() {
