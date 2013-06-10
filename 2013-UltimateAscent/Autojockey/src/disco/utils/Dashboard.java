@@ -39,7 +39,6 @@ public class Dashboard {
     public static void putStuff() {
         putSubsystems();
         putSensors();
-        sendleJOS();
     }
 
     //Only call this once or we overflow the memory. Bad day.
@@ -52,6 +51,8 @@ public class Dashboard {
     public static void putSensors() {
         SmartDashboard.putNumber("Execution loop time", MainAscent.getExecutionTime());
 
+        sendleJOS();
+        
         //DRIVETRAIN
         //Encoder information
         SmartDashboard.putNumber("Left Encoder", CommandBase.drivetrain.getLeftEncoder());
