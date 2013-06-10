@@ -16,7 +16,6 @@ import lejos.FRC.OdometryGyroPoseProvider;
 import lejos.FRC.RegulatedDrivetrain;
 import lejos.geom.Line;
 import lejos.geom.Rectangle;
-import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.localization.PoseProvider;
 import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.DifferentialPilot;

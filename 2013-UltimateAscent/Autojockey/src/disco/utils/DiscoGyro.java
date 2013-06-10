@@ -6,12 +6,13 @@ package disco.utils;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Gyro;
+import lejos.robotics.DirectionFinder;
 
 /**
  *
  * @author sam
  */
-public class DiscoGyro extends Gyro {
+public class DiscoGyro extends Gyro implements DirectionFinder {
 
     double offset = 0;
 
@@ -56,5 +57,17 @@ public class DiscoGyro extends Gyro {
             a += 360;
         }
         return a;
+    }
+
+    public float getDegreesCartesian() {
+    }
+
+    public void startCalibration() {
+    }
+
+    public void stopCalibration() {
+    }
+
+    public void resetCartesianZero() {
     }
 }

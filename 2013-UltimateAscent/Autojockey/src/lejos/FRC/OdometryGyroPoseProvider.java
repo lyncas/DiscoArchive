@@ -48,6 +48,7 @@ public class OdometryGyroPoseProvider extends OdometryPoseProvider {
         //Hack: don't do this if we just reset it. Because this gets called many times for some reason.
         if (gyro.getAngle() > 2) {
             gyroOffset = normalize((float) (gyro.getAngle() + gyroOffset));
+            System.err.println(gyroAngle + " " + gyroOffset + " " +  gyro.getAngle());
             gyro.reset();
         }
 
@@ -73,6 +74,7 @@ public class OdometryGyroPoseProvider extends OdometryPoseProvider {
         heading = normalize((float) (gyro.getAngle() + gyroOffset)); // keep angle between -180 and 180
         angle0 = (float) gyro.getAngle();
         distance0 = event.getDistanceTraveled();
+        System.out.println(heading + " " + angle0 + " " + distance0);
         super.current = !event.isMoving();
     }
 
