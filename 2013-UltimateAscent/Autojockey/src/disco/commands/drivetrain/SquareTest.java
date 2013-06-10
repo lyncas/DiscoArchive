@@ -13,7 +13,7 @@ public class SquareTest extends CommandBase {
     DifferentialPilot p;
     OdometryPoseProvider o;
     int direction = 1;
-    int length = 36;
+    int length = 10*12;
     boolean finished = false;
     private static Thread sq;
 
