@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import lejos.robotics.navigation.Pose;
+import lejos.robotics.navigation.Waypoint;
+import lejos.robotics.pathfinding.Path;
 
 /**
  *
@@ -19,14 +21,18 @@ public class RobotMapperExtension extends StaticWidget {
     private final String RobotMapperTableLocation = "LocationInformation",
 	    KEY_POSE = "robot_Pose",
 	    KEY_ROBOT_WIDTH = "robot_Width",
-	    KEY_ROBOT_LENGTH = "robot_Length";
+	    KEY_ROBOT_LENGTH = "robot_Length",
+	    KEY_PATH="robot_path";
 
     private volatile Pose robotPose = new Pose(0, 0, 90);
     private int robotWidth = 0, robotLength = 0;
     private boolean connected = false;
+    private volatile Path robotPath=null;
     private DataReaderThread reader = new DataReaderThread();
+
     //drawables
     private Robot robot;
+    private DrawablePath path_drawing;
 
     public void setValue(Object o) {
     }
@@ -47,6 +53,7 @@ public class RobotMapperExtension extends StaticWidget {
 	}
 	reader.start();
 	robot = new Robot(robotWidth, robotLength);
+	path_drawing=new DrawablePath(robotPath,Color.ORANGE);
     }
 
     @Override
@@ -68,6 +75,11 @@ public class RobotMapperExtension extends StaticWidget {
 	robot.setDisabled(!connected);
 	robot.draw(g, panelCenterX, panelCenterY);
 
+	//So we draw from the robot to the first waypoint
+	robotPath.add(0, new Waypoint(robotPose));
+	path_drawing.setPath(robotPath);
+	path_drawing.draw(g,panelCenterX,panelCenterY);
+
     }
     volatile boolean error = false;
     volatile int mode = 0, ia = 0;
@@ -80,6 +92,7 @@ public class RobotMapperExtension extends StaticWidget {
 		//update data
 		try {
 		    robotPose = (Pose) table.getValue(KEY_POSE);
+		    robotPath=(Path) table.getValue(KEY_PATH, robotPath);
 		    connected = true;
 		} catch (Exception e) {
 		    connected = false;

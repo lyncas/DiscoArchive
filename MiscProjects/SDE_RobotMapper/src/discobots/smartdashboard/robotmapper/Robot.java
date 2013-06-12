@@ -66,7 +66,7 @@ public class Robot implements drawable{
     @Override
     public void draw(Graphics g,int window_centerX,int window_centerY) {
 	//Compute where to draw robot, assuming window cetner is world coordinate (0,0)
-	double centerX=pose.getX()+window_centerX;
+	double centerX=window_centerX+pose.getX();
 	double centerY=window_centerY-pose.getY();
 	double heading=pose.getHeading();
 	Graphics2D g2=(Graphics2D)g;
@@ -83,9 +83,9 @@ public class Robot implements drawable{
 	//Create properly transformed robot and draw it
 	g2.setColor(Color.CYAN);
 	g2.fill(robotTrans.createTransformedShape(robotRect));
+
 	g2.setColor(Color.RED);
         g2.setStroke(new BasicStroke(2.0f));
-
 	g2.draw(robotTrans.createTransformedShape(arrow));
 	if(disabled){
 	    g2.setColor(Color.RED);
