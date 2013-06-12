@@ -1,4 +1,4 @@
-package org.discobots.smartdashboard.extensions.robotmapper;
+package discobots.smartdashboard.robotmapper;
 
 import edu.wpi.first.smartdashboard.gui.StaticWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
