@@ -18,12 +18,15 @@ import lejos.robotics.navigation.Pose;
  *
  * @author Sam Dietrich, Nolan Shah
  */
-public class Robot {
+public class Robot implements drawable{
 
+    //state
     private int robotWidth = 20;
     private int robotLength = 20;
     private Pose pose=new Pose(0,0,0);
+    private boolean disabled=true;
 
+    //drawable objects
     Rectangle robotRect;
     Path2D arrow;
     Path2D disabledX;
@@ -52,11 +55,16 @@ public class Robot {
 	pose=new Pose(p.getX(),p.getY(),p.getHeading());
     }
 
+    public void setDisabled(boolean disabled){
+	this.disabled=disabled;
+    }
+
     public Pose getPose(){
 	return new Pose(pose.getX(),pose.getY(),pose.getHeading());
     }
 
-    public void drawRobot(Graphics g,int window_centerX,int window_centerY,boolean disabled) {
+    @Override
+    public void draw(Graphics g,int window_centerX,int window_centerY) {
 	//Compute where to draw robot, assuming window cetner is world coordinate (0,0)
 	double centerX=pose.getX()+window_centerX;
 	double centerY=window_centerY-pose.getY();
