@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lejos.robotics.navigation.Pose;
+import lejos.robotics.pathfinding.Path;
 
 public class Dashboard {
 
@@ -19,11 +20,10 @@ public class Dashboard {
     private static NetworkTable table;
     //These must be the same as in the RobotMapperExtension
     private static final String RobotMapperTableLocation = "LocationInformation",
-            KEY_X_POSITION = "xPosition",
-            KEY_Y_POSITION = "yPosition",
-            KEY_HEADING = "heading",
-            KEY_ROBOT_WIDTH = "robot_Width",
-            KEY_ROBOT_LENGTH = "robot_Length";
+	    KEY_POSE = "robot_Pose",
+	    KEY_ROBOT_WIDTH = "robot_Width",
+	    KEY_ROBOT_LENGTH = "robot_Length",
+	    KEY_PATH="robot_path";
 
     public static void init() {
         table = NetworkTable.getTable(RobotMapperTableLocation);
@@ -51,8 +51,8 @@ public class Dashboard {
     public static void putSensors() {
         SmartDashboard.putNumber("Execution loop time", MainAscent.getExecutionTime());
 
-        sendleJOS();
-        
+        sendleJOSPose();
+
         //DRIVETRAIN
         //Encoder information
         SmartDashboard.putNumber("Left Encoder", CommandBase.drivetrain.getLeftEncoder());
@@ -64,7 +64,7 @@ public class Dashboard {
         SmartDashboard.putNumber("Left sonar", CommandBase.drivetrain.getLeftSonar());
         SmartDashboard.putNumber("Right sonar", CommandBase.drivetrain.getRightSonar());
         SmartDashboard.putNumber("Back sonar", CommandBase.drivetrain.getBackSonar());
-        
+
         //Location information
         Pose p = CommandBase.drivetrain.getPoseProvider().getPose();
         SmartDashboard.putNumber("X", p.getX());
@@ -76,15 +76,19 @@ public class Dashboard {
         SmartDashboard.putString("Compressor State", CommandBase.compressor.getEnabled() ? "ON" : "OFF");
     }
 
-    public static void sendleJOS() {
+    public static void sendleJOSPose() {
         Pose p = CommandBase.drivetrain.getPoseProvider().getPose();
         if (p != null) {
-            table.putNumber(KEY_X_POSITION, p.getX());
-            table.putNumber(KEY_Y_POSITION, p.getY());
-            table.putNumber(KEY_HEADING, p.getHeading());
+            table.putValue(KEY_POSE,p);
             table.putNumber(KEY_ROBOT_WIDTH, HW.wheelSeparation + 4);
             table.putNumber(KEY_ROBOT_LENGTH, HW.robotLength);
         }
+    }
+
+    public static void sendleJOSPath(Path p){
+	if(p!=null) {
+	    table.putValue(KEY_PATH, p);
+	}
     }
 
     public static void putTest() {
