@@ -6,6 +6,7 @@ package disco.subsystems;
 
 import disco.HW;
 import disco.utils.DiscoGyro;
+import disco.utils.FeatureReporter;
 import disco.utils.MaxbotixSonar;
 import disco.utils.MaxbotixSonarYellowDot;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -94,19 +95,31 @@ public class AutoDrivetrain extends Subsystem {
     }
 
     private void sonarsInit() {
+        //Set up sonars
 	frontSonar = new MaxbotixSonarYellowDot(HW.frontsonarSlot, HW.frontsonarChannel, MaxbotixSonar.Unit.kInches);
-	FeatureDetector frontSonar_detector=new RangeFeatureDetector(frontSonar,(float)frontSonar.MAX_PEOPLE_RANGE,frontSonar.MIN_READING_DELAY,0);
-	leftSonar = new MaxbotixSonar(HW.leftsonarSlot,HW.leftsonarChannel,MaxbotixSonar.Unit.kInches);
-	FeatureDetector leftSonar_detector=new RangeFeatureDetector(leftSonar,(float)leftSonar.MAX_PEOPLE_RANGE,leftSonar.MIN_READING_DELAY,90);
-	rightSonar = new MaxbotixSonar(HW.rightsonarSlot,HW.rightsonarChannel,MaxbotixSonar.Unit.kInches);
-	FeatureDetector rightSonar_detector=new RangeFeatureDetector(rightSonar,(float)rightSonar.MAX_PEOPLE_RANGE,rightSonar.MIN_READING_DELAY,90);
-	backSonar = new MaxbotixSonar(HW.backsonarSlot,HW.backsonarChannel,MaxbotixSonar.Unit.kInches);
-	FeatureDetector backSonar_detector=new RangeFeatureDetector(backSonar,(float)backSonar.MAX_PEOPLE_RANGE,backSonar.MIN_READING_DELAY,90);
-	sonars=new FusorDetector();
+        leftSonar = new MaxbotixSonar(HW.leftsonarSlot,HW.leftsonarChannel,MaxbotixSonar.Unit.kInches);
+        rightSonar = new MaxbotixSonar(HW.rightsonarSlot,HW.rightsonarChannel,MaxbotixSonar.Unit.kInches);
+        backSonar = new MaxbotixSonar(HW.backsonarSlot,HW.backsonarChannel,MaxbotixSonar.Unit.kInches);
+	//set up detectors
+        RangeFeatureDetector frontSonar_detector=new RangeFeatureDetector(frontSonar,(float)frontSonar.MAX_PEOPLE_RANGE,frontSonar.MIN_READING_DELAY,0);
+	frontSonar_detector.setPoseProvider(op);
+        RangeFeatureDetector leftSonar_detector=new RangeFeatureDetector(leftSonar,(float)leftSonar.MAX_PEOPLE_RANGE,leftSonar.MIN_READING_DELAY,90);
+	leftSonar_detector.setPoseProvider(op);
+        RangeFeatureDetector rightSonar_detector=new RangeFeatureDetector(rightSonar,(float)rightSonar.MAX_PEOPLE_RANGE,rightSonar.MIN_READING_DELAY,-90);
+	rightSonar_detector.setPoseProvider(op);
+        RangeFeatureDetector backSonar_detector=new RangeFeatureDetector(backSonar,(float)backSonar.MAX_PEOPLE_RANGE,backSonar.MIN_READING_DELAY,180);
+	backSonar_detector.setPoseProvider(op);
+        //set up fusor
+        sonars=new FusorDetector();
 	sonars.addDetector(frontSonar_detector);
-	//sonars.addDetector(frontSonar2_detector);
 	sonars.addDetector(leftSonar_detector);
-	sonars.enableDetection(false);
+	sonars.addDetector(rightSonar_detector);
+	sonars.addDetector(backSonar_detector);
+        //set up listening
+        System.out.println("Enabling detectors");
+	sonars.enableDetection(true);
+        System.out.println("Adding listener");
+        sonars.addListener(new FeatureReporter());
     }
 
     private void gyroInit(){

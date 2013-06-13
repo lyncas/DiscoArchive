@@ -64,6 +64,7 @@ public class FusorDetector implements FeatureDetector, FeatureListener {
 			this.delay = detector.getDelay();
 		readings.add(new RangeReadings(0)); // Add dummy object to expand size of RangeReadings
 	}
+       
 	/**
 	 * This method scans all the sensors added to this object and returns the amalgamated results.
 	 * NOTE: This method is not called by the thread code.
