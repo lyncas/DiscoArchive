@@ -29,6 +29,7 @@ import lejos.robotics.pathfinding.Path;
  */
 public class Navigator implements WaypointListener
 {
+    boolean _navigationImmediateReturn=true;
 
    /**
     * Allocates a Navigator object,  using pilot that implements the ArcMoveController interface.
@@ -37,6 +38,16 @@ public class Navigator implements WaypointListener
    public Navigator(MoveController pilot)
    {
       this(pilot, null);
+   }
+   
+   /*
+    * navigationImmediateReturn: set to false when using GyroPilot or CompassPilot 
+    * as they do extra things when they are not forced to return.
+    * MAY CAUSE PROBLEMS WITH _keepgoing AND NOT STOP UNTIL MOVE END. USE AT YOUR OWN RISK.
+    */
+   public Navigator(MoveController pilot, PoseProvider poseProvider,boolean navigationImmediateReturn){
+       this(pilot,poseProvider);
+       this._navigationImmediateReturn=navigationImmediateReturn;
    }
 
    /**
@@ -369,7 +380,7 @@ public class Navigator implements WaypointListener
           if(!_keepGoing) break;
           if(_radius == 0)  // differential pilot used
           {
-            ((RotateMoveController) _pilot).rotate(destinationRelativeBearing,true);
+            ((RotateMoveController) _pilot).rotate(destinationRelativeBearing,_navigationImmediateReturn);
             while (_pilot.isMoving() && _keepGoing)Thread.yield();
             if(!_keepGoing) break;
           }
@@ -404,7 +415,7 @@ public class Navigator implements WaypointListener
           if (_radius == 0) //differential pilot is used
           {
             float distance = _pose.distanceTo(_destination);
-            _pilot.travel(distance, true);
+            _pilot.travel(distance, _navigationImmediateReturn);
             while (_pilot.isMoving() && _keepGoing)Thread.yield();
              _pose = poseProvider.getPose();
             if(!_keepGoing) break;

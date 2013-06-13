@@ -5,45 +5,29 @@
 package disco.commands.drivetrain;
 
 import disco.commands.CommandBase;
-import java.lejosutil.ListIterator;
+import lejos.robotics.localization.PoseProvider;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
-import lejos.robotics.navigation.Waypoint;
-import lejos.robotics.pathfinding.Path;
 
+public class LejosDriveCommandTemplate extends CommandBase {
 
-public class FollowPath extends CommandBase {
-    DifferentialPilot p;
+    DifferentialPilot pilot;
     Navigator nav;
-    Path path;
-    /*
-     * distance in wheel diameter units
-     */
-    public FollowPath(Path path) {
-        // Use requires() here to declare subsystem dependencies
-        
-        requires(drivetrain);
-	p=drivetrain.getPilot();
-        nav=drivetrain.getNavigator();
-        this.path=path;
-    }
+    PoseProvider pp;
+    Driver driver;
     
-    public FollowPath(Waypoint[] waypoints){
-        this(new Path());
-        for(int i=0;i<waypoints.length;i++) {
-            path.add(waypoints[i]);
-        }
+    public LejosDriveCommandTemplate() {
+        // Use requires() here to declare subsystem dependencies
+        requires(drivetrain);
+        pilot = drivetrain.getPilot();
+        nav = drivetrain.getNavigator();
+        pp = drivetrain.getPoseProvider();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-	nav.clearPath();
-        //nav.setPath(path);
-        ListIterator it=path.listIterator();
-        while (it.hasNext()){
-            nav.addWaypoint((Waypoint)it.next());
-        }
-        nav.followPath();
+        driver=new Driver();
+        driver.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -52,12 +36,13 @@ public class FollowPath extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return nav.pathCompleted();
+        return driver.isAlive();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-	p.stop();
+        driver=null;
+        pilot.stop();
         drivetrain.tankDrive(0, 0);
         drivetrain.disableControl();
     }
@@ -65,6 +50,25 @@ public class FollowPath extends CommandBase {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-	end();
+        end();
+    }
+
+    
+    class Driver extends Thread {
+        //what does this need to know?
+        public Driver(){
+            
+        }
+
+        //Put what you want the command to do here
+        public void run() {
+            
+        }
+        
+        //return true when command is over
+        public boolean isDone(){
+            return true;
+        }
+        
     }
 }

@@ -5,26 +5,31 @@
 package disco.commands.drivetrain;
 
 import disco.commands.CommandBase;
+import lejos.robotics.localization.PoseProvider;
 import lejos.robotics.navigation.DifferentialPilot;
-
+import lejos.robotics.navigation.Navigator;
 
 public class PilotDrive extends CommandBase {
-    DifferentialPilot p;
-    double dist;
 
-    /*
-     * distance in wheel diameter units
-     */
-    public PilotDrive(double distance) {
+    DifferentialPilot pilot;
+    Navigator nav;
+    PoseProvider pp;
+    Driver driver;
+    double dist;
+    
+    public PilotDrive(double dist) {
         // Use requires() here to declare subsystem dependencies
         requires(drivetrain);
-	p=drivetrain.getPilot();
-	dist=distance;
+        pilot = drivetrain.getPilot();
+        nav = drivetrain.getNavigator();
+        pp = drivetrain.getPoseProvider();
+        this.dist=dist;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-	p.travel(dist,true);
+        driver=new Driver();
+        driver.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,19 +38,40 @@ public class PilotDrive extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !p.isMoving();
+        return !driver.isAlive();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-	p.stop();
+        driver=null;
+        pilot.stop();
         drivetrain.tankDrive(0, 0);
         drivetrain.disableControl();
+        System.out.println("Move done");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-	end();
+        end();
+    }
+
+    
+    class Driver extends Thread {
+        //what does this need to know?
+        public Driver(){
+            
+        }
+
+        //Put what you want the command to do here
+        public void run() {
+            pilot.travel(dist,false);
+        }
+        
+        //return true when command is over
+        public boolean isDone(){
+            return !pilot.isMoving();
+        }
+        
     }
 }

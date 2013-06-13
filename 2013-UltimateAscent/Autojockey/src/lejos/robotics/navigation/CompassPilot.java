@@ -12,6 +12,9 @@ import lejos.util.Delay;
 
 /**
  * A Pilot that keeps track of direction using a DirectionFinder.
+ * 
+ * Modified: Sam Dietrich 20130613: Use 95% direction finder for error. 5% encoders.
+ * 
  *   This class will disappear in NXJ version 1.0. Compass should be added to a PoseProvider.
  * @see lejos.robotics.localization.PoseProvider#getPose()
  */
@@ -291,7 +294,7 @@ public class CompassPilot extends DifferentialPilot
             float incr = getAngleIncrement();
             _estimatedHeading += (incr - incr0); //change in heading from tacho counts
             incr0 =  incr;
-             _estimatedHeading = normalize( 0.5f *normalize(compass.getDegreesCartesian())  + 0.5f*_estimatedHeading);
+             _estimatedHeading = normalize( 1.00f *normalize(compass.getDegreesCartesian())  + 0.00f*_estimatedHeading);
             error = normalize( _estimatedHeading - _heading);
            toGo =(_distance - getMovementIncrement());
             if(Math.abs(error - e0) > 2)  //only steer if large change in error > 2 deg

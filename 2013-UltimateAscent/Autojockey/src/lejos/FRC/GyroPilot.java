@@ -5,11 +5,8 @@
 package lejos.FRC;
 
 import disco.utils.DiscoGyro;
-import edu.wpi.first.wpilibj.Gyro;
-import lejos.robotics.DirectionFinder;
 import lejos.robotics.RegulatedMotor;
 import lejos.robotics.navigation.CompassPilot;
-import lejos.robotics.navigation.DifferentialPilot;
 
 /**
  *

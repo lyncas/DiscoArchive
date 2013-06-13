@@ -99,6 +99,11 @@ public class MainAscent extends IterativeRobot {
         lastTime = System.currentTimeMillis();
 	Scheduler.getInstance().run();
         Dashboard.putSensors();
+        //Protect from super speedup. note: FAILURE.
+        if(Math.abs(CommandBase.drivetrain.getLeftRate())>4.0 || Math.abs(CommandBase.drivetrain.getRightRate())>4.0){
+           this.getWatchdog().setEnabled(true);
+           this.getWatchdog().kill();
+        }
         executionTimeMillis=System.currentTimeMillis()-lastTime;
 
     }

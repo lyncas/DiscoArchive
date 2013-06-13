@@ -5,26 +5,34 @@
 package disco.commands.drivetrain;
 
 import disco.commands.CommandBase;
+import lejos.robotics.localization.PoseProvider;
 import lejos.robotics.navigation.DifferentialPilot;
-
+import lejos.robotics.navigation.Navigator;
 
 public class PilotTurn extends CommandBase {
-    DifferentialPilot p;
-    double angle;
 
+    DifferentialPilot pilot;
+    Navigator nav;
+    PoseProvider pp;
+    Driver driver;
+    double angle;
+    
     /*
      * CCW+
      */
     public PilotTurn(double angle) {
         // Use requires() here to declare subsystem dependencies
         requires(drivetrain);
-	p=drivetrain.getPilot();
-	this.angle=angle;
+        pilot = drivetrain.getPilot();
+        nav = drivetrain.getNavigator();
+        pp = drivetrain.getPoseProvider();
+        this.angle=angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-	p.rotate(angle, true);
+        driver=new Driver();
+        driver.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,19 +41,40 @@ public class PilotTurn extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !p.isMoving();
+        return !driver.isAlive();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-	p.stop();
+        driver=null;
+        pilot.stop();
         drivetrain.tankDrive(0, 0);
         drivetrain.disableControl();
+        System.out.println("Turn done");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-	end();
+        end();
+    }
+
+    
+    class Driver extends Thread {
+        //what does this need to know?
+        public Driver(){
+            
+        }
+
+        //Put what you want the command to do here
+        public void run() {
+            pilot.rotate(angle,false);
+        }
+        
+        //return true when command is over
+        public boolean isDone(){
+            return !pilot.isMoving();
+        }
+        
     }
 }

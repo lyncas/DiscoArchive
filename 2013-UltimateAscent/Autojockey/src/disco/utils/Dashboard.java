@@ -27,10 +27,9 @@ public class Dashboard {
 
     public static void init() {
         table = NetworkTable.getTable(RobotMapperTableLocation);
-        if(table==null){
+        if (table == null) {
             System.out.println("NULL TABLE");
-        }
-        else{
+        } else {
             System.out.println("Table OK");
         }
         putStuff();
@@ -52,19 +51,20 @@ public class Dashboard {
         SmartDashboard.putNumber("Execution loop time", MainAscent.getExecutionTime());
 
         sendleJOS();
-        
+
         //DRIVETRAIN
         //Encoder information
         SmartDashboard.putNumber("Left Encoder", CommandBase.drivetrain.getLeftEncoder());
         SmartDashboard.putNumber("Right Encoder", CommandBase.drivetrain.getRightEncoder());
-        putTest();
+        SmartDashboard.putNumber("left velocity", CommandBase.drivetrain.getLeftRate());
+        SmartDashboard.putNumber("right velocity", CommandBase.drivetrain.getRightRate());
         SmartDashboard.putNumber("Gyro", CommandBase.drivetrain.getGyroAngle());
         //Sonar information
         SmartDashboard.putNumber("Front sonar", CommandBase.drivetrain.getFrontSonar());
         SmartDashboard.putNumber("Left sonar", CommandBase.drivetrain.getLeftSonar());
         SmartDashboard.putNumber("Right sonar", CommandBase.drivetrain.getRightSonar());
         SmartDashboard.putNumber("Back sonar", CommandBase.drivetrain.getBackSonar());
-        
+
         //Location information
         Pose p = CommandBase.drivetrain.getPoseProvider().getPose();
         SmartDashboard.putNumber("X", p.getX());
@@ -85,10 +85,5 @@ public class Dashboard {
             table.putNumber(KEY_ROBOT_WIDTH, HW.wheelSeparation + 4);
             table.putNumber(KEY_ROBOT_LENGTH, HW.robotLength);
         }
-    }
-
-    public static void putTest() {
-        SmartDashboard.putNumber("left velocity", CommandBase.drivetrain.getLeftRate());
-        SmartDashboard.putNumber("right velocity", CommandBase.drivetrain.getRightRate());
     }
 }

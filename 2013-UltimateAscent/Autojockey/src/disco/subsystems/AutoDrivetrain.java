@@ -127,7 +127,7 @@ public class AutoDrivetrain extends Subsystem {
 	pilot.addMoveListener(op);
 	//Tell it that we are initially pointing in the positive Y direction, instead of positive X.
 	op.setPose(new Pose(0, 0, 90));
-	nav = new Navigator(pilot, op);
+	nav = new Navigator(pilot, op,false);
     }
 
     private void generateMap() {
