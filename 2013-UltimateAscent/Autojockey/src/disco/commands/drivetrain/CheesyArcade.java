@@ -39,7 +39,7 @@ public class CheesyArcade extends CommandBase {
         double left = tempLeft + skim(tempRight);
         double right = tempRight - skim(tempLeft);
         
-        drivetrain.tankDriveUnsmoothed(left, right);
+        drivetrain.tankDrive(left, right);
     }
     
     protected boolean isFinished() {

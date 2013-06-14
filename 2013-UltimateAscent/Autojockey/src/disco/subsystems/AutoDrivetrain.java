@@ -11,6 +11,7 @@ import disco.utils.MaxbotixSonar;
 import disco.utils.MaxbotixSonarYellowDot;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import lejos.FRC.GyroPilot;
@@ -40,6 +41,7 @@ public class AutoDrivetrain extends Subsystem {
     private Victor leftDrive2;
     private Victor rightDrive1;
     private Victor rightDrive2;
+    private RobotDrive manualDrive;
     //Sonars
     private MaxbotixSonar frontSonar;
     private MaxbotixSonar leftSonar;
@@ -80,6 +82,12 @@ public class AutoDrivetrain extends Subsystem {
 	leftDrive2 = new Victor(HW.LeftDrive2Slot, HW.LeftDrive2Channel);
 	rightDrive1 = new Victor(HW.RightDrive1Slot, HW.RightDrive1Channel);
 	rightDrive2 = new Victor(HW.RightDrive2Slot, HW.RightDrive2Channel);
+        manualDrive=new RobotDrive(leftDrive1,leftDrive2,rightDrive1,rightDrive2);
+        manualDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+	manualDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+	manualDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+	manualDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        manualDrive.setSafetyEnabled(false);
     }
 
     private void encodersInit() {
@@ -101,13 +109,13 @@ public class AutoDrivetrain extends Subsystem {
         rightSonar = new MaxbotixSonar(HW.rightsonarSlot,HW.rightsonarChannel,MaxbotixSonar.Unit.kInches);
         backSonar = new MaxbotixSonar(HW.backsonarSlot,HW.backsonarChannel,MaxbotixSonar.Unit.kInches);
 	//set up detectors
-        RangeFeatureDetector frontSonar_detector=new RangeFeatureDetector(frontSonar,(float)frontSonar.MAX_PEOPLE_RANGE,frontSonar.MIN_READING_DELAY,0);
+        RangeFeatureDetector frontSonar_detector=new RangeFeatureDetector(frontSonar,(float)frontSonar.MAX_PEOPLE_RANGE,1000,0);
 	frontSonar_detector.setPoseProvider(op);
-        RangeFeatureDetector leftSonar_detector=new RangeFeatureDetector(leftSonar,(float)leftSonar.MAX_PEOPLE_RANGE,leftSonar.MIN_READING_DELAY,90);
+        RangeFeatureDetector leftSonar_detector=new RangeFeatureDetector(leftSonar,(float)leftSonar.MAX_PEOPLE_RANGE,1000,90);
 	leftSonar_detector.setPoseProvider(op);
-        RangeFeatureDetector rightSonar_detector=new RangeFeatureDetector(rightSonar,(float)rightSonar.MAX_PEOPLE_RANGE,rightSonar.MIN_READING_DELAY,-90);
+        RangeFeatureDetector rightSonar_detector=new RangeFeatureDetector(rightSonar,(float)rightSonar.MAX_PEOPLE_RANGE,1000,-90);
 	rightSonar_detector.setPoseProvider(op);
-        RangeFeatureDetector backSonar_detector=new RangeFeatureDetector(backSonar,(float)backSonar.MAX_PEOPLE_RANGE,backSonar.MIN_READING_DELAY,180);
+        RangeFeatureDetector backSonar_detector=new RangeFeatureDetector(backSonar,(float)backSonar.MAX_PEOPLE_RANGE,1000,180);
 	backSonar_detector.setPoseProvider(op);
         //set up fusor
         sonars=new FusorDetector();
@@ -162,25 +170,8 @@ public class AutoDrivetrain extends Subsystem {
 	default_path = p;
     }
 
-    //BUG: drives too slow
     public void tankDrive(double left, double right) {
-	//set up for tank
-	//pilot.setAcceleration(9999);
-	leftDrive.setSpeed(java.lejoslang.Math.round(HW.maxFPS * Math.abs(left) * 360 / (2 * Math.PI * HW.wheelRadius)));
-	rightDrive.setSpeed(java.lejoslang.Math.round(HW.maxFPS * Math.abs(right) * 360 / (2 * Math.PI * HW.wheelRadius)));
-	if (right > 0) {
-	    rightDrive.forward();
-	} else {
-	    rightDrive.backward();
-	}
-	if (left > 0) {
-	    leftDrive.forward();
-	} else {
-	    leftDrive.backward();
-	}
-	//reset
-	pilot.setAcceleration(accel);
-	pilot.setTravelSpeed(max_speed);
+	manualDrive.tankDrive(left, right, false);
     }
 
     public void arcadeDrive(double move, double turn) {

@@ -104,7 +104,7 @@ public class AssistedCheesy extends CommandBase {
             m_rightInitial = drivetrain.getRightEncoder();
         }
 
-        drivetrain.tankDriveUnsmoothed(left, right);
+        drivetrain.tankDrive(left, right);
     }
 
     protected void end() {
