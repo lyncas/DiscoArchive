@@ -4,6 +4,7 @@
  */
 package disco.commands.drivetrain;
 
+import disco.commands.drivetrain.manual.LerpDrive;
 import disco.commands.CommandBase;
 
 public class cycleDrive extends CommandBase {

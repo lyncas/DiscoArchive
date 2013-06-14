@@ -1,4 +1,4 @@
-package disco.commands.drivetrain;
+package disco.commands.drivetrain.manual;
 
 import disco.commands.CommandBase;
 import disco.utils.GamePad;
