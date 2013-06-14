@@ -21,13 +21,13 @@ import lejos.robotics.RangeFinder;
  * Maxbotix sonar MB 1240
  */
 public class MaxbotixSonar extends SensorBase implements PIDSource, ISensor, RangeFinder {
-    protected static final double k_CentimeterFactor=204.8;
-    protected static final double k_InchesFactor = k_CentimeterFactor*0.393;
-    protected static final double k_MillimetersFactor = 10*k_CentimeterFactor;
-    public static final double MAX_RANGE=254;//inches. about 20 feet.
-    public static final double MAX_PEOPLE_RANGE=12*5;//inches. Maximum range for detecting objects the size of people.
-    public static final double MIN_RANGE=20;
-    public static final int MIN_READING_DELAY=100;//msec
+    protected double k_CentimeterFactor=204.8;
+    protected double k_InchesFactor = k_CentimeterFactor*0.393;
+    protected double k_MillimetersFactor = 10*k_CentimeterFactor;
+    public double MAX_RANGE=254;//inches. about 20 feet.
+    public double MAX_PEOPLE_RANGE=12*5;//inches. Maximum range for detecting objects the size of people.
+    public double MIN_RANGE=20;
+    public int MIN_READING_DELAY=100;//msec
 
 
     /**

@@ -29,16 +29,16 @@ public class FeatureReporter implements FeatureListener {
             catch(NullPointerException e){
                 rPose=new Pose(0,0,90);
             }
-            System.out.println(rPose);
+            //System.out.println(rPose);
             RangeReading rr = Rfeature.getRangeReading();
             double dist = rr.getRange();
             double angle = rr.getAngle() + rPose.getHeading();
             double angleRad = Math.toRadians(angle);
             double x = rPose.getX() + dist * Math.cos(angleRad);
             double y = rPose.getY() + dist * Math.sin(angleRad);
-            System.out.println("Range: " + dist
-                    + "\nAngle: " + angle
-                    + "\nRobot: x=" + rPose.getX() + " y=" + rPose.getY());
+//            System.out.println("Range: " + dist
+//                    + "\nAngle: " + angle
+//                    + "\nRobot: x=" + rPose.getX() + " y=" + rPose.getY());
             System.out.println("Feature detected at :" + Utilitate.roundHundredths(x) + " , " + Utilitate.roundHundredths(y));
         } else {
             System.out.println("Non-range feature detected. You might want to check that.");
