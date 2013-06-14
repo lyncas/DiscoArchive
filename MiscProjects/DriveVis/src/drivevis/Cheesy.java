@@ -14,31 +14,43 @@ public class Cheesy implements DriveMode {
 
     @Override
     public Powers calcLR(double moveValue, double rotateValue) {
-	double move = moveValue;
-	double turn = rotateValue;
+	double throttle = moveValue;
+	double wheel = rotateValue;
 
-	if (Math.abs(move) > threshold) {
-	    turn = turn * (turnGain * Math.abs(move));
-	}
+	 double wheelNonLinearity = 0.6;
+      // Apply a sin function that's scaled to make it feel better.
+//      wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) /
+//          Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+//      wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) /
+//          Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+      
+      double sensitivity = 1.7;
 
-	double tempLeft = move + turn;
-	double tempRight = move - turn;
+    double angularPower;
+    double linearPower=throttle;
+      angularPower = Math.abs(throttle) * wheel * sensitivity;
 
-	tempLeft = tempLeft + skim(tempRight);
-	tempRight = tempRight - skim(tempLeft);
+      double leftPwm, rightPwm, overPower=0;
+      rightPwm = leftPwm = linearPower;
+    leftPwm += angularPower;
+    rightPwm -= angularPower;
 
-	//remove this to get real version
-	double max = Math.max(Math.abs(tempLeft), Math.abs(tempRight));
-	if (max > 1) {
-	    tempLeft = tempLeft / max;
-	    tempRight = tempRight / max;
-	}
-	//end remove
+    if (leftPwm > 1.0) {
+      rightPwm -= overPower * (leftPwm - 1.0);
+      leftPwm = 1.0;
+    } else if (rightPwm > 1.0) {
+      leftPwm -= overPower * (rightPwm - 1.0);
+      rightPwm = 1.0;
+    } else if (leftPwm < -1.0) {
+      rightPwm += overPower * (-1.0 - leftPwm);
+      leftPwm = -1.0;
+    } else if (rightPwm < -1.0) {
+      leftPwm += overPower * (-1.0 - rightPwm);
+      rightPwm = -1.0;
+    }
 
-	driveLeft = tempLeft;
-	driveRight = tempRight;
+    return new Powers(leftPwm, rightPwm);
 
-	return new Powers(driveLeft,driveRight);
     }
 
     @Override

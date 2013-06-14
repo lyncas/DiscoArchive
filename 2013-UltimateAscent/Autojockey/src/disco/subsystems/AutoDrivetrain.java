@@ -14,8 +14,9 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import java.lejosutil.ArrayList;
+import java.lejosutil.Iterator;
 import lejos.FRC.GyroPilot;
-import lejos.FRC.OdometryGyroPoseProvider;
 import lejos.FRC.RegulatedDrivetrain;
 import lejos.geom.Line;
 import lejos.geom.Rectangle;
@@ -26,8 +27,6 @@ import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
 import lejos.robotics.navigation.Pose;
 import lejos.robotics.navigation.Waypoint;
-import lejos.robotics.objectdetection.FeatureDetector;
-import lejos.robotics.objectdetection.FusorDetector;
 import lejos.robotics.objectdetection.RangeFeatureDetector;
 import lejos.robotics.pathfinding.Path;
 
@@ -47,7 +46,8 @@ public class AutoDrivetrain extends Subsystem {
     private MaxbotixSonar leftSonar;
     private MaxbotixSonar rightSonar;
     private MaxbotixSonar backSonar;
-    private FusorDetector sonars;
+    private ArrayList sonars;
+    private FeatureReporter sonarReporter;
     //Encoders
     private Encoder leftEncoder;
     private Encoder rightEncoder;
@@ -110,24 +110,24 @@ public class AutoDrivetrain extends Subsystem {
         backSonar = new MaxbotixSonar(HW.backsonarSlot,HW.backsonarChannel,MaxbotixSonar.Unit.kInches);
 	//set up detectors
         RangeFeatureDetector frontSonar_detector=new RangeFeatureDetector(frontSonar,(float)frontSonar.MAX_PEOPLE_RANGE,1000,0);
-	frontSonar_detector.setPoseProvider(op);
         RangeFeatureDetector leftSonar_detector=new RangeFeatureDetector(leftSonar,(float)leftSonar.MAX_PEOPLE_RANGE,1000,90);
-	leftSonar_detector.setPoseProvider(op);
         RangeFeatureDetector rightSonar_detector=new RangeFeatureDetector(rightSonar,(float)rightSonar.MAX_PEOPLE_RANGE,1000,-90);
-	rightSonar_detector.setPoseProvider(op);
         RangeFeatureDetector backSonar_detector=new RangeFeatureDetector(backSonar,(float)backSonar.MAX_PEOPLE_RANGE,1000,180);
-	backSonar_detector.setPoseProvider(op);
         //set up fusor
-        sonars=new FusorDetector();
-	sonars.addDetector(frontSonar_detector);
-	sonars.addDetector(leftSonar_detector);
-	sonars.addDetector(rightSonar_detector);
-	sonars.addDetector(backSonar_detector);
+        sonars=new ArrayList();
+	sonars.add(frontSonar_detector);
+	sonars.add(leftSonar_detector);
+	sonars.add(rightSonar_detector);
+	sonars.add(backSonar_detector);
         //set up listening
-        System.out.println("Enabling detectors");
-	sonars.enableDetection(true);
-        System.out.println("Adding listener");
-        sonars.addListener(new FeatureReporter());
+        sonarReporter=new FeatureReporter();
+        System.out.println("Enabling detectors and adding listeners.");
+	for(Iterator it=sonars.iterator();it.hasNext();){
+            RangeFeatureDetector aSonar=(RangeFeatureDetector)it.next();
+            aSonar.setPoseProvider(op);
+            aSonar.enableDetection(true);
+            aSonar.addListener(sonarReporter);
+        }
     }
 
     private void gyroInit(){
