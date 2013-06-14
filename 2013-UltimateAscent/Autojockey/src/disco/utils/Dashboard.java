@@ -14,8 +14,6 @@ import lejos.robotics.navigation.Pose;
 
 public class Dashboard {
 
-    public static SendableChooser autonChooser;
-    public static double autonSetpoint = 5400;
     private static NetworkTable table;
     //These must be the same as in the RobotMapperExtension
     private static final String RobotMapperTableLocation = "LocationInformation",
@@ -43,6 +41,7 @@ public class Dashboard {
     //Only call this once or we overflow the memory. Bad day.
     private static void putSubsystems() {
         SmartDashboard.putData(CommandBase.drivetrain);
+        SmartDashboard.putData(CommandBase.shooter);
         SmartDashboard.putData(CommandBase.compressor);
     }
 
@@ -74,7 +73,15 @@ public class Dashboard {
         //COMPRESSOR
         SmartDashboard.putBoolean("Air Full", CommandBase.compressor.getPressureSwitch());
         SmartDashboard.putString("Compressor State", CommandBase.compressor.getEnabled() ? "ON" : "OFF");
-    }
+    
+        //SHOOTER
+        SmartDashboard.putNumber("Forward Shooter RPM", CommandBase.shooter.getFrontRPM());
+        SmartDashboard.putNumber("Back Shooter RPM", CommandBase.shooter.getBackRPM());
+        SmartDashboard.putNumber("Shooter difference", CommandBase.shooter.difference);
+        SmartDashboard.putNumber("Shooter Setpoint", CommandBase.shooter.getSetpoint());
+        SmartDashboard.putBoolean("Shooter On target", CommandBase.shooter.isOnTarget());
+    
+    }   
 
     public static void sendleJOS() {
         Pose p = CommandBase.drivetrain.getPoseProvider().getPose();

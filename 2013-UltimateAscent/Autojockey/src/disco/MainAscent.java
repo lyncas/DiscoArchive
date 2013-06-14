@@ -67,7 +67,8 @@ public class MainAscent extends IterativeRobot {
 
     public void autonomousInit() {
 	// schedule the autonomous command (example)
-	autonomousCommand = (Command) (Dashboard.autonChooser.getSelected());
+//	autonomousCommand = (Command) (Dashboard.autonChooser.getSelected());
+        autonomousCommand=null;
         if(autonomousCommand!=null) {
             autonomousCommand.start();
         }

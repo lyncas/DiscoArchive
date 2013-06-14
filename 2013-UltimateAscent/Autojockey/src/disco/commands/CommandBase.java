@@ -17,10 +17,13 @@ public abstract class CommandBase extends Command {
     // Create a single static instance of all of your subsystems
     public static AutoDrivetrain drivetrain;
     public static CompressorSub compressor;
+    public static Shooter shooter;
 
     public static void init() {
         drivetrain = new AutoDrivetrain();
         System.out.println("Drivetrain initialization successful");
+        shooter = new Shooter();
+        System.out.println("Shooter initialization successful");
         compressor = new CompressorSub();
         System.out.println("Compressor initialization successful");
         // This MUST be here. If the OI creates Commands (which it very likely

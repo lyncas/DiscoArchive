@@ -3,6 +3,13 @@ package disco;
 import disco.commands.CommandBase;
 import disco.commands.drivetrain.*;
 import disco.commands.pneumatics.*;
+import disco.commands.shooter.AutoShoot;
+import disco.commands.shooter.ShooterDec;
+import disco.commands.shooter.ShooterDecDiff;
+import disco.commands.shooter.ShooterInc;
+import disco.commands.shooter.ShooterIncDiff;
+import disco.commands.shooter.ShooterToggle;
+import disco.commands.shooter.cycleShooter;
 import disco.utils.GamePad;
 import disco.utils.GamePad.AxisButton;
 import edu.wpi.first.wpilibj.Joystick;
@@ -61,6 +68,15 @@ public class OI {
 	/*
 	 * Shooter
 	 */
+        b2_dpadU.whenPressed(new ShooterIncDiff());
+        b2_dpadD.whenPressed(new ShooterDecDiff());
+        b2_bumpR.whenPressed(new ShooterToggle());
+        b2_dpadR.whenPressed(new ShooterInc());
+        b2_dpadL.whenPressed(new ShooterDec());
+        b2_trigR.whenPressed(new Shoot());
+        b2_trigL.whenPressed(new Clear());
+        b2_Back.whenPressed(new cycleShooter());
+        b2_A.whenPressed(new AutoShoot(5,1000,200));
 
 	/*
 	 * Drivetrain
@@ -82,7 +98,7 @@ public class OI {
 	/*
 	 * Pneumatics
 	 */
-	b_X.whenPressed(new ToggleCompressor());
+	b2_X.whenPressed(new ToggleCompressor());
 
     }
 
