@@ -4,37 +4,42 @@
  */
 package disco.commands.drivetrain;
 
-import disco.commands.drivetrain.manual.LerpDrive;
 import disco.commands.CommandBase;
+import disco.commands.drivetrain.manual.FloatDrive;
+import disco.commands.drivetrain.manual.LerpDrive;
+import disco.commands.drivetrain.manual.LerpDriveSine;
 
 public class cycleDrive extends CommandBase {
-    private static int mode=0;
-    private boolean done;
-    private static final int numModes=2;
+
+    private static int mode = 0;
+    private static final int numModes = 3;
 
     public cycleDrive() {
-
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        done=false;
+        switch (mode) {
+            case 0:
+                new LerpDrive().start();
+                break;
+            case 1:
+                new LerpDriveSine().start();
+                break;
+            case 2:
+                new FloatDrive().start();
+                break;
+        }
+        mode = mode < numModes - 1 ? mode + 1 : 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        switch(mode){
-            case 0: new LerpDrive().start();
-                    break;
-	    case 1: new FloatDrive().start();
-        }
-        mode= mode<numModes-1 ? mode+1 : 0;
-        done=true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return done;
+        return true;
     }
 
     // Called once after isFinished returns true
