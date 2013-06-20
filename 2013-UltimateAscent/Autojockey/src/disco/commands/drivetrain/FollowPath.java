@@ -5,6 +5,7 @@
 package disco.commands.drivetrain;
 
 import disco.commands.CommandBase;
+import disco.utils.Dashboard;
 import java.lejosutil.ListIterator;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.Navigator;
@@ -21,13 +22,13 @@ public class FollowPath extends CommandBase {
      */
     public FollowPath(Path path) {
         // Use requires() here to declare subsystem dependencies
-        
+
         requires(drivetrain);
 	p=drivetrain.getPilot();
         nav=drivetrain.getNavigator();
         this.path=path;
     }
-    
+
     public FollowPath(Waypoint[] waypoints){
         this(new Path());
         for(int i=0;i<waypoints.length;i++) {
@@ -47,7 +48,14 @@ public class FollowPath extends CommandBase {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    private int i=0;
     protected void execute() {
+	//only send path sometimes
+	i+=1;
+	if(i==4){
+	    Dashboard.sendleJOSPath(nav.getPath());
+	}
+	i%=5;
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -57,6 +65,7 @@ public class FollowPath extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+	Dashboard.sendleJOSPath(nav.getPath());
 	p.stop();
         drivetrain.tankDrive(0, 0);
         drivetrain.disableControl();

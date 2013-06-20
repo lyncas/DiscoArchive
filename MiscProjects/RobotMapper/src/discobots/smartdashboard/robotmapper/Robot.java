@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.discobots.smartdashboard.extensions.robotmapper;
+package discobots.smartdashboard.robotmapper;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -11,15 +11,22 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
+import lejos.robotics.navigation.Pose;
 
 /**
  *
  * @author Sam Dietrich, Nolan Shah
  */
-public class Robot {
+public class Robot implements drawable{
 
+    //state
     private int robotWidth = 20;
     private int robotLength = 20;
+    private Pose pose=new Pose(0,0,0);
+    private boolean disabled=true;
+
+    //drawable objects
     Rectangle robotRect;
     Path2D arrow;
     Path2D disabledX;
@@ -44,18 +51,41 @@ public class Robot {
 	disabledX.lineTo(0, robotLength);
     }
 
-    public void drawRobot(Graphics g, double centerX, double centerY, double heading, boolean disabled) {
+    public void setPose(Pose p){
+	pose=new Pose(p.getX(),p.getY(),p.getHeading());
+    }
+
+    public void setDisabled(boolean disabled){
+	this.disabled=disabled;
+    }
+
+    public Pose getPose(){
+	return new Pose(pose.getX(),pose.getY(),pose.getHeading());
+    }
+
+    @Override
+    public void draw(Graphics g,int window_centerX,int window_centerY) {
+	//Compute where to draw robot, assuming window cetner is world coordinate (0,0)
+	double centerX=window_centerX+pose.getX();
+	double centerY=window_centerY-pose.getY();
+	double heading=pose.getHeading();
 	Graphics2D g2=(Graphics2D)g;
+
 	AffineTransform robotTrans=new AffineTransform();
-	//May have to do these in the other order. Rotate robot components and translate them to robot location.
+	//Last things first
 	robotTrans.translate(centerX-robotWidth/2, centerY-robotLength/2);
-	robotTrans.rotate(Math.toRadians(heading) - Math.PI/2);
+	//move back to 0rigin
+	robotTrans.translate(robotWidth/2, robotLength/2);
+	//rotate to correct angle
+	robotTrans.rotate(-(Math.toRadians(heading) - Math.PI/2));
+	//move so we rotate around center
+	robotTrans.translate(-robotWidth/2, -robotLength/2);
 	//Create properly transformed robot and draw it
 	g2.setColor(Color.CYAN);
 	g2.fill(robotTrans.createTransformedShape(robotRect));
+
 	g2.setColor(Color.RED);
         g2.setStroke(new BasicStroke(2.0f));
-        
 	g2.draw(robotTrans.createTransformedShape(arrow));
 	if(disabled){
 	    g2.setColor(Color.RED);

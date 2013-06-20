@@ -152,6 +152,15 @@ public class ArrayList extends AbstractList implements RandomAccess
 		this((elements.length * 13) / 10);
 		addAll(elements);
 	}
+        
+        public String toString(){
+            String s="";
+            Iterator it=this.listIterator();
+            while(it.hasNext()){
+                s+="~"+it.next().toString();
+            }
+            return s;
+        }
 
 	/**
 	 * Add a element at a specific index.
