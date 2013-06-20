@@ -79,15 +79,16 @@ public class Dashboard {
     public static void sendleJOSPose() {
         Pose p = CommandBase.drivetrain.getPoseProvider().getPose();
         if (p != null) {
-            table.putValue(KEY_POSE,p);
+            table.putString(KEY_POSE,p.toString());
+        }
             table.putNumber(KEY_ROBOT_WIDTH, HW.wheelSeparation + 4);
             table.putNumber(KEY_ROBOT_LENGTH, HW.robotLength);
-        }
+        
     }
 
     public static void sendleJOSPath(Path p){
 	if(p!=null) {
-	    table.putValue(KEY_PATH, p);
+	    table.putString(KEY_PATH, p.toString());
 	}
     }
 

@@ -91,4 +91,8 @@ public class Waypoint extends Point {
 			    Math.abs(p.getHeading() - heading) > maxHeadingError) return false;
 		return true;
 	}
+        
+        public String toString(){
+            return ("X:"+x+" Y:"+y+" H:"+heading);
+        }
 }

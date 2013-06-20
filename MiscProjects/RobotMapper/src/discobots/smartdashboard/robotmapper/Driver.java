@@ -18,7 +18,7 @@ public class Driver {
     static JFrame main_frame;
     static JPanel main_panel;
     static RobotMapperExtension map;
-    public static final int size = 800;
+    public static final int size = 400;
 
     public static void main(String[] args) {
 	createTopLevel();
