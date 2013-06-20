@@ -39,6 +39,7 @@ public class RobotMapperExtension extends JPanel {
 
     public void init() {
 	setPreferredSize(new Dimension(size, size));
+	setBackground(Color.WHITE);
 	try {
 	    //table.setIPAddress("10.25.87.7"); // Temporary for testing. Should be 10.25.87.7
 	    table = NetworkTable.getTable(RobotMapperTableLocation);

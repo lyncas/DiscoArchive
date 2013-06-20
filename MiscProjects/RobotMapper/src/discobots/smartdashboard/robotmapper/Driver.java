@@ -22,6 +22,7 @@ public class Driver {
 
     public static void main(String[] args) {
 	createTopLevel();
+	createContent();
 
 
 	main_frame.setContentPane(main_panel);
@@ -45,7 +46,7 @@ public class Driver {
 
 	public static void createContent() {
 	map = new RobotMapperExtension(size);
-
+	map.setSize(size, size);
 	main_panel.setLayout(new BoxLayout(main_panel, BoxLayout.Y_AXIS));
 	main_panel.add(map);
     }
