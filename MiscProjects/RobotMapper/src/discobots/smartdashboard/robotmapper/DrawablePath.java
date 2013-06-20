@@ -28,6 +28,7 @@ public class DrawablePath implements drawable {
 
     public DrawablePath(Path p, Color c) {
 	this.p = p;
+	this.c=c;
     }
 
     public void setPath(Path p) {

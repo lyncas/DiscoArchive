@@ -1,6 +1,7 @@
 package discobots.smartdashboard.robotmapper;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,7 +16,7 @@ import lejos.robotics.pathfinding.Path;
  */
 public class RobotMapperExtension extends JPanel {
 
-    private int size=800;
+    private int size;
     private static final boolean DEBUGGING = false;
     private NetworkTable table;
     private final String RobotMapperTableLocation = "LocationInformation",
@@ -32,16 +33,19 @@ public class RobotMapperExtension extends JPanel {
     private Robot robot;
     private DrawablePath path_drawing;
 
-    public RobotMapperExtension(int size){
-	this.size=size;
+    public RobotMapperExtension(int size) {
+	this.size = size;
 	init();
+	robotPath=new Path();
+	robotPath.add(new Waypoint(0,0));
+	robotPath.add(new Waypoint(50,50));
+	robotPath.add(new Waypoint(75,50));
     }
 
     public void init() {
 	setPreferredSize(new Dimension(size, size));
 	setBackground(Color.WHITE);
 	try {
-	    //table.setIPAddress("10.25.87.7"); // Temporary for testing. Should be 10.25.87.7
 	    table = NetworkTable.getTable(RobotMapperTableLocation);
 	    robotPose = (Pose) table.getValue(KEY_POSE, new Pose(0, 0, 90));
 	    robotWidth = (int) table.getNumber(KEY_ROBOT_WIDTH, 20);
@@ -58,7 +62,7 @@ public class RobotMapperExtension extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-	g.setColor(Color.BLACK);
+	g.setColor(Color.LIGHT_GRAY);
 	g.fillRect(0, 0, getSize().width, getSize().height);
 	if (!connected) {
 	    g.setColor(Color.ORANGE);
@@ -71,10 +75,10 @@ public class RobotMapperExtension extends JPanel {
 	robot.setDisabled(!connected);
 	robot.draw(g, panelCenterX, panelCenterY);
 
-	//So we draw from the robot to the first waypoint
-	robotPath.add(0, new Waypoint(robotPose));
-	path_drawing.setPath(robotPath);
-	path_drawing.draw(g, panelCenterX, panelCenterY);
+	if (robotPath != null) {
+	    path_drawing.setPath(robotPath);
+	    path_drawing.draw(g, panelCenterX, panelCenterY);
+	}
 
     }
     volatile boolean error = false;
@@ -88,7 +92,13 @@ public class RobotMapperExtension extends JPanel {
 		//update data
 		try {
 		    robotPose = (Pose) table.getValue(KEY_POSE);
-		    robotPath = (Path) table.getValue(KEY_PATH, robotPath);
+		    try {
+			robotPath = (Path) table.getValue(KEY_PATH);
+			//make sure it draws it starting at us
+			robotPath.add(0, new Waypoint(robotPose));
+		    } catch (TableKeyNotDefinedException tk) {
+			//if no path, don't worry.
+		    }
 		    connected = true;
 		} catch (Exception e) {
 		    connected = false;
