@@ -17,7 +17,6 @@ import lejos.robotics.pathfinding.Path;
 public class RobotMapperExtension extends JPanel {
 
     private int size;
-    private static final boolean DEBUGGING = false;
     private NetworkTable table;
     private final String RobotMapperTableLocation = "LocationInformation",
 	    KEY_POSE = "robot_Pose",
@@ -36,10 +35,10 @@ public class RobotMapperExtension extends JPanel {
     public RobotMapperExtension(int size) {
 	this.size = size;
 	init();
-	robotPath=new Path();
-	robotPath.add(new Waypoint(0,0));
-	robotPath.add(new Waypoint(50,50));
-	robotPath.add(new Waypoint(75,50));
+	robotPath = new Path();
+	robotPath.add(new Waypoint(0, 0));
+	robotPath.add(new Waypoint(50, 50));
+	robotPath.add(new Waypoint(75, 50));
     }
 
     public void init() {
@@ -80,9 +79,32 @@ public class RobotMapperExtension extends JPanel {
 	    path_drawing.draw(g, panelCenterX, panelCenterY);
 	}
 
+	drawRuler(g);
     }
-    volatile boolean error = false;
-    volatile int mode = 0, ia = 0;
+
+    /*
+     * Draws one number every 50 px
+     * Assumes screen center is (0,0)
+     */
+    protected void drawRuler(Graphics g) {
+	int width = getWidth();
+	int height = getHeight();
+	int X_AXIS = height / 2;//y location of x axis
+	int Y_AXIS = width / 2;//x location of y axis
+
+	//Plot X values along screen bottom
+	g.setColor(new Color(0,70, 0));//dark green
+	for (int x = 0; x < width; x += 50) {
+	    g.drawString(String.valueOf(x - Y_AXIS), x, height);
+	}
+
+	//Plot Y values along screen left
+	g.setColor(new Color(0, 0, 150));//dark blue
+	for (int y = 0; y < height; y += 50) {
+	    g.drawString(String.valueOf(X_AXIS - y), 0, y);
+	}
+
+    }
 
     private class DataReaderThread extends Thread {
 
@@ -105,7 +127,6 @@ public class RobotMapperExtension extends JPanel {
 		}
 		//redraw with new data
 		repaint();
-		error = false;
 		//wait a while to do it again.
 		try {
 		    Thread.sleep(50);
