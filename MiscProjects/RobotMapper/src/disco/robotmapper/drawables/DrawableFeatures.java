@@ -70,7 +70,7 @@ public class DrawableFeatures implements drawable {
 
 	    for (WorldRangeReading r : readings) {
 		Point2D p = r.getLocation();
-		g.drawOval((int) (window_centerX + p.getX()), (int) (window_centerY - p.getY()), radius * 2, radius * 2);
+		g.drawOval((int) (window_centerX + p.getX()-radius), (int) (window_centerY - p.getY()-radius), radius * 2, radius * 2);
 	    }
 
 	    g2.setStroke(old_stroke);

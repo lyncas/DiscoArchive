@@ -41,7 +41,7 @@ public class RobotMapperExtension extends JPanel {
 	this.size = size;
 	init();
 
-	features_drawing.addRangeReading(new RangeReading(0,30), robotPose);
+	features_drawing.addRangeReading(new RangeReading(0,50), robotPose);
     }
 
     public void init() {
