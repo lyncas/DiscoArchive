@@ -35,13 +35,19 @@ public class RobotMapperExtension extends JPanel {
     public RobotMapperExtension(int size) {
         this.size = size;
         init();
+	robotPath=new Path();
+	robotPath.add(new Waypoint(0,0));
+	robotPath.add(new Waypoint(-30,170));
+	robotPath.add(new Waypoint(20,80));
+	robotPath.add(new Waypoint(10,130));
     }
 
     public void init() {
         setPreferredSize(new Dimension(size, size));
         setBackground(Color.WHITE);
         try {
-            NetworkTable.setClientMode();
+	    //COMMENT WHEN TESTING WITHOUT ROBOT.
+            //NetworkTable.setClientMode();
             NetworkTable.setIPAddress("10.25.87.2");
             table = NetworkTable.getTable(RobotMapperTableLocation);
             robotPose = StringParser.getPose(table.getString(KEY_POSE,new Pose(0,0,90).toString()));
@@ -68,14 +74,14 @@ public class RobotMapperExtension extends JPanel {
         int panelCenterX = getSize().width / 2;
         int panelCenterY = getSize().height / 2;
 
-        robot.setPose(robotPose);
-        robot.setDisabled(!connected);
-        robot.draw(g, panelCenterX, panelCenterY);
-
-        if (robotPath != null) {
+	if (robotPath != null) {
             path_drawing.setPath(robotPath);
             path_drawing.draw(g, panelCenterX, panelCenterY);
         }
+
+        robot.setPose(robotPose);
+        robot.setDisabled(!connected);
+        robot.draw(g, panelCenterX, panelCenterY);
 
         drawRuler(g);
     }
