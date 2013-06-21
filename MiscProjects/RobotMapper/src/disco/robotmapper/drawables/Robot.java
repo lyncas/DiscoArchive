@@ -35,20 +35,20 @@ public class Robot implements drawable{
 	//robot
 	robotWidth = width > 0 ? width : 20;
 	robotLength = length > 0 ? length : 20;
-	robotRect=new Rectangle(0,0,robotWidth,robotLength);
+	robotRect=new Rectangle(-robotWidth/2,-robotLength/2,robotWidth,robotLength);
 	//direction arrow
 	arrow=new Path2D.Float(Path2D.WIND_EVEN_ODD) {};
-	arrow.moveTo(robotWidth/2, robotLength);
-	arrow.lineTo(robotWidth/2, 0);
-	arrow.lineTo(robotWidth/4, robotLength/4);
-	arrow.lineTo(robotWidth*3/4, robotLength/4);
-	arrow.lineTo(robotWidth/2, 0);
+	arrow.moveTo(0, robotLength/2);
+	arrow.lineTo(0, -robotLength/2);
+	arrow.lineTo(-robotWidth/4, -robotLength/4);
+	arrow.lineTo(robotWidth/4, -robotLength/4);
+	arrow.lineTo(0, -robotLength/2);
 	//the X
 	disabledX=new Path2D.Float(Path2D.WIND_EVEN_ODD);
-	disabledX.moveTo(0,0);
-	disabledX.lineTo(robotWidth, robotLength);
-	disabledX.moveTo(robotWidth, 0);
-	disabledX.lineTo(0, robotLength);
+	disabledX.moveTo(-robotWidth/2,-robotLength/2);
+	disabledX.lineTo(robotWidth/2, robotLength/2);
+	disabledX.moveTo(robotWidth/2, -robotLength/2);
+	disabledX.lineTo(-robotWidth/2, robotLength/2);
     }
 
     public void setPose(Pose p){
@@ -73,13 +73,10 @@ public class Robot implements drawable{
 
 	AffineTransform robotTrans=new AffineTransform();
 	//Last things first
-	robotTrans.translate(centerX-robotWidth/2, centerY-robotLength/2);
-	//move back to 0rigin
-	robotTrans.translate(robotWidth/2, robotLength/2);
+	//Move to screen location
+	robotTrans.translate(centerX, centerY);
 	//rotate to correct angle
 	robotTrans.rotate(-(Math.toRadians(heading) - Math.PI/2));
-	//move so we rotate around center
-	robotTrans.translate(-robotWidth/2, -robotLength/2);
 	//Create properly transformed robot and draw it
 	g2.setColor(Color.CYAN);
 	g2.fill(robotTrans.createTransformedShape(robotRect));
