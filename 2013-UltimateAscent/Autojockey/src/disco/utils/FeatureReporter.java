@@ -27,8 +27,8 @@ public class FeatureReporter implements FeatureListener {
             RangeReading rr = Rfeature.getRangeReading();
             double dist = rr.getRange();
             double angle = rr.getAngle() + rPose.getHeading();
-            double x=rPose.getX() + dist * Math.cos(angle);
-            double y= rPose.getY() + dist * Math.sin(angle);
+            double x=rPose.getX() + dist * Math.cos(Math.toRadians(angle));
+            double y= rPose.getY() + dist * Math.sin(Math.toRadians(angle));
 
             System.out.println("Feature detected at :" + Utilitate.roundHundredths(x)+" , "+Utilitate.roundHundredths(y));
         }
@@ -36,6 +36,6 @@ public class FeatureReporter implements FeatureListener {
             System.out.println("Non-range feature detected. You might want to check that.");
         }
     }
-    
+
 
 }
