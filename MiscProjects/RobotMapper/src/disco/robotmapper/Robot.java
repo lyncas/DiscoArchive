@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package discobots.smartdashboard.robotmapper;
+package disco.robotmapper;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

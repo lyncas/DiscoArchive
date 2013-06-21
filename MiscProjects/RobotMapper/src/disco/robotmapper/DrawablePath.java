@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package discobots.smartdashboard.robotmapper;
+package disco.robotmapper;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -37,7 +37,7 @@ public class DrawablePath implements drawable {
 
     @Override
     public void draw(Graphics g, int window_centerX, int window_centerY) {
-	if (p != null) {
+	if (p != null && p.size()>0) {
 	    Graphics2D g2 = (Graphics2D) g;
 	    Color old_color = g2.getColor();
 	    Stroke old_stroke=g2.getStroke();
