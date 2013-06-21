@@ -33,7 +33,6 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
     private int robotWidth = 0, robotLength = 0;
     private boolean connected = false;
     private volatile Path robotPath = null;
-    private DataReaderThread reader = new DataReaderThread();
     //drawables
     private Robot robot;
     private DrawablePath path_drawing;
@@ -62,7 +61,6 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 	    e.printStackTrace();
 	    connected = false;
 	}
-	reader.start();
 	robot = new Robot(robotWidth, robotLength);
 	path_drawing = new DrawablePath(robotPath, Color.ORANGE);
 	features_drawing = new DrawableFeatures(Color.RED, robotLength / 2);
@@ -70,6 +68,7 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 
     @Override
     public void paint(Graphics g) {
+	connected=table.isConnected();
 	//BACKGROUND
 	g.setColor(Color.LIGHT_GRAY);
 	g.fillRect(0, 0, getSize().width, getSize().height);
@@ -144,36 +143,5 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 		break;
 	}
 	repaint();
-    }
-
-    private class DataReaderThread extends Thread {
-
-	@Override
-	public void run() {
-	    while (true) {
-		//update data
-		try {
-		    robotPose = StringParser.getPose(table.getString(KEY_POSE));
-		    try {
-			robotPath = StringParser.getPath(table.getString(KEY_PATH));
-			//make sure it draws it starting at us
-			robotPath.add(0, new Waypoint(robotPose));
-		    } catch (TableKeyNotDefinedException tk) {
-			//if no path, don't worry.
-		    }
-		    connected = true;
-		} catch (TableKeyNotDefinedException e) {
-		    connected = false;
-		    //e.printStackTrace();
-		}
-		//redraw with new data
-		repaint();
-		//wait a while to do it again.
-		try {
-		    Thread.sleep(50);
-		} catch (Exception ex) {
-		}
-	    }
-	}
     }
 }
