@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package disco.robotmapper;
+package disco.robotmapper.drawables;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

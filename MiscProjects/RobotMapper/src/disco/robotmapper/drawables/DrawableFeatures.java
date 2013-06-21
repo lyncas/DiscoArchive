@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package disco.robotmapper;
+package disco.robotmapper.drawables;
 
 import disco.robotmapper.leJOSExtended.WorldRangeReading;
 import java.awt.Color;

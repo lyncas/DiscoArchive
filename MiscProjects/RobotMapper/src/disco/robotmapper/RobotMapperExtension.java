@@ -1,5 +1,8 @@
 package disco.robotmapper;
 
+import disco.robotmapper.drawables.Robot;
+import disco.robotmapper.drawables.DrawablePath;
+import disco.robotmapper.drawables.DrawableFeatures;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 import java.awt.Color;
