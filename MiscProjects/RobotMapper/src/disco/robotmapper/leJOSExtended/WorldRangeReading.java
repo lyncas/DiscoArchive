@@ -22,13 +22,10 @@ public class WorldRangeReading extends RangeReading {
 
     public WorldRangeReading(float angle, float range, Pose robotPose) {
 	super(angle, range);
-	System.out.println(angle);
 	angle = angle + robotPose.getHeading();
 	double x = robotPose.getX() + range * Math.cos(Math.toRadians(angle));
 	double y = robotPose.getY() + range * Math.sin(Math.toRadians(angle));
 	location=new Point2D.Double(x,y);
-	System.out.println(location);
-	System.out.println(robotPose);
     }
 
     public WorldRangeReading(RangeReading rr, Pose robotPose) {
