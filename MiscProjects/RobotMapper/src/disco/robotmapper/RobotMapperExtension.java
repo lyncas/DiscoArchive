@@ -4,6 +4,8 @@ import disco.robotmapper.drawables.Robot;
 import disco.robotmapper.drawables.DrawablePath;
 import disco.robotmapper.drawables.DrawableFeatures;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.tables.ITable;
+import edu.wpi.first.wpilibj.tables.ITableListener;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,7 +20,7 @@ import lejos.robotics.pathfinding.Path;
  *
  * @author Nolan Shah, Sam Dietrich
  */
-public class RobotMapperExtension extends JPanel {
+public class RobotMapperExtension extends JPanel implements ITableListener {
 
     private int size;
     private NetworkTable table;
@@ -41,7 +43,7 @@ public class RobotMapperExtension extends JPanel {
 	this.size = size;
 	init();
 
-	features_drawing.addRangeReading(new RangeReading(0,50), robotPose);
+	features_drawing.addRangeReading(new RangeReading(0, 50), robotPose);
     }
 
     public void init() {
@@ -115,6 +117,33 @@ public class RobotMapperExtension extends JPanel {
 	    g.drawString(String.valueOf(X_AXIS - y), 0, y);
 	}
 
+    }
+
+    /*
+     * itable is the table
+     * string is the key
+     * o is the value
+     * bln is whether this key is new on the table
+     */
+    @Override
+    public void valueChanged(ITable itable, String string, Object o, boolean bln) {
+	switch (string) {
+	    case KEY_POSE:
+		robotPose = StringParser.getPose(o.toString());
+		break;
+	    case KEY_PATH:
+		robotPath = StringParser.getPath(o.toString());
+		//make sure it draws it starting at us
+		robotPath.add(0, new Waypoint(robotPose));
+		break;
+	    case KEY_ROBOT_WIDTH:
+		robotWidth=(int)o;
+		break;
+	    case KEY_ROBOT_LENGTH:
+		robotLength=(int)o;
+		break;
+	}
+	repaint();
     }
 
     private class DataReaderThread extends Thread {

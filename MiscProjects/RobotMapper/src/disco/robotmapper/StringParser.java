@@ -12,6 +12,8 @@ import lejos.robotics.pathfinding.Path;
 /**
  *
  * @author Sam Dietrich
+ *
+ * Like serialization, but painful.
  */
 public class StringParser {
 
