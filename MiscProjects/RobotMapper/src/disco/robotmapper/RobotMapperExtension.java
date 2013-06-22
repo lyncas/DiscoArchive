@@ -6,7 +6,6 @@ import disco.robotmapper.drawables.DrawableFeatures;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
-import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
