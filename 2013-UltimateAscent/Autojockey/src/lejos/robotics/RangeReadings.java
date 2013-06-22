@@ -101,5 +101,10 @@ public class RangeReadings extends ArrayList  {
 	  index++;
       }
   }
+
+  //Not necessary because super. But to remember it exists.
+  public String toString(){
+      return super.toString();
+  }
 }
 

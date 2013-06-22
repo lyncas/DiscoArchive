@@ -93,4 +93,8 @@ public class RangeFeature implements Feature {
 	public Pose getPose() {
 		return pose;
 	}
+
+	public String toString(){
+	    return pose.toString()+"|"+rrs.toString();
+	}
 }
