@@ -4,6 +4,7 @@
  */
 package disco.robotmapper;
 
+import java.awt.Dimension;
 import java.awt.Point;
 
 /**
@@ -50,8 +51,6 @@ public class ViewHelper {
 	this.screen_width = screen_width;
 	this.screen_height = screen_height;
 
-	x_range = x_max - x_min;
-	y_range = y_max - y_min;
 	findAxes();
     }
 
@@ -68,14 +67,25 @@ public class ViewHelper {
 	screen_width += d_screen_width;
 	screen_height += d_screen_height;
 
-	x_range = x_max - x_min;
-	y_range = y_max - y_min;
 	findAxes();
+    }
+
+    public void setDimensions(int screen_width,int screen_height){
+	this.screen_width=screen_width;
+	this.screen_height=screen_height;
+
+	findAxes();
+    }
+
+    public Dimension getDimension(){
+	return new Dimension(screen_width,screen_height);
     }
 
     //Calcualte the pixel locations of the logical axes
     private void findAxes() {
 	//The idea here is that the axes are a proportion of the screen from the left/top
+	x_range = x_max - x_min;
+	y_range = y_max - y_min;
 
 	//Y-AXIS
 	y_axis = (int) (-x_min / x_range * screen_width);
@@ -105,5 +115,21 @@ public class ViewHelper {
      */
     public double Y_PixelsPerUnit() {
 	return screen_height / y_range;
+    }
+
+    public double getX_min(){
+	return x_min;
+    }
+
+    public double getX_max(){
+	return x_max;
+    }
+
+    public double getY_min(){
+	return y_min;
+    }
+
+    public double getY_max(){
+	return y_max;
     }
 }

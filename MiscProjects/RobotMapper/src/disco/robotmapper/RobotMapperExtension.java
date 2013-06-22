@@ -3,6 +3,7 @@ package disco.robotmapper;
 import disco.robotmapper.drawables.Robot;
 import disco.robotmapper.drawables.DrawablePath;
 import disco.robotmapper.drawables.DrawableFeatures;
+import disco.robotmapper.drawables.Ruler;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
@@ -41,6 +42,7 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
     private Robot robot;
     private DrawablePath path_drawing;
     private DrawableFeatures features_drawing;
+    private Ruler ruler;
 
     public RobotMapperExtension(int size) {
 	this.pixel_size = size;
@@ -69,11 +71,13 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 	robot = new Robot(robotWidth, robotLength);
 	path_drawing = new DrawablePath(robotPath, Color.ORANGE);
 	features_drawing = new DrawableFeatures(Color.RED, robotLength / 2);
+	ruler=new Ruler(new Color(0, 70, 0),new Color(0, 0, 150));
     }
 
     @Override
     public void paint(Graphics g) {
-	connected = table.isConnected();
+	viewHelper.setDimensions(getWidth(), getHeight());
+	connected = table.isConnected();//Not a good solution
 	//BACKGROUND
 	g.setColor(Color.LIGHT_GRAY);
 	g.fillRect(0, 0, getSize().width, getSize().height);
@@ -93,34 +97,9 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 	robot.setDisabled(!connected);
 	robot.draw(g, viewHelper);
 	//RULER
-	drawRuler(g);
+	ruler.draw(g,viewHelper);
 	//g.drawLine(0, (int) viewHelper.getOrigin().getY(), 400, (int) viewHelper.getOrigin().getY());
 	//g.drawLine((int) viewHelper.getOrigin().getX(), 0, (int) viewHelper.getOrigin().getX(), 400);
-    }
-
-    /*
-     * Draws one number every 50 px
-     * Assumes screen center is (0,0)
-     */
-    protected void drawRuler(Graphics g) {
-	Color old = g.getColor();
-	int width = getWidth();
-	int height = getHeight();
-	int X_AXIS = height / 2;//y location of x axis
-	int Y_AXIS = width / 2;//x location of y axis
-
-	//Plot X values along screen bottom
-	g.setColor(new Color(0, 70, 0));//dark green
-	for (int x = 0; x < width; x += 50) {
-	    g.drawString(String.valueOf(x - Y_AXIS), x, height);
-	}
-
-	//Plot Y values along screen left
-	g.setColor(new Color(0, 0, 150));//dark blue
-	for (int y = 0; y < height; y += 50) {
-	    g.drawString(String.valueOf(X_AXIS - y), 0, y);
-	}
-	g.setColor(old);
     }
 
     /*
