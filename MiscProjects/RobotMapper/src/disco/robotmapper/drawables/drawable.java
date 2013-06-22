@@ -4,6 +4,7 @@
  */
 package disco.robotmapper.drawables;
 
+import disco.robotmapper.ViewHelper;
 import java.awt.Graphics;
 
 /**
@@ -14,6 +15,6 @@ import java.awt.Graphics;
  */
 interface drawable {
 
-    public void draw(Graphics g,int window_centerX,int window_centerY);
+    public void draw(Graphics g, ViewHelper v);
 
 }

@@ -4,10 +4,12 @@
  */
 package disco.robotmapper.drawables;
 
+import disco.robotmapper.ViewHelper;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Stroke;
 import java.awt.geom.Path2D;
 import lejos.robotics.navigation.Waypoint;
@@ -36,7 +38,8 @@ public class DrawablePath implements drawable {
     }
 
     @Override
-    public void draw(Graphics g, int window_centerX, int window_centerY) {
+    public void draw(Graphics g,ViewHelper v) {
+	Point origin=v.getOrigin();
 	if (p != null && p.size()>0) {
 	    Graphics2D g2 = (Graphics2D) g;
 	    Color old_color = g2.getColor();
@@ -44,10 +47,10 @@ public class DrawablePath implements drawable {
 
 	    g2.setColor(c);
 	    lineDrawing = new Path2D.Float(Path2D.WIND_EVEN_ODD);
-	    lineDrawing.moveTo(window_centerX + p.get(0).getX(), window_centerY - p.get(0).getY());
+	    lineDrawing.moveTo(origin.getX() + p.get(0).getX()*v.X_PixelsPerUnit(), origin.getY()- p.get(0).getY()*v.Y_PixelsPerUnit());
 
 	    for (Waypoint w : p) {
-		lineDrawing.lineTo(window_centerX + w.getX(), window_centerY - w.getY());
+		lineDrawing.lineTo(origin.getX() + w.getX()*v.X_PixelsPerUnit(), origin.getY() - w.getY()*v.Y_PixelsPerUnit());
 	    }
 
 	    g2.setStroke(new BasicStroke(2.0f));

@@ -4,10 +4,12 @@
  */
 package disco.robotmapper.drawables;
 
+import disco.robotmapper.ViewHelper;
 import disco.robotmapper.leJOSExtended.WorldRangeReading;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Stroke;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -60,7 +62,8 @@ public class DrawableFeatures implements drawable {
     }
 
     @Override
-    public void draw(Graphics g, int window_centerX, int window_centerY) {
+    public void draw(Graphics g, ViewHelper v) {
+	Point Origin = v.getOrigin();
 	if (readings.size() > 0) {
 	    Graphics2D g2 = (Graphics2D) g;
 	    Color old_color = g2.getColor();
@@ -70,7 +73,10 @@ public class DrawableFeatures implements drawable {
 
 	    for (WorldRangeReading r : readings) {
 		Point2D p = r.getLocation();
-		g.drawOval((int) (window_centerX + p.getX()-radius), (int) (window_centerY - p.getY()-radius), radius * 2, radius * 2);
+		g.drawOval((int) (Origin.getX() + (p.getX() - radius) * v.X_PixelsPerUnit()),
+			(int) (Origin.getY() - (p.getY() + radius) * v.Y_PixelsPerUnit()),
+			(int) (radius * 2 * v.X_PixelsPerUnit()),
+			(int) (radius * 2 * v.Y_PixelsPerUnit()));
 	    }
 
 	    g2.setStroke(old_stroke);

@@ -21,13 +21,18 @@ import lejos.robotics.pathfinding.Path;
  */
 public class RobotMapperExtension extends JPanel implements ITableListener {
 
-    private int size;
+    //Screen size info
+    private int pixel_size;
+    private double logical_size = 200;
+    private ViewHelper viewHelper;
+    //Network info
     private NetworkTable table;
     private final String RobotMapperTableLocation = "LocationInformation",
 	    KEY_POSE = "robot_Pose",
 	    KEY_ROBOT_WIDTH = "robot_Width",
 	    KEY_ROBOT_LENGTH = "robot_Length",
 	    KEY_PATH = "robot_path";
+    //Robot info
     private volatile Pose robotPose = new Pose(0, 0, 90);
     private int robotWidth = 0, robotLength = 0;
     private boolean connected = false;
@@ -38,14 +43,14 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
     private DrawableFeatures features_drawing;
 
     public RobotMapperExtension(int size) {
-	this.size = size;
+	this.pixel_size = size;
 	init();
 
-	features_drawing.addRangeReading(new RangeReading(0, 50), robotPose);
+	features_drawing.addRangeReading(new RangeReading(0, 15), robotPose);
     }
 
     public void init() {
-	setPreferredSize(new Dimension(size, size));
+	setPreferredSize(new Dimension(pixel_size, pixel_size));
 	setBackground(Color.WHITE);
 	try {
 	    //COMMENT WHEN TESTING WITHOUT ROBOT.
@@ -60,6 +65,7 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 	    e.printStackTrace();
 	    connected = false;
 	}
+	viewHelper = new ViewHelper(logical_size, pixel_size);
 	robot = new Robot(robotWidth, robotLength);
 	path_drawing = new DrawablePath(robotPath, Color.ORANGE);
 	features_drawing = new DrawableFeatures(Color.RED, robotLength / 2);
@@ -67,7 +73,7 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 
     @Override
     public void paint(Graphics g) {
-	connected=table.isConnected();
+	connected = table.isConnected();
 	//BACKGROUND
 	g.setColor(Color.LIGHT_GRAY);
 	g.fillRect(0, 0, getSize().width, getSize().height);
@@ -75,22 +81,21 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 	    g.setColor(Color.ORANGE);
 	    g.drawString("NOT CONNECTED", 0, 20);
 	}
-	//CALCULATIONS
-	int panelCenterX = getSize().width / 2;
-	int panelCenterY = getSize().height / 2;
 	//PATH
 	if (robotPath != null) {
 	    path_drawing.setPath(robotPath);
 	}
-	path_drawing.draw(g, panelCenterX, panelCenterY);
+	path_drawing.draw(g, viewHelper);
 	//FEATURES
-	features_drawing.draw(g, panelCenterX, panelCenterY);
+	features_drawing.draw(g, viewHelper);
 	//ROBOT
 	robot.setPose(robotPose);
 	robot.setDisabled(!connected);
-	robot.draw(g, panelCenterX, panelCenterY);
+	robot.draw(g, viewHelper);
 	//RULER
 	drawRuler(g);
+	//g.drawLine(0, (int) viewHelper.getOrigin().getY(), 400, (int) viewHelper.getOrigin().getY());
+	//g.drawLine((int) viewHelper.getOrigin().getX(), 0, (int) viewHelper.getOrigin().getX(), 400);
     }
 
     /*
@@ -98,6 +103,7 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
      * Assumes screen center is (0,0)
      */
     protected void drawRuler(Graphics g) {
+	Color old = g.getColor();
 	int width = getWidth();
 	int height = getHeight();
 	int X_AXIS = height / 2;//y location of x axis
@@ -114,7 +120,7 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 	for (int y = 0; y < height; y += 50) {
 	    g.drawString(String.valueOf(X_AXIS - y), 0, y);
 	}
-
+	g.setColor(old);
     }
 
     /*
@@ -135,10 +141,10 @@ public class RobotMapperExtension extends JPanel implements ITableListener {
 		robotPath.add(0, new Waypoint(robotPose));
 		break;
 	    case KEY_ROBOT_WIDTH:
-		robotWidth=(int)o;
+		robotWidth = (int) o;
 		break;
 	    case KEY_ROBOT_LENGTH:
-		robotLength=(int)o;
+		robotLength = (int) o;
 		break;
 	}
 	repaint();

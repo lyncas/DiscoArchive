@@ -87,23 +87,23 @@ public class ViewHelper {
     /*
      * Returns the location of the logical origin in the pixel system.
      */
-    public Point getOrigin(){
-	return new Point(y_axis,x_axis);
+    public Point getOrigin() {
+	return new Point(y_axis, x_axis);
     }
 
     /*
      * Returns the number of pixels to cover to get one unit of whatever the input size was.
      * In the x direction.
      */
-    public double X_PixelsPerUnit(){
-	return screen_width/x_range;
+    public double X_PixelsPerUnit() {
+	return screen_width / x_range;
     }
 
     /*
      * Returns the number of pixels to cover to get one unit of whatever the input size was.
      * In the y direction.
      */
-    public double Y_PixelsPerUnit(){
-	return screen_height/y_range;
+    public double Y_PixelsPerUnit() {
+	return screen_height / y_range;
     }
 }
