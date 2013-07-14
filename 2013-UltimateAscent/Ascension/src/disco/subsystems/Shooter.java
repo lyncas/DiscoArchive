@@ -156,11 +156,11 @@ public class Shooter extends Subsystem {
     }
 
     public double getFrontRPM() {
-        return m_encoderFront.getRPM()<15000 ? m_encoderFront.getRPM():getSetpoint()-500;
+        return m_encoderFront.getRPM()<15000 ? m_encoderFront.getRPM():0;
 
     }
     public double getBackRPM() {
-	return m_encoderBack.getRPM()<getSetpoint()+1000 ? m_encoderBack.getRPM():getSetpoint()-500;
+	return m_encoderBack.getRPM()<10000 ? m_encoderBack.getRPM():0;
     }
 
     public void setOnTarget(boolean val){
