@@ -23,7 +23,7 @@ public class LerpDrive extends CommandBase {
     private Joystick joy1;
     private GamePad gp;
 
-    private double threshold = 0.1;
+    private double threshold = 0.05;
     private double a = 0.25;
     private double b = 1;
 

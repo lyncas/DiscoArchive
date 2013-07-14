@@ -1,6 +1,5 @@
 package disco;
 
-import disco.commands.SaveData;
 import disco.commands.drivetrain.*;
 import disco.commands.pneumatics.*;
 import disco.commands.shooter.*;
@@ -83,20 +82,19 @@ public class OI {
 	 * Shooter
 	 */
         b_dpadU.whenPressed(new ShooterIncDiff());
-        b_dpadD.whenPressed(new ShooterDecDiff());
-        b_bumpR.whenPressed(new ShooterToggle());
-        b_dpadR.whenPressed(new ShooterInc());
-        b_dpadL.whenPressed(new ShooterDec());
-        b_trigR.whenPressed(new Shoot());
-        b_trigL.whenPressed(new Clear());
-        b_Back.whenPressed(new cycleShooter());
+        b2_dpadD.whenPressed(new ShooterDecDiff());
+        b2_bumpR.whenPressed(new ShooterToggle());
+        b2_dpadR.whenPressed(new ShooterInc());
+        b2_dpadL.whenPressed(new ShooterDec());
+        b2_trigR.whenPressed(new Shoot());
+        b2_trigL.whenPressed(new Clear());
+        b2_Back.whenPressed(new cycleShooter());
+        b2_A.whenPressed(new AutoShoot(5,1000,250));
 
 	/*
 	 * Drivetrain
 	 */
         b_Start.whenPressed(new cycleDrive());
-        b_Y.whenPressed(new NegateDrive());
-	b_A.whenPressed(new AutoShoot(5,1000,200));
 
 	/*
 	 * Pneumatics

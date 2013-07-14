@@ -5,7 +5,6 @@
 package disco.subsystems;
 
 import disco.HW;
-import disco.commands.drivetrain.AssistedCheesy;
 import disco.commands.drivetrain.LerpDrive;
 import disco.utils.BetterDrive;
 import disco.utils.MaxbotixSonar;

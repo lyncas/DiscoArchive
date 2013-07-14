@@ -5,9 +5,7 @@
 package disco.commands.drivetrain;
 
 import disco.commands.CommandBase;
-import disco.commands.drivetrain.manual.FloatDrive;
 import disco.commands.drivetrain.manual.LerpDrive;
-import disco.commands.drivetrain.manual.LerpDriveSine;
 
 public class cycleDrive extends CommandBase {
 
@@ -22,12 +20,6 @@ public class cycleDrive extends CommandBase {
         switch (mode) {
             case 0:
                 new LerpDrive().start();
-                break;
-            case 1:
-                new LerpDriveSine().start();
-                break;
-            case 2:
-                new FloatDrive().start();
                 break;
         }
         mode = mode < numModes - 1 ? mode + 1 : 0;
