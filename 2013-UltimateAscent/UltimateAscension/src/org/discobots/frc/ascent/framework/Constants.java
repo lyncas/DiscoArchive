@@ -16,7 +16,7 @@ public final class Constants {
             Shooter_DefaultSetpointPyramidRPM = 5700,
             Shooter_DefaultSetpointFullCourtRPM = 7000;
     public static final double 
-            Shooter_DefaultSetpointPyramidPWM = 0.5;
+            Shooter_DefaultSetpointPyramidPWM = 1.0;
     /* DRIVE CONSTANTS */
     public static final double
             SkidSteer_ErrorAngleThreshold = 5;

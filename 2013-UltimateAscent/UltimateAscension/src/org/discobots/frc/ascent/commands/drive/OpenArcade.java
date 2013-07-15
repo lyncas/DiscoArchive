@@ -15,11 +15,12 @@ public final class OpenArcade extends CommandBase {
     protected void execute() {
         double move = calculateMoveInput();
         double turn = calculateTurnInput();
-        double left = calculateOutput(move, turn);
+        /*double left = calculateOutput(move, turn);
         double right =  calculateOutput(move, -turn);
         left = trimExtraOutput(left);
         right = trimExtraOutput(right);
-        drivetrainSubsystem.tankDrive(left, right, false, true);
+        drivetrainSubsystem.tankDrive(left, right, false, false);*/
+        drivetrainSubsystem.arcadeDrive(move, turn, false, false);
     }
 
     protected boolean isFinished() {
@@ -35,16 +36,16 @@ public final class OpenArcade extends CommandBase {
     }
     
     private double calculateMoveInput() {
-        double move = oi.getRawAnalogStickALY() / 2;
+        double move = oi.getRawAnalogStickALY();
         move += oi.getRawAnalogStickARY();
         move = Math.abs(move) < deadThreshold ? 0 : move;
-        return Math.abs(move) > 1 ? 1 : move;
+        return move;
     }
     private double calculateTurnInput() {
-        double turn = oi.getRawAnalogStickALX() / 2;
+        double turn = oi.getRawAnalogStickALX();
         turn += oi.getRawAnalogStickARX();
         turn = Math.abs(turn) < deadThreshold ? 0 : turn;
-        return Math.abs(turn) > 1 ? 1 : turn;
+        return turn;
     }
     private double calculateOutput(double move, double turn) {
         return turn + 0.12*move*turn + move*move*move + 0.33*move*turn*turn*Math.sin(turn) - move*move*turn - 0.39*move*move*move*turn*turn;

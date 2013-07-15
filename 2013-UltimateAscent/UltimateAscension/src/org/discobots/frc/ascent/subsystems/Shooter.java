@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.frc.ascent.HW;
+import org.discobots.frc.ascent.commands.DoNothing;
 import org.discobots.frc.ascent.framework.CounterEncoder;
 
 public class Shooter extends Subsystem {
@@ -23,7 +24,7 @@ public class Shooter extends Subsystem {
         backEncoder = new CounterEncoder(HW.encoderShooterBackSlot, HW.encoderShooterBackChannel, 2);
     }
     protected void initDefaultCommand() {
-        
+        new DoNothing(this).start();
     }
     public double getFrontPWM() {
         return frontVictor.get();

@@ -4,9 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
 package org.discobots.frc.ascent;
-
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -22,21 +20,30 @@ import org.discobots.frc.ascent.commands.CommandBase;
 public class Robot extends IterativeRobot {
 
     public void robotInit() {
+        //System.out.println("Initializing Robot.");
         CommandBase.init();
         Dashboard.init();
+        this.getWatchdog().setEnabled(false);
     }
 
     public void autonomousInit() {
+        //System.out.println("Initializing Autonomous.");
     }
-    
+
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
     }
 
     public void teleopInit() {
+        //System.out.println("Initializing Teleop");
     }
 
     public void teleopPeriodic() {
+        long a = System.currentTimeMillis();
         Scheduler.getInstance().run();
+        //Dashboard.update();
+        long b = System.currentTimeMillis();
+        System.out.println(b - a);
+        
     }
 }

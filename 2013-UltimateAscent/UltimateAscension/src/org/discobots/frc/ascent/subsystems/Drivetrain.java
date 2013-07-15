@@ -106,6 +106,7 @@ public class Drivetrain extends Subsystem {
                 turnOutput = turnPrev + rampThreshold;
             }
         }
+        turnOutput = -turnOutput;
         robotDrive.arcadeDrive(moveOutput, turnOutput);
         movePrev = moveOutput;
         turnPrev = turnOutput;

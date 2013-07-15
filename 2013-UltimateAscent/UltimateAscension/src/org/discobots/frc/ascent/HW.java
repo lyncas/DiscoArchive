@@ -21,12 +21,12 @@ public class HW {
     public static final byte localI2CAddress = 85; // 01010101
     public static final byte arduinoI2CAddress = 21 << 1 + 0; // 00010101 << 1 + 0  // Includes directional data. Add 1 to switch direction.
     /* MOTORS */////////////////////////////////////////////////////////////////
-    public static final int motorDriveLeft1Slot = 1, motorDriveLeft1Channel = 1,
-            motorDriveLeft2Slot = 1, motorDriveLeft2Channel = 2,
-            motorDriveRight1Slot = 1, motorDriveRight1Channel = 3,
-            motorDriveRight2Slot = 1, motorDriveRight2Channel = 4,
-            motorShooterFrontSlot = 1, motorShooterFrontChannel = 5,
-            motorShooterBackSlot = 1, motorShooterBackChannel = 6;
+    public static final int motorDriveLeft1Slot = 1, motorDriveLeft1Channel = 3,
+            motorDriveLeft2Slot = 1, motorDriveLeft2Channel = 4,
+            motorDriveRight1Slot = 1, motorDriveRight1Channel = 1,
+            motorDriveRight2Slot = 1, motorDriveRight2Channel = 2,
+            motorShooterFrontSlot = 1, motorShooterFrontChannel = 6,
+            motorShooterBackSlot = 1, motorShooterBackChannel = 5;
     /* RELAYS */////////////////////////////////////////////////////////////////
     public static final int compressorSlot = 1, compressorChannel = 8;
     /* SOLENOIDS *//////////////////////////////////////////////////////////////
