@@ -2,13 +2,14 @@ package org.discobots.frc.ascent.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.frc.ascent.HW;
 import org.discobots.frc.ascent.commands.DoNothing;
 import org.discobots.frc.ascent.framework.CounterEncoder;
 
 public class Shooter extends Subsystem {
-    private Talon frontVictor, backVictor;
+    private Victor frontVictor, backVictor;
     private CounterEncoder frontEncoder, backEncoder;
     private Solenoid mainShoot, clearShoot;
     double pwmSetpoint = 0.0; // For Open-Loop Shooter
@@ -16,8 +17,8 @@ public class Shooter extends Subsystem {
     
     
     public Shooter() {
-        frontVictor = new Talon(HW.encoderShooterFrontSlot, HW.encoderShooterFrontChannel);
-        backVictor = new Talon(HW.encoderShooterBackSlot, HW.encoderShooterBackChannel);
+        frontVictor = new Victor(HW.motorShooterFrontSlot, HW.motorShooterFrontChannel);
+        backVictor = new Victor(HW.motorShooterBackSlot, HW.motorShooterBackChannel);
         mainShoot = new Solenoid(HW.solenoidShootAChannel);
         clearShoot = new Solenoid(HW.solenoidShootBChannel);
         frontEncoder = new CounterEncoder(HW.encoderShooterFrontSlot, HW.encoderShooterFrontChannel, 2);
