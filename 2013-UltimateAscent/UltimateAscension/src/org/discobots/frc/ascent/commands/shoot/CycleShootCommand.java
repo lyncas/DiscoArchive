@@ -26,7 +26,7 @@ public class CycleShootCommand extends CommandBase {
         if (c instanceof DoNothing) {
             new ShooterOpen().start();
         } else {
-            new DoNothing().start();
+            new DoNothing(CommandBase.shooterSubsystem).start();
         }
     }
 

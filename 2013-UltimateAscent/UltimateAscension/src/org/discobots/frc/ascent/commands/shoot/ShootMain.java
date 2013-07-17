@@ -11,7 +11,7 @@ public class ShootMain extends CommandGroup {
     
     public ShootMain() {
         addSequential(new ToggleMainShoot());
-        addSequential(new WaitCommand(0.3));
+        addSequential(new WaitCommand(0.2));
         addSequential(new ToggleMainShoot());
     }
     

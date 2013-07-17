@@ -2,6 +2,7 @@ package org.discobots.frc.ascent;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.discobots.frc.ascent.commands.compressor.CompressorToggle;
 import org.discobots.frc.ascent.commands.drive.CycleDriveCommand;
 import org.discobots.frc.ascent.commands.shoot.CycleShootCommand;
 import org.discobots.frc.ascent.commands.shoot.ShootMain;
@@ -62,6 +63,7 @@ public class OI {
         b_btnX.whenPressed(new CycleShootCommand());
         b_trigR.whenPressed(new ShootMain());
         // Compressor Commands
+        b_btnB.whenPressed(new CompressorToggle());
         // Collector Commands
     }
 

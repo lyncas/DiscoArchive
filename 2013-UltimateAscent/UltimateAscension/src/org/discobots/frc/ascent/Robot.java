@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         //Dashboard.update();
         long b = System.currentTimeMillis();
-        System.out.println(b - a);
+        //System.out.println(b - a);
         
     }
 }

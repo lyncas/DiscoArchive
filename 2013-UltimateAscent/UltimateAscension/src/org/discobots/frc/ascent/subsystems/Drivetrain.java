@@ -48,8 +48,8 @@ public class Drivetrain extends Subsystem {
         rightEncoder.start();
         leftEncoder.start();
         
-        gyro = new Gyro(HW.gyroDriveSlot, HW.gyroDriveChannel);
-        gyro.reset();
+        //gyro = new Gyro(HW.gyroDriveSlot, HW.gyroDriveChannel);
+        //gyro.reset();
         
         switchLeft = new DigitalInput(HW.limitswitchDriveLeftSlot, HW.limitswitchDriveLeftChannel);
         switchRight = new DigitalInput(HW.limitswitchDriveRightSlot, HW.limitswitchDriveRightChannel);

@@ -28,10 +28,10 @@ public class HW {
             motorShooterFrontSlot = 1, motorShooterFrontChannel = 6,
             motorShooterBackSlot = 1, motorShooterBackChannel = 5;
     /* RELAYS */////////////////////////////////////////////////////////////////
-    public static final int compressorSlot = 1, compressorChannel = 8;
+    public static final int compressorSlot = 1, compressorChannel = 1;
     /* SOLENOIDS *//////////////////////////////////////////////////////////////
-    public static final int solenoidShootAChannel = 6,
-            solenoidShootBChannel = 5,
+    public static final int solenoidShootAChannel = 1,
+            solenoidShootBChannel = 2,
             solenoidShiftLeftChannel = 2,
             solenoidShiftRightChannel = 3,
             encoderFrontPowerChannel = 7,

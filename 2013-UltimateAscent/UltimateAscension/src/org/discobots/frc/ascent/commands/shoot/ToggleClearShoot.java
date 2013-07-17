@@ -14,7 +14,7 @@ import org.discobots.frc.ascent.commands.CommandBase;
 public class ToggleClearShoot extends CommandBase {
 
     protected void initialize() {
-        shooterSubsystem.setClearShootPosition(!shooterSubsystem.getClearShootPosition());
+        //shooterSubsystem.setClearShootPosition(!shooterSubsystem.getClearShootPosition());
     }
 
     protected void execute() {

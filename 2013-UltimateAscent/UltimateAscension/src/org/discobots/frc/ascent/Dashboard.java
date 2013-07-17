@@ -19,7 +19,7 @@ public class Dashboard {
         // Robot
         
         // Subsystem: Drivetrain
-        SmartDashboard.putString("Drivetrain Subsystem", CommandBase.drivetrainSubsystem.toString());
+        //SmartDashboard.putString("Drivetrain Subsystem", CommandBase.drivetrainSubsystem.toString());
         
         // Subsystem: Shooter
         
