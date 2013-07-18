@@ -13,7 +13,7 @@ public class Shooter extends Subsystem {
 
     private Victor frontVictor, backVictor;
     private CounterEncoder frontEncoder, backEncoder;
-    private DoubleSolenoid mainShoot, clearShoot;
+    private DoubleSolenoid mainShoot;
     double pwmSetpoint = 0.7; // For Open-Loop Shooter
     double rpmSetpoint = 0.7; // For Closed-Loop Shooter
 

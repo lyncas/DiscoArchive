@@ -21,7 +21,7 @@ public abstract class CommandBase extends Command {
     public static Shooter shooterSubsystem;
     
     public static void init() {
-        //compressorSubsystem = new Compressor();
+        compressorSubsystem = new Compressor();
         drivetrainSubsystem = new Drivetrain();
         shooterSubsystem = new Shooter();
         oi = new OI();
