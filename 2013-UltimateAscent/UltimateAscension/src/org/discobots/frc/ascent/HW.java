@@ -32,19 +32,8 @@ public class HW {
     /* SOLENOIDS *//////////////////////////////////////////////////////////////
     public static final int solenoidShootAChannel = 1,
             solenoidShootBChannel = 2,
-            solenoidShiftLeftChannel = 2,
-            solenoidShiftRightChannel = 3,
-            encoderFrontPowerChannel = 7,
-            encoderBackPowerChannel = 8;
+            solenoidCollectAChannel = 3,
+            solenoidCollectBChannel = 4;
     /* SENSORS *////////////////////////////////////////////////////////////////
-    public static final int encoderDriveLeftSlot = 1, encoderDriveLeftAChannel = 8,
-            encoderDriveLeftBChannel = 9,
-            encoderDriveRightSlot = 1, encoderDriveRightAChannel = 4,
-            encoderDriveRightBChannel = 5,
-            encoderShooterFrontSlot = 1, encoderShooterFrontChannel = 1,
-            encoderShooterBackSlot = 1, encoderShooterBackChannel = 2,
-            pressureswitchSlot = 1, pressureswitchChannel = 14,
-            limitswitchDriveLeftSlot = 1, limitswitchDriveLeftChannel = 7,
-            limitswitchDriveRightSlot = 1, limitswitchDriveRightChannel = 12,
-            gyroDriveSlot = 1, gyroDriveChannel = 2;
+    public static final int pressureswitchSlot = 1, pressureswitchChannel = 14;
 }

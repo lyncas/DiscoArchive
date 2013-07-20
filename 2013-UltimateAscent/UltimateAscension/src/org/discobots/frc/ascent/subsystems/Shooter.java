@@ -13,7 +13,7 @@ public class Shooter extends Subsystem {
 
     private Victor frontVictor, backVictor;
     private CounterEncoder frontEncoder, backEncoder;
-    private DoubleSolenoid mainShoot, clearShoot;
+    private DoubleSolenoid mainShoot;
     double pwmSetpoint = 0.7; // For Open-Loop Shooter
     double rpmSetpoint = 0.7; // For Closed-Loop Shooter
 
@@ -22,8 +22,6 @@ public class Shooter extends Subsystem {
         backVictor = new Victor(HW.motorShooterBackSlot, HW.motorShooterBackChannel);
         mainShoot = new DoubleSolenoid(HW.solenoidShootAChannel, HW.solenoidShootBChannel);
         //clearShoot = new Solenoid(HW.solenoidShootBChannel);
-        frontEncoder = new CounterEncoder(HW.encoderShooterFrontSlot, HW.encoderShooterFrontChannel, 2);
-        backEncoder = new CounterEncoder(HW.encoderShooterBackSlot, HW.encoderShooterBackChannel, 2);
     }
 
     protected void initDefaultCommand() {
@@ -71,22 +69,16 @@ public class Shooter extends Subsystem {
     }
 
     public boolean getMainShootPosition() {
-        return mainShoot.get()==DoubleSolenoid.Value.kForward;
+        return mainShoot.get() == DoubleSolenoid.Value.kForward;
     }
-//    public boolean getClearShootPosition() {
-//        return clearShoot.get();
-//    }
 
     public void setMainShootPosition(boolean pos) {
-        if(pos){
+        if (pos) {
             mainShoot.set(DoubleSolenoid.Value.kForward);
             System.out.println("in");
-        }else{
+        } else {
             mainShoot.set(DoubleSolenoid.Value.kReverse);
             System.out.println("out");
         }
     }
-//    public void setClearShootPosition(boolean pos) {
-//        clearShoot.set(pos);
-//    }
 }

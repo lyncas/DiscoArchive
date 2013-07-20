@@ -2,9 +2,7 @@ package org.discobots.frc.ascent.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.discobots.frc.ascent.OI;
-import org.discobots.frc.ascent.subsystems.Drivetrain;
-import org.discobots.frc.ascent.subsystems.Compressor;
-import org.discobots.frc.ascent.subsystems.Shooter;
+import org.discobots.frc.ascent.subsystems.*;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -19,11 +17,13 @@ public abstract class CommandBase extends Command {
     public static Compressor compressorSubsystem;
     public static Drivetrain drivetrainSubsystem;
     public static Shooter shooterSubsystem;
+    public static Collector collectorSubsystem;
     
     public static void init() {
-        //compressorSubsystem = new Compressor();
+        compressorSubsystem = new Compressor();
         drivetrainSubsystem = new Drivetrain();
         shooterSubsystem = new Shooter();
+        collectorSubsystem = new Collector();
         oi = new OI();
         
     }

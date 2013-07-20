@@ -10,6 +10,7 @@ import org.discobots.frc.ascent.commands.CommandBase;
 public class CompressorOff extends CommandBase {
     
     public CompressorOff() {
+        requires(compressorSubsystem);
     }
 
     protected void initialize() {
