@@ -1,8 +1,6 @@
 package org.discobots.frc.ascent.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.frc.ascent.HW;
@@ -21,7 +19,6 @@ public class Shooter extends Subsystem {
         frontVictor = new Victor(HW.motorShooterFrontSlot, HW.motorShooterFrontChannel);
         backVictor = new Victor(HW.motorShooterBackSlot, HW.motorShooterBackChannel);
         mainShoot = new DoubleSolenoid(HW.solenoidShootAChannel, HW.solenoidShootBChannel);
-        //clearShoot = new Solenoid(HW.solenoidShootBChannel);
         frontEncoder = new CounterEncoder(HW.encoderShooterFrontSlot, HW.encoderShooterFrontChannel, 2);
         backEncoder = new CounterEncoder(HW.encoderShooterBackSlot, HW.encoderShooterBackChannel, 2);
     }
@@ -32,7 +29,7 @@ public class Shooter extends Subsystem {
 
     public double getFrontPWM() {
         return frontVictor.get();
-    }
+    } 
 
     public double getBackPWM() {
         return backVictor.get();
@@ -73,10 +70,7 @@ public class Shooter extends Subsystem {
     public boolean getMainShootPosition() {
         return mainShoot.get()==DoubleSolenoid.Value.kForward;
     }
-//    public boolean getClearShootPosition() {
-//        return clearShoot.get();
-//    }
-
+    
     public void setMainShootPosition(boolean pos) {
         if(pos){
             mainShoot.set(DoubleSolenoid.Value.kForward);
@@ -86,7 +80,4 @@ public class Shooter extends Subsystem {
             System.out.println("out");
         }
     }
-//    public void setClearShootPosition(boolean pos) {
-//        clearShoot.set(pos);
-//    }
 }

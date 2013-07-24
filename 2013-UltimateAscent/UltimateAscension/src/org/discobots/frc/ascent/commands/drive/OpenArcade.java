@@ -15,12 +15,12 @@ public final class OpenArcade extends CommandBase {
     protected void execute() {
         double move = calculateMoveInput();
         double turn = calculateTurnInput();
-        /*double left = calculateOutput(move, turn);
+        double left = calculateOutput(move, turn);
         double right =  calculateOutput(move, -turn);
         left = trimExtraOutput(left);
         right = trimExtraOutput(right);
-        drivetrainSubsystem.tankDrive(left, right, false, false);*/
-        drivetrainSubsystem.arcadeDrive(move, turn, false, false);
+        drivetrainSubsystem.tankDrive(left, right, false, false);
+        //drivetrainSubsystem.arcadeDrive(move, turn, false, false);
     }
 
     protected boolean isFinished() {

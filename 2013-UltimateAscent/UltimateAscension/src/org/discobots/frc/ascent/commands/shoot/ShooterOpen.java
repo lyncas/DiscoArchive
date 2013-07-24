@@ -12,8 +12,8 @@ public class ShooterOpen extends CommandBase {
     }
 
     protected void execute() {
-        shooterSubsystem.setFrontPWM(-shooterSubsystem.getSetpointPWM());
-        shooterSubsystem.setBackPWM(shooterSubsystem.getSetpointPWM());
+        shooterSubsystem.setFrontPWM(shooterSubsystem.getSetpointPWM());
+        shooterSubsystem.setBackPWM(-shooterSubsystem.getSetpointPWM());
     }
 
     protected boolean isFinished() {
