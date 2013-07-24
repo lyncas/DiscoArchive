@@ -2,6 +2,8 @@ package org.discobots.frc.ascent;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.discobots.frc.ascent.commands.collect.ArmDown;
+import org.discobots.frc.ascent.commands.collect.ArmUp;
 import org.discobots.frc.ascent.commands.compressor.CompressorToggle;
 import org.discobots.frc.ascent.commands.drive.CycleDriveCommand;
 import org.discobots.frc.ascent.commands.shoot.CycleShootCommand;
@@ -65,6 +67,8 @@ public class OI {
         // Compressor Commands
         b_btnB.whenPressed(new CompressorToggle());
         // Collector Commands
+        b_dpadU.whenPressed(new ArmUp());
+        b_dpadD.whenPressed(new ArmDown());
     }
 
     public double getRawAnalogStickALX() {
