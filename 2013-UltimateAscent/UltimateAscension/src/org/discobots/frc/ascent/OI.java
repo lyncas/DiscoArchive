@@ -7,6 +7,7 @@ import org.discobots.frc.ascent.commands.collect.ArmUp;
 import org.discobots.frc.ascent.commands.compressor.CompressorToggle;
 import org.discobots.frc.ascent.commands.drive.CycleDriveCommand;
 import org.discobots.frc.ascent.commands.shoot.CycleShootCommand;
+import org.discobots.frc.ascent.commands.shoot.PWMSetpointIncrement;
 import org.discobots.frc.ascent.commands.shoot.ShootMain;
 import org.discobots.frc.ascent.framework.GamePad;
 import org.discobots.frc.ascent.framework.GamePad.AxisButton;
@@ -64,6 +65,8 @@ public class OI {
         // Shoot Commands
         b_btnX.whenPressed(new CycleShootCommand());
         b_trigR.whenPressed(new ShootMain());
+        b_dpadR.whenPressed(new PWMSetpointIncrement(0.05));
+        b_dpadL.whenPressed(new PWMSetpointIncrement(-0.05));
         // Compressor Commands
         b_btnB.whenPressed(new CompressorToggle());
         // Collector Commands
