@@ -15,9 +15,6 @@ import org.discobots.frc.ascent.commands.drive.OpenTank;
  */
 public class Drivetrain extends Subsystem {
     private Victor leftFrontVictor, leftBackVictor, rightFrontVictor, rightBackVictor;
-    private Encoder leftEncoder, rightEncoder;
-    private Gyro gyro; // UNUSED AND NOT IMPLEMENTED
-    private DigitalInput switchLeft, switchRight;
     private RobotDrive robotDrive;
     private double rightPrev, leftPrev;
     private double movePrev, turnPrev;
@@ -36,23 +33,6 @@ public class Drivetrain extends Subsystem {
 	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true); // Should be false but nope.
 	robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
 	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        
-//        rightEncoder = new Encoder( HW.encoderDriveRightSlot, HW.encoderDriveRightAChannel,
-//                                    HW.encoderDriveLeftSlot, HW.encoderDriveRightBChannel,
-//                                    false, CounterBase.EncodingType.k1X);
-//        leftEncoder = new Encoder(  HW.encoderDriveLeftSlot, HW.encoderDriveLeftAChannel,
-//                                    HW.encoderDriveLeftSlot, HW.encoderDriveLeftBChannel,
-//                                    false, CounterBase.EncodingType.k1X);
-        rightEncoder.setDistancePerPulse(HW.distancePerPulse);
-        leftEncoder.setDistancePerPulse(HW.distancePerPulse);
-        rightEncoder.start();
-        leftEncoder.start();
-        
-//        gyro = new Gyro(HW.gyroDriveSlot, HW.gyroDriveChannel);
-//        gyro.reset();
-        
-//        switchLeft = new DigitalInput(HW.limitswitchDriveLeftSlot, HW.limitswitchDriveLeftChannel);
-//        switchRight = new DigitalInput(HW.limitswitchDriveRightSlot, HW.limitswitchDriveRightChannel);
         
         rightPrev = leftPrev = movePrev = turnPrev = 0.0; 
     }
@@ -133,31 +113,10 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new OpenArcade());
     }
-    public boolean isSwitchLeftPressed() {
-        return switchLeft.get();
-    }
-    public boolean isSwitchRightPressed() {
-        return switchRight.get();
-    }
-    public int getEncoderLeftValue() {
-        return leftEncoder.get();
-    }
-    public int getEncoderRightValue() {
-        return rightEncoder.get();
-    }
-    public double getEncoderLeftRate() {
-        return leftEncoder.getRate() / 12;
-    }
-    public double getEncoderRightRate() {
-        return rightEncoder.getRate() / 12;
-    }
     public double getMotorPWMLeft() {
         return leftFrontVictor.getSpeed();
     }
     public double getMotorPWMRight() {
         return rightFrontVictor.getSpeed();
-    }
-    public double getGyroAngle() {
-        return gyro.getAngle();
     }
 }

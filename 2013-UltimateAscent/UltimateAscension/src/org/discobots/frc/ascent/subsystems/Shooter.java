@@ -19,8 +19,6 @@ public class Shooter extends Subsystem {
         frontVictor = new Victor(HW.motorShooterFrontSlot, HW.motorShooterFrontChannel);
         backVictor = new Victor(HW.motorShooterBackSlot, HW.motorShooterBackChannel);
         mainShoot = new DoubleSolenoid(HW.solenoidShootFwdChannel, HW.solenoidShootRevChannel);
-//        frontEncoder = new CounterEncoder(HW.encoderShooterFrontSlot, HW.encoderShooterFrontChannel, 2);
-//        backEncoder = new CounterEncoder(HW.encoderShooterBackSlot, HW.encoderShooterBackChannel, 2);
     }
 
     protected void initDefaultCommand() {
@@ -68,13 +66,13 @@ public class Shooter extends Subsystem {
     }
 
     public boolean getMainShootPosition() {
-        return mainShoot.get()==DoubleSolenoid.Value.kForward;//in
+        return mainShoot.get() == DoubleSolenoid.Value.kForward;//in
     }
     
     public void setMainShootPosition(boolean in) {
         if(in){
             mainShoot.set(DoubleSolenoid.Value.kForward);//in
-        }else{
+        } else {
             mainShoot.set(DoubleSolenoid.Value.kReverse);//out
         }
     }

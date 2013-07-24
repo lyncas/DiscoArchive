@@ -9,6 +9,7 @@ import org.discobots.frc.ascent.commands.CommandBase;
 public class CompressorOn extends CommandBase {
     
     public CompressorOn() {
+        requires(compressorSubsystem);
     }
 
     protected void initialize() {
@@ -19,7 +20,7 @@ public class CompressorOn extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     protected void end() {

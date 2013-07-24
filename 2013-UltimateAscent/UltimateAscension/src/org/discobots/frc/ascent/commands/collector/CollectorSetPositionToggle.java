@@ -2,30 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.discobots.frc.ascent.commands.drive;
+package org.discobots.frc.ascent.commands.collector;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.discobots.frc.ascent.commands.CommandBase;
 
 /**
  *
  * @author Nolan Shah
  */
-public class CycleDriveCommand extends CommandBase {
+public class CollectorSetPositionToggle extends CommandBase {
     
-    public CycleDriveCommand() {
+    public CollectorSetPositionToggle() {
     }
 
     protected void initialize() {
-        Command currentCommand = drivetrainSubsystem.getCurrentCommand();
-        if (currentCommand instanceof OpenArcade) {
-            new OpenTank().start();
-        } else {
-            new OpenArcade().start();
-        }
+        collectorSubsystem.setCollectorPosition(!collectorSubsystem.getCollectorPosition());
     }
 
     protected void execute() {
+        
     }
 
     protected boolean isFinished() {
@@ -33,8 +28,10 @@ public class CycleDriveCommand extends CommandBase {
     }
 
     protected void end() {
+        
     }
 
     protected void interrupted() {
+        
     }
 }

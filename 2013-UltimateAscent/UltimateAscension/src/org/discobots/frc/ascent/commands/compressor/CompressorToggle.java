@@ -9,6 +9,7 @@ import org.discobots.frc.ascent.commands.CommandBase;
 public class CompressorToggle extends CommandBase {
     
     public CompressorToggle() {
+        requires(compressorSubsystem);
     }
 
     protected void initialize() {

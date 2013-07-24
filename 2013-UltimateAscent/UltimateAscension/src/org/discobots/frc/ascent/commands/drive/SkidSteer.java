@@ -12,12 +12,12 @@ public final class SkidSteer extends CommandBase {
 
     private double offset;
 
-    public SkidSteer(double offset) {
+    private SkidSteer(double offset) {
         requires(drivetrainSubsystem);
         this.offset = offset;
     }
     
-    public SkidSteer() {
+    private SkidSteer() {
         requires(drivetrainSubsystem);
         this.offset = 0;
     }
@@ -31,7 +31,7 @@ public final class SkidSteer extends CommandBase {
         double yInput = calculateYInput();
         double sInput = calculateSInput();
         double angle = normalizeAngle(MathUtils.atan2(yInput, xInput) * (180 / Math.PI));
-        double error = angle - normalizeAngle(drivetrainSubsystem.getGyroAngle() + offset);
+        double error = 0;//angle - normalizeAngle(drivetrainSubsystem.getGyroAngle() + offset);
         if (Math.abs(error) > Constants.SkidSteer_ErrorAngleThreshold) {
             if (error > 0) {
                 left = 1;

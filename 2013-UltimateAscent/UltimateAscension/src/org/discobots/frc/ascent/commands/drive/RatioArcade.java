@@ -20,12 +20,12 @@ public final class RatioArcade extends CommandBase {
     private PIDController leftController, rightController;
     private PIDSource leftControllerSource = new PIDSource() {
         public double pidGet() {
-            return drivetrainSubsystem.getEncoderLeftRate();
+            return 0;//drivetrainSubsystem.getEncoderLeftRate();
         }
     };
     private PIDSource rightControllerSource = new PIDSource() {
         public double pidGet() {
-            return drivetrainSubsystem.getEncoderRightRate();
+            return 0;//drivetrainSubsystem.getEncoderRightRate();
         }
     };
     private PIDOutput leftControllerOutput = new PIDOutput() {
@@ -39,7 +39,7 @@ public final class RatioArcade extends CommandBase {
         }
     };
     
-    public RatioArcade() {
+    private RatioArcade() {
         pidLeftOutput = 0;
         pidRightOutput = 0;
         requires(drivetrainSubsystem);
