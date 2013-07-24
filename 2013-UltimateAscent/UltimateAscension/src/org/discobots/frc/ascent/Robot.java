@@ -25,6 +25,10 @@ public class Robot extends IterativeRobot {
         Dashboard.init();
         this.getWatchdog().setEnabled(false);
     }
+    
+    public void disabledPeriodic(){
+        Dashboard.update();
+    }
 
     public void autonomousInit() {
         //System.out.println("Initializing Autonomous.");
@@ -32,6 +36,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        Dashboard.update();
     }
 
     public void teleopInit() {
@@ -41,7 +46,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         long a = System.currentTimeMillis();
         Scheduler.getInstance().run();
-        //Dashboard.update();
+        Dashboard.update();
         long b = System.currentTimeMillis();
         //System.out.println(b - a);
         

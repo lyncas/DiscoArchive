@@ -19,11 +19,16 @@ public class Dashboard {
         // Robot
         
         // Subsystem: Drivetrain
-        //SmartDashboard.putString("Drivetrain Subsystem", CommandBase.drivetrainSubsystem.toString());
         
         // Subsystem: Shooter
+        SmartDashboard.putNumber("Shooter PWM setpoint", CommandBase.shooterSubsystem.getSetpointPWM());
         
         // Subsystem: Collector
+        SmartDashboard.putString("Arm Position", CommandBase.collectorSubsystem.getArmPosition() ? "Down":"Up");
+        
+        //Subsystem: Compressor
+        SmartDashboard.putBoolean("Tanks full", CommandBase.compressorSubsystem.getPressure());
+        SmartDashboard.putBoolean("Compressor enabled", CommandBase.compressorSubsystem.isCompressorEnabled());
         
         // Subsystem: Shared
     }
