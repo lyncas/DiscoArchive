@@ -26,25 +26,28 @@ public class HW {
             motorDriveRight1Slot = 1, motorDriveRight1Channel = 1,
             motorDriveRight2Slot = 1, motorDriveRight2Channel = 2,
             motorShooterFrontSlot = 1, motorShooterFrontChannel = 6,
-            motorShooterBackSlot = 1, motorShooterBackChannel = 5;
+            motorShooterBackSlot = 1, motorShooterBackChannel = 5,
+            compressorTalonSlot=1, compressorTalonChannel=7;
     /* RELAYS */////////////////////////////////////////////////////////////////
-    public static final int compressorSlot = 1, compressorChannel = 1;
+    //public static final int compressorSlot = 1, compressorChannel = 1;
     /* SOLENOIDS *//////////////////////////////////////////////////////////////
-    public static final int solenoidShootAChannel = 1,
-            solenoidShootBChannel = 2,
-            solenoidShiftLeftChannel = 2,
+    public static final int solenoidShootFwdChannel = 1,
+            solenoidShootRevChannel = 2,
+            /*solenoidShiftLeftChannel = 2,
             solenoidShiftRightChannel = 3,
             encoderFrontPowerChannel = 7,
-            encoderBackPowerChannel = 8;
+            encoderBackPowerChannel = 8*/
+            solenoidArmUpChannel=3,
+            solenoidArmDownChannel=4;
     /* SENSORS *////////////////////////////////////////////////////////////////
-    public static final int encoderDriveLeftSlot = 1, encoderDriveLeftAChannel = 8,
+    public static final int /*encoderDriveLeftSlot = 1, encoderDriveLeftAChannel = 8,
             encoderDriveLeftBChannel = 9,
             encoderDriveRightSlot = 1, encoderDriveRightAChannel = 4,
             encoderDriveRightBChannel = 5,
             encoderShooterFrontSlot = 1, encoderShooterFrontChannel = 1,
-            encoderShooterBackSlot = 1, encoderShooterBackChannel = 2,
-            pressureswitchSlot = 1, pressureswitchChannel = 14,
+            encoderShooterBackSlot = 1, encoderShooterBackChannel = 2,*/
+            pressureswitchSlot = 1, pressureswitchChannel = 1/*,
             limitswitchDriveLeftSlot = 1, limitswitchDriveLeftChannel = 7,
             limitswitchDriveRightSlot = 1, limitswitchDriveRightChannel = 12,
-            gyroDriveSlot = 1, gyroDriveChannel = 2;
+            gyroDriveSlot = 1, gyroDriveChannel = 2*/;
 }

@@ -11,16 +11,17 @@ public class Shooter extends Subsystem {
 
     private Victor frontVictor, backVictor;
     private CounterEncoder frontEncoder, backEncoder;
-    private DoubleSolenoid mainShoot;
+    private DoubleSolenoid mainShoot, armSolenoid;
     double pwmSetpoint = 0.7; // For Open-Loop Shooter
-    double rpmSetpoint = 0.7; // For Closed-Loop Shooter
+    double rpmSetpoint = 5000; // For Closed-Loop Shooter
 
     public Shooter() {
         frontVictor = new Victor(HW.motorShooterFrontSlot, HW.motorShooterFrontChannel);
         backVictor = new Victor(HW.motorShooterBackSlot, HW.motorShooterBackChannel);
-        mainShoot = new DoubleSolenoid(HW.solenoidShootAChannel, HW.solenoidShootBChannel);
-        frontEncoder = new CounterEncoder(HW.encoderShooterFrontSlot, HW.encoderShooterFrontChannel, 2);
-        backEncoder = new CounterEncoder(HW.encoderShooterBackSlot, HW.encoderShooterBackChannel, 2);
+        mainShoot = new DoubleSolenoid(HW.solenoidShootFwdChannel, HW.solenoidShootRevChannel);
+        armSolenoid=new DoubleSolenoid(HW.solenoidArmDownChannel,HW.solenoidArmUpChannel);
+//        frontEncoder = new CounterEncoder(HW.encoderShooterFrontSlot, HW.encoderShooterFrontChannel, 2);
+//        backEncoder = new CounterEncoder(HW.encoderShooterBackSlot, HW.encoderShooterBackChannel, 2);
     }
 
     protected void initDefaultCommand() {
@@ -68,16 +69,27 @@ public class Shooter extends Subsystem {
     }
 
     public boolean getMainShootPosition() {
-        return mainShoot.get()==DoubleSolenoid.Value.kForward;
+        return mainShoot.get()==DoubleSolenoid.Value.kForward;//in
     }
     
-    public void setMainShootPosition(boolean pos) {
-        if(pos){
-            mainShoot.set(DoubleSolenoid.Value.kForward);
-            System.out.println("in");
+    public void setMainShootPosition(boolean in) {
+        if(in){
+            mainShoot.set(DoubleSolenoid.Value.kForward);//in
         }else{
-            mainShoot.set(DoubleSolenoid.Value.kReverse);
-            System.out.println("out");
+            mainShoot.set(DoubleSolenoid.Value.kReverse);//out
+        }
+    }
+    
+    public boolean getArmPosition(){
+        return armSolenoid.get()==DoubleSolenoid.Value.kForward;//down
+    }
+    
+    public void setArmPosition(boolean down){
+        if(down){
+            armSolenoid.set(DoubleSolenoid.Value.kForward);
+        }
+        else{
+            armSolenoid.set(DoubleSolenoid.Value.kReverse);
         }
     }
 }
