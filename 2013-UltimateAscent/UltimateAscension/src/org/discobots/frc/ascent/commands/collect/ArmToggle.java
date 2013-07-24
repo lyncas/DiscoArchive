@@ -2,8 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package org.discobots.frc.ascent.commands.collector;
+package org.discobots.frc.ascent.commands.collect;
 
 import org.discobots.frc.ascent.commands.CommandBase;
 
@@ -11,10 +10,13 @@ import org.discobots.frc.ascent.commands.CommandBase;
  *
  * @author Nolan Shah
  */
-public class CollectorSetPositionDown extends CommandBase {
+public class ArmToggle extends CommandBase {
+    
+    public ArmToggle() {
+    }
 
     protected void initialize() {
-        collectorSubsystem.setCollectorPosition(false);
+        collectorSubsystem.setArmPosition(!collectorSubsystem.getArmPosition());
     }
 
     protected void execute() {
@@ -32,5 +34,4 @@ public class CollectorSetPositionDown extends CommandBase {
     protected void interrupted() {
         
     }
-
 }

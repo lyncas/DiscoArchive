@@ -2,7 +2,7 @@ package org.discobots.frc.ascent;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.discobots.frc.ascent.commands.collector.CollectorSetPositionToggle;
+import org.discobots.frc.ascent.commands.collect.ArmToggle;
 import org.discobots.frc.ascent.commands.collect.ArmDown;
 import org.discobots.frc.ascent.commands.collect.ArmUp;
 import org.discobots.frc.ascent.commands.compressor.CompressorToggle;
@@ -73,7 +73,7 @@ public class OI {
         // Collector Commands
         b_dpadU.whenPressed(new ArmUp());
         b_dpadD.whenPressed(new ArmDown());
-        b_btnY.whenPressed(new CollectorSetPositionToggle());
+        b_btnY.whenPressed(new ArmToggle());
     }
 
     public double getRawAnalogStickALX() {
