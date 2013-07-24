@@ -37,22 +37,22 @@ public class Drivetrain extends Subsystem {
 	robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
 	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         
-        rightEncoder = new Encoder( HW.encoderDriveRightSlot, HW.encoderDriveRightAChannel,
-                                    HW.encoderDriveLeftSlot, HW.encoderDriveRightBChannel,
-                                    false, CounterBase.EncodingType.k1X);
-        leftEncoder = new Encoder(  HW.encoderDriveLeftSlot, HW.encoderDriveLeftAChannel,
-                                    HW.encoderDriveLeftSlot, HW.encoderDriveLeftBChannel,
-                                    false, CounterBase.EncodingType.k1X);
+//        rightEncoder = new Encoder( HW.encoderDriveRightSlot, HW.encoderDriveRightAChannel,
+//                                    HW.encoderDriveLeftSlot, HW.encoderDriveRightBChannel,
+//                                    false, CounterBase.EncodingType.k1X);
+//        leftEncoder = new Encoder(  HW.encoderDriveLeftSlot, HW.encoderDriveLeftAChannel,
+//                                    HW.encoderDriveLeftSlot, HW.encoderDriveLeftBChannel,
+//                                    false, CounterBase.EncodingType.k1X);
         rightEncoder.setDistancePerPulse(HW.distancePerPulse);
         leftEncoder.setDistancePerPulse(HW.distancePerPulse);
         rightEncoder.start();
         leftEncoder.start();
         
-        //gyro = new Gyro(HW.gyroDriveSlot, HW.gyroDriveChannel);
-        //gyro.reset();
+//        gyro = new Gyro(HW.gyroDriveSlot, HW.gyroDriveChannel);
+//        gyro.reset();
         
-        switchLeft = new DigitalInput(HW.limitswitchDriveLeftSlot, HW.limitswitchDriveLeftChannel);
-        switchRight = new DigitalInput(HW.limitswitchDriveRightSlot, HW.limitswitchDriveRightChannel);
+//        switchLeft = new DigitalInput(HW.limitswitchDriveLeftSlot, HW.limitswitchDriveLeftChannel);
+//        switchRight = new DigitalInput(HW.limitswitchDriveRightSlot, HW.limitswitchDriveRightChannel);
         
         rightPrev = leftPrev = movePrev = turnPrev = 0.0; 
     }
