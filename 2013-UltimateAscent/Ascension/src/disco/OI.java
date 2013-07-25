@@ -81,7 +81,7 @@ public class OI {
 	/*
 	 * Shooter
 	 */
-        b_dpadU.whenPressed(new ShooterIncDiff());
+        b2_dpadU.whenPressed(new ShooterIncDiff());
         b2_dpadD.whenPressed(new ShooterDecDiff());
         b2_bumpR.whenPressed(new ShooterToggle());
         b2_dpadR.whenPressed(new ShooterInc());
