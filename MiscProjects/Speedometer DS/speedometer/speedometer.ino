@@ -15,11 +15,17 @@ void loop()
    if (Serial.available()>0) // Checks for a character in the serial monitor
      {
        int shooterSpeed = Serial.parseInt();
-       int x = shooterSpeed * 10;
-       int speedometerSpeed = x + 90;
-       drDre.write(speedometerSpeed);
-       
-     }
+         if (shooterSpeed = 0)
+           {
+             drDre.write(90);
+           }
+         else
+           {
+             int x = shooterSpeed * 2;
+             int speedometerSpeed = x + 110;
+             drDre.write(speedometerSpeed);
+           }
+     }    
 }
 
 
