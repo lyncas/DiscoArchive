@@ -18,12 +18,14 @@ public abstract class CommandBase extends Command {
     public static Drivetrain drivetrainSubsystem;
     public static Shooter shooterSubsystem;
     public static Collector collectorSubsystem;
+    public static Hanger hangerSubsystem;
     
     public static void init() {
         compressorSubsystem = new Compressor();
         drivetrainSubsystem = new Drivetrain();
         shooterSubsystem = new Shooter();
         collectorSubsystem = new Collector();
+        hangerSubsystem = new Hanger();
         oi = new OI();
         
     }

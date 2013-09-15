@@ -17,7 +17,7 @@ public class Collector extends Subsystem {
     private DoubleSolenoid armSolenoid;
 
     public Collector() {
-        armSolenoid = new DoubleSolenoid(HW.solenoidArmDownChannel, HW.solenoidArmUpChannel);
+        armSolenoid = new DoubleSolenoid(HW.solenoidCollectorDownChannel, HW.solenoidCollectorUpChannel);
         setArmPosition(true);
     }
 

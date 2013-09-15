@@ -27,14 +27,16 @@ public class HW {
             motorDriveRight2Slot = 1, motorDriveRight2Channel = 2,
             motorShooterFrontSlot = 1, motorShooterFrontChannel = 6,
             motorShooterBackSlot = 1, motorShooterBackChannel = 5,
-            compressorTalonSlot=1, compressorTalonChannel=7;
+            compressorTalonSlot = 1, compressorTalonChannel = 7;
     /* RELAYS */////////////////////////////////////////////////////////////////
     //public static final int compressorSlot = 1, compressorChannel = 1;
     /* SOLENOIDS *//////////////////////////////////////////////////////////////
     public static final int solenoidShootFwdChannel = 1,
             solenoidShootRevChannel = 2,
-            solenoidArmUpChannel=3,
-            solenoidArmDownChannel=4;
+            solenoidCollectorUpChannel = 3,
+            solenoidCollectorDownChannel = 4,
+            solenoidHangerLeftChannel = 5,
+            solenoidHangerRightChannel = 6;
     /* SENSORS *////////////////////////////////////////////////////////////////
     public static final int pressureswitchSlot = 1, pressureswitchChannel = 1;
 }
