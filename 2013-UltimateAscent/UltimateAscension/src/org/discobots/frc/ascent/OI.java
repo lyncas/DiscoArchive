@@ -19,7 +19,7 @@ import org.discobots.frc.ascent.framework.GamePad.AxisButton;
  */
 public class OI {
 
-    private GamePad gp1 = new GamePad(1, GamePad.MODE_D);
+    private GamePad gp1 = new GamePad(1, GamePad.MODE_D); // D and X for Logitech, XBOX for xbox (hybrid of d and x)
     private GamePad gp2 = new GamePad(2, GamePad.MODE_D);
     // JOYSTICK 1
     private Button b_dpadU = new AxisButton(gp1, GamePad.DPAD_Y_U);
