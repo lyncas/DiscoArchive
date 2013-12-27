@@ -11,7 +11,7 @@ public class GamePad extends Joystick {
      * triggers as an axis but cannot use the vertical Dpad. D allows the
      * vertical Dpad with the triggers as buttons.
      */
-    public static final int MODE_X = 1, MODE_D = 2, MODE_XBOX = 3;
+    public static final int MODE_X = 1, MODE_D = 2;
     public static final int STICK_L = 1, STICK_R = 2;
     //For some reason, the base code only supports 6 axes and 12 buttons. Sigh. It's better than normal joysticks.
     private static final int m_numAxes = 6;
@@ -54,18 +54,13 @@ public class GamePad extends Joystick {
                 thisMode = MODE_D;
                 break;
             }
-            case MODE_XBOX: {
-                XmodeInit();
-                thisMode = MODE_D;
-                break;
-            }
             default: {
                 DmodeInit();
                 thisMode = MODE_D;
                 break;
             }
         }
-        System.out.println("Gamepad initialized in mode " + (thisMode == MODE_D ? "D" : "X"));
+        System.out.println(this.getClass().getName() + " initialized in mode " + (thisMode == MODE_D ? "D" : "X"));
     }
     //...and this one is for us to make the joystick stuff work
 
@@ -137,8 +132,7 @@ public class GamePad extends Joystick {
         setAxisReversed(AXIS_RY, true);
         setAxisReversed(DPAD_Y, true);
     }
-    
-    
+
     /**
      * Reverse axes if they are not in the expected direction. This is
      * preconfigured when you choose the mode.
