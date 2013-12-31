@@ -5,16 +5,16 @@
  */
 package robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+import robot.GamePad;
 
 /**
  *
  * @author Sam
  */
 public class ArcadeDrive extends CommandBase {
-    Joystick j1;
+    GamePad j1;
     
-    public ArcadeDrive(Joystick j) {
+    public ArcadeDrive(GamePad j) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrain);

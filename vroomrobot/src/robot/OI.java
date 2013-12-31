@@ -41,11 +41,11 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-    Joystick controller=new Joystick(1);
-    Joystick controller2=new Joystick(2);
+    GamePad controller=new GamePad(1,GamePad.MODE_D);
+    GamePad controller2=new GamePad(2,GamePad.MODE_D);
     
     
-    public Joystick getJoy(){
+    public GamePad getGP(){
         return controller;
     }
     

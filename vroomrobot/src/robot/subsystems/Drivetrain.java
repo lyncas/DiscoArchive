@@ -26,6 +26,7 @@ public class Drivetrain extends Subsystem {
     
     
     public Drivetrain(){
+        super("Drivetrain");
         left1=new Victor(1,1);
         left2=new Victor(1,2);
         right1=new Victor(1,3);
@@ -34,7 +35,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new ArcadeDrive(CommandBase.oi.getJoy()));
+        setDefaultCommand(new ArcadeDrive(CommandBase.oi.getGP()));
     }
     
     public void arcade(double move, double rotate){
