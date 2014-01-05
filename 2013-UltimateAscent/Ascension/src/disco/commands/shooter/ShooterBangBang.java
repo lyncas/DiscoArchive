@@ -15,7 +15,7 @@ public class ShooterBangBang extends CommandBase {
     public ShooterBangBang() {
         // Use requires() here to declare subsystem dependencies
         requires(shooter);
-        requires(compressor);
+        //requires(compressor);
     }
 
     // Called just before this Command runs the first time
