@@ -16,8 +16,8 @@ import robt.utils.TalonCompressor;
  * @author Developer
  */
 public class CompressorSub extends Subsystem {
-    TalonCompressor comp=new TalonCompressor(HW.presssureSwitchSlot,HW.pressureSwitchChannel,HW.compressorSlot,HW.compressorChannel);
-    DoubleSolenoid armSolenoid=new DoubleSolenoid(HW.armSolenoid1Channel,HW.armSolenoid2Channel);
+    TalonCompressor comp=new TalonCompressor(HW.presssureswitchslot,HW.pressureswitchchannel,HW.compressorslot,HW.compressorchannel);
+    DoubleSolenoid armSolenoid=new DoubleSolenoid(HW.armsolenoid1channel,HW.armsolenoid2channel);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

@@ -6,16 +6,19 @@
 package robt.commands.winch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  * @author Developer
  */
-public class FullFire extends CommandGroup {
+public class Fire extends CommandGroup {
     
-    public FullFire() {
-        addSequential(new Pull());
+    public Fire() {
         addSequential(new ArmToFire());
-        addSequential(new Fire());
+        addSequential(new Unlock());//BOOM
+        addSequential(new WaitCommand(0.25));
+        addSequential(new EngageWinch());
+        
     }
 }

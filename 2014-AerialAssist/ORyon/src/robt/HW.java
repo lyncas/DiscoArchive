@@ -25,13 +25,11 @@ public class HW {
             
             intakslot=1,    intakechannel=5,
             
-            winch1slot=1,   winch1channel=6,
-            winch2slot=1,   winch2channel=7,
-            winch3slot=1,   winch3channel=8;
+            flip1slot=1,    flip1channel=7;
     
     
     public static final int 
-            compressorSlot=1,   compressorChannel=1;
+            compressorSlot=1,   compressorChannel=6;
     
     public static final int armSolenoid1Channel=1,  armSolenoid2Channel=2,
                             lockSolenoid1Channel=3, lockSolenoid2Channel=4,

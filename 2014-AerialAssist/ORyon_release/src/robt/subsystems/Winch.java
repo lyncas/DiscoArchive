@@ -21,8 +21,8 @@ public class Winch extends Subsystem {
     Talon motor2/*=new Talon(HW.winch2slot,HW.winch2channel)*/;
     Talon motor3/*=new Talon(HW.winch3slot,HW.winch3channel)*/;
     
-    DoubleSolenoid lock=new DoubleSolenoid(HW.lockSolenoid1Channel,HW.lockSolenoid2Channel);
-    DoubleSolenoid release=new DoubleSolenoid(HW.releaseSolenoid1Channel,HW.releaseSolenoid2Channel);
+    DoubleSolenoid lock=new DoubleSolenoid(HW.locksolenoid1channel,HW.locksolenoid2channel);
+    DoubleSolenoid release=new DoubleSolenoid(HW.releasesolenoid1channel,HW.releasesolenoid2channel);
     
     //Moved to OI
 //    DigitalInput cocked=new DigitalInput(HW.winchLimitSlot,HW.winchLimitChannel);
