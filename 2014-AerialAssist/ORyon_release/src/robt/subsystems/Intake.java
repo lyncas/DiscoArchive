@@ -26,20 +26,6 @@ public class Intake extends Subsystem {
     }
     
     public void setIntake(double power){
-        this.power=power;
-    }
-    
-    public void intakeOn(){
         intakemotor.set(power);
-        enabled=true;
-    }
-    
-    public void intakeOff(){
-        intakemotor.set(0);
-        enabled=false;
-    }
-    
-    public boolean getEnabled(){
-        return enabled;
     }
 }

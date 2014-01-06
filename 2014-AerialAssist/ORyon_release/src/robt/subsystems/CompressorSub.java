@@ -9,14 +9,13 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robt.HW;
-import robt.utils.TalonCompressor;
 
 /**
  *
  * @author Developer
  */
 public class CompressorSub extends Subsystem {
-    TalonCompressor comp=new TalonCompressor(HW.presssureswitchslot,HW.pressureswitchchannel,HW.compressorslot,HW.compressorchannel);
+    Compressor comp=new Compressor(HW.presssureswitchslot,HW.pressureswitchchannel,HW.compressorslot,HW.compressorchannel);
     DoubleSolenoid armSolenoid=new DoubleSolenoid(HW.armsolenoid1channel,HW.armsolenoid2channel);
 
     public void initDefaultCommand() {

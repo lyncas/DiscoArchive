@@ -29,7 +29,6 @@ public class VariIntake extends CommandBase {
 	if (joy1 instanceof GamePad) {
 	    gp = (GamePad) joy1;
 	}
-        intake.intakeOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -43,7 +42,6 @@ public class VariIntake extends CommandBase {
         else{
             intake.setIntake(0);
         }
-        intake.intakeOn();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -53,7 +51,7 @@ public class VariIntake extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        intake.intakeOff();
+        intake.setIntake(0);
     }
 
     // Called when another command which requires one or more of the same

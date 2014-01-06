@@ -3,38 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package robt.commands.arm;
+package robt.commands;
 
-import robt.commands.CommandBase;
+import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
  *
  * @author Developer
  */
-public class ToggleIntake extends CommandBase {
+public class WaitForPressCommand extends CommandBase {
+    Button but;
+    boolean inverted;
     
-    public ToggleIntake() {
-        requires(intake);
+    public WaitForPressCommand(Button b,boolean inverted) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        but=b;
+        this.inverted=inverted;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-       
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-         if(intake.getEnabled()){
-            intake.intakeOff();
-        }
-        else{
-            intake.intakeOn();
-        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return but.get()^inverted;
     }
 
     // Called once after isFinished returns true

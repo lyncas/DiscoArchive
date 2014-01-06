@@ -5,7 +5,6 @@
  */
 package robt.commands.flip;
 
-import robt.commands.arm.*;
 import edu.wpi.first.wpilibj.Joystick;
 import robt.commands.CommandBase;
 import robt.utils.GamePad;
