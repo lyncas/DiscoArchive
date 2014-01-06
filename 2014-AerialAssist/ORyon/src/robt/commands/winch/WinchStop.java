@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package robt.commands;
+package robt.commands.winch;
+
+import robt.commands.CommandBase;
 
 /**
  *
  * @author Developer
  */
-public class ToggleCompressor extends CommandBase {
+public class WinchStop extends CommandBase {
     
-    public ToggleCompressor() {
+    public WinchStop() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -22,12 +24,7 @@ public class ToggleCompressor extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(compressor.getEnabled()){
-            compressor.disable();
-        }
-        else{
-            compressor.enable();
-        }
+        winch.winchStop();
     }
 
     // Make this return true when this Command no longer needs to run execute()

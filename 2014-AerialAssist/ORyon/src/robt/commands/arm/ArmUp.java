@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package robt.commands;
+package robt.commands.arm;
+
+import robt.commands.CommandBase;
 
 /**
  *
  * @author Developer
  */
-public class armDown extends CommandBase {
+public class ArmUp extends CommandBase {
     
-    public armDown() {
+    public ArmUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -22,7 +24,7 @@ public class armDown extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        compressor.armDown();
+        compressor.armUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()

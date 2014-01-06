@@ -8,7 +8,7 @@ package robt.subsystems;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robt.HW;
-import robt.commands.variIntake;
+import robt.commands.arm.VariIntake;
 
 /**
  *
@@ -22,7 +22,7 @@ public class Intake extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new variIntake());
+        setDefaultCommand(new VariIntake());
     }
     
     public void setIntake(double power){

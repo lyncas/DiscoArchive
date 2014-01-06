@@ -15,7 +15,7 @@ import robt.HW;
  * @author Developer
  */
 public class CompressorSub extends Subsystem {
-    Compressor comp=new Compressor(HW.presssureSwitchSlot,HW.pressureSwitchChannle,HW.compressorSlot,HW.compressorChannel);
+    Compressor comp=new Compressor(HW.presssureSwitchSlot,HW.pressureSwitchChannel,HW.compressorSlot,HW.compressorChannel);
     DoubleSolenoid armSolenoid=new DoubleSolenoid(HW.armSolenoid1Channel,HW.armSolenoid2Channel);
 
     public void initDefaultCommand() {

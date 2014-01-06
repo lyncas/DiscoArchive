@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package robt.commands;
+package robt.commands.arm;
 
 import edu.wpi.first.wpilibj.Joystick;
+import robt.commands.CommandBase;
 import robt.utils.GamePad;
 
 /**
  *
  * @author Developer
  */
-public class variIntake extends CommandBase {
+public class VariIntake extends CommandBase {
 
     private Joystick joy1;
     private GamePad gp;
 
-    public variIntake() {
+    public VariIntake() {
         // Use requires() here to declare subsystem dependencies
         requires(intake);
     }

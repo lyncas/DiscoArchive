@@ -4,7 +4,7 @@ package robt.subsystems;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robt.HW;
-import robt.commands.Lerpdrive;
+import robt.commands.drive.Lerpdrive;
 import robt.utils.BetterDrive;
 
 /**

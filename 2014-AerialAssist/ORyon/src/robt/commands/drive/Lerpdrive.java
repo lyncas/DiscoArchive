@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package robt.commands;
+package robt.commands.drive;
 
 import robt.utils.GamePad;
 import edu.wpi.first.wpilibj.Joystick;
+import robt.commands.CommandBase;
 
 /**
  * Linear interpolation drive between b on left and right edges of joystick

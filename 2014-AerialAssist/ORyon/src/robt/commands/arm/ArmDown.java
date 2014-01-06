@@ -3,31 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package robt.commands;
+package robt.commands.arm;
+
+import robt.commands.CommandBase;
 
 /**
  *
  * @author Developer
  */
-public class ToggleIntake extends CommandBase {
+public class ArmDown extends CommandBase {
     
-    public ToggleIntake() {
-        requires(intake);
+    public ArmDown() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-       
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-         if(intake.getEnabled()){
-            intake.intakeOff();
-        }
-        else{
-            intake.intakeOn();
-        }
+        compressor.armDown();
     }
 
     // Make this return true when this Command no longer needs to run execute()

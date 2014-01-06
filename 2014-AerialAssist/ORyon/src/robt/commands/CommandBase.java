@@ -18,6 +18,7 @@ public abstract class CommandBase extends Command {
     public static Drivetrain drivetrain = new Drivetrain();
     public static Intake intake=new Intake();
     public static CompressorSub compressor=new CompressorSub();
+    public static Winch winch=new Winch();
     
 
     public static void init() {

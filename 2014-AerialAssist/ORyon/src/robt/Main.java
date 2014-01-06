@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import robt.commands.CommandBase;
-import robt.commands.Lerpdrive;
+import robt.commands.drive.Lerpdrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
