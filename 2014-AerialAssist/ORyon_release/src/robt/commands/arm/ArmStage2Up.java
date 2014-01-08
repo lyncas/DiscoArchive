@@ -5,60 +5,39 @@
  */
 package robt.commands.arm;
 
-import edu.wpi.first.wpilibj.Joystick;
 import robt.commands.CommandBase;
-import robt.utils.GamePad;
 
 /**
  *
  * @author Developer
  */
-public class VariIntake extends CommandBase {
-
-    private Joystick joy1;
-    private GamePad gp;
-
-    public VariIntake() {
+public class ArmStage2Up extends CommandBase {
+    
+    public ArmStage2Up() {
         // Use requires() here to declare subsystem dependencies
-        requires(intake);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        joy1 = oi.getJoy1();
-	if (joy1 instanceof GamePad) {
-	    gp = (GamePad) joy1;
-	}
-        intake.intakeOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(gp.getRawButton(gp.TRIGGER_L)){
-            intake.setIntake(-1);
-        }
-        else if(gp.getRawButton(gp.TRIGGER_R)){
-            intake.setIntake(1);
-        }
-        else{
-            intake.setIntake(0);
-        }
-        intake.intakeOn();
+        compressor.armStage2Up();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        intake.intakeOff();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
     }
 }

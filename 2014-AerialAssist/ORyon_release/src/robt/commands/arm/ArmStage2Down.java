@@ -3,23 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package robt.commands;
+package robt.commands.arm;
 
-import edu.wpi.first.wpilibj.buttons.Button;
+import robt.commands.CommandBase;
 
 /**
  *
  * @author Developer
  */
-public class WaitForPressCommand extends CommandBase {
-    Button but;
-    boolean inverted;
+public class ArmStage2Down extends CommandBase {
     
-    public WaitForPressCommand(Button b,boolean inverted) {
+    public ArmStage2Down() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        but=b;
-        this.inverted=inverted;
     }
 
     // Called just before this Command runs the first time
@@ -28,11 +24,12 @@ public class WaitForPressCommand extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        compressor.armStage2Down();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return but.get()^inverted;
+        return true;
     }
 
     // Called once after isFinished returns true

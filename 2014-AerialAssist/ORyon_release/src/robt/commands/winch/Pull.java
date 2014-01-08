@@ -17,7 +17,7 @@ public class Pull extends CommandGroup {
 
     public Pull() {
 
-        if (CommandBase.oi.winchLimitSwitch.get()) {
+        if (CommandBase.oi.cocked.get()) {
             addSequential(new ArmToFire());//failsafe if we start pull when already pulled
         } else {
             addSequential(new EngageWinch());

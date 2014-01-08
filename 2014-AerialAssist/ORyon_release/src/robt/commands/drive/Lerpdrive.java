@@ -10,9 +10,8 @@ import robt.commands.CommandBase;
 
 /**
  * Linear interpolation drive between b on left and right edges of joystick
- * range and a at corners. Allows fine control with the right joystick 
- * PID CURRENTLY DISABLED
- * Linear interpolation algorithm based on design by Ether on Chief Delphi.
+ * range and a at corners. Allows fine control with the right joystick PID
+ * CURRENTLY DISABLED
  */
 public class Lerpdrive extends CommandBase {
 
@@ -43,6 +42,9 @@ public class Lerpdrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
+	//Touching pyramid?
+
         calculateInputs();
 	//The important part
 	if (move >= 0 && turn >= 0) {//Q1

@@ -7,7 +7,7 @@ package robt;
  * floating around.
  */
 public class HW {
-    
+   
     //MOTORS
     public static final int 
             left1slot=1,    left1channel=1,
@@ -17,19 +17,25 @@ public class HW {
             
             intakslot=1,    intakechannel=5,
             
-            flip1slot=1,    flip1channel=7;
+            flip1slot=1,    flip1channel=7,
+            flip2slot=1,    flip2channel=8;
     
     //RELAYS
     public static final int 
-            compressorslot=1,   compressorchannel=6;
+            compressorSlot=1,   compressorChannel=6;
     
-    //PNEUMATIC SOLENOIDS
-    public static final int armsolenoid1channel=1,  armsolenoid2channel=2,
-                            locksolenoid1channel=3, locksolenoid2channel=4,
-                            releasesolenoid1channel=5,releasesolenoid2channel=6;
+    //SOLENOIDS
+    public static final int armSolenoid1Channel=1,  armSolenoid2Channel=2,
+                            armStage2Channel1=3,    armStage2Channel2=4,
+            
+                            lockSolenoid1Channel=5, lockSolenoid2Channel=6,
+                            releaseSolenoid1Channel=7,releaseSolenoid2Channel=8;
     
     //SENSORS
     public static final int 
-            presssureswitchslot=1,  pressureswitchchannel=1,
-            winchlimitslot=1,       winchlimitchannel=2;
+            presssureSwitchSlot=1,  pressureSwitchChannel=1,
+            ballsensorslot=1,       ballsensorchannel=2,
+            
+            
+            winchLimitSlot=1,       winchLimitChannel=9;
 }
