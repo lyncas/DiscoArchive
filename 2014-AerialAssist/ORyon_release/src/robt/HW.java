@@ -26,16 +26,9 @@ public class HW {
     
     //SOLENOIDS
     public static final int armSolenoid1Channel=1,  armSolenoid2Channel=2,
-                            armStage2Channel1=3,    armStage2Channel2=4,
-            
-                            lockSolenoid1Channel=5, lockSolenoid2Channel=6,
-                            releaseSolenoid1Channel=7,releaseSolenoid2Channel=8;
+                            armStage2Channel1=3,    armStage2Channel2=4;
     
     //SENSORS
     public static final int 
-            presssureSwitchSlot=1,  pressureSwitchChannel=1,
-            ballsensorslot=1,       ballsensorchannel=2,
-            
-            
-            winchLimitSlot=1,       winchLimitChannel=9;
+            presssureSwitchSlot=1,  pressureSwitchChannel=1;
 }
