@@ -28,7 +28,7 @@ public class ArcadeDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drivetrain.arcade(j1.getY(), j1.getX());
+        drivetrain.arcade(j1.getLY(), j1.getLX());
     }
 
     // Make this return true when this Command no longer needs to run execute()
