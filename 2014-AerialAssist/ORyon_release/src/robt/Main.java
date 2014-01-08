@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import robt.commands.CommandBase;
+import robt.commands.DriveForwards;
 import robt.commands.drive.Lerpdrive;
 
 /**
@@ -24,7 +25,7 @@ import robt.commands.drive.Lerpdrive;
  */
 public class Main extends IterativeRobot {
 
-    Command autonomousCommand;
+    Command driveAuton;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -32,7 +33,7 @@ public class Main extends IterativeRobot {
      */
     public void robotInit() {
         // instantiate the command used for the autonomous period
-        //autonomousCommand = new Lerpdrive();
+        driveAuton=new DriveForwards(3000);
 
         // Initialize all subsystems
         CommandBase.init();
@@ -40,8 +41,7 @@ public class Main extends IterativeRobot {
     }
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        //autonomousCommand.start();
+        driveAuton.start();
     }
 
     /**
@@ -56,7 +56,7 @@ public class Main extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        //autonomousCommand.cancel();
+        driveAuton.cancel();
     }
 
     /**
