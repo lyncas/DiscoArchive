@@ -12,7 +12,7 @@ import robt.utils.GamePad;
 
 /**
  *
- * @author Developer
+ * @author Sam Dietrich / Team ORyon
  */
 public class VariFlip extends CommandBase {
     
@@ -29,17 +29,15 @@ public class VariFlip extends CommandBase {
         joy1 = oi.getJoy1();
         if (joy1 instanceof GamePad) {
             gp = (GamePad) joy1;
+        } else{
+            throw new IllegalStateException("Must use logitech gamepda");
         }
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (gp.getRawButton(gp.BTN_X)) {//SHOOT
-            if (flipper.isTouchingBall()) {
-                flipper.setPower(-1);
-            } else {
-                flipper.setPower(-0.3);
-            }
+            flipper.setPower(-1);
         } else if (gp.getRawButton(gp.BTN_Y)) {
             flipper.setPower(0.35);
         } else {

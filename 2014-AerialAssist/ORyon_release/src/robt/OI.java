@@ -1,7 +1,6 @@
 
 package robt;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import robt.commands.compress.ToggleCompressor;
 import robt.commands.arm.ArmUp;
 import robt.commands.arm.ArmDown;
@@ -10,10 +9,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import robt.commands.arm.ArmStage2Down;
 import robt.commands.arm.ArmStage2Up;
-import robt.commands.winch.ArmToFire;
 import robt.utils.GamePad;
 import robt.utils.GamePad.AxisButton;
-import robt.utils.SwitchButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -62,8 +59,7 @@ public class OI {
     private Button b_LB=new JoystickButton(gp1,gp1.BUMPER_L);
     private Button b_DPAD_Y_UP=new AxisButton(gp1,GamePad.DPAD_Y_U);
     private Button b_DPAD_Y_DN=new AxisButton(gp1,GamePad.DPAD_Y_D);
-    public DigitalInput cocked=new DigitalInput(HW.winchLimitSlot,HW.winchLimitChannel);
-    SwitchButton limitButton=new SwitchButton(cocked);
+
     
     public OI(){
         //b_A.whenPressed(new ToggleIntake());
@@ -72,7 +68,6 @@ public class OI {
         b_LB.whenPressed(new ArmDown());
         b_DPAD_Y_UP.whenPressed(new ArmStage2Up());
         b_DPAD_Y_DN.whenPressed(new ArmStage2Down());
-        limitButton.whenPressed(new ArmToFire());
     }
 }
 

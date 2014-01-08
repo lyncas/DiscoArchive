@@ -8,7 +8,7 @@ import robt.commands.drive.Lerpdrive;
 import robt.utils.BetterDrive;
 
 /**
- *
+ * @author Sam Dietrich / Team ORyon
  */
 public class Drivetrain extends Subsystem {
     // Put methods for controlling this subsystem

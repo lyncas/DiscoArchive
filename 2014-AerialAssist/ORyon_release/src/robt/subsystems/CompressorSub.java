@@ -13,12 +13,13 @@ import robt.utils.TalonCompressor;
 
 /**
  *
- * @author Developer
+ * @author Sam Dietrich / Team ORyon
  */
 public class CompressorSub extends Subsystem {
-    Compressor comp=new Compressor(HW.presssureSwitchSlot,HW.pressureSwitchChannel,HW.compressorSlot,HW.compressorChannel);
-    DoubleSolenoid armSolenoid=new DoubleSolenoid(HW.armSolenoid1Channel,HW.armSolenoid2Channel);
-    DoubleSolenoid armStage2=new DoubleSolenoid(HW.armStage2Channel1,HW.armStage2Channel2);
+    Compressor comp=new Compressor(HW.presssureswitchslot,HW.pressureswitchchannel,HW.compressorslot,HW.compressorchannel);
+    //These should be in their own subsustem, in best practice
+    DoubleSolenoid armSolenoid=new DoubleSolenoid(HW.armsolenoid1channel,HW.armsolenoid2channel);
+    DoubleSolenoid armStage2=new DoubleSolenoid(HW.armstage2channel1,HW.armstage2channel2);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

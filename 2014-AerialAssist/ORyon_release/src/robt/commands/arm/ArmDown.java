@@ -9,7 +9,7 @@ import robt.commands.CommandBase;
 
 /**
  *
- * @author Developer
+ * @author Sam Dietrich / Team ORyon
  */
 public class ArmDown extends CommandBase {
     
@@ -39,5 +39,6 @@ public class ArmDown extends CommandBase {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        end();
     }
 }

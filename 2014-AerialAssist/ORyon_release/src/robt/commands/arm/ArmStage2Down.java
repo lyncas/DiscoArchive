@@ -9,7 +9,7 @@ import robt.commands.CommandBase;
 
 /**
  *
- * @author Developer
+ * @author Sam Dietrich / Team ORyon
  */
 public class ArmStage2Down extends CommandBase {
     

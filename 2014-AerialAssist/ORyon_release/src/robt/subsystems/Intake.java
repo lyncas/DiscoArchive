@@ -12,34 +12,18 @@ import robt.commands.arm.VariIntake;
 
 /**
  *
- * @author Developer
+ * @author Sam Dietrich / Team ORyon
  */
 public class Intake extends Subsystem {
-    Talon intakemotor=new Talon(HW.intakslot,HW.intakechannel);
-    private double power=0.5;
-    private boolean enabled=false;
-    
+
+    Talon intakemotor = new Talon(HW.intakslot, HW.intakechannel);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new VariIntake());
     }
-    
-    public void setIntake(double power){
-        this.power=power;
-    }
-    
-    public void intakeOn(){
+
+    public void setIntake(double power) {
         intakemotor.set(power);
-        enabled=true;
-    }
-    
-    public void intakeOff(){
-        intakemotor.set(0);
-        enabled=false;
-    }
-    
-    public boolean getEnabled(){
-        return enabled;
     }
 }

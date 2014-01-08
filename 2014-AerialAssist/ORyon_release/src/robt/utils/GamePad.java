@@ -5,6 +5,10 @@ import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
+/**
+ *
+ * @author Sam Dietrich / 2587 Discobots
+ */
 public class GamePad extends Joystick {
     /**
      * Select the mode with the switch on the back of the joystick.

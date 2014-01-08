@@ -13,7 +13,7 @@ import robt.commands.flip.VariFlip;
 
 /**
  *
- * @author Developer
+ * @author Sam Dietrich / Team ORyon
  */
 public class Flipper extends Subsystem {
     // Put methods for controlling this subsystem

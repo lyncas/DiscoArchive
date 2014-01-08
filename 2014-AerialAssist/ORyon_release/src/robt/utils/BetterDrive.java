@@ -3,6 +3,10 @@ package robt.utils;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 
+/**
+ *
+ * @author Sam Dietrich / 2587 Discobots
+ */
 public class BetterDrive extends RobotDrive {
     double leftPrev=0;
     double rightPrev=0;
@@ -81,9 +85,7 @@ public class BetterDrive extends RobotDrive {
     }
 
     public void arcadeDrive(double moveValue,double turnValue){
-        leftPrev = moveValue - turnValue;
-        rightPrev = moveValue + turnValue;
-	super.arcadeDrive(moveValue, moveValue, false);
+        arcadeDrive(moveValue,turnValue,false);
     }
     public double getLeftPrev() {
         return leftPrev;
