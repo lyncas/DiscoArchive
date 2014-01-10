@@ -5,7 +5,7 @@ package drivevis;
  *
  * @author sam
  */
-public class Arcade implements DriveMode {
+public class WPIArcade implements DriveMode {
 
     private double driveLeft = 0;
     private double driveRight = 0;
@@ -18,7 +18,7 @@ public class Arcade implements DriveMode {
 
     @Override
     public String Name() {
-	return "ARCADE";
+	return "WPILIB ARCADE";
     }
 
     //arcade drive from RobotDrive.java
