@@ -4,7 +4,7 @@ import disco.commands.CommandBase;
 import disco.utils.GamePad;
 
 public class CheesyArcade extends CommandBase {
-
+ 
     private double move;
     private double turn;
     private GamePad gamepad;
