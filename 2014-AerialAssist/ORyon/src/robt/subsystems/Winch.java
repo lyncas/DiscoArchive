@@ -17,9 +17,9 @@ import robt.utils.SwitchButton;
  * @author Developer
  */
 public class Winch extends Subsystem {
-    Talon motor1=new Talon(HW.winch1slot,HW.winch1channel);
-    Talon motor2=new Talon(HW.winch2slot,HW.winch2channel);
-    Talon motor3=new Talon(HW.winch3slot,HW.winch3channel);
+    Talon motor1/*=new Talon(HW.winch1slot,HW.winch1channel)*/;
+    Talon motor2/*=new Talon(HW.winch2slot,HW.winch2channel)*/;
+    Talon motor3/*=new Talon(HW.winch3slot,HW.winch3channel)*/;
     
     DoubleSolenoid lock=new DoubleSolenoid(HW.lockSolenoid1Channel,HW.lockSolenoid2Channel);
     DoubleSolenoid release=new DoubleSolenoid(HW.releaseSolenoid1Channel,HW.releaseSolenoid2Channel);

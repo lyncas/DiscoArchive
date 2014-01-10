@@ -8,6 +8,7 @@ package robot.subsystems;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import robot.HW;
 import robot.commands.ArcadeDrive;
 import robot.commands.CommandBase;
 
@@ -27,10 +28,10 @@ public class Drivetrain extends Subsystem {
     
     public Drivetrain(){
         super("Drivetrain");
-        left1=new Victor(1,1);
-        left2=new Victor(1,2);
-        right1=new Victor(1,3);
-        right2=new Victor(1,4);
+        left1=new Victor(HW.leftdrive1slot,HW.leftdrive1channel);
+        left2=new Victor(HW.leftdrive2slot,HW.leftdrive2channel);
+        right1=new Victor(HW.rightdrive1slot,HW.rightdrive1channel);
+        right2=new Victor(HW.rightdrive2slot,HW.rightdrive2channel);
         drive=new RobotDrive(left1,left2,right1,right2);
     }
 
