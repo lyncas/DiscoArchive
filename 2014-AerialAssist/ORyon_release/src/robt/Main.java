@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import robt.commands.CommandBase;
 import robt.commands.DriveForwards;
 import robt.commands.drive.Lerpdrive;
+import robt.utils.Dashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,6 +40,10 @@ public class Main extends IterativeRobot {
         CommandBase.init();
         this.getWatchdog().setEnabled(false);
     }
+    
+    public void disabledPeriodic(){
+        Dashboard.putStuff();
+    }
 
     public void autonomousInit() {
         driveAuton.start();
@@ -49,6 +54,7 @@ public class Main extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        Dashboard.putStuff();
     }
 
     public void teleopInit() {
@@ -64,6 +70,7 @@ public class Main extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        Dashboard.putStuff();
     }
     
     /**

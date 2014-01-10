@@ -53,4 +53,8 @@ public class CompressorSub extends Subsystem {
     public void armStage2Down(){
         armStage2.set(DoubleSolenoid.Value.kReverse);
     }
+
+    public boolean getPressureSwitch() {
+        return comp.getPressureSwitchValue();
+    }
 }
