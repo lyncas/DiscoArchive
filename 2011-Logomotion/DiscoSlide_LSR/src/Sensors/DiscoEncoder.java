@@ -86,7 +86,7 @@ public class DiscoEncoder extends Encoder implements PIDSource {
     /**
      * Free the EncoderRateTask
      */
-    protected void free() {
+    public void free() {
         m_controlLoop.cancel();
         m_controlLoop = null;
     }
