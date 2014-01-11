@@ -1,4 +1,4 @@
-package org.discobots.aerialascent;
+package org.discobots.aerialassist;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -6,7 +6,7 @@ package org.discobots.aerialascent;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class HW {
+public class RobotMap {
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static final int leftMotor = 1;
