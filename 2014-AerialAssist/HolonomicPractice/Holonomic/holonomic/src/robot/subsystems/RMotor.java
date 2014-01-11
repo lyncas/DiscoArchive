@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package robot.subsystems;
+import edu.wpi.first.wpilibj.Jaguar;
 import robot.HW;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,12 +15,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class RMotor extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    Victor rmotor;
+    Jaguar rmotor;
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     public RMotor(){
-    rmotor = HW.
+        rmotor=new Jaguar(1,5);
+    }
+    public void set(double power){
+        rmotor.set(power);
     }
 }

@@ -12,6 +12,7 @@ package robot.commands;
 public class Hold extends CommandBase {
     
     public Hold() {
+        requires(RMotor);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -22,6 +23,7 @@ public class Hold extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        RMotor.set(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,10 +33,12 @@ public class Hold extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        RMotor.set(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        end();
     }
 }
