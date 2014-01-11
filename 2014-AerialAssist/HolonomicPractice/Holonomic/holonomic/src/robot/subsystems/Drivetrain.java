@@ -8,10 +8,8 @@ package robot.subsystems;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import robot.HW;
-import robot.commands.ArcadeDrive;
 import robot.commands.CommandBase;
-import robot.commands.holonomicDrive;
+import robot.commands.HolonomicPolar;
 
 /**
  *
@@ -26,7 +24,6 @@ public class Drivetrain extends Subsystem {
     Victor rightRear;
     RobotDrive drive;
     
-    
     public Drivetrain(){
         super("Drivetrain");
         leftFront=new Victor(1,1);
@@ -38,11 +35,15 @@ public class Drivetrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new holonomicDrive(CommandBase.oi.getGP()));
+        setDefaultCommand(new HolonomicPolar(CommandBase.oi.getGP()));
     }
     
     public void arcade(double move, double rotate){
         drive.arcadeDrive(move, rotate);
+    }
+    
+    public void holonomicPolar(double mag,double dir,double rot) {
+        drive.mecanumDrive_Polar(mag, dir, rot);
     }
     
     public void holonomic(double x, double y, double rotation){    
