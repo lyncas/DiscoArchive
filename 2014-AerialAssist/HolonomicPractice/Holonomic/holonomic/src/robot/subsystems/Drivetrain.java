@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.HW;
 import robot.commands.ArcadeDrive;
 import robot.commands.CommandBase;
+import robot.commands.holonomicDrive;
 
 /**
  *
@@ -33,10 +34,11 @@ public class Drivetrain extends Subsystem {
         rightFront=new Victor(1,2);
         rightRear=new Victor(1,3);
         drive=new RobotDrive(leftFront,leftRear,rightFront,rightRear);
+        drive.setSafetyEnabled(false);
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new ArcadeDrive(CommandBase.oi.getGP()));
+        setDefaultCommand(new holonomicDrive(CommandBase.oi.getGP()));
     }
     
     public void arcade(double move, double rotate){
@@ -48,7 +50,7 @@ public class Drivetrain extends Subsystem {
         double mag = Math.sqrt(x*x+y*y);
         
         double LF = SC*(x+y)+rotation;
-        double RF = SC*(x-y)+rotation;
+        double RF = SC*(x-y)-rotation;
         double max = Math.max(Math.abs(LF), Math.abs(RF));
         if(max==0) 
             max = 1;
@@ -58,10 +60,10 @@ public class Drivetrain extends Subsystem {
         double RR = -LF;
         double LR = -RF;
         
-        HW.leftFront.set(LF);
-        HW.rightFront.set(RF);
-        HW.rightRear.set(RR);
-        HW.leftRear.set(LR);
+        leftFront.set(-LF);
+        rightFront.set(RF);
+        rightRear.set(RR);
+        leftRear.set(LR);
     }
     
 }

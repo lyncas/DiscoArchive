@@ -1,6 +1,4 @@
-package robot;
-
-import edu.wpi.first.wpilibj.Victor;
+package org.discobots.aerialascent;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -18,10 +16,4 @@ public class HW {
     // number and the module. For example you with a rangefinder:
     // public static final int rangefinderPort = 1;
     // public static final int rangefinderModule = 1;
-    public static final int 
-            leftdrive1slot=1,   leftdrive1channel=1,
-            leftdrive2slot=1,   leftdrive2channel=2,
-            rightdrive1slot=1,  rightdrive1channel=3,
-            rightdrive2slot=1,  rightdrive2channel=4;
-    
 }
