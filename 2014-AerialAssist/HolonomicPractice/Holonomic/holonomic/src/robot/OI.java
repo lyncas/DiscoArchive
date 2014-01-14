@@ -4,6 +4,9 @@ package robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import robot.commands.Hold;
+import robot.commands.Threesec;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -43,8 +46,12 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     GamePad controller=new GamePad(1,GamePad.MODE_D);
     GamePad controller2=new GamePad(2,GamePad.MODE_D);
-    
-    
+    Button b=new JoystickButton(controller,controller.BTN_B);
+    Button a=new JoystickButton(controller,controller.BTN_A);
+    public OI(){
+        b.whenPressed(new Threesec());
+        a.whileHeld(new Hold());
+    }
     public GamePad getGP(){
         return controller;
     }
