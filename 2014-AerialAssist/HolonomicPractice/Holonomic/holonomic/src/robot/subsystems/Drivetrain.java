@@ -35,6 +35,9 @@ public class Drivetrain extends Subsystem {
         rightRear=new Victor(1,3);
         drive=new RobotDrive(leftFront,leftRear,rightFront,rightRear);
         drive.setSafetyEnabled(false);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     }
 
     public void initDefaultCommand() {
@@ -64,6 +67,11 @@ public class Drivetrain extends Subsystem {
         rightFront.set(RF);
         rightRear.set(RR);
         leftRear.set(LR);
+        System.out.println(-LF+"   "+RF+"   "+RR+"   "+LR);
+    }
+    
+    public void holonomicPolar(double mag, double dir, double turn){
+        drive.mecanumDrive_Polar(mag, dir, turn);
     }
     
 }
