@@ -11,11 +11,13 @@ import robot.GamePad;
  * @author Dylan
  */
 public class Threesec extends CommandBase {
-    GamePad j;
     long time;
+    int delta;
+    double power;
     public Threesec() {
         requires(RMotor);
-        j=oi.getGP();
+        delta=RMotor.gett();
+        power=RMotor.getp();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -27,12 +29,12 @@ public class Threesec extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        RMotor.set(1);
+        RMotor.set(power);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-       return System.currentTimeMillis()>=time+250;    
+       return System.currentTimeMillis()>=time+delta;    
     }
 
     // Called once after isFinished returns true
