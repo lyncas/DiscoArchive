@@ -37,8 +37,8 @@ task usercontrol()
 	while(true)
 	{
 		int Ch3a= abs(vexRT[Ch3]) < 8 ? 0 : vexRT[Ch3];
-		int Ch4a= abs(vexRT[Ch4]) < 8 ? 0 : vexRT[Ch4];
-	  motor[right] = motor[port8] = motor[rightb] = Ch3a - Ch4a;
-	 	motor[left] = motor[port4] = motor[leftb] = Ch3a + Ch4a;
+		int Ch2a= abs(vexRT[Ch2]) < 8 ? 0 : vexRT[Ch2];
+	  motor[right] = motor[righta] = motor[rightb] = Ch3a;
+	 	motor[left] = motor[lefta] = motor[leftb] = Ch2a;
 	}
 }
