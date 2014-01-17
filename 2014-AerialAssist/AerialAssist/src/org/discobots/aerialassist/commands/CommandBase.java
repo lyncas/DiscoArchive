@@ -3,6 +3,7 @@ package org.discobots.aerialassist.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.OI;
+import org.discobots.aerialassist.subsystems.CompSub;
 import org.discobots.aerialassist.subsystems.ExampleSubsystem;
 
 /**
@@ -16,7 +17,7 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-
+    public static CompSub compressor = new CompSub();
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import robot.commands.Changedrive;
 import robot.commands.Changepower;
 import robot.commands.Changetime;
 import robot.commands.Hold;
@@ -54,6 +55,7 @@ public class OI {
     Button bumperR= new JoystickButton(controller,controller.BUMPER_R);
     Button triggerL= new JoystickButton(controller,controller.TRIGGER_L);
     Button bumperL= new JoystickButton(controller,controller.BUMPER_L);
+    Button X=new JoystickButton(controller,controller.BTN_X);
     
     
     public OI(){
@@ -63,6 +65,7 @@ public class OI {
         bumperR.whenPressed(new Changepower(-.05));
         triggerL.whenPressed(new Changetime(5));
         bumperL.whenPressed(new Changetime(-5));
+        X.whenPressed(new Changedrive());
     }
     public GamePad getGP(){
         return controller;
