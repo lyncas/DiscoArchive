@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package robot.subsystems;
+package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import robot.commands.CommandBase;
-import robot.commands.HolonomicPolar;
+import org.discobots.aerialassist.commands.CommandBase;
+import org.discobots.aerialassist.commands.MecanumDrive;
+//import robot.commands.CommandBase;
+//import robot.commands.HolonomicPolar;
 
 /**
  *
@@ -35,17 +37,14 @@ public class Drivetrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new HolonomicPolar(CommandBase.oi.getGP()));
-    }
-    
-    public void arcade(double move, double rotate){
-        drive.arcadeDrive(move, rotate);
+        setDefaultCommand(new MecanumDrive(CommandBase.oi.getGP()));
     }
     
     public void holonomicPolar(double mag,double dir,double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
     }
     
+    /*
     public void holonomic(double x, double y, double rotation){    
         double SC = 1/Math.sqrt(2);
         double mag = Math.sqrt(x*x+y*y);
@@ -65,6 +64,5 @@ public class Drivetrain extends Subsystem {
         rightFront.set(RF);
         rightRear.set(RR);
         leftRear.set(LR);
-    }
-    
+    }*/
 }
