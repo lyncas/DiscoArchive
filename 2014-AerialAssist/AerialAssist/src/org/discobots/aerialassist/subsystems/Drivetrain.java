@@ -34,6 +34,9 @@ public class Drivetrain extends Subsystem {
         rightRear=new Victor(1,3);
         drive=new RobotDrive(leftFront,leftRear,rightFront,rightRear);
         drive.setSafetyEnabled(false);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
     }
 
     public void initDefaultCommand() {

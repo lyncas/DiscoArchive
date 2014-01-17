@@ -35,8 +35,8 @@ public class MecanumDrive extends CommandBase {
         double rotation=J.getRX();
         
         double magnitude = Math.sqrt(x*x+y*y);
-        double angle = MathUtils.atan2(y,x);
-        
+        double angle = MathUtils.atan2(y,x)*180.0/Math.PI;
+        System.out.println(angle);
         drivetrain.holonomicPolar(magnitude, angle, rotation);
     }
 
