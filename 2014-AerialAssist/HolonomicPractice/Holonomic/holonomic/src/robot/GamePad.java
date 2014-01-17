@@ -175,10 +175,10 @@ public class GamePad extends Joystick {
 	double result=0;
 	switch(stick){
 	    case STICK_L:
-		result=MathUtils.atan2(getLX(), -getLY());
+		result=MathUtils.atan2(getLY(), getLX());
 		break;
 	    case STICK_R:
-		result=MathUtils.atan2(getRX(), -getRY());
+		result=MathUtils.atan2(getRY(), getRX());
 		break;
 	    default:
 		throw new IllegalArgumentException();

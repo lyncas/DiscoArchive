@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/Main.java</file>
+            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/Drivetrain.java</file>
+            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/MecanumDrive.java</file>
+            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/CommandBase.java</file>
+        </group>
     </open-files>
 </project-private>
