@@ -5,6 +5,8 @@
  */
 package org.discobots.aerialassist.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 /**
  *
  * @author Dylan
@@ -14,7 +16,7 @@ public class Changedrive extends CommandBase {
     public Changedrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(compressor);
+        requires(drivetrain);
     }
 
     // Called just before this Command runs the first time
@@ -23,10 +25,10 @@ public class Changedrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(compressor.check())
-            compressor.off();
+        if(drivetrain.checkPneu()==DoubleSolenoid.Value.kForward)
+            drivetrain.disablePneu();
         else
-            compressor.on();
+            drivetrain.enablePneu();
     }
 
     // Make this return true when this Command no longer needs to run execute()

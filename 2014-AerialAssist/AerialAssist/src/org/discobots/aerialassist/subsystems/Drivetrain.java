@@ -5,7 +5,9 @@
  */
 package org.discobots.aerialassist.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.commands.CommandBase;
@@ -25,6 +27,7 @@ public class Drivetrain extends Subsystem {
     Victor rightFront;
     Victor rightRear;
     RobotDrive drive;
+    private DoubleSolenoid sol;
     
     public Drivetrain(){
         super("Drivetrain");
@@ -37,6 +40,7 @@ public class Drivetrain extends Subsystem {
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        sol = new DoubleSolenoid();
     }
 
     public void initDefaultCommand() {
@@ -46,7 +50,15 @@ public class Drivetrain extends Subsystem {
     public void holonomicPolar(double mag,double dir,double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
     }
-    
+    public void enablePneu(){
+        sol.set(DoubleSolenoid.Value.kForward);
+    }
+    public void disablePneu(){
+        sol.set(DoubleSolenoid.Value.kReverse);
+    }
+    public DoubleSolenoid.Value checkPneu(){
+        return sol.get();
+    }
     /*
     public void holonomic(double x, double y, double rotation){    
         double SC = 1/Math.sqrt(2);
