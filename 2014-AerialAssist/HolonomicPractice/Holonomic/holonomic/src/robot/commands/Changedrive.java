@@ -1,15 +1,20 @@
-
-package org.discobots.aerialassist.commands;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package robot.commands;
 
 /**
  *
- * @author bradmiller
+ * @author Dylan
  */
-public class ExampleCommand extends CommandBase {
-
-    public ExampleCommand() {
+public class Changedrive extends CommandBase {
+    
+    public Changedrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(compressor);
     }
 
     // Called just before this Command runs the first time
@@ -18,11 +23,12 @@ public class ExampleCommand extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        compressor.change();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
