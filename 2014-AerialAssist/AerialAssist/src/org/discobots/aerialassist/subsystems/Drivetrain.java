@@ -38,6 +38,7 @@ public class Drivetrain extends Subsystem {
     private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
 
+    
     public Drivetrain() {
         super("Drivetrain");
         leftFront = new Jaguar(1, HW.leftFrontMotor);
@@ -63,12 +64,10 @@ public class Drivetrain extends Subsystem {
     public void holonomicPolar(double mag, double dir, double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
     }
-
-    public void enablePneu() {
+    public void PneuOut(){
         sol.set(DoubleSolenoid.Value.kForward);
     }
-
-    public void disablePneu() {
+    public void PneuIn(){
         sol.set(DoubleSolenoid.Value.kReverse);
     }
 
