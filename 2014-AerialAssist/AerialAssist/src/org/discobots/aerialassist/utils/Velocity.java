@@ -34,37 +34,43 @@ public class Velocity {
 class Vaccumulator extends Thread {
 
     private double xvelocity, yvelocity, time, t;
+    private double calX = 0, calY = 0;
     private ADXL345_I2C accelerometer;
 
     public Vaccumulator() {
-        accelerometer=CommandBase.drivetrain.getAccelerometer();
-    }
-    
-    public double calibrateX(){
-    double sum=0;
-    int count;
-    for(count=0;count<500;count++)
-        sum+=accelerometer.getAcceleration(ADXL345_I2C.Axes.kX);
-    return sum/count;
-    }
-    public double calibrateY(){
-    double sum=0;
-    int count;
-    for(count=0;count<500;count++)
-        sum+=accelerometer.getAcceleration(ADXL345_I2C.Axes.kY);
-    return sum/count;
+        accelerometer = CommandBase.drivetrain.getAccelerometer();
     }
 
+    /*
+    * Take a few samples to find our offset
+    */
+    public void calibrate() {
+        double sumX = 0, sumY = 0;
+        int samples=100;
+        double time=Timer.getFPGATimestamp();
+        for (int count = 0; count < samples; count++) {
+            sumX += accelerometer.getAcceleration(ADXL345_I2C.Axes.kX);
+            sumY += accelerometer.getAcceleration(ADXL345_I2C.Axes.kY);
+            //wait 500 microseconds between samples
+            while(Timer.getFPGATimestamp()-time < (500/1000000.0)){
+                yield();
+            }
+            time=Timer.getFPGATimestamp();
+        }
+        calX=sumX/samples;
+        calY=sumY/samples;
+    }
+
+
     public void run() {
+        calibrate();
         xvelocity = yvelocity = t = 0;
-        double cx=calibrateX();
-        double cy=calibrateY();
         time = Timer.getFPGATimestamp();
         while (true) {
             t = Timer.getFPGATimestamp() - time;
             time = Timer.getFPGATimestamp();
-            xvelocity += ((accelerometer.getAcceleration(ADXL345_I2C.Axes.kX)+cx) * 9.8) * t;
-            yvelocity += ((accelerometer.getAcceleration(ADXL345_I2C.Axes.kY)+cy) * 9.8) * t;
+            xvelocity += ((accelerometer.getAcceleration(ADXL345_I2C.Axes.kX) - calX) * 9.81) * t;
+            yvelocity += ((accelerometer.getAcceleration(ADXL345_I2C.Axes.kY) - calY) * 9.81) * t;
             yield();
         }
     }
