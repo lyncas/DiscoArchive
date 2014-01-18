@@ -65,10 +65,11 @@ class Vaccumulator extends Thread {
 
     public void run() {
         calibrate();
+        System.out.println("Calibration done!");
         xvelocity = yvelocity = t = 0;
 
         //acceleration ring buffer for smoothing/averaging
-        int bufferlength = 20;
+        int bufferlength = 50;
         double[][] accbuffer = new double[2][bufferlength];
         int bufferindex = 0;
 
@@ -82,15 +83,16 @@ class Vaccumulator extends Thread {
             accbuffer[1][bufferindex] = accelerometer.getAcceleration(ADXL345_I2C.Axes.kY);
             bufferindex++;
             //after we fill it up, average and add to to the velocity.
-            if (bufferindex == bufferlength - 1) {
+            if (bufferindex == bufferlength) {
                 double delta = Timer.getFPGATimestamp() - masterTime;
                 xvelocity += (average(accbuffer[0]) - calX) * 9.81 * delta;
                 yvelocity += (average(accbuffer[1]) - calY) * 9.81 * delta;
                 masterTime=Timer.getFPGATimestamp();
+                System.out.println("avg: "+xvelocity+" "+yvelocity);
             }
             bufferindex %= bufferlength;
 
-            while (Timer.getFPGATimestamp() - time < (10 / 1000000.0)) {
+            while (Timer.getFPGATimestamp() - time < (10000 / 1000000.0)) {
                 yield();
             }
         }
