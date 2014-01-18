@@ -41,8 +41,10 @@ public class MecanumDrive extends CommandBase {
         
         double gyroAngle = drivetrain.getGyroAngle();
         SmartDashboard.putNumber("Gyro Angle:   ", gyroAngle); 
-        SmartDashboard.putNumber("X Acceleration:   ",drivetrain.accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
-        SmartDashboard.putNumber("Y Acceleration:   ",drivetrain.accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
+        SmartDashboard.putNumber("X Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kX));
+        SmartDashboard.putNumber("Y Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kY));
+        SmartDashboard.putNumber("X velocity", drivetrain.getXVelocity());
+        SmartDashboard.putNumber("Y velocity", drivetrain.getYVelocity());
         
         drivetrain.holonomicPolar(magnitude, angle, rotation);
     }
