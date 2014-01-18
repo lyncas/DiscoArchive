@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.communication.UsageReporting;
 
 /**
  *
- * @author Developer
+ * @author Patrick
  */
 public class BetterRobotDrive extends RobotDrive{
 

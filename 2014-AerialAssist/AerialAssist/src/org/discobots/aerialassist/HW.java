@@ -1,5 +1,6 @@
 package org.discobots.aerialassist;
 
+import edu.wpi.first.wpilibj.ADXL345_I2C;
 import org.discobots.aerialassist.utils.DiscoGyro;
 
 /**
@@ -24,5 +25,6 @@ public class HW {
     public static final int rightFrontMotor = 2;
     public static final int rightRearMotor = 3;
     
-    //public static DiscoGyro gyro = new DiscoGyro(1);
+    public static final int gyroChannel = 1;
+    public static final int accelModule = 1; //IDK what this is yet
 }

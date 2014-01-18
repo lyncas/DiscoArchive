@@ -6,6 +6,8 @@
 package org.discobots.aerialassist.commands;
 
 import com.sun.squawk.util.MathUtils;
+import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.GamePad;
 
 /**
@@ -36,7 +38,12 @@ public class MecanumDrive extends CommandBase {
         
         double magnitude = Math.sqrt(x*x+y*y);
         double angle = MathUtils.atan2(y,x)*180.0/Math.PI;
-        System.out.println(angle);
+        
+        double gyroAngle = drivetrain.getGyroAngle();
+        SmartDashboard.putNumber("Gyro Angle:   ", gyroAngle); 
+        SmartDashboard.putNumber("X Acceleration:   ",drivetrain.accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
+        SmartDashboard.putNumber("Y Acceleration:   ",drivetrain.accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
+        
         drivetrain.holonomicPolar(magnitude, angle, rotation);
     }
 
