@@ -11,7 +11,7 @@ import org.discobots.aerialassist.commands.CommandBase;
 
 /**
  *
- * @author Sam
+ * @author Sam m
  */
 public class Velocity {
 
@@ -34,18 +34,37 @@ public class Velocity {
 class Vaccumulator extends Thread {
 
     private double xvelocity, yvelocity, time, t;
+    private ADXL345_I2C accelerometer;
 
     public Vaccumulator() {
+        accelerometer=CommandBase.drivetrain.getAccelerometer();
+    }
+    
+    public double calibrateX(){
+    double sum=0;
+    int count;
+    for(count=0;count<500;count++)
+        sum+=accelerometer.getAcceleration(ADXL345_I2C.Axes.kX);
+    return sum/count;
+    }
+    public double calibrateY(){
+    double sum=0;
+    int count;
+    for(count=0;count<500;count++)
+        sum+=accelerometer.getAcceleration(ADXL345_I2C.Axes.kY);
+    return sum/count;
     }
 
     public void run() {
         xvelocity = yvelocity = t = 0;
+        double cx=calibrateX();
+        double cy=calibrateY();
         time = Timer.getFPGATimestamp();
         while (true) {
             t = Timer.getFPGATimestamp() - time;
             time = Timer.getFPGATimestamp();
-            xvelocity += (CommandBase.drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kX) * 9.8) * t;
-            yvelocity += (CommandBase.drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kY) * 9.8) * t;
+            xvelocity += ((accelerometer.getAcceleration(ADXL345_I2C.Axes.kX)+cx) * 9.8) * t;
+            yvelocity += ((accelerometer.getAcceleration(ADXL345_I2C.Axes.kY)+cy) * 9.8) * t;
             yield();
         }
     }
