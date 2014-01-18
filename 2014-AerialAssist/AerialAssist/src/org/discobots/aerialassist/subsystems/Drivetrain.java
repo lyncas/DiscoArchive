@@ -16,6 +16,7 @@ import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.commands.MecanumDrive;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
+import org.discobots.aerialassist.utils.Velocity;
 //import robot.commands.CommandBase;
 //import robot.commands.HolonomicPolar;
 
@@ -33,7 +34,8 @@ public class Drivetrain extends Subsystem {
     BetterRobotDrive drive;
     private DoubleSolenoid sol;
     private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
-    public ADXL345_I2C accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
+    private ADXL345_I2C accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
+    private Velocity velocityReporter;
 
     
     public Drivetrain(){
@@ -49,6 +51,8 @@ public class Drivetrain extends Subsystem {
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         //sol = new DoubleSolenoid(1,1);
+        velocityReporter=new Velocity();
+        
     }
 
     public void initDefaultCommand() {
@@ -69,5 +73,15 @@ public class Drivetrain extends Subsystem {
     }
     public double getGyroAngle() {
         return gyro.getAngle();
+    }
+    public ADXL345_I2C getAccelerometer(){
+        return accelerometer;
+    }
+    
+    public double getXVelocity(){
+        return velocityReporter.getXVelocity();
+    }
+    public double getYVelocity(){
+        return velocityReporter.getYVelocity();
     }
 }
