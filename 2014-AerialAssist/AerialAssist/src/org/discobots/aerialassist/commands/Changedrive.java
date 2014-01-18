@@ -12,10 +12,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  * @author Dylan
  */
 public class Changedrive extends CommandBase {
-    
-    public Changedrive() {
+    boolean which;
+    public Changedrive(boolean check) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        which=check;
         requires(drivetrain);
     }
 
@@ -25,10 +26,10 @@ public class Changedrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(drivetrain.checkPneu()==DoubleSolenoid.Value.kForward)
-            drivetrain.disablePneu();
+        if(which)
+            drivetrain.PneuOut();
         else
-            drivetrain.enablePneu();
+            drivetrain.PneuIn();
     }
 
     // Make this return true when this Command no longer needs to run execute()

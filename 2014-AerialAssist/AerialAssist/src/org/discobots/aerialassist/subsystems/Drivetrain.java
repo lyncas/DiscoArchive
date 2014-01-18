@@ -34,6 +34,8 @@ public class Drivetrain extends Subsystem {
     private DoubleSolenoid sol;
     private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
     public ADXL345_I2C accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
+    public static final boolean MECANUM=true;
+    public static final boolean TRACTION=false;
 
     
     public Drivetrain(){
@@ -58,10 +60,10 @@ public class Drivetrain extends Subsystem {
     public void holonomicPolar(double mag,double dir,double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
     }
-    public void enablePneu(){
+    public void PneuOut(){
         sol.set(DoubleSolenoid.Value.kForward);
     }
-    public void disablePneu(){
+    public void PneuIn(){
         sol.set(DoubleSolenoid.Value.kReverse);
     }
     public DoubleSolenoid.Value checkPneu(){
