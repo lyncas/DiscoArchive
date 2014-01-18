@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.commands.MecanumDrive;
 //import robot.commands.CommandBase;
@@ -31,16 +32,17 @@ public class Drivetrain extends Subsystem {
     
     public Drivetrain(){
         super("Drivetrain");
-        leftFront=new Victor(1,1);
-        leftRear=new Victor(1,4);
-        rightFront=new Victor(1,2);
-        rightRear=new Victor(1,3);
+        leftFront=new Victor(1,HW.leftFrontMotor);
+        leftRear=new Victor(1,HW.leftRearMotor);
+        rightFront=new Victor(1,HW.rightFrontMotor);
+        rightRear=new Victor(1,HW.rightRearMotor);
         drive=new RobotDrive(leftFront,leftRear,rightFront,rightRear);
+        
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-        sol = new DoubleSolenoid();
+        sol = new DoubleSolenoid(1,1);
     }
 
     public void initDefaultCommand() {

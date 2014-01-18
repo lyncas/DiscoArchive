@@ -19,6 +19,11 @@ import edu.wpi.first.wpilibj.communication.UsageReporting;
  */
 public class BetterRobotDrive extends RobotDrive{
 
+    static final int kFrontLeft_val = 0;
+    static final int kFrontRight_val = 1;
+    static final int kRearLeft_val = 2;
+    static final int kRearRight_val = 3;
+    
     public BetterRobotDrive(SpeedController frontLeftMotor, SpeedController rearLeftMotor, SpeedController frontRightMotor, SpeedController rearRightMotor) {
         super(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
     }
@@ -37,19 +42,19 @@ public class BetterRobotDrive extends RobotDrive{
         double sinD = Math.sin(dirInRad);
 
         double wheelSpeeds[] = new double[kMaxNumberOfMotors];
-        wheelSpeeds[MotorType.kFrontLeft_val] = (sinD * magnitude + rotation);
-        wheelSpeeds[MotorType.kFrontRight_val] = (cosD * magnitude - rotation);
-        wheelSpeeds[MotorType.kRearLeft_val] = (cosD * magnitude + rotation);
-        wheelSpeeds[MotorType.kRearRight_val] = (sinD * magnitude - rotation);
+        wheelSpeeds[kFrontLeft_val] = (sinD * magnitude + rotation);
+        wheelSpeeds[kFrontRight_val] = (cosD * magnitude + rotation);  //Uses cosD * magnitude - rotation in default code
+        wheelSpeeds[kRearLeft_val] = (cosD * magnitude - rotation);    //Uses cosD * magnitude + rotation in default code
+        wheelSpeeds[kRearRight_val] = (sinD * magnitude - rotation);
 
         normalize(wheelSpeeds);
 
         byte syncGroup = (byte)0x80;
 
-        m_frontLeftMotor.set(wheelSpeeds[MotorType.kFrontLeft_val] * m_invertedMotors[MotorType.kFrontLeft_val] * m_maxOutput, syncGroup);
-        m_frontRightMotor.set(wheelSpeeds[MotorType.kFrontRight_val] * m_invertedMotors[MotorType.kFrontRight_val] * m_maxOutput, syncGroup);
-        m_rearLeftMotor.set(wheelSpeeds[MotorType.kRearLeft_val] * m_invertedMotors[MotorType.kRearLeft_val] * m_maxOutput, syncGroup);
-        m_rearRightMotor.set(wheelSpeeds[MotorType.kRearRight_val] * m_invertedMotors[MotorType.kRearRight_val] * m_maxOutput, syncGroup);
+        m_frontLeftMotor.set(wheelSpeeds[kFrontLeft_val] * m_invertedMotors[kFrontLeft_val] * m_maxOutput, syncGroup);
+        m_frontRightMotor.set(wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * m_maxOutput, syncGroup);
+        m_rearLeftMotor.set(wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * m_maxOutput, syncGroup);
+        m_rearRightMotor.set(wheelSpeeds[kRearRight_val] * m_invertedMotors[kRearRight_val] * m_maxOutput, syncGroup);
 
         if (m_isCANInitialized) {
             try {

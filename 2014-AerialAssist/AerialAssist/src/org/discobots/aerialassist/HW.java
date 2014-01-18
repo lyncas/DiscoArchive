@@ -1,5 +1,7 @@
 package org.discobots.aerialassist;
 
+import org.discobots.aerialassist.utils.DiscoGyro;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -16,4 +18,11 @@ public class HW {
     // number and the module. For example you with a rangefinder:
     // public static final int rangefinderPort = 1;
     // public static final int rangefinderModule = 1;
+    
+    public static final int leftFrontMotor = 1;
+    public static final int leftRearMotor = 4;
+    public static final int rightFrontMotor = 2;
+    public static final int rightRearMotor = 3;
+    
+    //public static DiscoGyro gyro = new DiscoGyro(1);
 }
