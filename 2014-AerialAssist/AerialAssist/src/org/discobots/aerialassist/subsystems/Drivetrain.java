@@ -25,6 +25,7 @@ import org.discobots.aerialassist.utils.Velocity;
  * @author Sam
  */
 public class Drivetrain extends Subsystem {
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     Jaguar leftFront;
@@ -34,54 +35,60 @@ public class Drivetrain extends Subsystem {
     BetterRobotDrive drive;
     private DoubleSolenoid sol;
     private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
-    private ADXL345_I2C accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
+    private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
 
-    
-    public Drivetrain(){
+    public Drivetrain() {
         super("Drivetrain");
-        leftFront=new Jaguar(1,HW.leftFrontMotor);
-        leftRear=new Jaguar(1,HW.leftRearMotor);
-        rightFront=new Jaguar(1,HW.rightFrontMotor);
-        rightRear=new Jaguar(1,HW.rightRearMotor);
-        drive=new BetterRobotDrive(leftFront,leftRear,rightFront,rightRear);
-        
+        leftFront = new Jaguar(1, HW.leftFrontMotor);
+        leftRear = new Jaguar(1, HW.leftRearMotor);
+        rightFront = new Jaguar(1, HW.rightFrontMotor);
+        rightRear = new Jaguar(1, HW.rightRearMotor);
+        drive = new BetterRobotDrive(leftFront, leftRear, rightFront, rightRear);
+
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         //sol = new DoubleSolenoid(1,1);
-        velocityReporter=new Velocity();
-        
+        accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
+        velocityReporter = new Velocity(accelerometer);
+
     }
 
     public void initDefaultCommand() {
         setDefaultCommand(new MecanumDrive(CommandBase.oi.getGP()));
     }
-    
-    public void holonomicPolar(double mag,double dir,double rot) {
+
+    public void holonomicPolar(double mag, double dir, double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
     }
-    public void enablePneu(){
+
+    public void enablePneu() {
         sol.set(DoubleSolenoid.Value.kForward);
     }
-    public void disablePneu(){
+
+    public void disablePneu() {
         sol.set(DoubleSolenoid.Value.kReverse);
     }
-    public DoubleSolenoid.Value checkPneu(){
+
+    public DoubleSolenoid.Value checkPneu() {
         return sol.get();
     }
+
     public double getGyroAngle() {
         return gyro.getAngle();
     }
-    public ADXL345_I2C getAccelerometer(){
+
+    public ADXL345_I2C getAccelerometer() {
         return accelerometer;
     }
-    
-    public double getXVelocity(){
+
+    public double getXVelocity() {
         return velocityReporter.getXVelocity();
     }
-    public double getYVelocity(){
+
+    public double getYVelocity() {
         return velocityReporter.getYVelocity();
     }
 }
