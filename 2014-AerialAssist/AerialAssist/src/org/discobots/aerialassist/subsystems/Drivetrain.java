@@ -37,8 +37,9 @@ public class Drivetrain extends Subsystem {
     private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
     private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
+    public static final boolean MECANUM = true;
+    public static final boolean TRACTION = false;
 
-    
     public Drivetrain() {
         super("Drivetrain");
         leftFront = new Jaguar(1, HW.leftFrontMotor);
@@ -64,10 +65,12 @@ public class Drivetrain extends Subsystem {
     public void holonomicPolar(double mag, double dir, double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
     }
-    public void PneuOut(){
+
+    public void PneuOut() {
         sol.set(DoubleSolenoid.Value.kForward);
     }
-    public void PneuIn(){
+
+    public void PneuIn() {
         sol.set(DoubleSolenoid.Value.kReverse);
     }
 

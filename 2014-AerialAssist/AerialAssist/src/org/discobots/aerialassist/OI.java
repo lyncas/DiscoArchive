@@ -1,11 +1,9 @@
 
 package org.discobots.aerialassist;
-import org.discobots.aerialassist.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.discobots.aerialassist.commands.Changedrive;
-import static org.discobots.aerialassist.commands.CommandBase.drivetrain;
+import org.discobots.aerialassist.subsystems.Drivetrain;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -47,8 +45,8 @@ public class OI {
         Button a= new JoystickButton(controller,controller.BTN_A);
         Button b= new JoystickButton(controller,controller.BTN_B);
         public OI(){
-            a.whenPressed(new Changedrive(drivetrain.MECANUM));
-            b.whenPressed(new Changedrive(drivetrain.TRACTION));
+            a.whenPressed(new Changedrive(Drivetrain.MECANUM));
+            b.whenPressed(new Changedrive(Drivetrain.TRACTION));
         }
     public GamePad getGP(){
         return controller;
