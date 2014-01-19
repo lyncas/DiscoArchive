@@ -26,5 +26,5 @@ public class HW {
     public static final int rightRearMotor = 3;
     
     public static final int gyroChannel = 1;
-    public static final int accelModule = 1; //IDK what this is yet
+    public static final int accelModule = 1; //I2C on digital module 1
 }

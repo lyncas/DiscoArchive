@@ -33,13 +33,14 @@ public class Drivetrain extends Subsystem {
     Jaguar rightFront;
     Jaguar rightRear;
     BetterRobotDrive drive;
-    private DoubleSolenoid sol;
+    private DoubleSolenoid driveShiftSol;
     private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
     private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
-    public static final boolean MECANUM = true;
-    public static final boolean TRACTION = false;
+        public static final boolean MECANUM=true;
+    public static final boolean TRACTION=false;
 
+    
     public Drivetrain() {
         super("Drivetrain");
         leftFront = new Jaguar(1, HW.leftFrontMotor);
@@ -65,17 +66,15 @@ public class Drivetrain extends Subsystem {
     public void holonomicPolar(double mag, double dir, double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
     }
-
-    public void PneuOut() {
-        sol.set(DoubleSolenoid.Value.kForward);
+    public void PneuOut(){
+        driveShiftSol.set(DoubleSolenoid.Value.kForward);
     }
-
-    public void PneuIn() {
-        sol.set(DoubleSolenoid.Value.kReverse);
+    public void PneuIn(){
+        driveShiftSol.set(DoubleSolenoid.Value.kReverse);
     }
 
     public DoubleSolenoid.Value checkPneu() {
-        return sol.get();
+        return driveShiftSol.get();
     }
 
     public double getGyroAngle() {
