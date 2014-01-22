@@ -37,7 +37,7 @@ public class Drivetrain extends Subsystem {
     private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
     private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
-        public static final boolean MECANUM=true;
+    public static final boolean MECANUM=true;
     public static final boolean TRACTION=false;
 
     
@@ -91,5 +91,9 @@ public class Drivetrain extends Subsystem {
 
     public double getYVelocity() {
         return velocityReporter.getYVelocity();
+    }
+    
+    public DiscoGyro getGyro() {
+        return gyro;
     }
 }

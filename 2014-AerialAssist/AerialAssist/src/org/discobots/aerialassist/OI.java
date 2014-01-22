@@ -1,8 +1,10 @@
 
 package org.discobots.aerialassist;
+import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.discobots.aerialassist.commands.Changedrive;
+import org.discobots.aerialassist.controllers.FixAngle;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 
 /**
@@ -41,13 +43,23 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-        GamePad controller=new GamePad(1,GamePad.MODE_D);
-        Button a= new JoystickButton(controller,controller.BTN_A);
-        Button b= new JoystickButton(controller,controller.BTN_B);
-        public OI(){
-            a.whenPressed(new Changedrive(Drivetrain.MECANUM));
-            b.whenPressed(new Changedrive(Drivetrain.TRACTION));
-        }
+    
+    GamePad controller=new GamePad(1,GamePad.MODE_D);
+    Button A= new JoystickButton(controller,controller.BTN_A);
+    Button B= new JoystickButton(controller,controller.BTN_B);
+    Button X= new JoystickButton(controller,controller.BTN_X);
+    Button Y= new JoystickButton(controller,controller.BTN_Y);
+    Button LBump= new JoystickButton(controller,controller.BUMPER_L);
+    Button RBump= new JoystickButton(controller,controller.BUMPER_R);
+    Button LTrig= new JoystickButton(controller,controller.TRIGGER_L);
+    Button RTrig= new JoystickButton(controller,controller.TRIGGER_R);
+
+    public OI(){
+        A.whenPressed(new Changedrive(Drivetrain.MECANUM));
+        B.whenPressed(new Changedrive(Drivetrain.TRACTION));
+        X.whenPressed(new FixAngle());
+    }
+    
     public GamePad getGP(){
         return controller;
     }

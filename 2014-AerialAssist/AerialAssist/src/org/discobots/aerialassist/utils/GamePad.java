@@ -1,5 +1,5 @@
 
-package org.discobots.aerialassist;
+package org.discobots.aerialassist.utils;
 
 import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.Joystick;

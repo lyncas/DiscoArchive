@@ -8,7 +8,8 @@ package org.discobots.aerialassist.commands;
 import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.discobots.aerialassist.GamePad;
+import org.discobots.aerialassist.utils.GamePad;
+import org.discobots.aerialassist.HW;
 
 /**
  *
@@ -28,6 +29,11 @@ public class MecanumDrive extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         drivetrain.holonomicPolar(0,0,0);
+        
+        HW.leftFrontController.setGyro(drivetrain.getGyro());
+        HW.leftRearController.setGyro(drivetrain.getGyro());
+        HW.rightFrontController.setGyro(drivetrain.getGyro());
+        HW.rightRearController.setGyro(drivetrain.getGyro());
     }
 
     // Called repeatedly when this Command is scheduled to run
