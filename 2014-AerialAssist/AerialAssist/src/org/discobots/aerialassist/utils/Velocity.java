@@ -77,8 +77,13 @@ class Vaccumulator extends Thread {
         double masterTime = time;
         while (true) {
             time = Timer.getFPGATimestamp();
-
+            
+            for(int x=0;x<bufferlength;x++){
             //put data into the buffer
+            double t=Timer.getFPGATimestamp();
+            while (Timer.getFPGATimestamp() - t < (100 / 1000000.0)) {
+                yield();
+            }
             accbuffer[0][bufferindex] = accelerometer.getAcceleration(ADXL345_I2C.Axes.kX);
             accbuffer[1][bufferindex] = accelerometer.getAcceleration(ADXL345_I2C.Axes.kY);
             bufferindex++;
@@ -88,11 +93,12 @@ class Vaccumulator extends Thread {
                 xvelocity += (average(accbuffer[0]) - calX) * 9.81 * delta;
                 yvelocity += (average(accbuffer[1]) - calY) * 9.81 * delta;
                 masterTime=Timer.getFPGATimestamp();
-                System.out.println("avg: "+xvelocity+" "+yvelocity);
+                //System.out.println("avg: "+xvelocity+" "+yvelocity);
             }
             bufferindex %= bufferlength;
-
-            while (Timer.getFPGATimestamp() - time < (10000 / 1000000.0)) {
+            }
+            t=Timer.getFPGATimestamp();
+            while (Timer.getFPGATimestamp() - t < (5000 / 1000000.0)) {
                 yield();
             }
         }
