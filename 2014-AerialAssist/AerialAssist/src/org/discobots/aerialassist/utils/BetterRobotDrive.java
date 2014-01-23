@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.can.CANNotInitializedException;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.communication.UsageReporting;
+import org.discobots.aerialassist.HW;
 
 /**
  *
@@ -37,7 +38,8 @@ public class BetterRobotDrive extends RobotDrive{
         // Normalized for full power along the Cartesian axes.
         magnitude = limit(magnitude) * Math.sqrt(2.0);
         // The rollers are at 45 degree angles.
-        double dirInRad = (direction + 45.0) * 3.14159 / 180.0;
+        
+        double dirInRad = (direction + HW.angleController.getOutput())* 3.14159 / 180.0;
         double cosD = Math.cos(dirInRad);
         double sinD = Math.sin(dirInRad);
 

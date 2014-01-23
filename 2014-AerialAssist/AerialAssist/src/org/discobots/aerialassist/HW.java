@@ -1,6 +1,7 @@
 package org.discobots.aerialassist;
 
 import org.discobots.aerialassist.controllers.AngleController;
+import org.discobots.aerialassist.commands.CommandBase;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -27,10 +28,7 @@ public class HW {
     /**---------------------------------
      * Controllers / PIDs
      ---------------------------------*/
-    public static final AngleController leftFrontController = new AngleController(0.5,0.0,0.0);
-    public static final AngleController leftRearController = new AngleController(0.5,0.0,0.0);
-    public static final AngleController rightFrontController = new AngleController(0.5,0.0,0.0);
-    public static final AngleController rightRearController = new AngleController(0.5,0.0,0.0);
+    public static final AngleController angleController = new AngleController(0.5,0.0,0.0,CommandBase.drivetrain.getGyro());
 
     /**---------------------------------
      * Gyro / Accelerometer

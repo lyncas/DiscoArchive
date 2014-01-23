@@ -29,11 +29,11 @@ public class MecanumDrive extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         drivetrain.holonomicPolar(0,0,0);
-        
+        /*
         HW.leftFrontController.setGyro(drivetrain.getGyro());
         HW.leftRearController.setGyro(drivetrain.getGyro());
         HW.rightFrontController.setGyro(drivetrain.getGyro());
-        HW.rightRearController.setGyro(drivetrain.getGyro());
+        HW.rightRearController.setGyro(drivetrain.getGyro());*/
     }
 
     // Called repeatedly when this Command is scheduled to run
