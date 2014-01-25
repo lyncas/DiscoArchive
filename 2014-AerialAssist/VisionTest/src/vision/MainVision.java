@@ -101,6 +101,7 @@ public class MainVision extends SimpleRobot {
                  */
                 try{
                 image = camera.getImage();   
+                image.write("/image.bmp");
                 }catch(Exception e)
                 {
                     System.out.println("ERROR: Could not get image from the Axis Camera!");
@@ -352,18 +353,19 @@ public class MainVision extends SimpleRobot {
      * This function is called once each time the robot enters autonomous mode.
      */
     public void autonomous() {
-        
+        System.out.println("Filtering Image");
+        try {
+            filterImage();
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
      * This function is called once each time the robot enters operator control.
      */
     public void operatorControl() {
-        try {
-            filterImage();
-        } catch (NIVisionException ex) {
-            ex.printStackTrace();
-        }
+        
     }
     
     /**
