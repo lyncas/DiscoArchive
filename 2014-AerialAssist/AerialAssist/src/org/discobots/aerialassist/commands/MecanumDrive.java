@@ -52,7 +52,7 @@ public class MecanumDrive extends CommandBase {
         SmartDashboard.putNumber("X velocity", drivetrain.getXVelocity());
         SmartDashboard.putNumber("Y velocity", drivetrain.getYVelocity());
         
-        drivetrain.holonomicPolar(magnitude, angle, rotation);
+        drivetrain.holonomicPolar(magnitude, angle-gyroAngle, rotation);
     }
 
     // Make this return true when this Command no longer needs to run execute()

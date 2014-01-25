@@ -14,7 +14,7 @@ public abstract class CommandBase extends Command {
 
     public static OI oi;
     // Create a single static instance of all of your subsystems
-    public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+    public static Drivetrain drivetrain = new Drivetrain();
     public static CompSub compressor;
     public static RMotor RMotor;
     public static void init() {
@@ -27,7 +27,7 @@ public abstract class CommandBase extends Command {
         compressor = new CompSub();
         RMotor = new RMotor();
         // Show what command your subsystem is running on the SmartDashboard
-        SmartDashboard.putData(exampleSubsystem);
+        SmartDashboard.putData(drivetrain);
     }
 
     public CommandBase(String name) {

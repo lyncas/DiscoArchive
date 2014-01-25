@@ -39,7 +39,7 @@ public class BetterRobotDrive extends RobotDrive{
         magnitude = limit(magnitude) * Math.sqrt(2.0);
         // The rollers are at 45 degree angles.
         
-        double dirInRad = (direction + HW.angleController.getOutput())* 3.14159 / 180.0;
+        double dirInRad = (direction + 45 - HW.angleController.getOutput())* 3.14159 / 180.0;
         double cosD = Math.cos(dirInRad);
         double sinD = Math.sin(dirInRad);
 
