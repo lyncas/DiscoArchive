@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
-import org.discobots.aerialassist.commands.MecanumDrive;
+import org.discobots.aerialassist.commands.drive.MecanumDrive;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
 import org.discobots.aerialassist.utils.Velocity;

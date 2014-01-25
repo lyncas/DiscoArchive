@@ -3,9 +3,9 @@ package org.discobots.aerialassist.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.OI;
-import org.discobots.aerialassist.subsystems.CompSub;
+import org.discobots.aerialassist.subsystems.CompressorSub;
 import org.discobots.aerialassist.subsystems.Drivetrain;
-import org.discobots.aerialassist.subsystems.RMotor;
+import org.discobots.aerialassist.subsystems.MotorTestSubsystem;
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
@@ -17,9 +17,9 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
 
-    public static CompSub compressor = new CompSub();
+    public static CompressorSub compressor = new CompressorSub();
     public static Drivetrain drivetrain = new Drivetrain();
-    public static RMotor RMotor = new RMotor();
+    public static MotorTestSubsystem RMotor = new MotorTestSubsystem();
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from

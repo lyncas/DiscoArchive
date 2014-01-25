@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  * @author Dylan
  */
-public class CompSub extends Subsystem {
+public class CompressorSub extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     Compressor comp;
-    public CompSub(){
+    public CompressorSub(){
         super("Compressor");
         comp = new Compressor(1,5,1,1);
     }

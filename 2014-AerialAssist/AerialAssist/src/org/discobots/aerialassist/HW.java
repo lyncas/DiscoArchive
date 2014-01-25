@@ -1,6 +1,6 @@
 package org.discobots.aerialassist;
 
-import org.discobots.aerialassist.controllers.AngleController;
+import org.discobots.aerialassist.utils.AngleController;
 import org.discobots.aerialassist.commands.CommandBase;
 
 /**
