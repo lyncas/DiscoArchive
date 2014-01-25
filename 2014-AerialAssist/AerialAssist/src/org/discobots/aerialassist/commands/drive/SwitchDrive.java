@@ -17,8 +17,12 @@ public class SwitchDrive extends CommandBase {
     public SwitchDrive(boolean check) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        which=check;
         requires(drivetrain);
+        which=check;
+    }
+    public SwitchDrive() {
+        requires(drivetrain);
+        which = !drivetrain.getDriveState();
     }
 
     // Called just before this Command runs the first time

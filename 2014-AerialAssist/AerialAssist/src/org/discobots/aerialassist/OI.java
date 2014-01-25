@@ -25,11 +25,15 @@ public class OI {
     Button RTrig= new JoystickButton(controller,controller.TRIGGER_R);
 
     public OI(){
-        A.whenPressed(new SwitchDrive(Drivetrain.MECANUM));
-        B.whenPressed(new SwitchDrive(Drivetrain.TRACTION));
+        //A.whenPressed(new SwitchDrive(Drivetrain.MECANUM));
+        B.whenPressed(new SwitchDrive(/*Drivetrain.TRACTION*/));
         X.whenPressed(new FixAngle());
         LTrig.whenPressed(new Hold());
-        RTrig.whenPressed(new Move(250, -1));
+        RTrig.whenPressed(new Move(400, -1));
+        RBump.whenPressed(new Move(350,-1));
+        LBump.whenPressed(new Move(350,-1));
+        Y.whenPressed(new Move(10000,-1));
+        A.whenPressed(new Move(10000,1));
     }
     
     public GamePad getGP(){

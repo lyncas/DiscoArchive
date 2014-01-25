@@ -28,18 +28,18 @@ public class Drivetrain extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    Jaguar leftFront;
-    Jaguar leftRear;
-    Jaguar rightFront;
-    Jaguar rightRear;
-    BetterRobotDrive drive;
+    private Jaguar leftFront;
+    private Jaguar leftRear;
+    private Jaguar rightFront;
+    private Jaguar rightRear;
+    private BetterRobotDrive drive;
     private DoubleSolenoid driveShiftSol;
     private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
     private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
     public static final boolean MECANUM=false;
     public static final boolean TRACTION=true;
-    public boolean currentState=MECANUM;
+    private boolean currentState=MECANUM;
 
     
     public Drivetrain() {
@@ -101,5 +101,8 @@ public class Drivetrain extends Subsystem {
     
     public DiscoGyro getGyro() {
         return gyro;
+    }
+    public boolean getDriveState() {
+        return this.currentState;
     }
 }

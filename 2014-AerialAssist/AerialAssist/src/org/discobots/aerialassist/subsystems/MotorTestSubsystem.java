@@ -25,12 +25,10 @@ public class MotorTestSubsystem extends Subsystem {
     public MotorTestSubsystem(){
         rmotor=new Jaguar(1,5);
         rmotor1=new Jaguar(1,10);
-        power=.8;
-        time=220;
     }
     public void set(double power1){
-        rmotor.set(power);
-        rmotor1.set(power);
+        rmotor.set(power1);
+        rmotor1.set(power1);
     }
     public void pIncrement(double power2){
         if((power+power2<=1)&&(power+power2>0))
