@@ -46,13 +46,9 @@ public class BetterRobotDrive extends RobotDrive{
 
         double wheelSpeeds[] = new double[kMaxNumberOfMotors];
         wheelSpeeds[kFrontLeft_val] = (sinD * magnitude + rotation);
-        SmartDashboard.putNumber("FL Motor:   ", -(sinD * magnitude + rotation)); 
         wheelSpeeds[kFrontRight_val] = (cosD * magnitude + rotation);  //Uses cosD * magnitude - rotation in default code
-        SmartDashboard.putNumber("FR Motor:   ", (cosD * magnitude + rotation)); 
         wheelSpeeds[kRearLeft_val] = (cosD * magnitude - rotation);    //Uses cosD * magnitude + rotation in default code
-        SmartDashboard.putNumber("RL Motor:   ", -(cosD * magnitude - rotation)); 
         wheelSpeeds[kRearRight_val] = (sinD * magnitude - rotation);
-        SmartDashboard.putNumber("RR Motor:   ", -(sinD * magnitude - rotation)); 
 
         normalize(wheelSpeeds);
 

@@ -15,11 +15,11 @@ import org.discobots.aerialassist.HW;
  *
  * @author Patrick
  */
-public class MecanumDrive extends CommandBase {
+public class TankDrive extends CommandBase {
     
     GamePad J;
     
-    public MecanumDrive(GamePad j) {
+    public TankDrive(GamePad j) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrain);
@@ -28,36 +28,25 @@ public class MecanumDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        drivetrain.holonomicPolar(0,0,0);
+        drivetrain.tankDrive(0,0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         double x=J.getLX();
-        double y=J.getLY();
-        double rotation=J.getRX();
-        
-        double magnitude = Math.sqrt(x*x+y*y);
-        double angle = MathUtils.atan2(y,x)*180.0/Math.PI;
-        
-        double gyroAngle = drivetrain.getGyroAngle();
-        SmartDashboard.putNumber("Gyro Angle:   ", gyroAngle); 
-        //SmartDashboard.putNumber("X Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kX));
-        //SmartDashboard.putNumber("Y Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kY));
-        //SmartDashboard.putNumber("X velocity", drivetrain.getXVelocity());
-        //SmartDashboard.putNumber("Y velocity", drivetrain.getYVelocity());
-        
-        drivetrain.holonomicPolar(magnitude, angle-gyroAngle, rotation);
+        double y=J.getRX();
+                
+        drivetrain.tankDrive(x,y);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !drivetrain.currentState;
+        return drivetrain.currentState;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        drivetrain.holonomicPolar(0,0,0);
+        drivetrain.tankDrive(0,0);
     }
 
     // Called when another command which requires one or more of the same
