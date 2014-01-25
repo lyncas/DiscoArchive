@@ -29,11 +29,6 @@ public class MecanumDrive extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         drivetrain.holonomicPolar(0,0,0);
-        /*
-        HW.leftFrontController.setGyro(drivetrain.getGyro());
-        HW.leftRearController.setGyro(drivetrain.getGyro());
-        HW.rightFrontController.setGyro(drivetrain.getGyro());
-        HW.rightRearController.setGyro(drivetrain.getGyro());*/
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -47,10 +42,10 @@ public class MecanumDrive extends CommandBase {
         
         double gyroAngle = drivetrain.getGyroAngle();
         SmartDashboard.putNumber("Gyro Angle:   ", gyroAngle); 
-        SmartDashboard.putNumber("X Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kX));
-        SmartDashboard.putNumber("Y Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kY));
-        SmartDashboard.putNumber("X velocity", drivetrain.getXVelocity());
-        SmartDashboard.putNumber("Y velocity", drivetrain.getYVelocity());
+        //SmartDashboard.putNumber("X Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kX));
+        //SmartDashboard.putNumber("Y Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kY));
+        //SmartDashboard.putNumber("X velocity", drivetrain.getXVelocity());
+        //SmartDashboard.putNumber("Y velocity", drivetrain.getYVelocity());
         
         drivetrain.holonomicPolar(magnitude, angle-gyroAngle, rotation);
     }

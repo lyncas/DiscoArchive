@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.can.CANNotInitializedException;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.communication.UsageReporting;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.HW;
 
 /**
@@ -34,20 +35,24 @@ public class BetterRobotDrive extends RobotDrive{
             UsageReporting.report(UsageReporting.kResourceType_RobotDrive, getNumMotors(), UsageReporting.kRobotDrive_MecanumPolar);
             kMecanumPolar_Reported = true;
         }
-        double frontLeftSpeed, rearLeftSpeed, frontRightSpeed, rearRightSpeed;
         // Normalized for full power along the Cartesian axes.
         magnitude = limit(magnitude) * Math.sqrt(2.0);
         // The rollers are at 45 degree angles.
         
-        double dirInRad = (direction + 45 - HW.angleController.getOutput())* 3.14159 / 180.0;
+        double dirInRad = (direction + 45)* 3.14159 / 180.0;
+        // - HW.angleController.getOutput()
         double cosD = Math.cos(dirInRad);
         double sinD = Math.sin(dirInRad);
 
         double wheelSpeeds[] = new double[kMaxNumberOfMotors];
         wheelSpeeds[kFrontLeft_val] = (sinD * magnitude + rotation);
+        SmartDashboard.putNumber("FL Motor:   ", -(sinD * magnitude + rotation)); 
         wheelSpeeds[kFrontRight_val] = (cosD * magnitude + rotation);  //Uses cosD * magnitude - rotation in default code
+        SmartDashboard.putNumber("FR Motor:   ", (cosD * magnitude + rotation)); 
         wheelSpeeds[kRearLeft_val] = (cosD * magnitude - rotation);    //Uses cosD * magnitude + rotation in default code
+        SmartDashboard.putNumber("RL Motor:   ", -(cosD * magnitude - rotation)); 
         wheelSpeeds[kRearRight_val] = (sinD * magnitude - rotation);
+        SmartDashboard.putNumber("RR Motor:   ", -(sinD * magnitude - rotation)); 
 
         normalize(wheelSpeeds);
 
