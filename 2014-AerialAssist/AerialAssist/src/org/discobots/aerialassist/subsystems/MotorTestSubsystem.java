@@ -15,6 +15,7 @@ public class MotorTestSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     Jaguar rmotor;
+    Jaguar rmotor1;
     double power;
     int time;
     public void initDefaultCommand() {
@@ -23,11 +24,13 @@ public class MotorTestSubsystem extends Subsystem {
     }
     public MotorTestSubsystem(){
         rmotor=new Jaguar(1,5);
+        rmotor1=new Jaguar(1,10);
         power=.8;
         time=220;
     }
     public void set(double power1){
         rmotor.set(power);
+        rmotor1.set(power);
     }
     public void pIncrement(double power2){
         if((power+power2<=1)&&(power+power2>0))

@@ -29,7 +29,7 @@ public class OI {
         B.whenPressed(new SwitchDrive(Drivetrain.TRACTION));
         X.whenPressed(new FixAngle());
         LTrig.whenPressed(new Hold());
-        RTrig.whenPressed(new Move());
+        RTrig.whenPressed(new Move(250, -1));
     }
     
     public GamePad getGP(){

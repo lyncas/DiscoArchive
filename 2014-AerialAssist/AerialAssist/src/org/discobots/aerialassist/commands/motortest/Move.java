@@ -15,10 +15,10 @@ public class Move extends CommandBase {
     long time;
     int delta;
     double power;
-    public Move() {
-        requires(RMotor);
-        delta=RMotor.gett();
-        power=RMotor.getp();
+    public Move(int d, int p) {
+        requires(motortestsub);
+        delta = d;
+        power = p;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -30,7 +30,8 @@ public class Move extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        RMotor.set(power);
+        motortestsub.set(power);
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +41,7 @@ public class Move extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        RMotor.set(0);
+        motortestsub.set(0);
     }
 
     // Called when another command which requires one or more of the same
