@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package org.discobots.aerialassist.commands;
-import robot.GamePad;
 
 /**
  *
