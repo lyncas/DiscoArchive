@@ -3,7 +3,9 @@ package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.discobots.aerialassist.commands.Catapult;
 import org.discobots.aerialassist.commands.Changedrive;
+import org.discobots.aerialassist.commands.Hold;
 import org.discobots.aerialassist.controllers.FixAngle;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 
@@ -58,6 +60,8 @@ public class OI {
         A.whenPressed(new Changedrive(Drivetrain.MECANUM));
         B.whenPressed(new Changedrive(Drivetrain.TRACTION));
         X.whenPressed(new FixAngle());
+        LTrig.whenPressed(new Hold());
+        RTrig.whenPressed(new Catapult());
     }
     
     public GamePad getGP(){
