@@ -5,6 +5,7 @@
  */
 package org.discobots.aerialassist.commands.motortest;
 
+import edu.wpi.first.wpilibj.Preferences;
 import org.discobots.aerialassist.commands.CommandBase;
 
 /**
@@ -12,13 +13,18 @@ import org.discobots.aerialassist.commands.CommandBase;
  * @author Dylan
  */
 public class Move extends CommandBase {
+    
+    Preferences pref;
+    
     long time;
     int delta;
     double power;
-    public Move(int d, int p) {
+    
+    
+    public Move(int d, double p) {
         requires(RMotor);
-        delta = d;
-        power = p;
+        delta = pref.getInt("Time", d);
+        power = pref.getDouble("Power", p);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
