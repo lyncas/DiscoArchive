@@ -22,8 +22,8 @@ public class HW {
     /**---------------------------------
      * Motors
      ---------------------------------*/
-    public static final int leftFrontMotor= 1, rightFrontMotor= 2,
-                            leftRearMotor = 4, rightRearMotor = 3;
+    public static final int leftFrontMotor= 3, rightFrontMotor= 4,
+                            leftRearMotor = 1, rightRearMotor = 2;
     
     /**---------------------------------
      * Controllers / PIDs

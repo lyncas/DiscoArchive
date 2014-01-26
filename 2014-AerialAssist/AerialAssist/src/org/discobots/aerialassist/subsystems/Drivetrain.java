@@ -10,10 +10,12 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.commands.drive.MecanumDrive;
+import org.discobots.aerialassist.commands.drive.TankDrive;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
 import org.discobots.aerialassist.utils.Velocity;
@@ -28,10 +30,10 @@ public class Drivetrain extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private Jaguar leftFront;
-    private Jaguar leftRear;
-    private Jaguar rightFront;
-    private Jaguar rightRear;
+    private Talon leftFront;
+    private Talon leftRear;
+    private Talon rightFront;
+    private Talon rightRear;
     private BetterRobotDrive drive;
     private DoubleSolenoid driveShiftSol;
     private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
@@ -44,10 +46,10 @@ public class Drivetrain extends Subsystem {
     
     public Drivetrain() {
         super("Drivetrain");
-        leftFront = new Jaguar(1, HW.leftFrontMotor);
-        leftRear = new Jaguar(1, HW.leftRearMotor);
-        rightFront = new Jaguar(1, HW.rightFrontMotor);
-        rightRear = new Jaguar(1, HW.rightRearMotor);
+        leftFront = new Talon(1, HW.leftFrontMotor);
+        leftRear = new Talon(1, HW.leftRearMotor);
+        rightFront = new Talon(1, HW.rightFrontMotor);
+        rightRear = new Talon(1, HW.rightRearMotor);
         drive = new BetterRobotDrive(leftFront, leftRear, rightFront, rightRear);
 
         drive.setSafetyEnabled(false);
@@ -55,13 +57,13 @@ public class Drivetrain extends Subsystem {
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         //sol = new DoubleSolenoid(1,1);
-        accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
-        velocityReporter = new Velocity(accelerometer);
+        //accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
+        //velocityReporter = new Velocity(accelerometer);
 
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new MecanumDrive(CommandBase.oi.getGP()));
+        setDefaultCommand(/*new MecanumDrive(CommandBase.oi.getGP())*/new TankDrive(CommandBase.oi.getGP()));
     }
 
     public void holonomicPolar(double mag, double dir, double rot) {

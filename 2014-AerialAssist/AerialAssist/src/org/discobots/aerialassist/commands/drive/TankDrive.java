@@ -34,10 +34,10 @@ public class TankDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double x=J.getLX();
-        double y=J.getRX();
+        double l=J.getLY();
+        double r=J.getRY();
                 
-        drivetrain.tankDrive(x,y);
+        drivetrain.tankDrive(l,r);
     }
 
     // Make this return true when this Command no longer needs to run execute()
