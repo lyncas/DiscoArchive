@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.image.CriteriaCollection;
 import edu.wpi.first.wpilibj.image.NIVision;
 import edu.wpi.first.wpilibj.image.NIVisionException;
 import edu.wpi.first.wpilibj.image.ParticleAnalysisReport;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -110,8 +111,9 @@ public class MainVision extends SimpleRobot {
                 
                 //image = new RGBImage("/testImage.jpg"); //uncomment if using a test image from the cRIO		
                 
-                thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
+                //thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
                 //maybe try using thresholdRGB in addition to tresholdHSV?
+                thresholdImage = image.thresholdRGB(0,255,0,255,0,255);
                 
                 try{
                 thresholdImage.write("/threshold.bmp");
