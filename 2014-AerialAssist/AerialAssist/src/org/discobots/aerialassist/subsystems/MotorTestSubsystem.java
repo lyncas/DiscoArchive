@@ -22,11 +22,7 @@ public class MotorTestSubsystem extends Subsystem {
     Jaguar rmotor1;
     double power;
     int time;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3556ce9559fbc30c99bebcb5b650412f0ada1a8d
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

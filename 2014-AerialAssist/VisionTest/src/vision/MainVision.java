@@ -9,6 +9,7 @@
 package vision;
 
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.image.BinaryImage;
@@ -49,6 +50,8 @@ public class MainVision extends SimpleRobot {
     //Maximum number of particles to process
     final int MAX_PARTICLES = 8;
 
+    Preferences prefs;
+    
     AxisCamera camera;          // the axis camera object (connected to the switch)
     CriteriaCollection cc;      // the criteria for doing the particle filter operation
     
@@ -56,6 +59,15 @@ public class MainVision extends SimpleRobot {
     BinaryImage thresholdImage = null;
     BinaryImage filteredImage;
 
+    
+    int hi;
+    int hf;
+    int si;
+    int sf;
+    int vi;
+    int vf;
+    
+    
     public MainVision() {
         this.filteredImage = null;
     }
@@ -83,6 +95,14 @@ public class MainVision extends SimpleRobot {
         cc.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AREA_MINIMUM, 65535, false);
         //type, area min, area max, outside range?
         getWatchdog().setEnabled(false);
+        hi = prefs.getInt("H INT", 0);
+        hf = prefs.getInt("H FINAL", 255);
+        si = prefs.getInt("S INT", 0);
+        sf = prefs.getInt("S FINAL", 255);
+        vi = prefs.getInt("V INT", 200);
+        vf = prefs.getInt("V FINAL", 255);
+        
+        
     }
 
     public void filterImage() throws NIVisionException
@@ -113,7 +133,9 @@ public class MainVision extends SimpleRobot {
                 
                 //thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
                 //maybe try using thresholdRGB in addition to tresholdHSV?
-                thresholdImage = image.thresholdRGB(0,255,0,255,0,255);
+                
+                
+                thresholdImage = image.thresholdHSV(0,255,0,255,0,255);
                 
                 try{
                 thresholdImage.write("/threshold.bmp");
