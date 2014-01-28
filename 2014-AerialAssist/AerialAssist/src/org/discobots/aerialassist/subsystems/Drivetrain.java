@@ -53,7 +53,8 @@ public class Drivetrain extends Subsystem {
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
         
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
