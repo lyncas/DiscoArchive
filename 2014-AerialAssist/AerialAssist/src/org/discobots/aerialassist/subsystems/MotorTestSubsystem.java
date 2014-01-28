@@ -5,6 +5,7 @@
  */
 package org.discobots.aerialassist.subsystems;
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,10 +15,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class MotorTestSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+       
     Jaguar rmotor;
     Jaguar rmotor1;
     double power;
     int time;
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
