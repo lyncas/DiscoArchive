@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.discobots.aerialassist.utils;
+package org.discobots.aerialassist.utils.velocity;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.Timer;
@@ -12,13 +12,18 @@ import org.discobots.aerialassist.commands.CommandBase;
 
 /**
  *
- * @author Sam m
+ * @author Sam M
  */
 public class Velocity {
 
+    public static boolean ENABLE_VELOCITY = false;
+    
     static Vaccumulator v;
 
-    public Velocity(ADXL345_I2C acc) {
+    public Velocity(ADXL345_I2C acc) throws Exception {
+        if (!ENABLE_VELOCITY){
+            throw new Exception();
+        }
         v = new Vaccumulator(acc);
         v.start();
     }

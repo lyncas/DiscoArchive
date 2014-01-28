@@ -18,9 +18,7 @@ import org.discobots.aerialassist.commands.drive.MecanumDrive;
 import org.discobots.aerialassist.commands.drive.TankDrive;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
-import org.discobots.aerialassist.utils.Velocity;
-//import robot.commands.CommandBase;
-//import robot.commands.HolonomicPolar;
+import org.discobots.aerialassist.utils.velocity.Velocity;
 
 /**
  *
@@ -35,15 +33,14 @@ public class Drivetrain extends Subsystem {
     private Talon rightFront;
     private Talon rightRear;
     private BetterRobotDrive drive;
-    private DoubleSolenoid driveShiftSol;
-    private DiscoGyro gyro = new DiscoGyro(HW.gyroChannel);
+    private DoubleSolenoid shifter;
+    private DiscoGyro gyro;
     private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
-    public static final boolean MECANUM=false;
-    public static final boolean TRACTION=true;
-    private boolean currentState=MECANUM;
+    public static final boolean MECANUM = false;
+    public static final boolean TRACTION = true;
+    private boolean currentState = MECANUM;
 
-    
     public Drivetrain() {
         super("Drivetrain");
         leftFront = new Talon(1, HW.leftFrontMotor);
@@ -51,44 +48,63 @@ public class Drivetrain extends Subsystem {
         rightFront = new Talon(1, HW.rightFrontMotor);
         rightRear = new Talon(1, HW.rightRearMotor);
         drive = new BetterRobotDrive(leftFront, leftRear, rightFront, rightRear);
+        shifter = new DoubleSolenoid(HW.driveShiftASolenoid, HW.driveShiftBSolenoid);
 
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-        //sol = new DoubleSolenoid(1,1);
-        //accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
-        //velocityReporter = new Velocity(accelerometer);
+        
+        gyro = new DiscoGyro(HW.gyroChannel);
+        accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
 
+        if (Velocity.ENABLE_VELOCITY) {
+            try {
+                velocityReporter = new Velocity(accelerometer);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(/*new MecanumDrive(CommandBase.oi.getGP())*/new TankDrive(CommandBase.oi.getGP()));
+        setDefaultCommand(new TankDrive());
     }
 
     public void holonomicPolar(double mag, double dir, double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
     }
+
     public void tankDrive(double leftVal, double rightVal) {
-        drive.tankDrive(leftVal,rightVal);
-    }
-    public void PneuOut(){
-        driveShiftSol.set(DoubleSolenoid.Value.kForward);
-        currentState=TRACTION;
-    }
-    public void PneuIn(){
-        driveShiftSol.set(DoubleSolenoid.Value.kReverse);
-        currentState=MECANUM;
+        drive.tankDrive(leftVal, rightVal);
     }
 
-    public DoubleSolenoid.Value checkPneu() {
-        return driveShiftSol.get();
+    public void shiftTraction() {
+        shifter.set(DoubleSolenoid.Value.kForward);
+        currentState = TRACTION;
+    }
+
+    public void shiftMecanum() {
+        shifter.set(DoubleSolenoid.Value.kReverse);
+        currentState = MECANUM;
+    }
+
+    public DoubleSolenoid.Value getShiftPosition() {
+        return shifter.get();
     }
 
     public double getGyroAngle() {
         return gyro.getAngle();
     }
 
+    public DiscoGyro getGyro() {
+        return gyro;
+    }
+
+    public boolean getDriveState() {
+        return this.currentState;
+    }
+    
     public ADXL345_I2C getAccelerometer() {
         return accelerometer;
     }
@@ -99,12 +115,5 @@ public class Drivetrain extends Subsystem {
 
     public double getYVelocity() {
         return velocityReporter.getYVelocity();
-    }
-    
-    public DiscoGyro getGyro() {
-        return gyro;
-    }
-    public boolean getDriveState() {
-        return this.currentState;
     }
 }

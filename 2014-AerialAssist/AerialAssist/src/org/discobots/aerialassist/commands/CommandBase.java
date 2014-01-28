@@ -3,8 +3,10 @@ package org.discobots.aerialassist.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.OI;
+import org.discobots.aerialassist.subsystems.Catapult;
 import org.discobots.aerialassist.subsystems.CompressorSub;
 import org.discobots.aerialassist.subsystems.Drivetrain;
+import org.discobots.aerialassist.subsystems.ElToro;
 import org.discobots.aerialassist.subsystems.MotorTestSubsystem;
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -19,6 +21,8 @@ public abstract class CommandBase extends Command {
 
     public static CompressorSub compressor = new CompressorSub();
     public static Drivetrain drivetrain = new Drivetrain();
+    public static ElToro eltoro = new ElToro();
+    public static Catapult catapult = new Catapult();
     public static MotorTestSubsystem RMotor = new MotorTestSubsystem();
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

@@ -17,52 +17,41 @@ import org.discobots.aerialassist.commands.CommandBase;
  * @author Patrick
  */
 public class MecanumDrive extends CommandBase {
-    
-    GamePad J;
-    
-    public MecanumDrive(GamePad j) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+
+    public MecanumDrive() {
         requires(drivetrain);
-        J=j;
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-        drivetrain.holonomicPolar(0,0,0);
+        drivetrain.holonomicPolar(0, 0, 0);
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double x=J.getLX();
-        double y=J.getLY();
-        double rotation=J.getRX();
+        // Get input from gamepad
+        double x = oi.getRawAnalogStickALX();
+        double y = oi.getRawAnalogStickALY();
+        double rotation = oi.getRawAnalogStickARX();
+        // Deadzone
+        if (Math.abs(x) < 0.05) x = 0;
+        if (Math.abs(y) < 0.05) y = 0;
+        if (Math.abs(rotation) < 0.05) rotation = 0;
         
-        double magnitude = Math.sqrt(x*x+y*y);
-        double angle = MathUtils.atan2(y,x)*180.0/Math.PI;
-        
+        double magnitude = Math.sqrt(x * x + y * y);
+        double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;
+
         double gyroAngle = drivetrain.getGyroAngle();
-        SmartDashboard.putNumber("Gyro Angle:   ", gyroAngle); 
-        //SmartDashboard.putNumber("X Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kX));
-        //SmartDashboard.putNumber("Y Acceleration:   ",drivetrain.getAccelerometer().getAcceleration(ADXL345_I2C.Axes.kY));
-        //SmartDashboard.putNumber("X velocity", drivetrain.getXVelocity());
-        //SmartDashboard.putNumber("Y velocity", drivetrain.getYVelocity());
-        
-        drivetrain.holonomicPolar(magnitude, angle-gyroAngle, rotation);
+
+        drivetrain.holonomicPolar(magnitude, angle - gyroAngle, rotation);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return drivetrain.getDriveState();
     }
 
-    // Called once after isFinished returns true
     protected void end() {
-        drivetrain.holonomicPolar(0,0,0);
+        drivetrain.holonomicPolar(0, 0, 0);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
         end();
     }
