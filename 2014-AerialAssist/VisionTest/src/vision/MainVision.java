@@ -98,9 +98,9 @@ public class MainVision extends SimpleRobot {
         hi = prefs.getInt("H INT", 0);
         hf = prefs.getInt("H FINAL", 255);
         si = prefs.getInt("S INT", 0);
-        sf = prefs.getInt("S FINAL", 255);
-        vi = prefs.getInt("V INT", 200);
-        vf = prefs.getInt("V FINAL", 255);
+        sf = prefs.getInt("S FINAL", 40);
+        vi = prefs.getInt("V INT", 217);//brightness int
+        vf = prefs.getInt("V FINAL", 255);//brightness max
         
         
     }
@@ -135,7 +135,10 @@ public class MainVision extends SimpleRobot {
                 //maybe try using thresholdRGB in addition to tresholdHSV?
                 
                 
-                thresholdImage = image.thresholdHSV(0,255,0,255,0,255);
+                thresholdImage = image.thresholdHSV(hi,hf,si,sf,vi,vf);
+                
+                //to test hsv colors go to http://colorizer.org/
+                
                 
                 try{
                 thresholdImage.write("/threshold.bmp");
