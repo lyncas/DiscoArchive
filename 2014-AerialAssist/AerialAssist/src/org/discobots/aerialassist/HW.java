@@ -22,16 +22,16 @@ public class HW {
     /**---------------------------------
      * Motors
      ---------------------------------*/
-    public static final int leftFrontMotor= 3, rightFrontMotor= 4,
-                            leftRearMotor = 1, rightRearMotor = 2;
+    public static final int leftRearMotor = 1, rightRearMotor = 2,
+                            leftFrontMotor = 3, rightFrontMotor= 4,
+                            elToroLeft = 5, elToroRight = 6;
+    /**---------------------------------
+     * Pneumatics
+     ---------------------------------*/
+    public static final int driveShiftASolenoid = 1, driveShiftBSolenoid = 2;
     
     /**---------------------------------
-     * Controllers / PIDs
-     ---------------------------------*/
-    public static final AngleController angleController = new AngleController(0.5,0.0,0.0,CommandBase.drivetrain.getGyro());
-
-    /**---------------------------------
-     * Gyro / Accelerometer
+     * Sensors
      ---------------------------------*/
     public static final int gyroChannel = 1;
     public static final int accelModule = 1; //I2C on digital module 1

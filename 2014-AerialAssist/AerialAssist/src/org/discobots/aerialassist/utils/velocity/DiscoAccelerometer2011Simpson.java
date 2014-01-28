@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.discobots.aerialassist.utils;
+package org.discobots.aerialassist.utils.velocity;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.ADXL345_I2C.DataFormat_Range;
@@ -12,7 +12,7 @@ import java.util.TimerTask;
  *
  * @author JAG
  */
-public class DiscoAccelerometer2011Boole extends ADXL345_I2C {
+public class DiscoAccelerometer2011Simpson extends ADXL345_I2C {
 
     public static final double kDefaultPeriod = .1;
     public static final double kMetersToFt = 3.2808399;
@@ -26,15 +26,15 @@ public class DiscoAccelerometer2011Boole extends ADXL345_I2C {
     protected double m_sumIntialXAcc = 0.0;
     protected double m_sumIntialYAcc = 0.0;
     protected int m_numberOfReadings = 0;
-    protected final int kIntegrationSamples = 5; //Boole's Rule
+    protected final int kIntegrationSamples = 3; //Simpson's Rule
     protected AllAxes[] m_lastReadings = new AllAxes[kIntegrationSamples];
     protected int m_currentSample = 0;
 
     private class DiscoAccelerometerTask extends TimerTask {
 
-        private DiscoAccelerometer2011Boole m_accelerometer;
+        private DiscoAccelerometer2011Simpson m_accelerometer;
 
-        public DiscoAccelerometerTask(DiscoAccelerometer2011Boole accelerometer) {
+        public DiscoAccelerometerTask(DiscoAccelerometer2011Simpson accelerometer) {
             if (accelerometer == null) {
                 throw new NullPointerException("Given accelerometer was null");
             }
@@ -46,7 +46,7 @@ public class DiscoAccelerometer2011Boole extends ADXL345_I2C {
         }
     }
 
-    public DiscoAccelerometer2011Boole() {
+    public DiscoAccelerometer2011Simpson() {
         super(1, DataFormat_Range.k4G);
 
         m_controlLoop = new java.util.Timer();
@@ -75,13 +75,14 @@ public class DiscoAccelerometer2011Boole extends ADXL345_I2C {
         m_yVelocity = 0.0;
     }
 
-    //Integrate using Boole's rule. Subtract 1 m_inital(X|Y)accel per reading
+    //Integrate using Simpson's rule. Subtract 1 m_inital(X|Y)accel per reading
     private synchronized void integrate() {
         m_lastReadings[m_currentSample] = getAccelerations();
         m_currentSample++;
         if (m_currentSample == kIntegrationSamples) {
-            m_xVelocity += (7.0 * m_lastReadings[0].XAxis + 32.0 * m_lastReadings[1].XAxis + 12.0 * m_lastReadings[2].XAxis + 32.0 * m_lastReadings[3].XAxis + 7.0 * m_lastReadings[4].XAxis - 90.0 * m_intialXAccel) * m_period * 2.0 / 45.0;
-            m_yVelocity += (7.0 * m_lastReadings[0].YAxis + 32.0 * m_lastReadings[1].YAxis + 12.0 * m_lastReadings[2].YAxis + 32.0 * m_lastReadings[3].YAxis + 7.0 * m_lastReadings[4].YAxis - 90.0 * m_intialYAccel) * m_period * 2.0 / 45.0;
+            m_xVelocity += (m_lastReadings[0].XAxis + 4.0 * m_lastReadings[1].XAxis + m_lastReadings[2].XAxis - 6.0 * m_intialXAccel) * m_period / 3.0;
+            m_yVelocity += (m_lastReadings[0].YAxis + 4.0 * m_lastReadings[1].YAxis + m_lastReadings[2].YAxis - 6.0 * m_intialYAccel) * m_period / 3.0;
+            m_currentSample = 0;
         }
     }
 

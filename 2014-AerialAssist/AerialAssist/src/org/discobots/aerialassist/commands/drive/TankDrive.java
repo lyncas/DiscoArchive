@@ -5,11 +5,6 @@
  */
 package org.discobots.aerialassist.commands.drive;
 
-import com.sun.squawk.util.MathUtils;
-import edu.wpi.first.wpilibj.ADXL345_I2C;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.discobots.aerialassist.utils.GamePad;
-import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
 
 /**
@@ -17,41 +12,31 @@ import org.discobots.aerialassist.commands.CommandBase;
  * @author Patrick
  */
 public class TankDrive extends CommandBase {
-    
-    GamePad J;
-    
-    public TankDrive(GamePad j) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+
+    public TankDrive() {
         requires(drivetrain);
-        J=j;
+
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-        drivetrain.tankDrive(0,0);
+        drivetrain.tankDrive(0, 0);
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double l=J.getLY();
-        double r=J.getRY();
-                
-        drivetrain.tankDrive(l,r);
+        double l = oi.getRawAnalogStickALY();
+        double r = oi.getRawAnalogStickARY();
+
+        drivetrain.tankDrive(l, r);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return !drivetrain.getDriveState();
     }
 
-    // Called once after isFinished returns true
     protected void end() {
-        drivetrain.tankDrive(0,0);
+        drivetrain.tankDrive(0, 0);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
         end();
     }

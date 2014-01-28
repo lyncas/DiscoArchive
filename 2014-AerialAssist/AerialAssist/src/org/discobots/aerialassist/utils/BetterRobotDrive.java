@@ -41,8 +41,8 @@ public class BetterRobotDrive extends RobotDrive{
         
         double dirInRad = (direction + 45)* 3.14159 / 180.0;
         // - HW.angleController.getOutput()
-        double cosD = Math.cos(dirInRad);
-        double sinD = Math.sin(dirInRad);
+        double cosD = 1;//Math.cos(dirInRad);
+        double sinD = 1;//Math.sin(dirInRad);
 
         double wheelSpeeds[] = new double[kMaxNumberOfMotors];
         wheelSpeeds[kFrontLeft_val] = (sinD * magnitude + rotation);

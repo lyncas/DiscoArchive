@@ -1,33 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.commands.drive;
 
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
+import org.discobots.aerialassist.utils.AngleController;
 
 /**
  *
  * @author Patrick
  */
 public class FixAngle extends CommandBase {
-        
+
+    private AngleController angleController = new AngleController(0.5, 0.0, 0.0, CommandBase.drivetrain.getGyro());
+
     private double target;
     private boolean useOwnData;
+
     public FixAngle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        target=0.0;
-        useOwnData=true;
+        target = 0.0;
+        useOwnData = true;
     }
-    
+
     public FixAngle(double angle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        target=angle;
-        useOwnData=false;
+        target = angle;
+        useOwnData = false;
     }
 
     // Called just before this Command runs the first time
@@ -36,10 +35,10 @@ public class FixAngle extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(useOwnData){
-            HW.angleController.setSetpoint();
-        }else{
-            HW.angleController.setSetpoint(target);
+        if (useOwnData) {
+            angleController.setSetpoint();
+        } else {
+            angleController.setSetpoint(target);
         }
     }
 

@@ -13,41 +13,38 @@ import org.discobots.aerialassist.commands.CommandBase;
  * @author Dylan
  */
 public class SwitchDrive extends CommandBase {
-    boolean which;
+
+    private boolean newMode;
+
     public SwitchDrive(boolean check) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         requires(drivetrain);
-        which=check;
+        newMode = check;
     }
+
     public SwitchDrive() {
-        requires(drivetrain);
-        which = !drivetrain.getDriveState();
+        this(!drivetrain.getDriveState());
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
+        if (newMode) { // newMode == Drivetrain.TRACTION (true)
+            drivetrain.shiftTraction();
+            new TankDrive().start();
+        } else { // newMode == Drivetrain.MECANUM (false)
+            drivetrain.shiftMecanum();
+            new MecanumDrive().start();
+        }
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(which)
-            drivetrain.PneuOut();
-        else
-            drivetrain.PneuIn();
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return true;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
 }
