@@ -23,10 +23,11 @@ public class Grid extends JPanel {
 
     public Grid(int div_quad, int parentSize) {
 	/*
-	 * Just add a new <? implements DriveMode>, add it to this list, and it will work
+	 * Just add a new <? implements DriveMode> , add it to this list, and it will work
 	 */
-	modes.add(new Arcade());
-	modes.add(new Cheesy());
+        modes.add(new RawArcade());
+	modes.add(new WPIArcade());
+	modes.add(new Skim());
 	modes.add(new Lerp());
 
 
@@ -79,6 +80,10 @@ public class Grid extends JPanel {
     public void setMode(int newMode) {
 	thisMode = modes.get(newMode);
 	recalculate();
+    }
+    
+    public int getCurrentModeNumber(){
+        return modes.indexOf(thisMode);
     }
 
     public void setHighContrast(boolean hc) {

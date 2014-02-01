@@ -30,6 +30,9 @@ import res.MenuStrings;
  *
  * Plots drivetrain outputs on a grid of inputs. inputs: joystick
  * [-1...1]x[-1...1] outputs: drivetrain [-1...1]x[-1...1]
+ * 
+ * 
+ * Using this project: Create a new <? implements DriveMode> and add it to the Grid class constructor.
  */
 public class DriveVis {
 
@@ -137,11 +140,11 @@ public class DriveVis {
 	    JSpinner spin = (JSpinner) e.getSource();
 	    int value = ((SpinnerNumberModel) spin.getModel()).getNumber().intValue();
 	    //g.reset(value,size);
+            int lastMode=g.getCurrentModeNumber();
 	    g = new Grid(value, size);
 	    main_panel.remove(0);
 	    main_panel.add(g, 0);
-	    g.setHighContrast(b_hc);
-	    g.setNumbers(b_nums);
+            g.setMode(lastMode);
 	    main_panel.repaint();
 	}
     }
