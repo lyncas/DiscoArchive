@@ -7,14 +7,14 @@ package org.discobots.aerialassist.commands;
 public class ToggleCompressor extends CommandBase {
 
     public ToggleCompressor() {
-        requires(compressor);
+        requires(compressorSub);
     }
 
     protected void initialize() {
-        if (compressor.check()) {
-            compressor.off();
+        if (compressorSub.check()) {
+            compressorSub.off();
         } else {
-            compressor.on();
+            compressorSub.on();
         }
     }
 

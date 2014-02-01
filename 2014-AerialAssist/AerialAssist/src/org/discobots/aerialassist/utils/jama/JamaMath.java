@@ -1,4 +1,4 @@
-package me.nolanshah.speedfrc.utils.jama;
+package org.discobots.aerialassist.utils.jama;
 
 public class JamaMath {
 

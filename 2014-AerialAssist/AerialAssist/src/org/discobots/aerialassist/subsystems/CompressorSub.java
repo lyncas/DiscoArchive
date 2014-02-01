@@ -4,33 +4,38 @@
  * and open the template in the editor.
  */
 package org.discobots.aerialassist.subsystems;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import org.discobots.aerialassist.HW;
 
 /**
  *
  * @author Dylan
  */
 public class CompressorSub extends Subsystem {
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     Compressor comp;
-    public CompressorSub(){
+
+    public CompressorSub() {
         super("Compressor");
-        comp = new Compressor(1,5,1,1);
+        comp = new Compressor(1, HW.pressureSwitchAnalog, 1, HW.compressorDigital);
     }
+
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
-    public void on(){
+
+    public void on() {
         comp.start();
     }
-    public void off(){
+
+    public void off() {
         comp.stop();
     }
-    public boolean check(){
+
+    public boolean check() {
         return comp.enabled();
     }
 }

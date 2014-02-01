@@ -14,27 +14,27 @@ import org.discobots.aerialassist.commands.CommandBase;
 public class TankDrive extends CommandBase {
 
     public TankDrive() {
-        requires(drivetrain);
+        requires(drivetrainSub);
 
     }
 
     protected void initialize() {
-        drivetrain.tankDrive(0, 0);
+        drivetrainSub.tankDrive(0, 0);
     }
 
     protected void execute() {
-        double l = oi.getRawAnalogStickALY();
-        double r = oi.getRawAnalogStickARY();
+        double l = -oi.getRawAnalogStickALY();
+        double r = -oi.getRawAnalogStickARY();
 
-        drivetrain.tankDrive(l, r);
+        drivetrainSub.tankDrive(l, r);
     }
 
     protected boolean isFinished() {
-        return !drivetrain.getDriveState();
+        return !drivetrainSub.getDriveState();
     }
 
     protected void end() {
-        drivetrain.tankDrive(0, 0);
+        drivetrainSub.tankDrive(0, 0);
     }
 
     protected void interrupted() {

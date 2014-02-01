@@ -3,10 +3,9 @@ package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.discobots.aerialassist.commands.motortest.Move;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
-import org.discobots.aerialassist.commands.motortest.Hold;
 import org.discobots.aerialassist.commands.drive.FixAngle;
+import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 import org.discobots.aerialassist.utils.GamePad.AxisButton;
 
@@ -59,12 +58,8 @@ public class OI {
     private void mapButtons() {
         b_btnB.whenPressed(new SwitchDrive());
         b_btnX.whenPressed(new FixAngle());
-        b_trigL.whenPressed(new Hold());
-        b_trigL.whenPressed(new Move(400, -1));
-        b_bumpR.whenPressed(new Move(350,-1));
-        b_bumpL.whenPressed(new Move(350,-1));
-        b_btnY.whenPressed(new Move(10000,-1));
-        b_btnA.whenPressed(new Move(10000,1));
+        b_bumpR.whileHeld(new Intake(Intake.IN));
+        b_bumpL.whileHeld(new Intake(Intake.OUT));
     }
      public double getRawAnalogStickALX() {
         return gp1.getLX();

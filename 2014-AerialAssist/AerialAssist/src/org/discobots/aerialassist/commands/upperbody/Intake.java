@@ -6,20 +6,22 @@ import org.discobots.aerialassist.commands.CommandBase;
  *
  * @author Nolan Shah
  */
-public class IntakeToro extends CommandBase {
+public class Intake extends CommandBase {
     
-    private boolean outtake;
+    private boolean direction;
+    public static final boolean OUT = false;
+    public static final boolean IN = true;
     
-    public IntakeToro(boolean outtake) {
-        requires(eltoro);
-        this.outtake = outtake;
+    public Intake(boolean direction) {
+        requires(intakeSub);
+        this.direction = direction;
     }
     
     protected void initialize() {
     }
 
     protected void execute() {
-        eltoro.setSpeed(outtake ? -0.8 : 0.8);
+        intakeSub.setSpeed(direction ? -1 : 1);
     }
 
     protected boolean isFinished() {
@@ -27,7 +29,7 @@ public class IntakeToro extends CommandBase {
     }
 
     protected void end() {
-        eltoro.setSpeed(0);
+        intakeSub.setSpeed(0);
     }
 
     protected void interrupted() {

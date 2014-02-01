@@ -6,8 +6,7 @@ import org.discobots.aerialassist.OI;
 import org.discobots.aerialassist.subsystems.Catapult;
 import org.discobots.aerialassist.subsystems.CompressorSub;
 import org.discobots.aerialassist.subsystems.Drivetrain;
-import org.discobots.aerialassist.subsystems.ElToro;
-import org.discobots.aerialassist.subsystems.MotorTestSubsystem;
+import org.discobots.aerialassist.subsystems.RollerSub;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -22,11 +21,10 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
 
-    public static CompressorSub compressor;
-    public static Drivetrain drivetrain;
-    public static ElToro eltoro;
-    public static Catapult catapult;
-    public static MotorTestSubsystem RMotor;
+    public static CompressorSub compressorSub = new CompressorSub();
+    public static Drivetrain drivetrainSub = new Drivetrain();
+    public static RollerSub intakeSub = new RollerSub();
+    public static Catapult catapultSub = new Catapult();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -35,13 +33,12 @@ public abstract class CommandBase extends Command {
         // yet. Thus, their requires() statements may grab null pointers. Bad
         // news. Don't move it.
         oi = new OI();
-        compressor = new CompressorSub();
-        drivetrain = new Drivetrain();
-        eltoro = new ElToro();
-        catapult = new Catapult();
-        RMotor = new MotorTestSubsystem();
+        
         // Show what command your subsystem is running on the SmartDashboard
-        SmartDashboard.putData(drivetrain);
+        SmartDashboard.putData(drivetrainSub);
+        SmartDashboard.putData(compressorSub);
+        SmartDashboard.putData(intakeSub);
+        SmartDashboard.putData(catapultSub);
     }
 
     public CommandBase(String name) {

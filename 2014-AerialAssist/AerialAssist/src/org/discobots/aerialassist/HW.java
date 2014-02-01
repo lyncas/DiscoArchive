@@ -24,11 +24,12 @@ public class HW {
      ---------------------------------*/
     public static final int leftRearMotor = 1, rightRearMotor = 2,
                             leftFrontMotor = 3, rightFrontMotor= 4,
-                            elToroLeft = 5, elToroRight = 6;
+                            rollerMotor = 5;
     /**---------------------------------
      * Pneumatics
      ---------------------------------*/
-    public static final int driveShiftASolenoid = 1, driveShiftBSolenoid = 2;
+    public static final int compressorDigital = 1, pressureSwitchAnalog = 5, 
+                            driveShiftASolenoid = 1, driveShiftBSolenoid = 2;
     
     /**---------------------------------
      * Sensors
