@@ -175,7 +175,7 @@ public class MainVision extends SimpleRobot {
 			scores[i].aspectRatioHorizontal = scoreAspectRatio(filteredImage, report, i, false);			
 					
 			//Check if the particle is a horizontal target, if not, check if it's a vertical target
-                        System.out.println("#" + (i+1) + " :TARGET REPORT");
+                        System.out.println("#" + (i++) + " :TARGET REPORT");
 			if(scoreCompare(scores[i], false)) //check for horizonal target?
 			{
                             System.out.println("particle: " + i + "is a Horizontal Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);
@@ -245,7 +245,7 @@ public class MainVision extends SimpleRobot {
                                             System.out.println("Hot target located");
                                             System.out.println("Distance: " + distance);
                                     } else {
-                                            System.out.println("No hot target present");
+                                            System.out.println("NO hot target present");
                                             System.out.println("Distance: " + distance);
                                     }
                             }
