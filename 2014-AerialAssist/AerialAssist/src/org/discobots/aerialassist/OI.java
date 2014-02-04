@@ -3,9 +3,11 @@ package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.drive.FixAngle;
 import org.discobots.aerialassist.commands.upperbody.Intake;
+import org.discobots.aerialassist.commands.upperbody.ToggleArm;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 import org.discobots.aerialassist.utils.GamePad.AxisButton;
 
@@ -56,8 +58,10 @@ public class OI {
     }
 
     private void mapButtons() {
+        b_btnA.whenPressed(new ToggleArm());
         b_btnB.whenPressed(new SwitchDrive());
         b_btnX.whenPressed(new FixAngle());
+        b_btnY.whenPressed(new ToggleCompressor());
         b_bumpR.whileHeld(new Intake(Intake.IN));
         b_bumpL.whileHeld(new Intake(Intake.OUT));
     }

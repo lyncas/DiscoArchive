@@ -69,7 +69,8 @@ public class Drivetrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new TankDrive());
+        setDefaultCommand(new MecanumDrive());
+        this.currentState = Drivetrain.MECANUM;
     }
 
     public void holonomicPolar(double mag, double dir, double rot) {

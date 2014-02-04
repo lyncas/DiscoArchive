@@ -45,7 +45,7 @@ public class MecanumDrive extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return drivetrainSub.getDriveState();
+        return false;
     }
 
     protected void end() {

@@ -13,7 +13,7 @@ public class Intake extends CommandBase {
     public static final boolean IN = true;
     
     public Intake(boolean direction) {
-        requires(intakeSub);
+        requires(rollerSub);
         this.direction = direction;
     }
     
@@ -21,7 +21,7 @@ public class Intake extends CommandBase {
     }
 
     protected void execute() {
-        intakeSub.setSpeed(direction ? -1 : 1);
+        rollerSub.setSpeed(direction ? -1 : 1);
     }
 
     protected boolean isFinished() {
@@ -29,7 +29,7 @@ public class Intake extends CommandBase {
     }
 
     protected void end() {
-        intakeSub.setSpeed(0);
+        rollerSub.setSpeed(0);
     }
 
     protected void interrupted() {

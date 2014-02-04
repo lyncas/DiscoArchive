@@ -29,7 +29,8 @@ public class HW {
      * Pneumatics
      ---------------------------------*/
     public static final int compressorDigital = 1, pressureSwitchAnalog = 5, 
-                            driveShiftASolenoid = 1, driveShiftBSolenoid = 2;
+                            driveShiftASolenoid = 2, driveShiftBSolenoid = 3,
+                            extenderSolenoid = 1;
     
     /**---------------------------------
      * Sensors

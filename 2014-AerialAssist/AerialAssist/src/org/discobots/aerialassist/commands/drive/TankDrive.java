@@ -30,7 +30,7 @@ public class TankDrive extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return !drivetrainSub.getDriveState();
+        return false;
     }
 
     protected void end() {
