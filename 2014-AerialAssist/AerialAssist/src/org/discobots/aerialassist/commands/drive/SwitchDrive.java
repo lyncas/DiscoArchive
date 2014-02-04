@@ -7,6 +7,7 @@ package org.discobots.aerialassist.commands.drive;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import org.discobots.aerialassist.commands.CommandBase;
+import org.discobots.aerialassist.subsystems.Drivetrain;
 
 /**
  *
@@ -17,20 +18,20 @@ public class SwitchDrive extends CommandBase {
     private boolean newMode;
 
     public SwitchDrive(boolean check) {
-        requires(drivetrain);
+        requires(drivetrainSub);
         newMode = check;
     }
 
     public SwitchDrive() {
-        this(!drivetrain.getDriveState());
+        this(!drivetrainSub.getDriveState());
     }
 
     protected void initialize() {
-        if (newMode) { // newMode == Drivetrain.TRACTION (true)
-            drivetrain.shiftTraction();
+        if (newMode == Drivetrain.TRACTION) {// (true)
+            drivetrainSub.shiftTraction();
             new TankDrive().start();
-        } else { // newMode == Drivetrain.MECANUM (false)
-            drivetrain.shiftMecanum();
+        } else if (newMode == Drivetrain.MECANUM) { // (false)
+            drivetrainSub.shiftMecanum();
             new MecanumDrive().start();
         }
     }

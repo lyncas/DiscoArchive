@@ -10,7 +10,7 @@ import org.discobots.aerialassist.utils.AngleController;
  */
 public class FixAngle extends CommandBase {
 
-    private AngleController angleController = new AngleController(0.5, 0.0, 0.0, CommandBase.drivetrain.getGyro());
+    private AngleController angleController = new AngleController(0.5, 0.0, 0.0, CommandBase.drivetrainSub.getGyro());
 
     private double target;
     private boolean useOwnData;

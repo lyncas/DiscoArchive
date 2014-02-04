@@ -4,33 +4,22 @@ import org.discobots.aerialassist.commands.CommandBase;
 
 /**
  *
- * @author Nolan Shah
+ * @author Developer
  */
-public class IntakeToro extends CommandBase {
+public class ToggleArm extends CommandBase {
     
-    private boolean outtake;
-    
-    public IntakeToro(boolean outtake) {
-        requires(eltoro);
-        this.outtake = outtake;
+    public ToggleArm() {
     }
-    
     protected void initialize() {
+        rollerSub.setExtender(!rollerSub.getExtender());
     }
-
     protected void execute() {
-        eltoro.setSpeed(outtake ? -0.8 : 0.8);
     }
-
     protected boolean isFinished() {
-        return false;
+        return true;
     }
-
     protected void end() {
-        eltoro.setSpeed(0);
     }
-
     protected void interrupted() {
     }
-    
 }

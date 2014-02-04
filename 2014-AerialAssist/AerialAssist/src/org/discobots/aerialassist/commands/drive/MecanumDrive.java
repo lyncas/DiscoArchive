@@ -19,11 +19,11 @@ import org.discobots.aerialassist.commands.CommandBase;
 public class MecanumDrive extends CommandBase {
 
     public MecanumDrive() {
-        requires(drivetrain);
+        requires(drivetrainSub);
     }
 
     protected void initialize() {
-        drivetrain.holonomicPolar(0, 0, 0);
+        drivetrainSub.holonomicPolar(0, 0, 0);
     }
 
     protected void execute() {
@@ -39,17 +39,17 @@ public class MecanumDrive extends CommandBase {
         double magnitude = Math.sqrt(x * x + y * y);
         double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;
 
-        double gyroAngle = drivetrain.getGyroAngle();
+        double gyroAngle = drivetrainSub.getGyroAngle();
 
-        drivetrain.holonomicPolar(magnitude, angle/* - gyroAngle*/, rotation);
+        drivetrainSub.holonomicPolar(magnitude, angle/* - gyroAngle*/, rotation);
     }
 
     protected boolean isFinished() {
-        return drivetrain.getDriveState();
+        return false;
     }
 
     protected void end() {
-        drivetrain.holonomicPolar(0, 0, 0);
+        drivetrainSub.holonomicPolar(0, 0, 0);
     }
 
     protected void interrupted() {
