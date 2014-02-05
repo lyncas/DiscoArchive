@@ -61,6 +61,7 @@ public class Main extends IterativeRobot {
     public void teleopPeriodic() {
         long begin=System.currentTimeMillis();
         Scheduler.getInstance().run();
+        CommandBase.update();
         SmartDashboard.putNumber("Main loop time:", System.currentTimeMillis()-begin);
     }
     

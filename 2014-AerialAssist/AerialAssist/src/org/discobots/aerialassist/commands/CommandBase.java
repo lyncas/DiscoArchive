@@ -23,7 +23,7 @@ public abstract class CommandBase extends Command {
 
     public static CompressorSub compressorSub = new CompressorSub();
     public static Drivetrain drivetrainSub = new Drivetrain();
-    public static RollerSub intakeSub = new RollerSub();
+    public static RollerSub rollerSub = new RollerSub();
     public static Catapult catapultSub = new Catapult();
 
     public static void init() {
@@ -37,10 +37,17 @@ public abstract class CommandBase extends Command {
         // Show what command your subsystem is running on the SmartDashboard
         SmartDashboard.putData(drivetrainSub);
         SmartDashboard.putData(compressorSub);
-        SmartDashboard.putData(intakeSub);
+        SmartDashboard.putData(rollerSub);
         SmartDashboard.putData(catapultSub);
     }
-
+    
+    public static void update() {
+        SmartDashboard.putData(drivetrainSub);
+        SmartDashboard.putData(compressorSub);
+        SmartDashboard.putData(rollerSub);
+        SmartDashboard.putData(catapultSub);
+    }
+    
     public CommandBase(String name) {
         super(name);
     }
