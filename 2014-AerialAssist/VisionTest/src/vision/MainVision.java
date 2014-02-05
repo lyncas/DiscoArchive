@@ -50,7 +50,6 @@ public class MainVision extends SimpleRobot {
     //Maximum number of particles to process
     final int MAX_PARTICLES = 8;
 
-    Preferences prefs;
     
     AxisCamera camera;          // the axis camera object (connected to the switch)
     CriteriaCollection cc;      // the criteria for doing the particle filter operation
@@ -58,15 +57,6 @@ public class MainVision extends SimpleRobot {
     ColorImage image = null;
     BinaryImage thresholdImage = null;
     BinaryImage filteredImage;
-
-    
-    int hi;
-    int hf;
-    int si;
-    int sf;
-    int vi;
-    int vf;
-    
     
     public MainVision() {
         this.filteredImage = null;
@@ -91,16 +81,13 @@ public class MainVision extends SimpleRobot {
     
     public void robotInit() {
         camera = AxisCamera.getInstance();  // get an instance of the camera
+        //maybe try getInstance("10.te.am.11")
+        
         cc = new CriteriaCollection();      // create the criteria for the particle filter
         cc.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AREA_MINIMUM, 65535, false);
         //type, area min, area max, outside range?
         getWatchdog().setEnabled(false);
-        hi = prefs.getInt("H INT", 0);
-        hf = prefs.getInt("H FINAL", 255);
-        si = prefs.getInt("S INT", 0);
-        sf = prefs.getInt("S FINAL", 40);
-        vi = prefs.getInt("V INT", 217);//brightness int
-        vf = prefs.getInt("V FINAL", 255);//brightness max
+        
         
         
     }
@@ -135,7 +122,7 @@ public class MainVision extends SimpleRobot {
                 //maybe try using thresholdRGB in addition to tresholdHSV?
                 
                 
-                thresholdImage = image.thresholdHSV(hi,hf,si,sf,vi,vf);
+                thresholdImage = image.thresholdHSV(32,170,200,255,133,255);
                 
                 //to test hsv colors go to http://colorizer.org/
                 
@@ -175,16 +162,16 @@ public class MainVision extends SimpleRobot {
 			scores[i].aspectRatioHorizontal = scoreAspectRatio(filteredImage, report, i, false);			
 					
 			//Check if the particle is a horizontal target, if not, check if it's a vertical target
-                        System.out.println("#" + (i++) + " :TARGET REPORT");
+                        System.out.println("#" + (i+1) + " :TARGET REPORT");
 			if(scoreCompare(scores[i], false)) //check for horizonal target?
 			{
-                            System.out.println("particle: " + i + "is a Horizontal Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);
+                            System.out.println("particle: " + (i+1) + "is a Horizontal Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);
                             horizontalTargets[horizontalTargetCount++] = i; //Add particle to target array and increment count
 			} else if (scoreCompare(scores[i], true)) { //check for vertical target?
-                            System.out.println("particle: " + i + "is a Vertical Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);
+                            System.out.println("particle: " + (i+1) + "is a Vertical Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);
                             verticalTargets[verticalTargetCount++] = i;  //Add particle to target array and increment count
 			} else { //not a target
-                            System.out.println("particle: " + i + "is not a Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);
+                            System.out.println("particle: " + (i+1) + "is not a Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);
 			}
                             System.out.println("rect: " + scores[i].rectangularity + "ARHoriz: " + scores[i].aspectRatioHorizontal);
                             System.out.println("ARVert: " + scores[i].aspectRatioVertical);	
@@ -245,7 +232,7 @@ public class MainVision extends SimpleRobot {
                                             System.out.println("Hot target located");
                                             System.out.println("Distance: " + distance);
                                     } else {
-                                            System.out.println("NO hot target present");
+                                            System.out.println("No hot target present");
                                             System.out.println("Distance: " + distance);
                                     }
                             }
