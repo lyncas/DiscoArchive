@@ -60,7 +60,9 @@ public class OI {
     private void mapButtons() {
         b_btnA.whenPressed(new ToggleArm());
         b_btnB.whenPressed(new SwitchDrive());
-        b_btnX.whenPressed(new FixAngle());
+        b_dpadU.whenPressed(new SwitchDrive(Drivetrain.MECANUM));
+        b_dpadD.whenPressed(new SwitchDrive(Drivetrain.TRACTION));
+//        b_btnX.whenPressed(new FixAngle());
         b_btnY.whenPressed(new ToggleCompressor());
         b_bumpR.whileHeld(new Intake(Intake.IN));
         b_bumpL.whileHeld(new Intake(Intake.OUT));

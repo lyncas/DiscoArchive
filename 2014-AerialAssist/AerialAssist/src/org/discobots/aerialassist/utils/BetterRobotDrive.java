@@ -53,7 +53,12 @@ public class BetterRobotDrive extends RobotDrive{
         normalize(wheelSpeeds);
 
         byte syncGroup = (byte)0x80;
-
+/*
+        SmartDashboard.putDouble("FL Motor:  ",wheelSpeeds[kFrontLeft_val]);
+        SmartDashboard.putDouble("FR Motor:  ",wheelSpeeds[kFrontRight_val]);
+        SmartDashboard.putDouble("RL Motor:  ",wheelSpeeds[kRearLeft_val]);
+        SmartDashboard.putDouble("RR Motor:  ",wheelSpeeds[kRearRight_val]);
+  */      
         m_frontLeftMotor.set(wheelSpeeds[kFrontLeft_val] * m_invertedMotors[kFrontLeft_val] * m_maxOutput, syncGroup);
         m_frontRightMotor.set(wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * m_maxOutput, syncGroup);
         m_rearLeftMotor.set(wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * m_maxOutput, syncGroup);

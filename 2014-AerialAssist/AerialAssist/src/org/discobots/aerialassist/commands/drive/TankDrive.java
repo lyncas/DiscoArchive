@@ -20,6 +20,7 @@ public class TankDrive extends CommandBase {
 
     protected void initialize() {
         drivetrainSub.tankDrive(0, 0);
+        System.out.println("Traction wheels engaged\n");
     }
 
     protected void execute() {
