@@ -46,8 +46,8 @@ public class BetterRobotDrive extends RobotDrive{
 
         double wheelSpeeds[] = new double[kMaxNumberOfMotors];
         wheelSpeeds[kFrontLeft_val] = (sinD * magnitude + rotation);
-        wheelSpeeds[kFrontRight_val] = (cosD * magnitude + rotation);  //Uses cosD * magnitude - rotation in default code
-        wheelSpeeds[kRearLeft_val] = (cosD * magnitude - rotation);    //Uses cosD * magnitude + rotation in default code
+        wheelSpeeds[kFrontRight_val] = (cosD * magnitude - rotation);  //Uses cosD * magnitude - rotation in default code   I changed it to that.
+        wheelSpeeds[kRearLeft_val] = (cosD * magnitude + rotation);    //Uses cosD * magnitude + rotation in default code   I changed it to that.
         wheelSpeeds[kRearRight_val] = (sinD * magnitude - rotation);
 
         normalize(wheelSpeeds);
