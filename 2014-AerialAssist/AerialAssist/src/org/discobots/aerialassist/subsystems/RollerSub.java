@@ -1,5 +1,6 @@
 package org.discobots.aerialassist.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,14 +12,14 @@ import org.discobots.aerialassist.HW;
  */
 public class RollerSub extends Subsystem {
     Victor rollerMotor;
-    Solenoid extenderSolenoid;
+    DoubleSolenoid extenderSolenoid;
     
     public void initDefaultCommand() {
     }
     
     public RollerSub() {
         rollerMotor = new Victor(1, HW.rollerMotor);
-        extenderSolenoid = new Solenoid(1, HW.extenderSolenoid);
+        extenderSolenoid = new DoubleSolenoid(1, HW.extenderASolenoid, HW.extenderBSolenoid);
     }
     
     public void setSpeed(double speed) {
@@ -26,11 +27,14 @@ public class RollerSub extends Subsystem {
     }
     
     public void setExtender(boolean set) {
-        extenderSolenoid.set(set);
-    }
+        extenderSolenoid.set(set ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
+     }
     
     public boolean getExtender() {
-        return extenderSolenoid.get();
+        if(extenderSolenoid.get() == DoubleSolenoid.Value.kForward)
+            return true;
+        else
+            return false;
     }
     
 }

@@ -45,10 +45,10 @@ public class BetterRobotDrive extends RobotDrive{
         double sinD = Math.sin(dirInRad);//1: I switched the values.
 
         double wheelSpeeds[] = new double[kMaxNumberOfMotors];
-        wheelSpeeds[kFrontLeft_val] = (sinD * magnitude + rotation);
-        wheelSpeeds[kFrontRight_val] = (cosD * magnitude - rotation);  //Uses cosD * magnitude - rotation in default code   I changed it to that.
-        wheelSpeeds[kRearLeft_val] = (cosD * magnitude + rotation);    //Uses cosD * magnitude + rotation in default code   I changed it to that.
-        wheelSpeeds[kRearRight_val] = (sinD * magnitude - rotation);
+        wheelSpeeds[kFrontLeft_val] = (cosD * magnitude + rotation);   //I changed it from sinD * magnitude + rotation.
+        wheelSpeeds[kFrontRight_val] = (sinD * magnitude - rotation);  //I changed it from cosD * magnitude - rotation.
+        wheelSpeeds[kRearLeft_val] = (sinD * magnitude + rotation);    //I changed it from cosD * magnitude + rotation.
+        wheelSpeeds[kRearRight_val] = (cosD * magnitude - rotation);   //I changed it from sinD * magnitude - rotation.
 
         normalize(wheelSpeeds);
 
