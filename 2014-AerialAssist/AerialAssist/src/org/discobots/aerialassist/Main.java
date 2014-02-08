@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.OI;
+import org.discobots.aerialassist.commands.drive.SwitchDrive;
+import org.discobots.aerialassist.subsystems.Drivetrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -54,6 +56,7 @@ public class Main extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
+        new SwitchDrive(Drivetrain.MECANUM).start();
     }
 
     /**

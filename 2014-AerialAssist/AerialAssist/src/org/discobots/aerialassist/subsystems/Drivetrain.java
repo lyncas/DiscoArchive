@@ -39,7 +39,7 @@ public class Drivetrain extends Subsystem {
     private Velocity velocityReporter;
     public static final boolean MECANUM = false;
     public static final boolean TRACTION = true;
-    private boolean currentState = TRACTION;
+    private boolean currentState = MECANUM;    //Why does it start out as mecanum if TRACTION is used as the default?
 
     public Drivetrain() {
         super("Drivetrain");
@@ -65,6 +65,9 @@ public class Drivetrain extends Subsystem {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+            
+//        currentState=getShiftPosition();
+        
         }
     }
 

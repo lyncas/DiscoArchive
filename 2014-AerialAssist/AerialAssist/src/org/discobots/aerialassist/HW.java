@@ -25,11 +25,9 @@ public class HW {
     public static final int leftRearMotor = 1, rightRearMotor = 2,
                             leftFrontMotor = 3, rightFrontMotor= 4,
                             rollerMotor = 5;
-    /**---------------------------------
-     * Pneumatics
-     ---------------------------------*/
-    public static final int compressorDigital = 1, pressureSwitchAnalog = 5, 
-                            driveShiftASolenoid = 3, driveShiftBSolenoid = 4,
+    public static final int compressorRelay = 1, pressureSwitchAnalog = 6,
+            //Port 3 is bad so I changed driveShiftASolenoid to 5 and pressureSwitchAnalog to 6.
+                            driveShiftASolenoid = 5, driveShiftBSolenoid = 4,
                             extenderASolenoid = 1, extenderBSolenoid = 2;
     
     /**---------------------------------
