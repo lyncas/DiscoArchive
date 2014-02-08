@@ -33,7 +33,7 @@ public class Drivetrain extends Subsystem {
     private Talon rightFront;
     private Talon rightRear;
     private BetterRobotDrive drive;
-    private DoubleSolenoid shifter;
+    private Solenoid shifter;
     private DiscoGyro gyro;
     private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
@@ -48,13 +48,13 @@ public class Drivetrain extends Subsystem {
         rightFront = new Talon(1, HW.rightFrontMotor);
         rightRear = new Talon(1, HW.rightRearMotor);
         drive = new BetterRobotDrive(leftFront, leftRear, rightFront, rightRear);
-        shifter = new DoubleSolenoid(HW.driveShiftASolenoid, HW.driveShiftBSolenoid);
+        shifter = new Solenoid(HW.driveShiftSolenoid);
 
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false);
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
@@ -70,7 +70,6 @@ public class Drivetrain extends Subsystem {
 
     public void initDefaultCommand() {
         setDefaultCommand(new MecanumDrive());
-        this.currentState = Drivetrain.MECANUM;
     }
 
     public void holonomicPolar(double mag, double dir, double rot) {
@@ -82,16 +81,18 @@ public class Drivetrain extends Subsystem {
     }
 
     public void shiftTraction() {
-        shifter.set(DoubleSolenoid.Value.kForward);
+        shifter.set(true);
+        System.out.println("Traction Mode Engaged");
         currentState = TRACTION;
     }
 
     public void shiftMecanum() {
-        shifter.set(DoubleSolenoid.Value.kReverse);
+        shifter.set(false);
+        System.out.println("Mecanum Mode Engaged");
         currentState = MECANUM;
     }
 
-    public DoubleSolenoid.Value getShiftPosition() {
+    public boolean getShiftPosition() {
         return shifter.get();
     }
 
@@ -104,7 +105,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public boolean getDriveState() {
-        return this.currentState;
+        return currentState;
     }
     
     public ADXL345_I2C getAccelerometer() {

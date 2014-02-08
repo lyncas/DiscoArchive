@@ -1,4 +1,4 @@
-
+ 
 package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -59,11 +59,15 @@ public class OI {
 
     private void mapButtons() {
         b_btnA.whenPressed(new ToggleArm());
-        b_btnB.whenPressed(new SwitchDrive());
+        b_btnB.whenReleased(new SwitchDrive());
+        b_dpadU.whenReleased(new SwitchDrive(Drivetrain.MECANUM));
+        b_dpadD.whenReleased(new SwitchDrive(Drivetrain.TRACTION));
         b_btnX.whenPressed(new FixAngle());
         b_btnY.whenPressed(new ToggleCompressor());
         b_bumpR.whileHeld(new Intake(Intake.IN));
-        b_bumpL.whileHeld(new Intake(Intake.OUT));
+        b_bumpR.whenReleased(new Intake(0));
+        b_trigR.whileHeld(new Intake(Intake.OUT));
+        b_trigR.whenReleased(new Intake(0));
     }
      public double getRawAnalogStickALX() {
         return gp1.getLX();

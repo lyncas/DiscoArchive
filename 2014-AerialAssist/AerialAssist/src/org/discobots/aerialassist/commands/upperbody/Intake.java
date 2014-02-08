@@ -8,11 +8,11 @@ import org.discobots.aerialassist.commands.CommandBase;
  */
 public class Intake extends CommandBase {
     
-    private boolean direction;
-    public static final boolean OUT = false;
-    public static final boolean IN = true;
+    private int direction;
+    public static final int OUT = 1;
+    public static final int IN = -1;
     
-    public Intake(boolean direction) {
+    public Intake(int direction) {
         requires(rollerSub);
         this.direction = direction;
     }
@@ -21,7 +21,7 @@ public class Intake extends CommandBase {
     }
 
     protected void execute() {
-        rollerSub.setSpeed(direction ? -1 : 1);
+        rollerSub.setSpeed(direction);
     }
 
     protected boolean isFinished() {
@@ -33,6 +33,7 @@ public class Intake extends CommandBase {
     }
 
     protected void interrupted() {
+        end();
     }
     
 }

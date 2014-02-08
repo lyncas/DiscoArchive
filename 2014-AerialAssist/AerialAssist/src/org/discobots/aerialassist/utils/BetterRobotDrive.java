@@ -39,15 +39,15 @@ public class BetterRobotDrive extends RobotDrive{
         magnitude = limit(magnitude) * Math.sqrt(2.0);
         // The rollers are at 45 degree angles.
         
-        double dirInRad = (direction + 45)* 3.14159 / 180.0;
+        double dirInRad = (direction - 45)* 3.14159 / 180.0;
         // - HW.angleController.getOutput()
-        double cosD = 1;//Math.cos(dirInRad);
-        double sinD = 1;//Math.sin(dirInRad);
+        double cosD = Math.cos(dirInRad);
+        double sinD = Math.sin(dirInRad);
 
         double wheelSpeeds[] = new double[kMaxNumberOfMotors];
         wheelSpeeds[kFrontLeft_val] = (sinD * magnitude + rotation);
-        wheelSpeeds[kFrontRight_val] = (cosD * magnitude + rotation);  //Uses cosD * magnitude - rotation in default code
-        wheelSpeeds[kRearLeft_val] = (cosD * magnitude - rotation);    //Uses cosD * magnitude + rotation in default code
+        wheelSpeeds[kFrontRight_val] = (cosD * magnitude - rotation);  //Uses cosD * magnitude - rotation in default code
+        wheelSpeeds[kRearLeft_val] = (cosD * magnitude + rotation);    //Uses cosD * magnitude + rotation in default code
         wheelSpeeds[kRearRight_val] = (sinD * magnitude - rotation);
 
         normalize(wheelSpeeds);

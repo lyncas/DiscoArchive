@@ -38,4 +38,9 @@ public class CompressorSub extends Subsystem {
     public boolean check() {
         return comp.enabled();
     }
+    
+    public boolean getPressure()
+    {
+        return comp.getPressureSwitchValue();
+    }
 }

@@ -10,3 +10,4 @@ build
 *.java
 
 *.java
+!/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/ToggleArm.java

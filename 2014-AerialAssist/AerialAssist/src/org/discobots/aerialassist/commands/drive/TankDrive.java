@@ -23,7 +23,7 @@ public class TankDrive extends CommandBase {
     }
 
     protected void execute() {
-        double l = -oi.getRawAnalogStickALY();
+        double l = oi.getRawAnalogStickALY();
         double r = -oi.getRawAnalogStickARY();
 
         drivetrainSub.tankDrive(l, r);

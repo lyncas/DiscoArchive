@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
+import org.discobots.aerialassist.utils.Dashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -62,6 +63,7 @@ public class Main extends IterativeRobot {
         long begin=System.currentTimeMillis();
         Scheduler.getInstance().run();
         CommandBase.update();
+        Dashboard.update();
         SmartDashboard.putNumber("Main loop time:", System.currentTimeMillis()-begin);
     }
     
