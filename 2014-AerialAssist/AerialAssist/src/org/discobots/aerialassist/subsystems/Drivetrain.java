@@ -39,7 +39,7 @@ public class Drivetrain extends Subsystem {
     private Velocity velocityReporter;
     public static final boolean MECANUM = false;
     public static final boolean TRACTION = true;
-    private boolean currentState = MECANUM;
+    private boolean currentState = MECANUM;    //Why does it start out as mecanum if TRACTION is used as the default?
 
     public Drivetrain() {
         super("Drivetrain");
@@ -55,6 +55,8 @@ public class Drivetrain extends Subsystem {
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
         
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(HW.accelModule, ADXL345_I2C.DataFormat_Range.k4G);
@@ -65,11 +67,15 @@ public class Drivetrain extends Subsystem {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+            
+//        currentState=getShiftPosition();
+        
         }
     }
 
     public void initDefaultCommand() {
         setDefaultCommand(new MecanumDrive());
+        this.currentState = MECANUM;
     }
 
     public void holonomicPolar(double mag, double dir, double rot) {

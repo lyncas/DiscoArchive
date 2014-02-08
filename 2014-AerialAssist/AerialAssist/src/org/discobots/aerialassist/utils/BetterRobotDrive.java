@@ -39,21 +39,26 @@ public class BetterRobotDrive extends RobotDrive{
         magnitude = limit(magnitude) * Math.sqrt(2.0);
         // The rollers are at 45 degree angles.
         
-        double dirInRad = (direction - 45)* 3.14159 / 180.0;
+        double dirInRad = (direction - 45)* 3.14159 / 180.0;    //I changed the +45 to -45.
         // - HW.angleController.getOutput()
-        double cosD = Math.cos(dirInRad);
-        double sinD = Math.sin(dirInRad);
+        double cosD = Math.cos(dirInRad);   //1; I switched the values.
+        double sinD = Math.sin(dirInRad);   //1: I switched the values.
 
         double wheelSpeeds[] = new double[kMaxNumberOfMotors];
-        wheelSpeeds[kFrontLeft_val] = (sinD * magnitude + rotation);
-        wheelSpeeds[kFrontRight_val] = (cosD * magnitude - rotation);  //Uses cosD * magnitude - rotation in default code
-        wheelSpeeds[kRearLeft_val] = (cosD * magnitude + rotation);    //Uses cosD * magnitude + rotation in default code
-        wheelSpeeds[kRearRight_val] = (sinD * magnitude - rotation);
+        wheelSpeeds[kFrontLeft_val] = (cosD * magnitude + rotation);   //I changed it from sinD * magnitude + rotation.
+        wheelSpeeds[kFrontRight_val] = (sinD * magnitude - rotation);  //I changed it from cosD * magnitude - rotation.
+        wheelSpeeds[kRearLeft_val] = (sinD * magnitude + rotation);    //I changed it from cosD * magnitude + rotation.
+        wheelSpeeds[kRearRight_val] = (cosD * magnitude - rotation);   //I changed it from sinD * magnitude - rotation.
 
         normalize(wheelSpeeds);
 
         byte syncGroup = (byte)0x80;
-
+/*
+        SmartDashboard.putDouble("FL Motor:  ",wheelSpeeds[kFrontLeft_val]);
+        SmartDashboard.putDouble("FR Motor:  ",wheelSpeeds[kFrontRight_val]);
+        SmartDashboard.putDouble("RL Motor:  ",wheelSpeeds[kRearLeft_val]);
+        SmartDashboard.putDouble("RR Motor:  ",wheelSpeeds[kRearRight_val]);
+  */      
         m_frontLeftMotor.set(wheelSpeeds[kFrontLeft_val] * m_invertedMotors[kFrontLeft_val] * m_maxOutput, syncGroup);
         m_frontRightMotor.set(wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * m_maxOutput, syncGroup);
         m_rearLeftMotor.set(wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * m_maxOutput, syncGroup);

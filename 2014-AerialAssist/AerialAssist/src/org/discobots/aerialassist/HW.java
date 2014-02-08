@@ -28,9 +28,13 @@ public class HW {
     /**---------------------------------
      * Pneumatics
      ---------------------------------*/
-    public static final int compressorDigital = 1, pressureSwitchAnalog = 5, 
+    public static final int compressorDigital = 1, 
                             driveShiftSolenoid = 3,
                             extenderSolenoid = 1, extender2Solenoid = 2;
+    public static final int compressorRelay = 1, pressureSwitchAnalog = 6,
+            //Port 3 is bad so I changed driveShiftASolenoid to 5 and pressureSwitchAnalog to 6.
+                            driveShiftASolenoid = 5, driveShiftBSolenoid = 4,
+                            extenderASolenoid = 1, extenderBSolenoid = 2;
     
     /**---------------------------------
      * Sensors

@@ -6,10 +6,6 @@
 package org.discobots.aerialassist.commands.drive;
 
 import com.sun.squawk.util.MathUtils;
-import edu.wpi.first.wpilibj.ADXL345_I2C;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.discobots.aerialassist.utils.GamePad;
-import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
 
 /**
@@ -24,6 +20,7 @@ public class MecanumDrive extends CommandBase {
 
     protected void initialize() {
         drivetrainSub.holonomicPolar(0, 0, 0);
+        System.out.println("Mecanum wheels engaged\n");
     }
 
     protected void execute() {
