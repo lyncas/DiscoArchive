@@ -31,29 +31,20 @@ public class SwitchDrive extends CommandBase {
     }
 
     protected void initialize() {
-        System.out.print("newMode = ");
-        if(newMode)
-            System.out.println("TRACTION");
-        else
-            System.out.println("MECANUM");
-
+        
         if(!useOwnData) {
             if (newMode == Drivetrain.TRACTION) { // (true) //!drivetrainSub.getDriveState()
-                System.out.println("shifting to traction");
                 drivetrainSub.shiftTraction();
                 new TankDrive().start();
             } else {// (newMode == Drivetrain.TRACTION) { // (false)
-                System.out.println("shifting to mecanum");
                 drivetrainSub.shiftMecanum();
                 new MecanumDrive().start();
             } 
         } else {
             if (!drivetrainSub.getDriveState()) { // (true) //!drivetrainSub.getDriveState()
-                System.out.println("shifting to traction");
                 drivetrainSub.shiftTraction();
                 new TankDrive().start();
             } else {// (newMode == Drivetrain.TRACTION) { // (false)
-                System.out.println("shifting to mecanum");
                 drivetrainSub.shiftMecanum();
                 new MecanumDrive().start();
             }

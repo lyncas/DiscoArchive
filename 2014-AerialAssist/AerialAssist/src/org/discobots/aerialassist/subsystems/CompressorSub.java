@@ -23,7 +23,7 @@ public class CompressorSub extends Subsystem {
     boolean enabled;
     public CompressorSub() {
         super("Compressor");
-    //    comp = new Compressor(1, HW.pressureSwitchAnalog, 1, HW.compressorRelay);
+        //comp = new Compressor(1,HW.pressureSwitchAnalog, 1, HW.compressorRelay+1);
         relay = new Relay(1, HW.compressorRelay);
     }
 
@@ -49,6 +49,6 @@ public class CompressorSub extends Subsystem {
     
     public boolean getPressure()
     {
-        return comp.getPressureSwitchValue();
+        return false;//comp.getPressureSwitchValue();
     }
 }
