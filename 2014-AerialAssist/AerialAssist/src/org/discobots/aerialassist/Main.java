@@ -14,13 +14,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
-<<<<<<< HEAD
 import org.discobots.aerialassist.utils.Dashboard;
-=======
 import org.discobots.aerialassist.OI;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.subsystems.Drivetrain;
->>>>>>> bd561ea9c29e372f0d20a290bcf3c4308c1bddd4
 
 /**
  * The VM is configured to automatically run this class, and to call the
