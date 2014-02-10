@@ -11,30 +11,27 @@ import org.discobots.aerialassist.HW;
  * @author Nolan Shah
  */
 public class RollerSub extends Subsystem {
-    Victor rollerMotor;
-    DoubleSolenoid extenderSolenoid;
+
+    private Victor roller;
+    private Solenoid extend;
     
     public void initDefaultCommand() {
     }
     
     public RollerSub() {
-        rollerMotor = new Victor(1, HW.rollerMotor);
-        extenderSolenoid = new DoubleSolenoid(1, HW.extenderASolenoid, HW.extenderBSolenoid);
+        roller = new Victor(1, HW.rollerMotor);
+        extend = new Solenoid(HW.extenderSolenoid);
     }
     
     public void setSpeed(double speed) {
-        rollerMotor.set(speed);
+        roller.set(speed);
     }
     
-    public void setExtender(boolean set) {
-        extenderSolenoid.set(set ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
-     }
+    public void setExtender(boolean on) {
+        extend.set(on);
+    }
     
     public boolean getExtender() {
-        if(extenderSolenoid.get() == DoubleSolenoid.Value.kForward)
-            return true;
-        else
-            return false;
+        return extend.get();
     }
-    
 }

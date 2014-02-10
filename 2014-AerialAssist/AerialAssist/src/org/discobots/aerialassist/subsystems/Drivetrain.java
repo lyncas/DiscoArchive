@@ -7,15 +7,12 @@ package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
-import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.commands.drive.MecanumDrive;
-import org.discobots.aerialassist.commands.drive.TankDrive;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
 import org.discobots.aerialassist.utils.velocity.Velocity;
@@ -43,14 +40,16 @@ public class Drivetrain extends Subsystem {
 
     public Drivetrain() {
         super("Drivetrain");
-        leftFront = new Talon(1, HW.leftFrontMotor);
-        leftRear = new Talon(1, HW.leftRearMotor);
-        rightFront = new Talon(1, HW.rightFrontMotor);
-        rightRear = new Talon(1, HW.rightRearMotor);
+        leftFront = new Talon(HW.motorModule, HW.leftFrontMotor);
+        leftRear = new Talon(HW.motorModule, HW.leftRearMotor);
+        rightFront = new Talon(HW.motorModule, HW.rightFrontMotor);
+        rightRear = new Talon(HW.motorModule, HW.rightRearMotor);
         drive = new BetterRobotDrive(leftFront, leftRear, rightFront, rightRear);
-        shifter = new DoubleSolenoid(HW.driveShiftASolenoid, HW.driveShiftBSolenoid);
+        shifter = new DoubleSolenoid(HW.solonoidModule,HW.driveShiftSolenoidForward,HW.driveShiftSolenoidReverse);
 
         drive.setSafetyEnabled(false);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
@@ -86,16 +85,18 @@ public class Drivetrain extends Subsystem {
 
     public void shiftTraction() {
         shifter.set(DoubleSolenoid.Value.kForward);
+        System.out.println("Traction Mode Engaged");
         currentState = TRACTION;
     }
 
     public void shiftMecanum() {
         shifter.set(DoubleSolenoid.Value.kReverse);
+        System.out.println("Mecanum Mode Engaged");
         currentState = MECANUM;
     }
 
-    public DoubleSolenoid.Value getShiftPosition() {
-        return shifter.get();
+    public boolean getShiftPosition() {
+        return shifter.get() == DoubleSolenoid.Value.kForward;
     }
 
     public double getGyroAngle() {
@@ -107,7 +108,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public boolean getDriveState() {
-        return this.currentState;
+        return currentState;
     }
     
     public ADXL345_I2C getAccelerometer() {

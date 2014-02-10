@@ -16,23 +16,38 @@ import org.discobots.aerialassist.subsystems.Drivetrain;
 public class SwitchDrive extends CommandBase {
 
     private boolean newMode;
+    private boolean useOwnData;
 
     public SwitchDrive(boolean check) {
         requires(drivetrainSub);
         newMode = check;
+        useOwnData=false;
     }
 
     public SwitchDrive() {
-        this(!drivetrainSub.getDriveState());
+        requires(drivetrainSub);
+        newMode=!drivetrainSub.getDriveState();
+        useOwnData=true;
     }
 
     protected void initialize() {
-        if (newMode == Drivetrain.TRACTION) {// (true)
-            drivetrainSub.shiftTraction();
-            new TankDrive().start();
-        } else if (newMode == Drivetrain.MECANUM) { // (false)
-            drivetrainSub.shiftMecanum();
-            new MecanumDrive().start();
+        
+        if(!useOwnData) {
+            if (newMode == Drivetrain.TRACTION) { // (true) //!drivetrainSub.getDriveState()
+                drivetrainSub.shiftTraction();
+                new TankDrive().start();
+            } else {// (newMode == Drivetrain.TRACTION) { // (false)
+                drivetrainSub.shiftMecanum();
+                new MecanumDrive().start();
+            } 
+        } else {
+            if (!drivetrainSub.getDriveState()) { // (true) //!drivetrainSub.getDriveState()
+                drivetrainSub.shiftTraction();
+                new TankDrive().start();
+            } else {// (newMode == Drivetrain.TRACTION) { // (false)
+                drivetrainSub.shiftMecanum();
+                new MecanumDrive().start();
+            }
         }
     }
 

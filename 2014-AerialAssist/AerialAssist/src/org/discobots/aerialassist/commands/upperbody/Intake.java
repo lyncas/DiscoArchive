@@ -33,6 +33,7 @@ public class Intake extends CommandBase {
     }
 
     protected void interrupted() {
+        end();
     }
     
 }
