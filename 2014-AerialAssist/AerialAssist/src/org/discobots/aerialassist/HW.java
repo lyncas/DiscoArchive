@@ -26,6 +26,7 @@ public class HW {
                             leftFrontMotor = 3, rightFrontMotor= 4,
                             rollerMotor = 5;
     public static final int compressorRelay = 1, pressureSwitchAnalog = 6,
+                            pressureSwitchSlot=1, pressureSwitchChannel=1, 
             //Port 3 is bad so I changed driveShiftASolenoid to 5 and pressureSwitchAnalog to 6.
                             driveShiftASolenoid = 5, driveShiftBSolenoid = 4,
                             extenderASolenoid = 1, extenderBSolenoid = 2;
