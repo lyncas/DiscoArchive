@@ -21,7 +21,7 @@ public class Intake extends CommandBase {
     }
 
     protected void execute() {
-        rollerSub.setSpeed(direction);
+        rollerSub.setIntakeSpeed(direction);
     }
 
     protected boolean isFinished() {
@@ -29,7 +29,7 @@ public class Intake extends CommandBase {
     }
 
     protected void end() {
-        rollerSub.setSpeed(0);
+        rollerSub.setIntakeSpeed(0);
     }
 
     protected void interrupted() {

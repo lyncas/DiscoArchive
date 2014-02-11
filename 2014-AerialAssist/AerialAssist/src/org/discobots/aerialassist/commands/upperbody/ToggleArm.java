@@ -11,7 +11,7 @@ public class ToggleArm extends CommandBase {
     public ToggleArm() {
     }
     protected void initialize() {
-        rollerSub.setExtender(!rollerSub.getExtender());
+        rollerSub.setExtended(!rollerSub.isExtended());
     }
     protected void execute() {
     }

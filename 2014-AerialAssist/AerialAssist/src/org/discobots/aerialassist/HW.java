@@ -29,6 +29,5 @@ public class HW {
     /**---------------------------------
      * Sensors
      ---------------------------------*/
-    public static final int gyroChannel = 2, accelModule = 1, //I2C on digital module 1
-                               chooChooSensor = 11, digitalModule = 1;
+    public static final int gyroChannel = 2, chooChooTouchSensor = 11;
 }

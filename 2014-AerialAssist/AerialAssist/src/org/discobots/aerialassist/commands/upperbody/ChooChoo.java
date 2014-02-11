@@ -5,66 +5,58 @@
  */
 package org.discobots.aerialassist.commands.upperbody;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
-import org.discobots.aerialassist.HW;
 
 /**
  *
  * @author Patrick
  */
 public class ChooChoo extends CommandBase {
-    
+
+    boolean finished;
+    private final long maxRunTime;
+    private long startTime;
+
     private final boolean keepGoing;
-    public long MAXTIME;
-    private long time;
-    DigitalInput limitSwitch;
-    
+
     public ChooChoo(boolean interrupt) {
         requires(catapultSub);
-        keepGoing = interrupt;
-        MAXTIME = 1000;
-//        limitSwitch = new DigitalInput(HW.digitalModule, HW.chooChooSensor);
+        keepGoing = interrupt; // What does this do? "keep going" does not mean the same as "interrupt"
+        maxRunTime = 1000;
+        finished = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        catapultSub.run();
-        if(!rollerSub.getExtender() || !keepGoing)
-            end();
-        time = System.currentTimeMillis();
+        if (!rollerSub.isExtended() || !keepGoing) {
+            finished = true;
+        } else {
+            catapultSub.run();
+            System.out.println("ChooChooCommand: Is Running");
+        }
+        startTime = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        boolean ready = false;
-        boolean go = true;
-        
-        while (go) {
-            SmartDashboard.putInt("Time to go: ", (int) (MAXTIME - (System.currentTimeMillis()-time)));
-            SmartDashboard.putBoolean("Switch Value: ", limitSwitch.get());
-            SmartDashboard.putBoolean("Ready: ", ready);
-            SmartDashboard.putBoolean("Go: ", go);
-            
-            if(!limitSwitch.get()) {
-                ready=true;
-            } if (limitSwitch.get() && ready) {
-                go = false;
-            }
+        if (catapultSub.getTouchValue()) {
+            finished = true;
         }
-        end();
+        SmartDashboard.putNumber("ChooChoo Time Remaining", (int) (maxRunTime - (System.currentTimeMillis() - startTime)));
+        SmartDashboard.putBoolean("ChooChoo Switch Value", catapultSub.getTouchValue());
+        SmartDashboard.putBoolean("ChooChoo Status", finished);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return System.currentTimeMillis() - time > MAXTIME;
+        return finished || (System.currentTimeMillis() - startTime > maxRunTime);
     }
 
     // Called once after isFinished returns true
     protected void end() {
         catapultSub.stop();
-        System.out.println("The launcher has stopped.");
+        System.out.println("ChooChooCommand: Has Stopped");
     }
 
     // Called when another command which requires one or more of the same

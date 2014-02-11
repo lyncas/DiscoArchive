@@ -23,15 +23,15 @@ public class RollerSub extends Subsystem {
         extend = new Solenoid(HW.extenderSolenoid);
     }
     
-    public void setSpeed(double speed) {
+    public void setIntakeSpeed(double speed) {
         roller.set(speed);
     }
     
-    public void setExtender(boolean on) {
+    public void setExtended(boolean on) {
         extend.set(on);
     }
     
-    public boolean getExtender() {
+    public boolean isExtended() {
         return extend.get();
     }
 }
