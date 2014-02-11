@@ -70,8 +70,7 @@ public class OI {
         b_bumpR.whenReleased(new Intake(0));
         b_trigR.whileHeld(new Intake(Intake.OUT));
         b_trigR.whenReleased(new Intake(0));
-        b_trigL.whenPressed(new ChooChoo(true));
-        b_bumpL.whenPressed(new ChooChoo(false));
+        b_trigL.whenPressed(new ChooChoo());
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
     }
