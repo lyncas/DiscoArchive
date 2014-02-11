@@ -7,8 +7,6 @@ import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.drive.FixAngle;
 import org.discobots.aerialassist.commands.upperbody.ChooChoo;
-import org.discobots.aerialassist.commands.upperbody.ChooChooEnable;
-import org.discobots.aerialassist.commands.upperbody.ChooChooManual;
 import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
 import org.discobots.aerialassist.subsystems.Drivetrain;
@@ -73,8 +71,6 @@ public class OI {
         b_trigR.whenReleased(new Intake(0));
         b_trigL.whenPressed(new ChooChoo(true));
         b_bumpL.whenPressed(new ChooChoo(false));
-        b_btnX.whileHeld(new ChooChooManual());
-        b2_btnA.whenPressed(new ChooChooEnable());
     }
      public double getRawAnalogStickALX() {
         return gp1.getLX();

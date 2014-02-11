@@ -1,5 +1,7 @@
 package org.discobots.aerialassist.subsystems;
 
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
@@ -12,6 +14,9 @@ public class Catapult extends Subsystem {
 
     private Victor catapultLauncher;
     private boolean manualFire;
+    DigitalInput limitSwitch;
+    Counter counter;
+
 
     public void initDefaultCommand() {
     }
@@ -19,14 +24,25 @@ public class Catapult extends Subsystem {
     public void Catapult()
     {
         catapultLauncher = new Victor(HW.catapultMotor);
+        counter = new Counter(limitSwitch);
+        limitSwitch = new DigitalInput(HW.digitalModule, HW.chooChooSensor);
     }
     
     public void run() {
         catapultLauncher.set(1);
+
+    }
+    
+    public boolean isSwitchSet() {
+        return counter.get() > 0;
     }
     
     public void stop() {
         catapultLauncher.set(0);
+    }
+    
+    public void initializeCounter() {
+        counter.reset();
     }
     
     public void toggleManualFire() {
@@ -36,5 +52,10 @@ public class Catapult extends Subsystem {
     public boolean getManual() {
         return manualFire;
     }    
+    
+    public boolean getLimit()
+    {
+        return limitSwitch.get();
+    }
     
 }

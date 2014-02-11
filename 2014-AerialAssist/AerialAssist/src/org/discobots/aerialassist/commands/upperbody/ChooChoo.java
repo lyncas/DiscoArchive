@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.HW;
+import org.discobots.aerialassist.subsystems.Catapult;
 
 /**
  *
@@ -19,13 +20,11 @@ public class ChooChoo extends CommandBase {
     private final boolean keepGoing;
     public long MAXTIME;
     private long time;
-    DigitalInput limitSwitch;
     
     public ChooChoo(boolean interrupt) {
         requires(catapultSub);
         keepGoing = interrupt;
         MAXTIME = 1000;
-//        limitSwitch = new DigitalInput(HW.digitalModule, HW.chooChooSensor);
     }
 
     // Called just before this Command runs the first time
@@ -41,15 +40,18 @@ public class ChooChoo extends CommandBase {
         boolean ready = false;
         boolean go = true;
         
+        
+        
         while (go) {
             SmartDashboard.putInt("Time to go: ", (int) (MAXTIME - (System.currentTimeMillis()-time)));
-            SmartDashboard.putBoolean("Switch Value: ", limitSwitch.get());
+            SmartDashboard.putBoolean("Switch Value: ", catapultSub.isSwitchSet());
+            //if the counter doesn't work, change it to catapultSub.getLimit();
             SmartDashboard.putBoolean("Ready: ", ready);
             SmartDashboard.putBoolean("Go: ", go);
             
-            if(!limitSwitch.get()) {
+            if(!catapultSub.getLimit()) {
                 ready=true;
-            } if (limitSwitch.get() && ready) {
+            } if (catapultSub.getLimit() && ready) {
                 go = false;
             }
         }
