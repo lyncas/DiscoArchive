@@ -60,16 +60,16 @@ public class MainVision extends SimpleRobot {
     BinaryImage filteredImage;
 
     
-    int hi;
-    int hf;
-    int si;
-    int sf;
-    int vi;
-    int vf;
+    public int hi;
+    public int hf;
+    public int si;
+    public int sf;
+    public int vi;
+    public int vf;
     
     
     public MainVision() {
-        this.filteredImage = null;
+        
     }
     
     public class Scores {
