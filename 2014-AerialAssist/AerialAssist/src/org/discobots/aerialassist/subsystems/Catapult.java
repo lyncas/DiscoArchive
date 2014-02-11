@@ -1,17 +1,40 @@
 package org.discobots.aerialassist.subsystems;
 
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.discobots.aerialassist.HW;
 
 /**
  *
- * @author Nolan
+ * @author Patrick
  */
 public class Catapult extends Subsystem {
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+
+    private Victor catapultLauncher;
+    private boolean manualFire;
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
+    
+    public void Catapult()
+    {
+        catapultLauncher = new Victor(HW.catapultMotor);
+    }
+    
+    public void run() {
+        catapultLauncher.set(1);
+    }
+    
+    public void stop() {
+        catapultLauncher.set(0);
+    }
+    
+    public void toggleManualFire() {
+        manualFire=!manualFire;
+    }    
+    
+    public boolean getManual() {
+        return manualFire;
+    }    
+    
 }
