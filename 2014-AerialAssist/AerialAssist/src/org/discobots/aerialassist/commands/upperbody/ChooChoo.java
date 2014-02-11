@@ -7,7 +7,6 @@ package org.discobots.aerialassist.commands.upperbody;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
-
 /**
  *
  * @author Patrick
@@ -19,7 +18,7 @@ public class ChooChoo extends CommandBase {
     private long startTime;
 
     private final boolean keepGoing;
-
+    
     public ChooChoo(boolean interrupt) {
         requires(catapultSub);
         keepGoing = interrupt; // What does this do? "keep going" does not mean the same as "interrupt"
@@ -40,11 +39,11 @@ public class ChooChoo extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (catapultSub.getTouchValue()) {
+        if (catapultSub.getLimitValue()) {
             finished = true;
         }
         SmartDashboard.putNumber("ChooChoo Time Remaining", (int) (maxRunTime - (System.currentTimeMillis() - startTime)));
-        SmartDashboard.putBoolean("ChooChoo Switch Value", catapultSub.getTouchValue());
+        SmartDashboard.putBoolean("ChooChoo Switch Value", catapultSub.getLimitValue());
         SmartDashboard.putBoolean("ChooChoo Status", finished);
     }
 
