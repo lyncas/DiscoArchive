@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/Intake.java</file>
             <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/CommandBase.java</file>
-            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/Catapult.java</file>
+            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/FireArm.java</file>
             <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/HW.java</file>
-            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/RollerSub.java</file>
-            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/Drivetrain.java</file>
-            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/ChooChoo.java</file>
-            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/Main.java</file>
+            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/Pneumatapult.java</file>
             <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/OI.java</file>
         </group>
     </open-files>
