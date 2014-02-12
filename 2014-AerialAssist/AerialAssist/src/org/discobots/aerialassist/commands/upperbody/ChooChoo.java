@@ -17,31 +17,30 @@ public class ChooChoo extends CommandBase {
     private final long maxRunTime;
     private long startTime;
 
-    private final boolean keepGoing;
     
-    public ChooChoo(boolean interrupt) {
+    public ChooChoo() {
         requires(catapultSub);
-        keepGoing = interrupt; // What does this do? "keep going" does not mean the same as "interrupt"
         maxRunTime = 1000;
         finished = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        if (!rollerSub.isExtended() || !keepGoing) {
+        if (!rollerSub.isExtended()) {
             finished = true;
         } else {
             catapultSub.run();
-            System.out.println("ChooChooCommand: Is Running");
+            System.out.println("ChooChooCommand: Is Initialized");
         }
         startTime = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (catapultSub.getLimitValue()) {
-            finished = true;
+        if (!catapultSub.getLimitValue()) {
+            //finished = true;
         }
+            System.out.println("ChooChooCommand: Is Executed");
         SmartDashboard.putNumber("ChooChoo Time Remaining", (int) (maxRunTime - (System.currentTimeMillis() - startTime)));
         SmartDashboard.putBoolean("ChooChoo Switch Value", catapultSub.getLimitValue());
         SmartDashboard.putBoolean("ChooChoo Status", finished);

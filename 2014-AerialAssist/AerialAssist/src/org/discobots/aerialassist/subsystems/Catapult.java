@@ -13,7 +13,6 @@ import org.discobots.aerialassist.HW;
 public class Catapult extends Subsystem {
 
     private Victor catapultLauncher;
-    private DigitalInput sensor;
     private boolean manualFire;
     DigitalInput limitSwitch;
     Counter counter;
@@ -22,15 +21,18 @@ public class Catapult extends Subsystem {
     public void initDefaultCommand() {
     }
 
-    public void Catapult() {
-        catapultLauncher = new Victor(HW.catapultMotor);
-        counter = new Counter(limitSwitch);
+    public Catapult() {
+        catapultLauncher = new Victor(1, HW.catapultMotor);
         limitSwitch = new DigitalInput(1, HW.chooChooTouchSensor);
+        counter = new Counter(limitSwitch);
+        System.out.println(catapultLauncher.toString() + " --------------------------");
+        System.out.println(counter.toString());
+        System.out.println(limitSwitch.toString());
+        
     }
 
     public void run() {
         catapultLauncher.set(1);
-
     }
     
     public boolean isSwitchSet() {
