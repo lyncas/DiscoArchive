@@ -61,6 +61,7 @@ public class OI {
     }
 
     private void mapButtons() {
+//      Controller 1
         b_btnA.whenPressed(new ToggleArm());
         b_btnB.whenReleased(new SwitchDrive());
         b_dpadU.whenReleased(new SwitchDrive(Drivetrain.MECANUM));
@@ -76,6 +77,10 @@ public class OI {
         b_bumpL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
+//      Controller 2
+        b2_trigR.whenPressed(new ChooChoo());
+        b2_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
+        b2_bumpL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
     }
      public double getRawAnalogStickALX() {
         return gp1.getLX();
