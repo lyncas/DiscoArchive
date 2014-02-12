@@ -6,7 +6,7 @@ import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.drive.FixAngle;
 import org.discobots.aerialassist.commands.upperbody.ChooChoo;
-import org.discobots.aerialassist.commands.upperbody.FireArm;
+import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
 //import org.discobots.aerialassist.commands.upperbody.ChooChooEnable; These two classes were not committed, i'm assuming these
 //import org.discobots.aerialassist.commands.upperbody.ChooChooManual; classes exist but are just not committed and pushed.
 import org.discobots.aerialassist.commands.upperbody.Intake;
@@ -72,8 +72,8 @@ public class OI {
         b_trigR.whileHeld(new Intake(Intake.OUT));
         b_trigR.whenReleased(new Intake(0));
         b_trigL.whenPressed(new ChooChoo());
-        b_bumpL.whenPressed(new FireArm(FireArm.FIRE));
-        b_bumpL.whenReleased(new FireArm(FireArm.LOAD));
+        b_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
+        b_bumpL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
     }
