@@ -18,7 +18,7 @@ public class HW {
      * Pneumatics
      ---------------------------------*/
     public static final int /*compressorDigital = 2,*/ compressorRelay = 1,
-                             pressureSwitchAnalog = 6, spikeReplacementVictor=1;
+                             pressureSwitchAnalog = 6, spikeReplacementVictor=8;
     
                            
     //Port 3 is bad so I changed driveShiftASolenoid to 5 and pressureSwitchAnalog to 6.

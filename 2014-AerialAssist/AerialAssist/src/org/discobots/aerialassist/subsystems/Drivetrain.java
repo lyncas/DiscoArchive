@@ -7,6 +7,7 @@ package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
@@ -85,13 +86,11 @@ public class Drivetrain extends Subsystem {
 
     public void shiftTraction() {
         shifter.set(DoubleSolenoid.Value.kForward);
-        System.out.println("Traction Mode Engaged");
         currentState = TRACTION;
     }
 
     public void shiftMecanum() {
         shifter.set(DoubleSolenoid.Value.kReverse);
-        System.out.println("Mecanum Mode Engaged");
         currentState = MECANUM;
     }
 
@@ -101,6 +100,10 @@ public class Drivetrain extends Subsystem {
 
     public double getGyroAngle() {
         return gyro.getAngle();
+    }
+    
+    public double getGyroRate() {
+        return gyro.getRate();
     }
 
     public DiscoGyro getGyro() {

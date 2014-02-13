@@ -72,9 +72,9 @@ public class OI {
         b_bumpR.whenReleased(new Intake(0));
         b_trigR.whileHeld(new Intake(Intake.OUT));
         b_trigR.whenReleased(new Intake(0));
-        b_trigL.whenPressed(new ChooChoo());
-        b_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
-        b_bumpL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
+        //b_trigL.whenPressed(new ChooChoo());
+        b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
+        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
 //      Controller 2
