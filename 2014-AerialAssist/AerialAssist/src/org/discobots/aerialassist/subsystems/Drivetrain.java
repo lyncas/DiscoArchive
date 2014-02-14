@@ -27,10 +27,15 @@ public class Drivetrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     private Talon leftFront;
+    private Talon leftMiniFront;
     private Talon leftRear;
+    private Talon leftMiniRear;
     private Talon rightFront;
+    private Talon rightMiniFront;
     private Talon rightRear;
+    private Talon rightMiniRear;
     private BetterRobotDrive drive;
+    private BetterRobotDrive miniDrive;
     private DoubleSolenoid shifter;
     private DiscoGyro gyro;
     private ADXL345_I2C accelerometer;
@@ -42,10 +47,15 @@ public class Drivetrain extends Subsystem {
     public Drivetrain() {
         super("Drivetrain");
         leftFront = new Talon(HW.motorModule, HW.leftFrontMotor);
+        leftMiniFront = new Talon(HW.motorModule, HW.leftFrontMiniMotor);
         leftRear = new Talon(HW.motorModule, HW.leftRearMotor);
+        leftMiniRear = new Talon(HW.motorModule, HW.leftRearMiniMotor);
         rightFront = new Talon(HW.motorModule, HW.rightFrontMotor);
+        rightMiniFront = new Talon(HW.motorModule, HW.rightFrontMiniMotor);
         rightRear = new Talon(HW.motorModule, HW.rightRearMotor);
+        rightMiniRear = new Talon(HW.motorModule, HW.rightRearMiniMotor);
         drive = new BetterRobotDrive(leftFront, leftRear, rightFront, rightRear);
+        miniDrive = new BetterRobotDrive(leftMiniFront, leftMiniRear, rightMiniFront, rightMiniRear);
         shifter = new DoubleSolenoid(HW.solonoidModule,HW.driveShiftSolenoidForward,HW.driveShiftSolenoidReverse);
 
         drive.setSafetyEnabled(false);
@@ -55,6 +65,14 @@ public class Drivetrain extends Subsystem {
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
+        
+        miniDrive.setSafetyEnabled(false);
+        miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
+        miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
         
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
@@ -74,14 +92,17 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new MecanumDrive());
         this.currentState = MECANUM;
+        gyro.reset(0);
     }
 
     public void holonomicPolar(double mag, double dir, double rot) {
-        drive.mecanumDrive_Polar(mag, dir, rot);
+        drive.mecanumDrive_Polar(mag, dir - gyro.getAngle(), rot);
+        miniDrive.mecanumDrive_Polar(mag, dir - gyro.getAngle(), rot);
     }
 
     public void tankDrive(double leftVal, double rightVal) {
         drive.tankDrive(leftVal, rightVal);
+        miniDrive.tankDrive(leftVal, rightVal);
     }
 
     public void shiftTraction() {

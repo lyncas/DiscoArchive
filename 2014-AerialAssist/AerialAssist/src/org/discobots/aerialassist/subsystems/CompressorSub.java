@@ -26,9 +26,9 @@ public class CompressorSub extends Subsystem {
     Victor whyWillTheSpikeNotWork;
     public CompressorSub() {
         super("Compressor");
-        //comp = new Compressor(1,HW.pressureSwitchAnalog, 1, HW.compressorRelay+1);
+        comp = new Compressor(1,HW.pressureSwitch, 1, HW.compressorRelay);
         //relay = new Relay(1, HW.compressorRelay);
-        whyWillTheSpikeNotWork = new Victor(1, HW.spikeReplacementVictor);
+        //whyWillTheSpikeNotWork = new Victor(1, HW.spikeReplacementVictor);
     }
 
     public void initDefaultCommand() {
@@ -37,25 +37,28 @@ public class CompressorSub extends Subsystem {
     public void on() {
         //relay.set(Relay.Value.kForward);
         //comp.setRelayValue(Relay.Value.kOn);
-        //comp.start();    
-        whyWillTheSpikeNotWork.set(1);
+        if (comp.getPressureSwitchValue()==true)
+            comp.stop();
+        else
+            comp.start();    
+        //whyWillTheSpikeNotWork.set(1);
     }
 
     public void off() {
         //relay.set(Relay.Value.kOff);
         //comp.setRelayValue(Relay.Value.kOff);
-        //comp.stop();    
-        whyWillTheSpikeNotWork.set(0);
+        comp.stop();    
+        //whyWillTheSpikeNotWork.set(0);
     }
 
     public boolean check() {
         //return relay.get() != Relay.Value.kOff;
-        //return comp.enabled();
-        return 1 == whyWillTheSpikeNotWork.get();
+        return comp.enabled();
+        //return 1 == whyWillTheSpikeNotWork.get();
     }
     
     public boolean getPressure()
     {
-        return false;//comp.getPressureSwitchValue();
+        return comp.getPressureSwitchValue();
     }
 }

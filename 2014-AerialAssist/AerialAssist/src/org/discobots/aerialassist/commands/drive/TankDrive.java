@@ -5,6 +5,7 @@
  */
 package org.discobots.aerialassist.commands.drive;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 
 /**
@@ -26,7 +27,10 @@ public class TankDrive extends CommandBase {
     protected void execute() {
         double l = oi.getRawAnalogStickALY();
         double r = -oi.getRawAnalogStickARY();
-
+        
+        SmartDashboard.putDouble("Gyro Angle:  ",drivetrainSub.getGyroAngle());
+        SmartDashboard.putDouble("Gyro Rate:  ",drivetrainSub.getGyroRate());
+        
         drivetrainSub.tankDrive(l, r);
     }
 

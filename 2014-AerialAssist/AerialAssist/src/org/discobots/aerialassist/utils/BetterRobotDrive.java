@@ -39,8 +39,7 @@ public class BetterRobotDrive extends RobotDrive{
         magnitude = limit(magnitude) * Math.sqrt(2.0);
         // The rollers are at 45 degree angles.
         
-        double dirInRad = (direction - 45)* 3.14159 / 180.0;    //I changed the +45 to -45.
-        // - HW.angleController.getOutput()
+        double dirInRad = (direction - 45)* 3.14159 / 180.0;    //I changed the +45 to -45.       
         double cosD = Math.cos(dirInRad);   //1; I switched the values.
         double sinD = Math.sin(dirInRad);   //1: I switched the values.
 
@@ -49,7 +48,7 @@ public class BetterRobotDrive extends RobotDrive{
         wheelSpeeds[kFrontRight_val] = (sinD * magnitude - rotation);  //I changed it from cosD * magnitude - rotation.
         wheelSpeeds[kRearLeft_val] = (sinD * magnitude + rotation);    //I changed it from cosD * magnitude + rotation.
         wheelSpeeds[kRearRight_val] = (cosD * magnitude - rotation);   //I changed it from sinD * magnitude - rotation.
-
+        
         normalize(wheelSpeeds);
 
         byte syncGroup = (byte)0x80;
@@ -63,15 +62,5 @@ public class BetterRobotDrive extends RobotDrive{
         m_frontRightMotor.set(wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * m_maxOutput, syncGroup);
         m_rearLeftMotor.set(wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * m_maxOutput, syncGroup);
         m_rearRightMotor.set(wheelSpeeds[kRearRight_val] * m_invertedMotors[kRearRight_val] * m_maxOutput, syncGroup);
-
-        if (m_isCANInitialized) {
-            try {
-                CANJaguar.updateSyncGroup(syncGroup);
-            } catch (CANNotInitializedException e) {
-                m_isCANInitialized = false;
-            } catch (CANTimeoutException e) {}
-        }
-
-        if (m_safetyHelper != null) m_safetyHelper.feed();
-    }    
+    }
 }
