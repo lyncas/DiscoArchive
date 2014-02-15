@@ -30,10 +30,6 @@ public class FirePneumatapult extends CommandBase {
     }
 
     protected void initialize() {
-<<<<<<< HEAD
-        startTime = System.currentTimeMillis();
-=======
->>>>>>> a11319d3199eafd953a8702ae4f67907ecd86b02
         startTime=System.currentTimeMillis();
     }
 
@@ -42,11 +38,7 @@ public class FirePneumatapult extends CommandBase {
        SmartDashboard.putBoolean("Catapult status", shoot);
        if (rollerSub.isExtended()) 
         {
-<<<<<<< HEAD
                 if(count%5<3)
-=======
-                if(count%5<=3)
->>>>>>> a11319d3199eafd953a8702ae4f67907ecd86b02
                     pneumatapultSub.fire(shoot);
                 else
                     pneumatapultSub.fire(false);
@@ -62,11 +54,7 @@ public class FirePneumatapult extends CommandBase {
     }
 
     protected boolean isFinished() {
-<<<<<<< HEAD
-        return System.currentTimeMillis() - startTime > maxRunTime;
-=======
         return System.currentTimeMillis()-startTime> maxRunTime;
->>>>>>> a11319d3199eafd953a8702ae4f67907ecd86b02
     }
 
     protected void end() {
