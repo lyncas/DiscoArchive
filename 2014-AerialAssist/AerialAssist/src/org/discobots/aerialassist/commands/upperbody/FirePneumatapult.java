@@ -34,11 +34,11 @@ public class FirePneumatapult extends CommandBase {
     }
 
     protected void execute() {
-       count++;
+       count+=20;
        SmartDashboard.putBoolean("Catapult status", shoot);
        if (rollerSub.isExtended()) 
         {
-                if(count%5<3)
+                if(count%200<180)//200 is one fifth of the total execution time, the solenoid starts and stops 5 times now
                     pneumatapultSub.fire(shoot);
                 else
                     pneumatapultSub.fire(false);
