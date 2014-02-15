@@ -17,13 +17,17 @@ public class FirePneumatapult extends CommandBase {
     private boolean shoot;
     public static final boolean FIRE = true;
     public static final boolean LOAD = false;
+    private final long maxRunTime;
+    private long startTime;
     
     public FirePneumatapult(boolean fire) {
         requires(pneumatapultSub);
         shoot = fire;
+        maxRunTime=1000;
     }
 
     protected void initialize() {
+        startTime = System.currentTimeMillis();
     }
 
     protected void execute() {
@@ -43,10 +47,11 @@ public class FirePneumatapult extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return true;
+        return System.currentTimeMillis() - startTime > maxRunTime;
     }
 
     protected void end() {
+        pneumatapultSub.fire(false);
     }
 
     protected void interrupted() {

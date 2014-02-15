@@ -74,13 +74,13 @@ public class OI {
         b_trigR.whenReleased(new Intake(0));
         //b_trigL.whenPressed(new ChooChoo());
         b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
-        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
+//        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
 //      Controller 2
         b2_trigR.whenPressed(new ChooChoo());
-        b2_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
-        b2_bumpL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
+//        b2_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
+//        b2_bumpL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
     }
      public double getRawAnalogStickALX() {
         return gp1.getLX();
