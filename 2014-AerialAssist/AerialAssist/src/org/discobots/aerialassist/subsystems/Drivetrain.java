@@ -96,8 +96,8 @@ public class Drivetrain extends Subsystem {
     }
 
     public void holonomicPolar(double mag, double dir, double rot) {
-        drive.mecanumDrive_Polar(mag, dir - gyro.getAngle(), rot);
-        miniDrive.mecanumDrive_Polar(mag, dir - gyro.getAngle(), rot);
+        drive.mecanumDrive_Polar(mag, dir, rot);
+        miniDrive.mecanumDrive_Polar(mag, dir, rot);
     }
 
     public void tankDrive(double leftVal, double rightVal) {
