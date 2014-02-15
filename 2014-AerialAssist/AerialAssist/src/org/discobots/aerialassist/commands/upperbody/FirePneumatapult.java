@@ -16,6 +16,7 @@ public class FirePneumatapult extends CommandBase {
     
     private boolean shoot;
     public int count;
+    public long time;
     public static final boolean FIRE = true;
     public static final boolean LOAD = false;
     
@@ -24,6 +25,7 @@ public class FirePneumatapult extends CommandBase {
         requires(pneumatapultSub);
         shoot = fire;
         count=0;
+        time=System.currentTimeMillis();
     }
 
     protected void initialize() {
@@ -34,13 +36,15 @@ public class FirePneumatapult extends CommandBase {
        SmartDashboard.putBoolean("Catapult status", shoot);
        if (rollerSub.isExtended()) 
         {
-            if(count%5<=3)
-                pneumatapultSub.fire(shoot);
-            else
-                pneumatapultSub.fire(false);
-            if (!compressorSub.check())
-            {
-                compressorSub.on();
+            if(System.currentTimeMillis()-time<=1000){
+                if(count%5<=3)
+                    pneumatapultSub.fire(shoot);
+                else
+                    pneumatapultSub.fire(false);
+                if (!compressorSub.check())
+                {
+                    compressorSub.on();
+                }
             }
         } 
        else
