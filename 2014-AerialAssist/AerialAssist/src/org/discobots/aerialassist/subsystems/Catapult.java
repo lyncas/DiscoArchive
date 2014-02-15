@@ -22,17 +22,17 @@ public class Catapult extends Subsystem {
     }
 
     public Catapult() {
-        catapultLauncher = new Victor(1, HW.catapultMotor);
+//        catapultLauncher = new Victor(1, HW.catapultMotor);
         limitSwitch = new DigitalInput(1, HW.chooChooTouchSensor);
         counter = new Counter(limitSwitch);
-        System.out.println(catapultLauncher.toString() + " --------------------------");
+//        System.out.println(catapultLauncher.toString() + " --------------------------");
         System.out.println(counter.toString());
         System.out.println(limitSwitch.toString());
         
     }
 
     public void run() {
-        catapultLauncher.set(1);
+//        catapultLauncher.set(1);
     }
     
     public boolean isSwitchSet() {
@@ -40,7 +40,7 @@ public class Catapult extends Subsystem {
     }
 
     public void stop() {
-        catapultLauncher.set(0);
+//        catapultLauncher.set(0);
     }
     
     public void initializeCounter() {

@@ -29,8 +29,6 @@ import org.discobots.aerialassist.subsystems.Drivetrain;
  */
 public class Main extends IterativeRobot {
     
-    DigitalInput[] digitalIOs = new DigitalInput[10];
-
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -41,11 +39,6 @@ public class Main extends IterativeRobot {
 
         // Initialize all subsystems
         CommandBase.init();
-        for(int k=1; k<digitalIOs.length; k++)
-        {
-            digitalIOs[k]=new DigitalInput(1, k+1);
-            SmartDashboard.putBoolean("Digital IO "+k+1, digitalIOs[k].get());
-        }
     }
 
     public void autonomousInit() {
@@ -76,10 +69,6 @@ public class Main extends IterativeRobot {
         CommandBase.update();
         Dashboard.update();
         SmartDashboard.putNumber("Main loop time:", System.currentTimeMillis()-begin);
-        for(int k=1; k<digitalIOs.length; k++)
-        {
-            SmartDashboard.putBoolean("Digital IO "+k+1, digitalIOs[k].get());
-        }
  //       for(int k=0; k<digitalIOs.length; k++)
  //       {
  //           digitalIOs[k]=new DigitalInput(1, k+1);
