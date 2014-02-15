@@ -15,30 +15,37 @@ import org.discobots.aerialassist.commands.CommandBase;
 public class FirePneumatapult extends CommandBase {
     
     private boolean shoot;
+    public int count;
+    public long startTime;
+    private final long maxRunTime;
     public static final boolean FIRE = true;
     public static final boolean LOAD = false;
-    private final long maxRunTime;
-    private long startTime;
     
     public FirePneumatapult(boolean fire) {
         requires(pneumatapultSub);
         shoot = fire;
+        count=0;
         maxRunTime=1000;
     }
 
     protected void initialize() {
         startTime = System.currentTimeMillis();
+        startTime=System.currentTimeMillis();
     }
 
     protected void execute() {
+       count++;
        SmartDashboard.putBoolean("Catapult status", shoot);
        if (rollerSub.isExtended()) 
         {
-            pneumatapultSub.fire(shoot);
-            if (!compressorSub.check())
-            {
-                compressorSub.on();
-            }
+                if(count%5<3)
+                    pneumatapultSub.fire(shoot);
+                else
+                    pneumatapultSub.fire(false);
+                if (!compressorSub.check())
+                {
+                    compressorSub.on();
+                }
         } 
        else
        {
