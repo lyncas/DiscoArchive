@@ -2,6 +2,7 @@ package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.discobots.aerialassist.commands.SwitchShot;
 import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.drive.FixAngle;
@@ -73,7 +74,8 @@ public class OI {
         b_trigR.whileHeld(new Intake(Intake.OUT));
         b_trigR.whenReleased(new Intake(0));
         //b_trigL.whenPressed(new ChooChoo());
-        b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE,FirePneumatapult.FULL));
+        b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
+        b_bumpL.whenPressed(new SwitchShot());
 //        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
