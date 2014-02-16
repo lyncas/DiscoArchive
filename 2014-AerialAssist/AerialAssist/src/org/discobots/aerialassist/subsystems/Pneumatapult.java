@@ -17,18 +17,25 @@ public class Pneumatapult extends Subsystem {
     
     private Solenoid fire1;
     private Solenoid fire2;
-    
+    private int mode;
     public void initDefaultCommand() {
     }
     
     public Pneumatapult() {
         fire1 = new Solenoid(HW.pneumatapultSolenoidA);
         fire2 = new Solenoid(HW.pneumatapultSolenoidB);
+        mode = 2;
     }
 
     public void fire(boolean shoot) {
         fire1.set(shoot);
         fire2.set(shoot);
     }
-
+    public int getMode(){
+        return mode;
+    }
+    public void changeMode(){
+        mode++;
+        mode=mode%3;
+    }
 }
