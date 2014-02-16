@@ -36,5 +36,6 @@ public class HW {
     /**---------------------------------
      * Sensors
      ---------------------------------*/
-    public static final int gyroChannel = 2, chooChooTouchSensor = 11;
+    public static final int gyroChannel = 2, chooChooTouchSensor = 11,
+                            armLimitSwitchChannel = 4;
 }
