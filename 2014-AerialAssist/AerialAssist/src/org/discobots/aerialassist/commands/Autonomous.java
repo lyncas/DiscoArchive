@@ -36,13 +36,16 @@ public class Autonomous extends CommandGroup {
         // arm.
         
         addSequential(new ToggleArm());
-        addSequential(new AutonomousIntake(.3*Intake.IN, 2000));
+        addSequential(new AutonomousIntake(0.2*Intake.IN, 2000));
         addSequential(new FirePneumatapult(true, 2));
 //        addSequential(new WaitCommand(1.500));
 //        addSequential(new AutonomousDrive(-1, -1, 1000));
+        addSequential(new AutonomousDrive(1, 90, 0, 100));
 //        addSequential(new AutonomousDrive(1, 1, 1000));
-        addSequential(new AutonomousIntake(1*Intake.IN, 6000));
+        addSequential(new AutonomousIntake(1*Intake.IN, 3000));
+        addSequential(new AutonomousDrive(1, 270, 0, 100));
         addSequential(new FirePneumatapult(true, 2));
+        addSequential(new AutonomousDrive(1, 270, 0, 500));
               
     }
 }

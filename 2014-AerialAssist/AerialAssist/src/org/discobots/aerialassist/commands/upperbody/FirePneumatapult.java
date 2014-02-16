@@ -27,9 +27,10 @@ public class FirePneumatapult extends CommandBase {
 
     
     
-    public FirePneumatapult(boolean fire) {
+    public FirePneumatapult(boolean fire, int ch) {
         requires(pneumatapultSub);
-        check = pneumatapultSub.getMode();
+//        check = pneumatapultSub.getMode();
+        check = ch;
         shoot = fire;
         count=0;
         maxRunTime=1000;
