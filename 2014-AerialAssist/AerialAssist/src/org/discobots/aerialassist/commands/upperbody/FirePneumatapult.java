@@ -62,7 +62,7 @@ public class FirePneumatapult extends CommandBase {
                     else
                         pneumatapultSub.fire(false);
                 }
-                if (!compressorSub.check()){
+                if (!compressorSub.isEnabled()){
                     compressorSub.on();
                 }
         } 

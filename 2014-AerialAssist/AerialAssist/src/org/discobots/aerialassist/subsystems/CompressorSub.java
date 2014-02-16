@@ -32,12 +32,11 @@ public class CompressorSub extends Subsystem {
         comp.stop();
     }
 
-    public boolean check() {
-        //return relay.get() != Relay.Value.kOff;
+    public boolean isEnabled() {
         return comp.enabled();
     }
-
-    public boolean getPressure() {
+    
+    public boolean isFull() {
         return comp.getPressureSwitchValue();
     }
 }

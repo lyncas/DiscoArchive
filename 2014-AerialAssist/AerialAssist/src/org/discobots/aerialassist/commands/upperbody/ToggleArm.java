@@ -12,7 +12,7 @@ public class ToggleArm extends CommandBase {
     }
     protected void initialize() {
         rollerSub.setExtended(!rollerSub.isExtended());
-        if (!compressorSub.check())
+        if (!compressorSub.isEnabled())
         {
             compressorSub.on();
         }

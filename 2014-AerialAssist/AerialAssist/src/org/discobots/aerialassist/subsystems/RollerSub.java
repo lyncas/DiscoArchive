@@ -27,6 +27,10 @@ public class RollerSub extends Subsystem {
         roller.set(speed);
     }
     
+    public double getIntakeSpeed() {
+        return roller.get();
+    }
+    
     public void setExtended(boolean on) {
         extend.set(on);
     }

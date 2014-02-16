@@ -14,13 +14,14 @@ import org.discobots.aerialassist.HW;
  * @author Seth
  */
 public class Pneumatapult extends Subsystem {
-    
+
     private Solenoid fire1;
     private Solenoid fire2;
     private int mode;
+
     public void initDefaultCommand() {
     }
-    
+
     public Pneumatapult() {
         fire1 = new Solenoid(HW.pneumatapultSolenoidA);
         fire2 = new Solenoid(HW.pneumatapultSolenoidB);
@@ -31,11 +32,17 @@ public class Pneumatapult extends Subsystem {
         fire1.set(shoot);
         fire2.set(shoot);
     }
-    public int getMode(){
+
+    public int getMode() {
         return mode;
     }
-    public void changeMode(){
+
+    public void changeMode() {
         mode++;
-        mode=mode%3;
+        mode = mode % 3;
+    }
+    
+    public boolean isDown() {
+        return !this.fire1.get();
     }
 }

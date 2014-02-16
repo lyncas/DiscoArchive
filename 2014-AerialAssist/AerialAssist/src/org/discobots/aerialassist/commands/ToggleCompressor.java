@@ -11,7 +11,7 @@ public class ToggleCompressor extends CommandBase {
     }
 
     protected void initialize() {
-        if (compressorSub.check()) {
+        if (compressorSub.isEnabled()) {
             compressorSub.off();
             System.out.println("Compressor off");
         } else {
