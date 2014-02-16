@@ -35,15 +35,11 @@ public class Main extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        // instantiate the command used for the autonomous period
-        //autonomousCommand = new ExampleCommand();
-
-        // Initialize all subsystems
         CommandBase.init();
+        Dashboard.init();
     }
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
         new Autonomous().start();
     }
 
@@ -52,13 +48,10 @@ public class Main extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        Dashboard.update();
     }
 
     public void teleopInit() {
-	// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
         new SwitchDrive(Drivetrain.MECANUM).start();
     }
 
@@ -68,14 +61,8 @@ public class Main extends IterativeRobot {
     public void teleopPeriodic() {
         long begin=System.currentTimeMillis();
         Scheduler.getInstance().run();
-        CommandBase.update();
         Dashboard.update();
-        SmartDashboard.putNumber("Main loop time:", System.currentTimeMillis()-begin);
- //       for(int k=0; k<digitalIOs.length; k++)
- //       {
- //           digitalIOs[k]=new DigitalInput(1, k+1);
- //           SmartDashboard.putBoolean("Digital IO "+k+1, digitalIOs[k].get());
-//        }
+        SmartDashboard.putNumber("Main Loop Time", System.currentTimeMillis()-begin);
     }
     
     /**

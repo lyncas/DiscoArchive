@@ -48,23 +48,7 @@ public abstract class CommandBase extends Command {
         SmartDashboard.putData(rollerSub);
         SmartDashboard.putData(catapultSub);
         SmartDashboard.putData(pneumatapultSub);
-
         //SmartDashboard.putData(visionSub);
-
-//        SmartDashboard.putData(visionSub);
-
-    }
-    
-    public static void update() {
-        SmartDashboard.putData(drivetrainSub);
-        SmartDashboard.putData(compressorSub);
-        SmartDashboard.putData(rollerSub);
-        SmartDashboard.putData(catapultSub);
-        SmartDashboard.putData(pneumatapultSub);
-
-        //SmartDashboard.putData(visionSub);
-
-//        SmartDashboard.putData(visionSub);
 
     }
     
