@@ -68,9 +68,6 @@ public class MecanumDrive extends CommandBase {
         double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;
 
         double gyroAngle = drivetrainSub.getGyroAngle();
-        SmartDashboard.putDouble("Gyro Angle:  ", drivetrainSub.getGyroAngle());
-        SmartDashboard.putDouble("Gyro Rate:  ", drivetrainSub.getGyroRate());
-
         drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
     }
 

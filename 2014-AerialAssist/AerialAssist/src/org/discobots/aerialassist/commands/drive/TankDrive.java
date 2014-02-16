@@ -40,10 +40,6 @@ public class TankDrive extends CommandBase {
         } else if (r - rPrev > rampThreshold) {
             r = rPrev + rampThreshold;
         }
-        
-        SmartDashboard.putNumber("Gyro Angle:  ",drivetrainSub.getGyroAngle());
-        SmartDashboard.putNumber("Gyro Rate:  ",drivetrainSub.getGyroRate());
-        
         drivetrainSub.tankDrive(l, r);
     }
 
