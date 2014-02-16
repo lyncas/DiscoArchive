@@ -50,7 +50,7 @@ public class FirePneumatapult extends CommandBase {
                         pneumatapultSub.fire(false);
                 }
                 if(check==1){
-                    if(count<=maxRunTime)
+                    if(count<=maxRunTime/2)
                         pneumatapultSub.fire(shoot);
                     else
                         pneumatapultSub.fire(false);

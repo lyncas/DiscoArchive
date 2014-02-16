@@ -41,7 +41,7 @@ public class MecanumDrive extends CommandBase {
         SmartDashboard.putDouble("Gyro Angle:  ",drivetrainSub.getGyroAngle());
         SmartDashboard.putDouble("Gyro Rate:  ",drivetrainSub.getGyroRate());
 
-        drivetrainSub.holonomicPolar(magnitude, angle-gyroAngle, rotation);
+        drivetrainSub.holonomicPolar(magnitude, angle+gyroAngle, rotation);
     }
 
     protected boolean isFinished() {

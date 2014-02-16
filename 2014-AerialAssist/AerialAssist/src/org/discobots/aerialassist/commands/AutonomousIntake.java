@@ -15,23 +15,25 @@ public class AutonomousIntake extends CommandBase {
 
     private final long maxRunTime;
     private long startTime; 
+    double power;
     
-    public AutonomousIntake(int time) {
+    public AutonomousIntake(double p, int time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(rollerSub);
         maxRunTime=time;
+        power=p;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         rollerSub.setIntakeSpeed(0);
+        startTime = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        rollerSub.setIntakeSpeed(Intake.IN);
-        startTime = System.currentTimeMillis();
+        rollerSub.setIntakeSpeed(power);
     }
 
     // Make this return true when this Command no longer needs to run execute()

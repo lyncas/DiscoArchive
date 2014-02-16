@@ -16,33 +16,40 @@ public class AutonomousDrive extends CommandBase {
     int magnitude; 
     int direction;
     int rotation;
+    int left; 
+    int right;
     
-    public AutonomousDrive(int mag, int dir, int rot, int time) {
+    public AutonomousDrive(int l, int r, int time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrainSub);
         maxRunTime=time;
+        this.left = l;
+        this.right = r;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        drivetrainSub.holonomicPolar(0, 0, 0); 
+        drivetrainSub.tankDrive(0, 0); 
+        startTime = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drivetrainSub.holonomicPolar(magnitude, direction, rotation);
-        startTime = System.currentTimeMillis();
+        drivetrainSub.tankDrive(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        if (System.currentTimeMillis() - startTime > maxRunTime) {
+            System.out.println("Killing AutonomousDrive");
+        }
         return System.currentTimeMillis() - startTime > maxRunTime;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        drivetrainSub.holonomicPolar(0, 0, 0);
+        drivetrainSub.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

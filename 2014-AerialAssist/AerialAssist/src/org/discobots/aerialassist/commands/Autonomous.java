@@ -8,6 +8,7 @@ package org.discobots.aerialassist.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
+import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 
@@ -35,12 +36,12 @@ public class Autonomous extends CommandGroup {
         // arm.
         
         addSequential(new ToggleArm());
-        addSequential(new WaitCommand(500));
+        addSequential(new AutonomousIntake(.3*Intake.IN, 2000));
         addSequential(new FirePneumatapult(true, 2));
-        addSequential(new WaitCommand(1500));
-        addSequential(new AutonomousDrive(1, 180, 0, 500));
-        addSequential(new AutonomousDrive(1, 0, 0, 500));
-        addSequential(new AutonomousIntake(500));
+//        addSequential(new WaitCommand(1.500));
+//        addSequential(new AutonomousDrive(-1, -1, 1000));
+//        addSequential(new AutonomousDrive(1, 1, 1000));
+        addSequential(new AutonomousIntake(1*Intake.IN, 6000));
         addSequential(new FirePneumatapult(true, 2));
               
     }

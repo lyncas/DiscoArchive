@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.utils.Dashboard;
 import org.discobots.aerialassist.OI;
+import org.discobots.aerialassist.commands.Autonomous;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 
@@ -43,6 +44,7 @@ public class Main extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+        new Autonomous().start();
     }
 
     /**
