@@ -41,8 +41,8 @@ public class TankDrive extends CommandBase {
             r = rPrev + rampThreshold;
         }
         
-        lPrev = l;
-        rPrev = r;
+        lPrev = (float)l;
+        rPrev = (float)r;
         
         drivetrainSub.tankDrive(l, r);
     }
