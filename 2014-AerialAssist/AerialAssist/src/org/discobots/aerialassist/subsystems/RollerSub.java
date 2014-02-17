@@ -37,6 +37,6 @@ public class RollerSub extends Subsystem {
     }
     
     public boolean isExtended() {
-        return !extend.get();
+        return !extend.get();   //I reversed it because the arm now defaults to down.
     }
 }
