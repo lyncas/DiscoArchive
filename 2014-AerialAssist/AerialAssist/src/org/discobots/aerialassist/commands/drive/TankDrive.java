@@ -40,6 +40,10 @@ public class TankDrive extends CommandBase {
         } else if (r - rPrev > rampThreshold) {
             r = rPrev + rampThreshold;
         }
+        
+        lPrev = l;
+        rPrev = r;
+        
         drivetrainSub.tankDrive(l, r);
     }
 
