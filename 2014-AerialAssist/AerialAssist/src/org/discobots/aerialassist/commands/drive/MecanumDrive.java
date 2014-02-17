@@ -64,9 +64,9 @@ public class MecanumDrive extends CommandBase {
             rotation = rPrev + rampThreshold;
         }
         
-        xPrev = x;
-        yPrev = y;
-        rPrev = rotation;
+        xPrev = (float)x;
+        yPrev = (float)y;
+        rPrev = (float)rotation;
         
         double magnitude = Math.sqrt(x * x + y * y);
         double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;
