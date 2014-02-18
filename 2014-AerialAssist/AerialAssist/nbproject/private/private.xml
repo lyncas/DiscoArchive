@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/MecanumDrive.java</file>
             <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/BetterRobotDrive.java</file>
+            <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/TankDrive.java</file>
             <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/ToggleArm.java</file>
             <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/Drivetrain.java</file>
             <file>file:/C:/Users/Seth/Desktop/FRC%20Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/RollerSub.java</file>

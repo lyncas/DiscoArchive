@@ -1,9 +1,5 @@
 package org.discobots.aerialassist;
 
-import org.discobots.aerialassist.utils.AngleController;
-import org.discobots.aerialassist.commands.CommandBase;
-
-
 public class HW {
 
     /**---------------------------------
@@ -28,7 +24,7 @@ public class HW {
     
                            
     //Port 3 is bad so I changed driveShiftASolenoid to 5 and pressureSwitchAnalog to 6.
-    public static final int extenderSolenoid = 1, 
+    public static final int extenderSolenoidA = 1, extenderSolenoidB = 5,
                             pneumatapultSolenoidA = 2, pneumatapultSolenoidB = 4,
                             driveShiftSolenoidForward = 7, driveShiftSolenoidReverse = 6, 
                             solonoidModule = 1;

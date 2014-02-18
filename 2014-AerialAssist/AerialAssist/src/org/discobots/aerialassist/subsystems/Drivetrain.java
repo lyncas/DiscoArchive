@@ -7,9 +7,7 @@ package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
@@ -61,14 +59,10 @@ public class Drivetrain extends Subsystem {
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
         
         miniDrive.setSafetyEnabled(false);
-        miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false

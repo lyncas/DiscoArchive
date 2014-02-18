@@ -72,7 +72,8 @@ public class MecanumDrive extends CommandBase {
         double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;
 
         double gyroAngle = drivetrainSub.getGyroAngle();
-        drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+//        drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);     //Uncomment for gyro.
+        drivetrainSub.holonomicPolar(magnitude, angle, rotation);   //Comment for gyro.
     }
 
     protected boolean isFinished() {
