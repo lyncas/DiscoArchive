@@ -61,14 +61,10 @@ public class Drivetrain extends Subsystem {
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
         
         miniDrive.setSafetyEnabled(false);
-        miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.drive.FixAngle;
+import org.discobots.aerialassist.commands.drive.HalfSpeedMecanum;
 import org.discobots.aerialassist.commands.upperbody.ChooChoo;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
 //import org.discobots.aerialassist.commands.upperbody.ChooChooEnable; These two classes were not committed, i'm assuming these
@@ -64,15 +65,18 @@ public class OI {
 //      Controller 1
         b_btnA.whenPressed(new ToggleArm());
         b_btnB.whenReleased(new SwitchDrive());
-        b_dpadU.whenReleased(new SwitchDrive(Drivetrain.MECANUM));
-        b_dpadD.whenReleased(new SwitchDrive(Drivetrain.TRACTION));
-        b_btnX.whenPressed(new FixAngle());
+        //b_dpadU.whenReleased(new SwitchDrive(Drivetrain.MECANUM));
+        //b_dpadD.whenReleased(new SwitchDrive(Drivetrain.TRACTION));
+        //b_btnX.whenPressed(new FixAngle());
+        b_dpadU.whileHeld(new HalfSpeedMecanum(90));   //These are like this because 0
+        b_dpadR.whileHeld(new HalfSpeedMecanum(180));  //degrees is NOT necessarily the
+        b_dpadD.whileHeld(new HalfSpeedMecanum(270));  //same as forward: 0 degrees is
+        b_dpadL.whileHeld(new HalfSpeedMecanum(0));    //straight right.
         b_btnY.whenPressed(new ToggleCompressor());
         b_bumpR.whileHeld(new Intake(Intake.IN));
         b_bumpR.whenReleased(new Intake(0));
         b_trigR.whileHeld(new Intake(Intake.OUT));
         b_trigR.whenReleased(new Intake(0));
-        //b_trigL.whenPressed(new ChooChoo());
         b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
         b_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
 //        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
