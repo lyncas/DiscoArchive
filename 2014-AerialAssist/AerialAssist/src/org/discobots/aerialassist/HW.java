@@ -25,8 +25,8 @@ public class HW {
                            
     //Port 3 is bad so I changed driveShiftASolenoid to 5 and pressureSwitchAnalog to 6.
     public static final int extenderSolenoidA = 1, extenderSolenoidB = 5,
-                            pneumatapultSolenoidA = 2, pneumatapultSolenoidB = 4,
-                            driveShiftSolenoidForward = 7, driveShiftSolenoidReverse = 6, 
+                            pneumatapultSolenoidA = 2, pneumatapultSolenoidB = 6,
+                            driveShiftSolenoidForward = 8, driveShiftSolenoidReverse = 7, 
                             solonoidModule = 1;
     
     /**---------------------------------
