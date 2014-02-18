@@ -16,6 +16,7 @@ import org.discobots.aerialassist.commands.CommandBase;
 public class MecanumDrive extends CommandBase {
 
     float xPrev, yPrev, rPrev;
+    boolean currentlyRotating;
     private final double rampThreshold = 0.1;
 
     public MecanumDrive() {
@@ -35,6 +36,7 @@ public class MecanumDrive extends CommandBase {
         double x = oi.getRawAnalogStickALX();
         double y = oi.getRawAnalogStickALY();
         double rotation = oi.getRawAnalogStickARX();
+        currentlyRotating = true;
         
         // Deadzone
         if (Math.abs(x) < 0.05) {
@@ -45,6 +47,7 @@ public class MecanumDrive extends CommandBase {
         }
         if (Math.abs(rotation) < 0.05) {
             rotation = 0;
+            currentlyRotating = false;
         }
         
         // Ramp
@@ -72,8 +75,11 @@ public class MecanumDrive extends CommandBase {
         double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;
 
         double gyroAngle = drivetrainSub.getGyroAngle();
-//        drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);     //Uncomment for gyro.
-        drivetrainSub.holonomicPolar(magnitude, angle, rotation);   //Comment for gyro.
+        if(currentlyRotating) {
+            drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+            drivetrainSub.setSetpoint();
+        } else
+            drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation + drivetrainSub.getAngleError());
     }
 
     protected boolean isFinished() {

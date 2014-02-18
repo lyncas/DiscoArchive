@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.drive.MecanumDrive;
+import org.discobots.aerialassist.utils.AngleController;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
 import org.discobots.aerialassist.utils.velocity.Velocity;
@@ -37,6 +38,7 @@ public class Drivetrain extends Subsystem {
     private DoubleSolenoid shifter;
     public DiscoGyro gyro;
     private ADXL345_I2C accelerometer;
+    private AngleController angleCont;
     private Velocity velocityReporter;
     public static final boolean MECANUM = false;
     public static final boolean TRACTION = true;
@@ -70,7 +72,8 @@ public class Drivetrain extends Subsystem {
         
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
-
+        angleCont = new AngleController(.5,0,0,gyro);
+        
         if (Velocity.ENABLE_VELOCITY) {
             try {
                 velocityReporter = new Velocity(accelerometer);
@@ -131,6 +134,14 @@ public class Drivetrain extends Subsystem {
     
     public ADXL345_I2C getAccelerometer() {
         return accelerometer;
+    }
+    
+    public double getAngleError() {
+        return angleCont.getOutput();
+    }
+    
+    public void setSetpoint() {
+        angleCont.setSetpoint();
     }
 
     public double getXVelocity() {
