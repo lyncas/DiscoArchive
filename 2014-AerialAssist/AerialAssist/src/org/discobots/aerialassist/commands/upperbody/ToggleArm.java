@@ -17,7 +17,7 @@ public class ToggleArm extends CommandBase {
     }
     protected void initialize() {
 //        rollerSub.setIntakeSpeed(0);                  //Get rid of all of the commented out lines if there is a limit switch.
-        rollerSub.setExtended(rollerSub.isExtended());  //I reversed it because isExtended now returns the opposite.
+        rollerSub.setExtended(!rollerSub.isExtended());  //I reversed it because isExtended now returns the opposite.
         if (!compressorSub.isEnabled())
         {
             compressorSub.on();

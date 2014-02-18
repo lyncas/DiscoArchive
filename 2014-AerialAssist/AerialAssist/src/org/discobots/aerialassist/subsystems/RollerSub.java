@@ -40,6 +40,6 @@ public class RollerSub extends Subsystem {
     }
     
     public boolean isExtended() {
-        return extend.get() != DoubleSolenoid.Value.kForward;   //I reversed it because the arm now defaults to down.
+        return extend.get() == DoubleSolenoid.Value.kForward;   //I reversed it because the arm now defaults to down.
     }
 }

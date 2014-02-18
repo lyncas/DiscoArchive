@@ -42,7 +42,7 @@ public class FirePneumatapult extends CommandBase {
 
     protected void execute() {
        count+=20;
-       if (rollerSub.isExtended()){      
+//       if (rollerSub.isExtended()){      
                 if(check==0){
                     if(count%200<180)//200 is one fifth of the total execution time, the solenoid starts and stops 5 times now
                         pneumatapultSub.fire(shoot);
@@ -56,20 +56,20 @@ public class FirePneumatapult extends CommandBase {
                         pneumatapultSub.fire(false);
                 }
                 if(check==2){
-                    if(count<=maxRunTime)
+//                   if(count<=maxRunTime)
                         pneumatapultSub.fire(shoot);
-                    else
-                        pneumatapultSub.fire(false);
+//                    else
+//                        pneumatapultSub.fire(false);
                 }
                 if (!compressorSub.isEnabled()){
                     compressorSub.on();
                 }
         } 
-       else
-       {
-           pneumatapultSub.fire(false);
-       }
-    }
+//       else
+//       {
+//           pneumatapultSub.fire(false);
+//       }
+//    }
 
     protected boolean isFinished() {
         return System.currentTimeMillis()-startTime> maxRunTime;
