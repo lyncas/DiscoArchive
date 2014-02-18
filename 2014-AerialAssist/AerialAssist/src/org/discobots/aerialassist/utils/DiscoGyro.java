@@ -28,7 +28,7 @@ public class DiscoGyro extends Gyro{
     }
 
     /**
-     * Reset by setting th angle to zero and reseting the gyo accumulator
+     * Reset by setting th angle to zero and reseting the gyro accumulator
      */
     public void reset(){
         reset(0);

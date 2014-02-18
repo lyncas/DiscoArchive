@@ -1,5 +1,8 @@
 package org.discobots.aerialassist.commands.drive;
 
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.utils.AngleController;
@@ -8,51 +11,49 @@ import org.discobots.aerialassist.utils.AngleController;
  *
  * @author Patrick
  */
-public class FixAngle extends CommandBase {
+public class FixAngle extends CommandBase implements PIDSource, PIDOutput {
 
-    private AngleController angleController = new AngleController(0.5, 0.0, 0.0, CommandBase.drivetrainSub.getGyro());
+    private PIDController angleController = new PIDController(0.5, 0.0, 0.0, this, this);
+    private float output;
+    private final float target;
 
-    private double target;
-    private boolean useOwnData;
-
-    public FixAngle() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        target = 0.0;
-        useOwnData = true;
-    }
-
-    public FixAngle(double angle) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public FixAngle(float angle) {
+        requires(drivetrainSub);
         target = angle;
-        useOwnData = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        angleController.setSetpoint(target);
+        angleController.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (useOwnData) {
-            angleController.setSetpoint();
-        } else {
-            angleController.setSetpoint(target);
-        }
+        //float ou
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return pidGet() - target < 1.0f;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        angleController.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        end();
+    }
+
+    public double pidGet() {
+        return drivetrainSub.getGyroAngle();
+    }
+
+    public void pidWrite(double output) {
+        this.output = (float) output;
     }
 }

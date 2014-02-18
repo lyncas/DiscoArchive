@@ -32,9 +32,9 @@ public class ToggleArm extends CommandBase {
  //       return armLimitSwitch.get();
     }
     protected void end() {
-//        rollerSub.setIntakeSpeed(0);
+        rollerSub.setIntakeSpeed(0);
     }
     protected void interrupted() {
-//       end();
+       end();
     }
 }
