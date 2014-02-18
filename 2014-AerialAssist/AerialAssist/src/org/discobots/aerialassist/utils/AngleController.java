@@ -3,7 +3,6 @@ package org.discobots.aerialassist.utils;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
-import org.discobots.aerialassist.utils.DiscoGyro;
 
 /**
  *

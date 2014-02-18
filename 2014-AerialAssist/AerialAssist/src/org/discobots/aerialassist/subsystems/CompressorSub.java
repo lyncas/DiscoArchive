@@ -15,15 +15,25 @@ import org.discobots.aerialassist.utils.BetterCompressor;
  */
 public class CompressorSub extends Subsystem {
     BetterCompressor comp;
+    public boolean canRun;
 
     public CompressorSub() {
         super("Compressor");
+        canRun=false;       
         comp = new BetterCompressor(1, HW.pressureSwitch, 1, HW.compressorRelay, 1, HW.spikeReplacementVictor);
     }
 
     public void initDefaultCommand() {
     }
-
+    
+    public void setRun(){
+        canRun=!canRun;
+    }
+    
+    public boolean getCanRun(){
+        return canRun;
+    }
+    
     public void on() {
         comp.start();
     }
