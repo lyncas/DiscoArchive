@@ -14,16 +14,14 @@ import org.discobots.aerialassist.HW;
 public class RollerSub extends Subsystem {
 
     private Talon roller;
-    private Solenoid extendA;
-    private Solenoid extendB;
+    private DoubleSolenoid extend;
     
     public void initDefaultCommand() {
     }
     
     public RollerSub() {
         roller = new Talon(1, HW.rollerMotor);
-        extendA = new Solenoid(HW.extenderSolenoidA);
-        extendB = new Solenoid(HW.extenderSolenoidB);
+        extend = new DoubleSolenoid(HW.extenderSolenoidA,HW.extenderSolenoidB);
     }
     
     public void setIntakeSpeed(double speed) {
@@ -35,11 +33,13 @@ public class RollerSub extends Subsystem {
     }
     
     public void setExtended(boolean on) {
-        extendA.set(on);
-        extendB.set(on);
+        if(on)
+            extend.set(DoubleSolenoid.Value.kForward);
+        else
+            extend.set(DoubleSolenoid.Value.kReverse);
     }
     
     public boolean isExtended() {
-        return !extendA.get() && !extendB.get();   //I reversed it because the arm now defaults to down.
+        return extend.get() != DoubleSolenoid.Value.kForward;   //I reversed it because the arm now defaults to down.
     }
 }

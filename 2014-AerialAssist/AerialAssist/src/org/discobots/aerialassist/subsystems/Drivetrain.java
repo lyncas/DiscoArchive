@@ -35,7 +35,7 @@ public class Drivetrain extends Subsystem {
     private BetterRobotDrive drive;
     private BetterRobotDrive miniDrive;
     private DoubleSolenoid shifter;
-    private DiscoGyro gyro;
+    public DiscoGyro gyro;
     private ADXL345_I2C accelerometer;
     private Velocity velocityReporter;
     public static final boolean MECANUM = false;
