@@ -31,22 +31,23 @@ public class SwitchDrive extends CommandBase {
     }
 
     protected void initialize() {
-        
-        if(!useOwnData) {
-            if (newMode == Drivetrain.TRACTION) { // (true) //!drivetrainSub.getDriveState()
-                drivetrainSub.shiftTraction();
-                new TankDrive().start();
-            } else {// (newMode == Drivetrain.TRACTION) { // (false)
-                drivetrainSub.shiftMecanum();
-                new MecanumDrive().start();
-            } 
-        } else {
-            if (!drivetrainSub.getDriveState()) { // (true) //!drivetrainSub.getDriveState()
-                drivetrainSub.shiftTraction();
-                new TankDrive().start();
-            } else {// (newMode == Drivetrain.TRACTION) { // (false)
-                drivetrainSub.shiftMecanum();
-                new MecanumDrive().start();
+        if(compressorSub.canRun){
+            if(!useOwnData) {
+                if (newMode == Drivetrain.TRACTION) { // (true) //!drivetrainSub.getDriveState()
+                    drivetrainSub.shiftTraction();
+                    new TankDrive().start();
+                } else {// (newMode == Drivetrain.TRACTION) { // (false)
+                    drivetrainSub.shiftMecanum();
+                    new MecanumDrive().start();
+                } 
+            } else {
+                if (!drivetrainSub.getDriveState()) { // (true) //!drivetrainSub.getDriveState()
+                    drivetrainSub.shiftTraction();
+                    new TankDrive().start();
+                } else {// (newMode == Drivetrain.TRACTION) { // (false)
+                    drivetrainSub.shiftMecanum();
+                    new MecanumDrive().start();
+                }
             }
         }
     }

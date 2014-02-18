@@ -42,7 +42,7 @@ public class FirePneumatapult extends CommandBase {
 
     protected void execute() {
        count+=20;
-       if (rollerSub.isExtended()){      
+       if (rollerSub.isExtended()&&compressorSub.getCanRun()){      
                 if(check==0){
                     if(count%200<180)//200 is one fifth of the total execution time, the solenoid starts and stops 5 times now
                         pneumatapultSub.fire(shoot);

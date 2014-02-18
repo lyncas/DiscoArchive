@@ -16,10 +16,10 @@ public class ToggleArm extends CommandBase {
         armLimitSwitch = new DigitalInput(HW.armLimitSwitchChannel);
     }
     protected void initialize() {
-//        rollerSub.setIntakeSpeed(0);                  //Get rid of all of the commented out lines if there is a limit switch.
-        rollerSub.setExtended(!rollerSub.isExtended());  //I reversed it because isExtended now returns the opposite.
-        if (!compressorSub.isEnabled())
-        {
+//        rollerSub.setIntakeSpeed(0);    //Get rid of all of the commented out lines if there is a limit switch.
+        if(compressorSub.getCanRun())
+            rollerSub.setExtended(!rollerSub.isExtended());  //I reversed it because isExtended now returns the opposite.
+        if (!compressorSub.isEnabled()){
             compressorSub.on();
         }
     }
