@@ -78,8 +78,8 @@ public class OI {
         b_bumpR.whenReleased(new Intake(0));
         b_trigR.whileHeld(new Intake(Intake.OUT));
         b_trigR.whenReleased(new Intake(0));
-        b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
-        b_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
+        b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
+//        b_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
         b_sStar.whenPressed(new ResetGyroAngle());
 //        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
