@@ -65,7 +65,7 @@ public class OI {
 
     private void mapButtons() {
 //      Controller 1
-        b_sStar.whenReleased(new SwitchDrive());
+    //    b_sStar.whenReleased(new SwitchDrive());
         //b_dpadU.whenReleased(new SwitchDrive(Drivetrain.MECANUM));
         //b_dpadD.whenReleased(new SwitchDrive(Drivetrain.TRACTION));
         b_btnX.whenPressed(new SwitchDrive(false));
@@ -91,7 +91,7 @@ public class OI {
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
 //      Controller 2
-        b2_trigR.whenPressed(new ChooChoo());
+     //   b2_trigR.whenPressed(new ChooChoo());
         b2_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
         b2_btnB.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));
         b2_btnY.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
