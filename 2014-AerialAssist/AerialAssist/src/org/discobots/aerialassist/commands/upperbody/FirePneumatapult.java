@@ -33,7 +33,7 @@ public class FirePneumatapult extends CommandBase {
         check = ch;
         shoot = fire;
         count=0;
-        maxRunTime=1000;
+        maxRunTime=1500;
     }
 
     protected void initialize() {
@@ -41,34 +41,35 @@ public class FirePneumatapult extends CommandBase {
     }
 
     protected void execute() {
-       count+=20;
-       if (rollerSub.isExtended()&&compressorSub.getCanRun()){      
-                if(check==0){
-                    if(count%200<180)//200 is one fifth of the total execution time, the solenoid starts and stops 5 times now
-                        pneumatapultSub.fire(shoot);
-                    else
-                        pneumatapultSub.fire(false);
-                }
-                if(check==1){
-                    if(count<=maxRunTime/2)
-                        pneumatapultSub.fire(shoot);
-                    else
-                        pneumatapultSub.fire(false);
-                }
-                if(check==2){
-                   if(count<=maxRunTime)
-                        pneumatapultSub.fire(shoot);
-                    else
-                        pneumatapultSub.fire(false);
-                }
-                if (!compressorSub.isEnabled()){
-                    compressorSub.on();
-                }
-        } 
-       else
-       {
-           pneumatapultSub.fire(false);
-       }
+      // count+=20;
+//       if (rollerSub.isExtended()&&compressorSub.getCanRun()){      
+        //        if(check==0){
+       //             if(count%200<180)//200 is one fifth of the total execution time, the solenoid starts and stops 5 times now
+       //                 pneumatapultSub.fire(shoot);
+      //              else
+      //                  pneumatapultSub.fire(false);
+     //           }
+     //           if(check==1){
+   //                 if(count<=maxRunTime/2)
+           //             pneumatapultSub.fire(shoot);
+          //          else
+         //               pneumatapultSub.fire(false);
+        //        }
+       //         if(check==2){
+      //             if(count<=maxRunTime)
+     //                   pneumatapultSub.fire(shoot);
+    //                else
+  //                      pneumatapultSub.fire(false);
+//                }
+//                if (!compressorSub.isEnabled()){
+ //                   compressorSub.on();
+//                }
+//       } 
+//       else
+//       {
+//            pneumatapultSub.fire(false);
+//       }
+        pneumatapultSub.fire(shoot);
     }
 
     protected boolean isFinished() {

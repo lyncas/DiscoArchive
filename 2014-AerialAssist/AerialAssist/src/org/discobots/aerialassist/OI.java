@@ -2,6 +2,7 @@ package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.discobots.aerialassist.commands.ResetGyroAngle;
 import org.discobots.aerialassist.commands.SetRunnable;
 //import org.discobots.aerialassist.commands.ResetGyroAngle;
 import org.discobots.aerialassist.commands.ToggleCompressor;
@@ -74,9 +75,9 @@ public class OI {
         b_btnY.whenPressed(new SwitchDrive(true));
 
         b_dpadU.whileHeld(new FixedSpeedMecanum(90));
-        b_dpadR.whileHeld(new FixedSpeedMecanum(180));
+        b_dpadR.whileHeld(new FixedSpeedMecanum(0));
         b_dpadD.whileHeld(new FixedSpeedMecanum(270));
-        b_dpadL.whileHeld(new FixedSpeedMecanum(0));
+        b_dpadL.whileHeld(new FixedSpeedMecanum(180));
 //        b_btnY.whenPressed(new ToggleCompressor());
         b_bumpR.whenPressed(new ToggleArm(true));//arm up
         b_trigR.whenPressed(new ToggleArm(false));//arm down
@@ -87,6 +88,7 @@ public class OI {
         b_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
         b_btnB.whenPressed(new ToggleCompressor());
         b_sBack.whenPressed(new SetRunnable());
+        b_clicR.whileHeld(new ResetGyroAngle());
 //        b_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
 //        b_sStar.whenPressed(new ResetGyroAngle());
 //        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
