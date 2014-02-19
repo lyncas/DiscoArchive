@@ -21,7 +21,7 @@ public class AngleController implements PIDSource, PIDOutput {
     }
 
     public double pidGet() {
-        return gyro.getAngle() % 360.0;
+        return (gyro.getAngle() + 180) % 360.0 - 180;
     }
 
     public void pidWrite(double pidOut) {

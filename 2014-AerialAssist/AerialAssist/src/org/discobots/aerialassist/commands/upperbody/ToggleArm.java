@@ -14,7 +14,7 @@ public class ToggleArm extends CommandBase {
     public boolean check;
     public ToggleArm(boolean on) {
         check = on;
-        armLimitSwitch = new DigitalInput(HW.armLimitSwitchChannel);
+        //armLimitSwitch = new DigitalInput(HW.armLimitSwitchChannel);
     }
     protected void initialize() {
 //        rollerSub.setIntakeSpeed(0);    //Get rid of all of the commented out lines if there is a limit switch.

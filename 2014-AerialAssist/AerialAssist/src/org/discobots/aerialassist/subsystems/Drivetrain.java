@@ -43,6 +43,7 @@ public class Drivetrain extends Subsystem {
     private Encoder sidewayEncoder;
     private AngleController angleCont;
     private Velocity velocityReporter;
+    public boolean fieldCentricEnabled = true;
     public static final boolean MECANUM = false;
     public static final boolean TRACTION = true;
     private boolean currentState = MECANUM;    //Why does it start out as mecanum if TRACTION is used as the default?
@@ -75,8 +76,8 @@ public class Drivetrain extends Subsystem {
         
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
-        forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
-        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
+        //forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
+        //sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
         angleCont = new AngleController(.5,0,0,gyro);
         
         if (Velocity.ENABLE_VELOCITY) {

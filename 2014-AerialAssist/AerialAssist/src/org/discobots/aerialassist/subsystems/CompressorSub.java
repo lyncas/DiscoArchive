@@ -6,6 +6,7 @@
 package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.utils.BetterCompressor;
 
@@ -28,6 +29,7 @@ public class CompressorSub extends Subsystem {
     
     public void setRun(){
         canRun=!canRun;
+        SmartDashboard.putBoolean("Is compressor enabled?", canRun);
     }
     
     public boolean getCanRun(){
