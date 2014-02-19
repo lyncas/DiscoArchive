@@ -7,6 +7,7 @@ import org.discobots.aerialassist.commands.SetRunnable;
 import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.drive.FixAngle;
+import org.discobots.aerialassist.commands.drive.FixedSpeedMecanum;
 //import org.discobots.aerialassist.commands.drive.HalfSpeedMecanum;
 import org.discobots.aerialassist.commands.upperbody.ChooChoo;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
@@ -71,10 +72,10 @@ public class OI {
         b_btnX.whenPressed(new SwitchDrive(false));
         b_btnY.whenPressed(new SwitchDrive(true));
 
-//        b_dpadU.whileHeld(new HalfSpeedMecanum(90));
-//        b_dpadR.whileHeld(new HalfSpeedMecanum(180));
-//        b_dpadD.whileHeld(new HalfSpeedMecanum(270));
-//        b_dpadL.whileHeld(new HalfSpeedMecanum(0));
+        b_dpadU.whileHeld(new FixedSpeedMecanum(90));
+        b_dpadR.whileHeld(new FixedSpeedMecanum(180));
+        b_dpadD.whileHeld(new FixedSpeedMecanum(270));
+        b_dpadL.whileHeld(new FixedSpeedMecanum(0));
 //        b_btnY.whenPressed(new ToggleCompressor());
         b_bumpR.whenPressed(new ToggleArm(true));//arm up
         b_trigR.whenPressed(new ToggleArm(false));//arm down

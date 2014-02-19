@@ -7,6 +7,7 @@ package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -38,6 +39,8 @@ public class Drivetrain extends Subsystem {
     private DoubleSolenoid shifter;
     public DiscoGyro gyro;
     private ADXL345_I2C accelerometer;
+    private Encoder forwardEncoder;
+    private Encoder sidewayEncoder;
     private AngleController angleCont;
     private Velocity velocityReporter;
     public static final boolean MECANUM = false;
@@ -72,6 +75,8 @@ public class Drivetrain extends Subsystem {
         
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
+        forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
+        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
         angleCont = new AngleController(.5,0,0,gyro);
         
         if (Velocity.ENABLE_VELOCITY) {
