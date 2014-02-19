@@ -65,21 +65,25 @@ public class OI {
 
     private void mapButtons() {
 //      Controller 1
-        b_btnA.whenPressed(new ToggleArm());
-        b_btnB.whenReleased(new SwitchDrive());
+        b_sStar.whenReleased(new SwitchDrive());
         //b_dpadU.whenReleased(new SwitchDrive(Drivetrain.MECANUM));
         //b_dpadD.whenReleased(new SwitchDrive(Drivetrain.TRACTION));
-        //b_btnX.whenPressed(new FixAngle());
+        b_btnX.whenPressed(new SwitchDrive(false));
+        b_btnY.whenPressed(new SwitchDrive(true));
+
 //        b_dpadU.whileHeld(new HalfSpeedMecanum(90));
 //        b_dpadR.whileHeld(new HalfSpeedMecanum(180));
 //        b_dpadD.whileHeld(new HalfSpeedMecanum(270));
 //        b_dpadL.whileHeld(new HalfSpeedMecanum(0));
-        b_btnY.whenPressed(new ToggleCompressor());
-        b_bumpR.whileHeld(new Intake(Intake.IN));
-        b_bumpR.whenReleased(new Intake(0));
-        b_trigR.whileHeld(new Intake(Intake.OUT));
-        b_trigR.whenReleased(new Intake(0));
-        b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
+//        b_btnY.whenPressed(new ToggleCompressor());
+        b_bumpR.whenPressed(new ToggleArm(true));//arm up
+        b_trigR.whenPressed(new ToggleArm(false));//arm down
+        b_bumpL.whileHeld(new Intake(Intake.IN));
+        b_bumpL.whenReleased(new Intake(0));
+        b_trigL.whileHeld(new Intake(Intake.OUT));
+        b_trigL.whenReleased(new Intake(0));
+        b_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
+        b_btnB.whenPressed(new ToggleCompressor());
         b_sBack.whenPressed(new SetRunnable());
 //        b_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
 //        b_sStar.whenPressed(new ResetGyroAngle());
