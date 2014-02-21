@@ -13,6 +13,8 @@ public class AngleController implements PIDSource, PIDOutput {
     private final PIDController angleController;
     private final DiscoGyro gyro;
     private double output;
+    private double kTurnScaleFactor = 30;
+    private double newHeading;
 
     public AngleController(double kP, double kI, double kD, DiscoGyro g) {
         angleController = new PIDController(kP, kI, kD, this, this);
@@ -51,6 +53,14 @@ public class AngleController implements PIDSource, PIDOutput {
             angleController.disable();
         }
     }
+    
+    public void incrementSetpoint(double rotation)
+    {
+        if (rotation > .05)
+            newHeading = gyro.getAngle() + rotation * kTurnScaleFactor;
+        setSetpoint(newHeading);
+        
+    }  
 
     //Debug Stuff I Guess From Here Down
     public void setPID(double newP, double newI, double newD) {

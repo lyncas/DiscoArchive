@@ -78,7 +78,8 @@ public class Drivetrain extends Subsystem {
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
         //forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
         //sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
-        angleCont = new AngleController(.5,0,0,gyro);
+        angleCont = new AngleController(.05,0,0,gyro);
+        angleCont.enable();
         
         if (Velocity.ENABLE_VELOCITY) {
             try {
@@ -150,6 +151,10 @@ public class Drivetrain extends Subsystem {
         angleCont.setSetpoint();
     }
 
+    public void incrementSetpoint(double rotation) {
+        angleCont.incrementSetpoint(rotation);
+    }
+    
     public double getXVelocity() {
         return velocityReporter.getXVelocity();
     }

@@ -83,7 +83,19 @@ public class MecanumDrive extends CommandBase {
             drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation + drivetrainSub.getAngleError());
         */
         if(drivetrainSub.fieldCentricEnabled)
-            drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+        {
+//            if(currentlyRotating) {
+                drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+//                drivetrainSub.incrementSetpoint(rotation);
+//            } else
+//            {
+//                if (Math.abs(drivetrainSub.getAngleError())>.5)
+//                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation + drivetrainSub.getAngleError());
+//                else
+//                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+//                SmartDashboard.putNumber("Angle Error", drivetrainSub.getAngleError());
+//            }
+        }
         else
             drivetrainSub.holonomicPolar(magnitude, angle, rotation);        
     }
