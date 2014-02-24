@@ -7,16 +7,11 @@ import org.discobots.aerialassist.commands.SetRunnable;
 //import org.discobots.aerialassist.commands.ResetGyroAngle;
 import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
-import org.discobots.aerialassist.commands.drive.FixAngle;
 import org.discobots.aerialassist.commands.drive.FixedSpeedMecanum;
 //import org.discobots.aerialassist.commands.drive.HalfSpeedMecanum;
-import org.discobots.aerialassist.commands.upperbody.ChooChoo;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
-//import org.discobots.aerialassist.commands.upperbody.ChooChooEnable; These two classes were not committed, i'm assuming these
-//import org.discobots.aerialassist.commands.upperbody.ChooChooManual; classes exist but are just not committed and pushed.
 import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
-import org.discobots.aerialassist.subsystems.Drivetrain;
 import org.discobots.aerialassist.utils.GamePad.AxisButton;
 
 /**
