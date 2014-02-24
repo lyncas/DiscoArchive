@@ -29,7 +29,7 @@ public class Dashboard {
         // Drive
         SmartDashboard.putNumber("Drive Angle", driveSub.getGyroAngle());
         SmartDashboard.putString("Drive Shift Mode", driveSub.getShiftPosition() ? "Traction" : "Mecanum");
-        SmartDashboard.putNumber("PID Controller Error", driveSub.getAngleError());
+        SmartDashboard.putNumber("PID Controller Error", driveSub.getAngleControllerOutput());
         SmartDashboard.putBoolean("Field Centric Enabled?", driveSub.fieldCentricEnabled);
 
         
