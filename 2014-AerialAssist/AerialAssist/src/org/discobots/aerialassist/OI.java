@@ -2,7 +2,7 @@ package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.discobots.aerialassist.commands.ResetGyroAngle;
+import org.discobots.aerialassist.commands.drive.ResetGyroAngle;
 import org.discobots.aerialassist.commands.SetRunnable;
 //import org.discobots.aerialassist.commands.ResetGyroAngle;
 import org.discobots.aerialassist.commands.ToggleCompressor;
@@ -16,7 +16,6 @@ import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
 //import org.discobots.aerialassist.commands.upperbody.ChooChooManual; classes exist but are just not committed and pushed.
 import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
-import org.discobots.aerialassist.commands.upperbody.ToggleFieldCentric;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 import org.discobots.aerialassist.utils.GamePad.AxisButton;
 
@@ -94,7 +93,7 @@ public class OI {
 //        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
-        b_sStar.whenPressed(new ToggleFieldCentric());
+     //   b_sStar.whenPressed(new ToggleFieldCentric());
         
 //      Controller 2
      //   b2_trigR.whenPressed(new ChooChoo());
