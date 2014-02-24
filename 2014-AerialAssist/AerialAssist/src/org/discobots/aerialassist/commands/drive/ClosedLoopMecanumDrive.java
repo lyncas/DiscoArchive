@@ -13,13 +13,13 @@ import org.discobots.aerialassist.commands.CommandBase;
  *
  * @author Patrick
  */
-public class MecanumDrive extends CommandBase {
+public class ClosedLoopMecanumDrive extends CommandBase {
 
     float xPrev, yPrev, rPrev;
     boolean currentlyRotating;
     private final double rampThreshold = 0.1;
 
-    public MecanumDrive() {
+    public ClosedLoopMecanumDrive() {
         requires(drivetrainSub);
         xPrev = 0;
         yPrev = 0;
