@@ -7,7 +7,6 @@ package org.discobots.aerialassist.commands.drive;
 
 import com.sun.squawk.util.MathUtils;
 import org.discobots.aerialassist.commands.CommandBase;
-import org.discobots.aerialassist.utils.Dashboard;
 
 /**
  *
@@ -88,7 +87,6 @@ public class MecanumDrive extends CommandBase {
                 drivetrainSub.setAngleControllerSetpoint(gyroAngle);
             } else {
                 drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, drivetrainSub.getAngleControllerOutput());
-                
             }
         } else {
             drivetrainSub.holonomicPolar(magnitude, angle, rotation);
