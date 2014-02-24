@@ -13,12 +13,13 @@ import org.discobots.aerialassist.utils.AngleController;
  */
 public class FixAngle extends CommandBase implements PIDSource, PIDOutput {
 
-    private PIDController angleController = new PIDController(0.5, 0.0, 0.0, this, this);
+    private PIDController angleController = new PIDController(1f/45f, 0.0, 0.0, this, this);
     private float output;
     private final float target;
 
     public FixAngle(float angle) {
         requires(drivetrainSub);
+        angleController.setOutputRange(-1.0, 1.0);
         target = angle;
     }
 

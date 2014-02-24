@@ -1,28 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package org.discobots.aerialassist.commands;
+package org.discobots.aerialassist.commands.drive;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.discobots.aerialassist.commands.CommandBase;
 
 /**
  *
  * @author Developer
  */
-public class ResetGyroAngle extends CommandBase {
+public class FixedSpeedMecanum extends CommandBase {
     
-    public ResetGyroAngle() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    double angle;
+    double maxSpeed;
+    
+    public FixedSpeedMecanum(double newAngle) {
+        requires(drivetrainSub);
+        angle = newAngle;
+        maxSpeed = SmartDashboard.getNumber("Fixed Speed", .5);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        drivetrainSub.gyro.reset();
+        drivetrainSub.holonomicPolar(0, 0, 0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        drivetrainSub.holonomicPolar(maxSpeed, angle, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,6 +35,7 @@ public class ResetGyroAngle extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        drivetrainSub.holonomicPolar(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

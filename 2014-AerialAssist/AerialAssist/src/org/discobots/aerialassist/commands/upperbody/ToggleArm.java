@@ -11,14 +11,15 @@ import org.discobots.aerialassist.commands.CommandBase;
 public class ToggleArm extends CommandBase {
     
     DigitalInput armLimitSwitch;
-    
-    public ToggleArm() {
-        armLimitSwitch = new DigitalInput(HW.armLimitSwitchChannel);
+    public boolean check;
+    public ToggleArm(boolean on) {
+        check = on;
+        //armLimitSwitch = new DigitalInput(HW.armLimitSwitchChannel);
     }
     protected void initialize() {
 //        rollerSub.setIntakeSpeed(0);    //Get rid of all of the commented out lines if there is a limit switch.
         if(compressorSub.getCanRun())
-            rollerSub.setExtended(!rollerSub.isExtended());  //I reversed it because isExtended now returns the opposite.
+            rollerSub.setExtended(check);  //I reversed it because isExtended now returns the opposite.
         if (!compressorSub.isEnabled()){
             compressorSub.on();
         }

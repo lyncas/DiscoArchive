@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.discobots.aerialassist.commands;
+package org.discobots.aerialassist.commands.upperbody;
+
+import org.discobots.aerialassist.commands.CommandBase;
 
 /**
  *

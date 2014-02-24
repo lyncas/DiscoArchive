@@ -7,6 +7,7 @@ package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -38,8 +39,11 @@ public class Drivetrain extends Subsystem {
     private DoubleSolenoid shifter;
     public DiscoGyro gyro;
     private ADXL345_I2C accelerometer;
+    private Encoder forwardEncoder;
+    private Encoder sidewayEncoder;
     private AngleController angleCont;
     private Velocity velocityReporter;
+    public boolean fieldCentricEnabled = true;
     public static final boolean MECANUM = false;
     public static final boolean TRACTION = true;
     private boolean currentState = MECANUM;    //Why does it start out as mecanum if TRACTION is used as the default?
@@ -72,7 +76,10 @@ public class Drivetrain extends Subsystem {
         
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
-        angleCont = new AngleController(.5,0,0,gyro);
+        //forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
+        //sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
+        angleCont = new AngleController(.05,0,0,gyro);
+        angleCont.enable();
         
         if (Velocity.ENABLE_VELOCITY) {
             try {
@@ -136,14 +143,14 @@ public class Drivetrain extends Subsystem {
         return accelerometer;
     }
     
-    public double getAngleError() {
+    public double getAngleControllerOutput() {
         return angleCont.getOutput();
     }
     
-    public void setSetpoint() {
-        angleCont.setSetpoint();
+    public void setAngleControllerSetpoint(double a) {
+        angleCont.setSetpoint(a);
     }
-
+    
     public double getXVelocity() {
         return velocityReporter.getXVelocity();
     }

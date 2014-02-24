@@ -2,19 +2,16 @@ package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.discobots.aerialassist.commands.drive.ResetGyroAngle;
 import org.discobots.aerialassist.commands.SetRunnable;
 //import org.discobots.aerialassist.commands.ResetGyroAngle;
 import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
-import org.discobots.aerialassist.commands.drive.FixAngle;
+import org.discobots.aerialassist.commands.drive.FixedSpeedMecanum;
 //import org.discobots.aerialassist.commands.drive.HalfSpeedMecanum;
-import org.discobots.aerialassist.commands.upperbody.ChooChoo;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
-//import org.discobots.aerialassist.commands.upperbody.ChooChooEnable; These two classes were not committed, i'm assuming these
-//import org.discobots.aerialassist.commands.upperbody.ChooChooManual; classes exist but are just not committed and pushed.
 import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
-import org.discobots.aerialassist.subsystems.Drivetrain;
 import org.discobots.aerialassist.utils.GamePad.AxisButton;
 
 /**
@@ -65,29 +62,36 @@ public class OI {
 
     private void mapButtons() {
 //      Controller 1
-        b_btnA.whenPressed(new ToggleArm());
-        b_btnB.whenReleased(new SwitchDrive());
+    //    b_sStar.whenReleased(new SwitchDrive());
         //b_dpadU.whenReleased(new SwitchDrive(Drivetrain.MECANUM));
         //b_dpadD.whenReleased(new SwitchDrive(Drivetrain.TRACTION));
-        //b_btnX.whenPressed(new FixAngle());
-//        b_dpadU.whileHeld(new HalfSpeedMecanum(90));
-//        b_dpadR.whileHeld(new HalfSpeedMecanum(180));
-//        b_dpadD.whileHeld(new HalfSpeedMecanum(270));
-//        b_dpadL.whileHeld(new HalfSpeedMecanum(0));
-        b_btnY.whenPressed(new ToggleCompressor());
-        b_bumpR.whileHeld(new Intake(Intake.IN));
-        b_bumpR.whenReleased(new Intake(0));
-        b_trigR.whileHeld(new Intake(Intake.OUT));
-        b_trigR.whenReleased(new Intake(0));
-        b_trigL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
+        b_btnX.whenPressed(new SwitchDrive(false));
+        b_btnY.whenPressed(new SwitchDrive(true));
+
+        b_dpadU.whileHeld(new FixedSpeedMecanum(90));
+        b_dpadR.whileHeld(new FixedSpeedMecanum(0));
+        b_dpadD.whileHeld(new FixedSpeedMecanum(270));
+        b_dpadL.whileHeld(new FixedSpeedMecanum(180));
+//        b_btnY.whenPressed(new ToggleCompressor());
+        b_bumpR.whenPressed(new ToggleArm(true));//arm up
+        b_trigR.whenPressed(new ToggleArm(false));//arm down
+        b_bumpL.whileHeld(new Intake(Intake.IN));
+        b_bumpL.whenReleased(new Intake(0));
+        b_trigL.whileHeld(new Intake(Intake.OUT));
+        b_trigL.whenReleased(new Intake(0));
+        b_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
+        b_btnB.whenPressed(new ToggleCompressor());
         b_sBack.whenPressed(new SetRunnable());
+        b_clicR.whileHeld(new ResetGyroAngle());
 //        b_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
 //        b_sStar.whenPressed(new ResetGyroAngle());
 //        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
+     //   b_sStar.whenPressed(new ToggleFieldCentric());
+        
 //      Controller 2
-        b2_trigR.whenPressed(new ChooChoo());
+     //   b2_trigR.whenPressed(new ChooChoo());
         b2_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
         b2_btnB.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));
         b2_btnY.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
