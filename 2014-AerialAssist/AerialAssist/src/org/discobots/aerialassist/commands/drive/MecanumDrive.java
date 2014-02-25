@@ -47,7 +47,7 @@ public class MecanumDrive extends CommandBase {
         }
         if (Math.abs(rotation) < 0.1) {
             rotation = 0;
-            currentlyRotating = false;
+//            currentlyRotating = false;
         }
 
         // Ramp
@@ -71,6 +71,9 @@ public class MecanumDrive extends CommandBase {
         yPrev = (float) y;
         rPrev = (float) rotation;
 
+        if (rPrev == 0.0)
+            currentlyRotating = false;
+        
         double magnitude = Math.sqrt(x * x + y * y);
         double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;
 
