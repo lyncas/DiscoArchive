@@ -6,6 +6,7 @@
 package org.discobots.aerialassist.commands.drive;
 
 import com.sun.squawk.util.MathUtils;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 
 /**
@@ -44,7 +45,7 @@ public class MecanumDrive extends CommandBase {
         if (Math.abs(y) < 0.05) {
             y = 0;
         }
-        if (Math.abs(rotation) < 0.05) {
+        if (Math.abs(rotation) < 0.1) {
             rotation = 0;
             currentlyRotating = false;
         }
@@ -81,7 +82,10 @@ public class MecanumDrive extends CommandBase {
          } else
          drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation + drivetrainSub.getAngleError());
          */
-        if (drivetrainSub.fieldCentricEnabled) {
+            
+         SmartDashboard.putBoolean("Currently Rotating?", currentlyRotating);
+         
+         if (drivetrainSub.isFieldCentricEnabled()) {
             if (currentlyRotating) {
                 drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
                 drivetrainSub.setAngleControllerSetpoint(gyroAngle);

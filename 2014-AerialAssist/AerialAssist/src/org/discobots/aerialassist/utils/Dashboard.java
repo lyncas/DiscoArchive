@@ -29,12 +29,13 @@ public class Dashboard {
         // Drive
         SmartDashboard.putNumber("Drive Angle", driveSub.getGyroAngle());
         SmartDashboard.putString("Drive Shift Mode", driveSub.getShiftPosition() ? "Traction" : "Mecanum");
-        SmartDashboard.putNumber("PID Controller Error", driveSub.getAngleControllerOutput());
-        SmartDashboard.putBoolean("Field Centric Enabled?", driveSub.fieldCentricEnabled);
-
+        SmartDashboard.putNumber("PID Controller Output", driveSub.getAngleControllerOutput());
+        SmartDashboard.putBoolean("Field Centric Enabled?", driveSub.isFieldCentricEnabled());
+        boolean a = SmartDashboard.getBoolean("Should I Enable Field Centric", true);
+        driveSub.setFieldCentricEnabled(a);
         
         // Compressor
-        SmartDashboard.putBoolean("Compressor Compressor", compSub.isEnabled());
+        SmartDashboard.putBoolean("Compressor On?", compSub.isEnabled());
         SmartDashboard.putBoolean("Compressor Max Presure", compSub.isFull());
         SmartDashboard.putBoolean("Is compressor enabled?", compSub.getCanRun());
         

@@ -158,4 +158,11 @@ public class Drivetrain extends Subsystem {
     public double getYVelocity() {
         return velocityReporter.getYVelocity();
     }
+    public boolean isFieldCentricEnabled() {
+        return this.fieldCentricEnabled;
+    }
+    public void setFieldCentricEnabled(boolean a) {
+        this.fieldCentricEnabled = a;
+    }
+    
 }
