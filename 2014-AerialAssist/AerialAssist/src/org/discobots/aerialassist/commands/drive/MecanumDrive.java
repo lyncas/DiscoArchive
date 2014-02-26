@@ -37,7 +37,7 @@ public class MecanumDrive extends CommandBase {
         double y = oi.getRawAnalogStickALY();
         double rotation = oi.getRawAnalogStickARX();
         currentlyRotating = true;
-        
+
         // Deadzone
         if (Math.abs(x) < 0.05) {
             x = 0;
@@ -45,11 +45,11 @@ public class MecanumDrive extends CommandBase {
         if (Math.abs(y) < 0.05) {
             y = 0;
         }
-        if (Math.abs(rotation) < 0.05) {
+        if (Math.abs(rotation) < 0.1) {
             rotation = 0;
-            currentlyRotating = false;
+//            currentlyRotating = false;
         }
-        
+
         // Ramp
         if (xPrev - x > rampThreshold) {
             x = xPrev - rampThreshold;
@@ -66,38 +66,38 @@ public class MecanumDrive extends CommandBase {
         } else if (rotation - rPrev > rampThreshold) {
             rotation = rPrev + rampThreshold;
         }
-        
-        xPrev = (float)x;
-        yPrev = (float)y;
-        rPrev = (float)rotation;
+
+        xPrev = (float) x;
+        yPrev = (float) y;
+        rPrev = (float) rotation;
+
+        if (rPrev == 0.0)
+            currentlyRotating = false;
         
         double magnitude = Math.sqrt(x * x + y * y);
         double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;
 
         double gyroAngle = drivetrainSub.getGyroAngle();
         /*
-        if(currentlyRotating) {
-            drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
-            drivetrainSub.setSetpoint();
-        } else
-            drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation + drivetrainSub.getAngleError());
-        */
-        if(drivetrainSub.fieldCentricEnabled)
-        {
-//            if(currentlyRotating) {
+         if(currentlyRotating) {
+         drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+         drivetrainSub.setSetpoint();
+         } else
+         drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation + drivetrainSub.getAngleError());
+         */
+            
+         SmartDashboard.putBoolean("Currently Rotating?", currentlyRotating);
+         
+         if (drivetrainSub.isFieldCentricEnabled()) {
+            //if (currentlyRotating) {
                 drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
-//                drivetrainSub.incrementSetpoint(rotation);
-//            } else
-//            {
-//                if (Math.abs(drivetrainSub.getAngleError())>.5)
-//                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation + drivetrainSub.getAngleError());
-//                else
-//                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
-//                SmartDashboard.putNumber("Angle Error", drivetrainSub.getAngleError());
-//            }
+                //drivetrainSub.setAngleControllerSetpoint(gyroAngle);
+            //} else {
+                //drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, drivetrainSub.getAngleControllerOutput());
+            //}
+        } else {
+            drivetrainSub.holonomicPolar(magnitude, angle, rotation);
         }
-        else
-            drivetrainSub.holonomicPolar(magnitude, angle, rotation);        
     }
 
     protected boolean isFinished() {

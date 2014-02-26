@@ -5,6 +5,8 @@
  */
 package org.discobots.aerialassist.commands;
 
+import org.discobots.aerialassist.commands.upperbody.AutonomousIntake;
+import org.discobots.aerialassist.commands.drive.AutonomousDrive;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;

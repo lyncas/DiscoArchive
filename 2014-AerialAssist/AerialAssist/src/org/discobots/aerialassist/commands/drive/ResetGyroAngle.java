@@ -3,27 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.discobots.aerialassist.commands;
+package org.discobots.aerialassist.commands.drive;
+
+import org.discobots.aerialassist.commands.CommandBase;
 
 /**
  *
- * @author Dylan
+ * @author Developer
  */
-public class SwitchShot extends CommandBase {
+public class ResetGyroAngle extends CommandBase {
     
-    public SwitchShot() {
+    public ResetGyroAngle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(pneumatapultSub);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        drivetrainSub.gyro.reset();
+        drivetrainSub.setAngleControllerSetpoint(0.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        pneumatapultSub.changeMode();
     }
 
     // Make this return true when this Command no longer needs to run execute()

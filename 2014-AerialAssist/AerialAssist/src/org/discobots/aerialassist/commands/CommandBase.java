@@ -3,7 +3,6 @@ package org.discobots.aerialassist.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.OI;
-import org.discobots.aerialassist.subsystems.Catapult;
 import org.discobots.aerialassist.subsystems.CompressorSub;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 import org.discobots.aerialassist.subsystems.RollerSub;
@@ -27,14 +26,8 @@ public abstract class CommandBase extends Command {
     public static CompressorSub compressorSub = new CompressorSub();
     public static Drivetrain drivetrainSub = new Drivetrain();
     public static RollerSub rollerSub = new RollerSub();
-    public static Catapult catapultSub = new Catapult();
     public static Pneumatapult pneumatapultSub = new Pneumatapult();
     public static VisionTracking visionSub = new VisionTracking();
-
-    //public static VisionTracking visionSub = new VisionTracking();
-
-//    public static VisionTracking visionSub = new VisionTracking();
-
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -48,7 +41,6 @@ public abstract class CommandBase extends Command {
         SmartDashboard.putData(drivetrainSub);
         SmartDashboard.putData(compressorSub);
         SmartDashboard.putData(rollerSub);
-        SmartDashboard.putData(catapultSub);
         SmartDashboard.putData(pneumatapultSub);
         //SmartDashboard.putData(visionSub);
 

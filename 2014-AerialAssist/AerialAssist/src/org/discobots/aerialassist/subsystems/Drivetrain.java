@@ -143,16 +143,12 @@ public class Drivetrain extends Subsystem {
         return accelerometer;
     }
     
-    public double getAngleError() {
+    public double getAngleControllerOutput() {
         return angleCont.getOutput();
     }
     
-    public void setSetpoint() {
-        angleCont.setSetpoint();
-    }
-
-    public void incrementSetpoint(double rotation) {
-        angleCont.incrementSetpoint(rotation);
+    public void setAngleControllerSetpoint(double a) {
+        angleCont.setSetpoint(a);
     }
     
     public double getXVelocity() {
@@ -162,4 +158,11 @@ public class Drivetrain extends Subsystem {
     public double getYVelocity() {
         return velocityReporter.getYVelocity();
     }
+    public boolean isFieldCentricEnabled() {
+        return this.fieldCentricEnabled;
+    }
+    public void setFieldCentricEnabled(boolean a) {
+        this.fieldCentricEnabled = a;
+    }
+    
 }
