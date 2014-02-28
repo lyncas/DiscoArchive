@@ -92,7 +92,7 @@ public class MecanumDrive extends CommandBase {
             if (currentlyRotating) {
                 drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
                 drivetrainSub.setAngleControllerSetpoint(gyroAngle);
-                drivetrainSub.incSetpoint(rotation);
+                drivetrainSub.incSetpoint(-rotation);
             } else {
                 if (Math.abs(drivetrainSub.getAngleControllerOutput()) > .05)
                 {
