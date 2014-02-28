@@ -8,6 +8,7 @@ import org.discobots.aerialassist.commands.SetRunnable;
 import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.drive.FixedSpeedMecanum;
+import org.discobots.aerialassist.commands.drive.ToggleFieldCentric;
 //import org.discobots.aerialassist.commands.drive.HalfSpeedMecanum;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
 import org.discobots.aerialassist.commands.upperbody.Intake;
@@ -88,7 +89,7 @@ public class OI {
 //        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
-     //   b_sStar.whenPressed(new ToggleFieldCentric());
+        b_sStar.whenPressed(new ToggleFieldCentric());
         
 //      Controller 2
      //   b2_trigR.whenPressed(new ChooChoo());

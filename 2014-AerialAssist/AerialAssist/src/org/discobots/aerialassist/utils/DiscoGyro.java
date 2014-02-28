@@ -19,7 +19,15 @@ public class DiscoGyro extends Gyro{
      * @return the value of the gyro plus our reset angle positions
      */
     public double getAngle(){
-        return m_resetAngleValue + super.getAngle();
+        double angle=super.getAngle();
+        angle%=360;
+        if (angle>180)
+            angle=-360+angle;
+        if (angle<-180)
+            angle=360+angle;
+//        return m_resetAngleValue + super.getAngle();
+//        return super.getAngle() % 360;
+        return angle;
     }
 
     public void setAngle(double angle){

@@ -88,16 +88,25 @@ public class MecanumDrive extends CommandBase {
             
          SmartDashboard.putBoolean("Currently Rotating?", currentlyRotating);
          
-         if (drivetrainSub.isFieldCentricEnabled()) {
-            //if (currentlyRotating) {
+//         if (drivetrainSub.isFieldCentricEnabled()) {
+            if (currentlyRotating) {
                 drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
-                //drivetrainSub.setAngleControllerSetpoint(gyroAngle);
-            //} else {
-                //drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, drivetrainSub.getAngleControllerOutput());
-            //}
-        } else {
-            drivetrainSub.holonomicPolar(magnitude, angle, rotation);
-        }
+                drivetrainSub.setAngleControllerSetpoint(gyroAngle);
+                drivetrainSub.incSetpoint(rotation);
+            } else {
+                if (Math.abs(drivetrainSub.getAngleControllerOutput()) > .05)
+                {
+                    if (drivetrainSub.isFieldCentricEnabled()) 
+                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, drivetrainSub.getAngleControllerOutput());
+                    else
+                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+                }    
+                else
+                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+            }
+//        } else {
+//            drivetrainSub.holonomicPolar(magnitude, angle, rotation);
+//        }
     }
 
     protected boolean isFinished() {
