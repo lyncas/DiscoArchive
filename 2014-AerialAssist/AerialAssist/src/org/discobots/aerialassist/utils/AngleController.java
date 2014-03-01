@@ -1,8 +1,10 @@
 package org.discobots.aerialassist.utils;
 
+import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -10,73 +12,69 @@ import edu.wpi.first.wpilibj.PIDSource;
  */
 public class AngleController implements PIDSource, PIDOutput {
 
-    private final PIDController angleController;
+    private final PIDController pidController;
     private final DiscoGyro gyro;
-    private double output;
-    private double kTurnScaleFactor = 30;
-    private double newHeading;
+    private double calculatedError;
+    private double pidOutput;
+    private double localRawAngle;
 
     public AngleController(double kP, double kI, double kD, DiscoGyro g) {
-        angleController = new PIDController(kP, kI, kD, this, this);
-        angleController.setSetpoint(0.0);
+        pidController = new PIDController(-kP, kI, kD, this, this);
+        pidController.setSetpoint(0.0);
         gyro = g;
     }
 
     public double pidGet() {
-//        return (gyro.getAngle() + 180) % 360.0 - 180;
-        return gyro.getAngle();
+        return calculatedError;
     }
 
     public void pidWrite(double pidOut) {
-        output = pidOut;
+        synchronized (this) {
+            this.pidOutput = pidOut;
+        }
     }
 
-    public void setSetpoint() {
-        angleController.setSetpoint(gyro.getAngle());
+    public double getSetpoint() {
+        return pidController.getSetpoint();
     }
-
-    public void setSetpoint(double value) {
-        angleController.setSetpoint(value);
+    
+    public void setSetpoint(double targetAngle) {
+        updateLocalAngleData();
+        SmartDashboard.putNumber("AngleController TargetAngle ", targetAngle);
+        double normalizedTargetAngle = DiscoGyro.normalize(targetAngle);
+        double scale = MathUtils.round(this.localRawAngle / 360.0);
+        double normalizedScaledTargetAngle = normalizedTargetAngle * scale;
+        
+        double a = this.localRawAngle - normalizedScaledTargetAngle;
+        double b = normalizedScaledTargetAngle = this.localRawAngle;
+        double error = 0;
+        if (Math.abs(a) <= Math.abs(b)) {
+            error = a;
+        } else if (Math.abs(a) > Math.abs(b)) {
+            error = b;
+        }
+        System.out.println(normalizedTargetAngle + " " + scale + " " + normalizedScaledTargetAngle + " " + a + " " + b + " " + error);
+        SmartDashboard.putNumber("AngleController Error ", error);
+        pidController.setSetpoint(error);
     }
 
     public double getOutput() {
-        return output;
-    }
-
-    public void enable() {
-        if (!angleController.isEnable()) {
-            angleController.enable();
+        synchronized (this) {
+            SmartDashboard.putNumber("Angle Output", this.pidOutput);
+            return this.pidOutput;
         }
     }
 
-    public void disable() {
-        if (angleController.isEnable()) {
-            angleController.disable();
+    public void setEnabled(boolean enabled) {
+        if (enabled) {
+            this.pidController.enable();
+        } else {
+            this.pidController.disable();
         }
     }
     
-    public void incrementSetpoint(double rotation)
-    {
-        if (rotation > .05)
-            newHeading = gyro.getAngle() + rotation * kTurnScaleFactor;
-        setSetpoint(newHeading);
-        
-    }  
-
-    //Debug Stuff I Guess From Here Down
-    public void setPID(double newP, double newI, double newD) {
-        angleController.setPID(newP, newI, newD);
-    }
-
-    public double getP() {
-        return angleController.getP();
-    }
-
-    public double getI() {
-        return angleController.getI();
-    }
-
-    public double getD() {
-        return angleController.getD();
+    private void updateLocalAngleData() {
+        this.localRawAngle = gyro.getAngle();
+        //this.localNormAngle = gyro.getNormalizedAngle();
     }
 }

@@ -60,36 +60,35 @@ public class Drivetrain extends Subsystem {
         rightMiniRear = new Talon(HW.motorModule, HW.rightRearMiniMotor);
         drive = new BetterRobotDrive(leftFront, leftRear, rightFront, rightRear);
         miniDrive = new BetterRobotDrive(leftMiniFront, leftMiniRear, rightMiniFront, rightMiniRear);
-        shifter = new DoubleSolenoid(HW.solonoidModule,HW.driveShiftSolenoidForward,HW.driveShiftSolenoidReverse);
+        shifter = new DoubleSolenoid(HW.solonoidModule, HW.driveShiftSolenoidForward, HW.driveShiftSolenoidReverse);
 
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
-        
+
         miniDrive.setSafetyEnabled(false);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
-        
+
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
         //forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
         //sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
-        angleCont = new AngleController(.025,0,0,gyro);
-        angleCont.enable();
-        
+        angleCont = new AngleController(-0.025, 0, 0, gyro);
+        angleCont.setEnabled(true);
+
         if (Velocity.ENABLE_VELOCITY) {
             try {
                 velocityReporter = new Velocity(accelerometer);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            
+
 //        currentState=getShiftPosition();
-        
         }
     }
 
@@ -126,9 +125,9 @@ public class Drivetrain extends Subsystem {
     public double getGyroAngle() {
         return gyro.getAngle();
     }
-    
-    public double getGyroRate() {
-        return gyro.getRate();
+
+    public double getGyroNormalizedAngle() {
+        return gyro.getNormalizedAngle();
     }
 
     public DiscoGyro getGyro() {
@@ -138,23 +137,24 @@ public class Drivetrain extends Subsystem {
     public boolean getDriveState() {
         return currentState;
     }
-    
+
     public ADXL345_I2C getAccelerometer() {
         return accelerometer;
     }
-    
+
     public double getAngleControllerOutput() {
         return angleCont.getOutput();
     }
-    
+
     public void setAngleControllerSetpoint(double a) {
         angleCont.setSetpoint(a);
     }
-    
-    public void incSetpoint(double a) {
-        angleCont.incrementSetpoint(a);
+
+    private static final double kINCREMENT = 30.0;
+    public void incrementSetpoint(double a) {
+        angleCont.setSetpoint(angleCont.getSetpoint() + a * kINCREMENT);
     }
-    
+
     public double getXVelocity() {
         return velocityReporter.getXVelocity();
     }
@@ -162,11 +162,13 @@ public class Drivetrain extends Subsystem {
     public double getYVelocity() {
         return velocityReporter.getYVelocity();
     }
+
     public boolean isFieldCentricEnabled() {
         return this.fieldCentricEnabled;
     }
+
     public void setFieldCentricEnabled(boolean a) {
         this.fieldCentricEnabled = a;
     }
-    
+
 }

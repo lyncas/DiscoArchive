@@ -47,16 +47,16 @@ public class MecanumDrive extends CommandBase {
         }
         if (Math.abs(rotation) < 0.1) {
             rotation = 0;
-//            currentlyRotating = false;
-        }
+ //           currentlyRotating = false;      // Attempting to debug PID added in currently rotating = false for deadzone
+          }
 
         // Ramp
         if (xPrev - x > rampThreshold) {
             x = xPrev - rampThreshold;
         } else if (x - xPrev > rampThreshold) {
             x = xPrev + rampThreshold;
-        }
-        if (yPrev - y > rampThreshold) {
+       }
+       if (yPrev - y > rampThreshold) {
             y = yPrev - rampThreshold;
         } else if (y - yPrev > rampThreshold) {
             y = yPrev + rampThreshold;
@@ -90,9 +90,9 @@ public class MecanumDrive extends CommandBase {
          
 //         if (drivetrainSub.isFieldCentricEnabled()) {
             if (currentlyRotating) {
-                drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+                drivetrainSub.holonomicPolar(-magnitude, angle + gyroAngle, rotation);
                 drivetrainSub.setAngleControllerSetpoint(gyroAngle);
-                drivetrainSub.incSetpoint(-rotation);
+                //drivetrainSub.incrementSetpoint(rotation);
             } else {
                 if (Math.abs(drivetrainSub.getAngleControllerOutput()) > .05)
                 {
