@@ -15,13 +15,14 @@ public class AutonomousDrive extends CommandBase {
     
     private final long maxRunTime;
     private long startTime; 
-    int magnitude; 
-    int direction;
-    int rotation;
+    double magnitude; 
+    double direction;
+    double rotation;
     int left; 
     int right;
+    double power = 0;
     
-    public AutonomousDrive(int mag, int dir, int rot, int time) {
+    public AutonomousDrive(double mag, double dir, double rot, int time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrainSub);
@@ -30,16 +31,33 @@ public class AutonomousDrive extends CommandBase {
         direction = dir;
         rotation = rot;
     }
+    
+    public AutonomousDrive(double mag, double dir, double rot, double p, int time) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        requires(drivetrainSub);
+        requires(rollerSub);
+        maxRunTime=time;
+        magnitude = mag;
+        direction = dir;
+        rotation = rot;
+        power = p;
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        drivetrainSub.holonomicPolar(0, 0, 0); 
+        drivetrainSub.holonomicPolar(0, 0, 0);
+        rollerSub.setIntakeSpeed(0);
         startTime = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drivetrainSub.holonomicPolar(magnitude, direction, rotation);
+        if (Math.abs(drivetrainSub.getAngleControllerOutput()) > .05)
+            drivetrainSub.holonomicPolar(magnitude, direction + drivetrainSub.getGyroAngle(), drivetrainSub.getAngleControllerOutput());
+        else
+            drivetrainSub.holonomicPolar(magnitude, direction + drivetrainSub.getGyroAngle(), rotation);
+        rollerSub.setIntakeSpeed(power);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -53,6 +71,7 @@ public class AutonomousDrive extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         drivetrainSub.holonomicPolar(0, 0, 0);
+        rollerSub.setIntakeSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

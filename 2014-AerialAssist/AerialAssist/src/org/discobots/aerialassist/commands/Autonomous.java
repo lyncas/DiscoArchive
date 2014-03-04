@@ -37,17 +37,19 @@ public class Autonomous extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
         
-        addSequential(new ToggleArm(true));
-        addSequential(new AutonomousIntake(0.2*Intake.IN, 2000));
+        //addSequential(new ToggleArm(true));
+        //addSequential(new AutonomousIntake(0.2*Intake.IN, 2000));
+        addSequential(new AutonomousDrive(.4, 270, 0, 0.5*Intake.IN, 2000));
         addSequential(new FirePneumatapult(true, 2));
-//        addSequential(new WaitCommand(1.500));
+        addSequential(new AutonomousDrive(1, 90, 0, 300));
+        addSequential(new WaitCommand(1.500));
 //        addSequential(new AutonomousDrive(-1, -1, 1000));
-        addSequential(new AutonomousDrive(1, 90, 0, 100));
+//        addSequential(new AutonomousDrive(1, 90, 0, 100));
 //        addSequential(new AutonomousDrive(1, 1, 1000));
         addSequential(new AutonomousIntake(1*Intake.IN, 3000));
-        addSequential(new AutonomousDrive(1, 270, 0, 100));
-        addSequential(new FirePneumatapult(true, 2));
-        addSequential(new AutonomousDrive(1, 270, 0, 500));
+//        addSequential(new AutonomousDrive(1, 270, 0, 400));
+//        addSequential(new FirePneumatapult(true, 2));
+//        addSequential(new AutonomousDrive(1, 270, 0, 500));
               
     }
 }
