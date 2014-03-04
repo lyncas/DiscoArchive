@@ -27,8 +27,9 @@ public class AngleController implements PIDSource, PIDOutput {
     }
 
     public double pidGet() {
+        updateLocalAngleData();
         double a = this.localRawAngle - normalizedScaledTargetAngle;
-        double b = normalizedScaledTargetAngle = this.localRawAngle;
+        double b = normalizedScaledTargetAngle - this.localRawAngle;
         double error = 0;
         if (Math.abs(a) <= Math.abs(b)) {
             error = a;
@@ -37,6 +38,10 @@ public class AngleController implements PIDSource, PIDOutput {
             error = b;
             this.a = false;
         }
+        calculatedError = error;
+        SmartDashboard.putNumber("AngleController Error Final", calculatedError);
+        SmartDashboard.putNumber("AngleController Error a", a);
+        SmartDashboard.putNumber("AngleController Error b", b);
         return error;
     }
 
@@ -56,9 +61,9 @@ public class AngleController implements PIDSource, PIDOutput {
         double normalizedTargetAngle = DiscoGyro.normalize(targetAngle);
         double scale = MathUtils.round(this.localRawAngle / 360.0);
         normalizedScaledTargetAngle = normalizedTargetAngle * scale;
-        
+        SmartDashboard.putNumber("AngleController normscal TargetAngle", normalizedScaledTargetAngle);
         double a = this.localRawAngle - normalizedScaledTargetAngle;
-        double b = normalizedScaledTargetAngle = this.localRawAngle;
+        double b = normalizedScaledTargetAngle - this.localRawAngle;
         double error = 0;
         if (Math.abs(a) <= Math.abs(b)) {
             error = a;
@@ -69,7 +74,9 @@ public class AngleController implements PIDSource, PIDOutput {
         }
         calculatedError = error;
         System.out.println(normalizedTargetAngle + " " + scale + " " + normalizedScaledTargetAngle + " " + a + " " + b + " " + error);
-        SmartDashboard.putNumber("AngleController Error ", error);
+        SmartDashboard.putNumber("AngleController Error Final", calculatedError);
+        SmartDashboard.putNumber("AngleController Error a", a);
+        SmartDashboard.putNumber("AngleController Error b", b);
         pidController.setSetpoint(error);
     }
 
