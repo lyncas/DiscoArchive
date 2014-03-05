@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.drive.MecanumDrive;
+import org.discobots.aerialassist.commands.drive.TankDrive;
 import org.discobots.aerialassist.utils.AngleController;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
@@ -93,7 +94,8 @@ public class Drivetrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new MecanumDrive());
+//        setDefaultCommand(new MecanumDrive());
+        setDefaultCommand(new TankDrive());
         this.currentState = MECANUM;
         gyro.reset(0);
     }

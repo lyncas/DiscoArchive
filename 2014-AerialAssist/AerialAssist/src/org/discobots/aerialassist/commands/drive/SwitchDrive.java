@@ -38,7 +38,8 @@ public class SwitchDrive extends CommandBase {
                     new TankDrive().start();
                 } else {// (newMode == Drivetrain.TRACTION) { // (false)
                     drivetrainSub.shiftMecanum();
-                    new MecanumDrive().start();
+//                    new MecanumDrive().start();
+                    new TankDrive().start();
                 } 
             } else {
                 if (!drivetrainSub.getDriveState()) { // (true) //!drivetrainSub.getDriveState()
@@ -46,7 +47,8 @@ public class SwitchDrive extends CommandBase {
                     new TankDrive().start();
                 } else {// (newMode == Drivetrain.TRACTION) { // (false)
                     drivetrainSub.shiftMecanum();
-                    new MecanumDrive().start();
+//                    new MecanumDrive().start();
+                    new TankDrive().start();
                 }
             }
         }

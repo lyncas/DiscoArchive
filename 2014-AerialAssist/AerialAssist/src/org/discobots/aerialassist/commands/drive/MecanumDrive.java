@@ -97,9 +97,9 @@ public class MecanumDrive extends CommandBase {
                 if (Math.abs(drivetrainSub.getAngleControllerOutput()) > .05)
                 {
                     if (drivetrainSub.isFieldCentricEnabled()) 
-                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, drivetrainSub.getAngleControllerOutput());
+                        drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, drivetrainSub.getAngleControllerOutput());
                     else
-                    drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
+                        drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
                 }    
                 else
                     drivetrainSub.holonomicPolar(magnitude, angle + gyroAngle, rotation);
