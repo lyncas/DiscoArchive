@@ -49,13 +49,13 @@ public class SwitchDrive extends CommandBase {
         } else if (commandMode == MODE_TANK) {
             new TankDrive().start();
         } else if (commandMode == MODE_TANKFIELDCENTRIC) {
-            new FieldCentricTankDrive().start();
+            new FieldCentricDrive().start();
         } else if (commandMode == MODE_AUTODETECT) {
             Command driveCommand = drivetrainSub.getCurrentCommand();
             if (driveCommand instanceof CheesyArcadeDrive) {
                 new TankDrive().start();
             } else if (driveCommand instanceof TankDrive) {
-                new FieldCentricTankDrive().start();
+                new FieldCentricDrive().start();
             } else {
                 new CheesyArcadeDrive().start();
             }
