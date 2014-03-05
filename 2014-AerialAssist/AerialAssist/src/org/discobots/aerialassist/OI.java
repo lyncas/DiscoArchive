@@ -1,15 +1,12 @@
 package org.discobots.aerialassist;
+
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.discobots.aerialassist.commands.drive.ResetGyroAngle;
 import org.discobots.aerialassist.commands.SetRunnable;
-//import org.discobots.aerialassist.commands.ResetGyroAngle;
+import org.discobots.aerialassist.commands.drive.ResetGyroAngle;
 import org.discobots.aerialassist.commands.ToggleCompressor;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
-import org.discobots.aerialassist.commands.drive.FixedSpeedMecanum;
-import org.discobots.aerialassist.commands.drive.ToggleFieldCentric;
-//import org.discobots.aerialassist.commands.drive.HalfSpeedMecanum;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
 import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
@@ -19,7 +16,8 @@ import org.discobots.aerialassist.utils.GamePad.AxisButton;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {    
+public class OI {
+
     private GamePad gp1 = new GamePad(1, GamePad.MODE_D);
     private GamePad gp2 = new GamePad(2, GamePad.MODE_D);
     // JOYSTICK 1
@@ -63,17 +61,9 @@ public class OI {
 
     private void mapButtons() {
 //      Controller 1
-    //    b_sStar.whenReleased(new SwitchDrive());
-        //b_dpadU.whenReleased(new SwitchDrive(Drivetrain.MECANUM));
-        //b_dpadD.whenReleased(new SwitchDrive(Drivetrain.TRACTION));
-        b_btnX.whenPressed(new SwitchDrive(false));
-        b_btnY.whenPressed(new SwitchDrive(true));
-
-        b_dpadU.whileHeld(new FixedSpeedMecanum(90));
-        b_dpadR.whileHeld(new FixedSpeedMecanum(0));
-        b_dpadD.whileHeld(new FixedSpeedMecanum(270));
-        b_dpadL.whileHeld(new FixedSpeedMecanum(180));
-//        b_btnY.whenPressed(new ToggleCompressor());
+        b_btnX.whenPressed(new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL));
+        b_btnY.whenPressed(new SwitchDrive(SwitchDrive.MODE_TRACTION, SwitchDrive.MODE_NULL));
+        b_sStar.whenPressed(new SwitchDrive(SwitchDrive.MODE_NULL, SwitchDrive.MODE_AUTODETECT));
         b_bumpR.whenPressed(new ToggleArm(true));//arm up
         b_trigR.whenPressed(new ToggleArm(false));//arm down
         b_bumpL.whileHeld(new Intake(Intake.IN));
@@ -89,17 +79,17 @@ public class OI {
 //        b_trigL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
 //        b_btnX.whileHeld(new ChooChooManual());
 //        b2_btnA.whenPressed(new ChooChooEnable());
-        b_sStar.whenPressed(new ToggleFieldCentric());
-        
+
 //      Controller 2
-     //   b2_trigR.whenPressed(new ChooChoo());
+        //   b2_trigR.whenPressed(new ChooChoo());
         b2_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
         b2_btnB.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));
         b2_btnY.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));
 //        b2_bumpL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE));
 //        b2_bumpL.whenReleased(new FirePneumatapult(FirePneumatapult.LOAD));
     }
-     public double getRawAnalogStickALX() {
+
+    public double getRawAnalogStickALX() {
         return gp1.getLX();
     }
 

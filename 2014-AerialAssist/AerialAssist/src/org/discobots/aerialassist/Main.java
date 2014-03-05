@@ -52,7 +52,7 @@ public class Main extends IterativeRobot {
     }
 
     public void teleopInit() {
-        new SwitchDrive(Drivetrain.MECANUM).start();
+        new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL).start();
     }
 
     /**

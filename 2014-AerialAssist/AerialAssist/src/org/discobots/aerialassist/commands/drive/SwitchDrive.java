@@ -6,6 +6,7 @@
 package org.discobots.aerialassist.commands.drive;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.command.Command;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 
@@ -15,41 +16,48 @@ import org.discobots.aerialassist.subsystems.Drivetrain;
  */
 public class SwitchDrive extends CommandBase {
 
-    private boolean newMode;
-    private boolean useOwnData;
+    public static final int MODE_NULL = 0;
+    public static final int MODE_AUTODETECT = 1;
+    private int omniOrTraction;
+    public static final int MODE_OMNIWHEEL = 2;
+    public static final int MODE_TRACTION = 3;
+    private int commandMode;
+    public static final int MODE_CHEESYARCADE = 2;
+    public static final int MODE_TANK = 3;
+    public static final int MODE_TANKFIELDCENTRIC = 4;
 
-    public SwitchDrive(boolean check) {
-        requires(drivetrainSub);
-        newMode = check;
-        useOwnData=false;
-    }
-
-    public SwitchDrive() {
-        requires(drivetrainSub);
-        newMode=!drivetrainSub.getDriveState();
-        useOwnData=true;
+    public SwitchDrive(int omniOrTraction, int commandMode) {
+        this.omniOrTraction = omniOrTraction;
+        this.commandMode = commandMode;
     }
 
     protected void initialize() {
-        if(compressorSub.canRun){
-            if(!useOwnData) {
-                if (newMode == Drivetrain.TRACTION) { // (true) //!drivetrainSub.getDriveState()
-                    drivetrainSub.shiftTraction();
-                    new TankDrive().start();
-                } else {// (newMode == Drivetrain.TRACTION) { // (false)
-                    drivetrainSub.shiftMecanum();
-//                    new MecanumDrive().start();
-                    new TankDrive().start();
-                } 
+        if (omniOrTraction == MODE_OMNIWHEEL) {
+            drivetrainSub.shiftOmni();
+        } else if (omniOrTraction == MODE_TRACTION) {
+            drivetrainSub.shiftTraction();
+        } else if (omniOrTraction == MODE_AUTODETECT) {
+            if (drivetrainSub.getDriveState() == Drivetrain.OMNI) {
+                drivetrainSub.shiftTraction();
+            } else if (drivetrainSub.getDriveState() == Drivetrain.TRACTION) {
+                drivetrainSub.shiftOmni();
+            }
+        }
+        
+        if (commandMode == MODE_CHEESYARCADE) {
+            new CheesyArcadeDrive().start();
+        } else if (commandMode == MODE_TANK) {
+            new TankDrive().start();
+        } else if (commandMode == MODE_TANKFIELDCENTRIC) {
+            new FieldCentricTankDrive().start();
+        } else if (commandMode == MODE_AUTODETECT) {
+            Command driveCommand = drivetrainSub.getCurrentCommand();
+            if (driveCommand instanceof CheesyArcadeDrive) {
+                new TankDrive().start();
+            } else if (driveCommand instanceof TankDrive) {
+                new FieldCentricTankDrive().start();
             } else {
-                if (!drivetrainSub.getDriveState()) { // (true) //!drivetrainSub.getDriveState()
-                    drivetrainSub.shiftTraction();
-                    new TankDrive().start();
-                } else {// (newMode == Drivetrain.TRACTION) { // (false)
-                    drivetrainSub.shiftMecanum();
-//                    new MecanumDrive().start();
-                    new TankDrive().start();
-                }
+                new CheesyArcadeDrive().start();
             }
         }
     }

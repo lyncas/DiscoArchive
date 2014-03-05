@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
-import org.discobots.aerialassist.commands.drive.MecanumDrive;
 import org.discobots.aerialassist.commands.drive.TankDrive;
 import org.discobots.aerialassist.utils.AngleController;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
@@ -45,9 +44,9 @@ public class Drivetrain extends Subsystem {
     private AngleController angleCont;
     private Velocity velocityReporter;
     public boolean fieldCentricEnabled = true;
-    public static final boolean MECANUM = false;
+    public static final boolean OMNI = false;
     public static final boolean TRACTION = true;
-    private boolean currentState = MECANUM;    //Why does it start out as mecanum if TRACTION is used as the default?
+    private boolean currentState = OMNI;    //Why does it start out as mecanum if TRACTION is used as the default?
 
     public Drivetrain() {
         super("Drivetrain");
@@ -96,7 +95,7 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
 //        setDefaultCommand(new MecanumDrive());
         setDefaultCommand(new TankDrive());
-        this.currentState = MECANUM;
+        this.currentState = OMNI;
         gyro.reset(0);
     }
 
@@ -115,9 +114,9 @@ public class Drivetrain extends Subsystem {
         currentState = TRACTION;
     }
 
-    public void shiftMecanum() {
+    public void shiftOmni() {
         shifter.set(DoubleSolenoid.Value.kReverse);
-        currentState = MECANUM;
+        currentState = OMNI;
     }
 
     public boolean getShiftPosition() {
