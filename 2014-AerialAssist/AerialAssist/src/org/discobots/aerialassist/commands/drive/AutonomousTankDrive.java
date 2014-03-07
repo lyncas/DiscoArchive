@@ -26,9 +26,10 @@ public class AutonomousTankDrive extends CommandBase {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrainSub);
+        requires(rollerSub);
         maxRunTime=time;
         left = l;
-        right = r;
+        right = -r;
     }
     
     public AutonomousTankDrive(double l, double r, double p, int time) {
@@ -38,7 +39,7 @@ public class AutonomousTankDrive extends CommandBase {
         requires(rollerSub);
         maxRunTime=time;
         left = l;
-        right = r;
+        right = -r;
         power = p;
     }
 

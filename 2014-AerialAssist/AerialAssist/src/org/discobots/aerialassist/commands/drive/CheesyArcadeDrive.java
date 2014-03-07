@@ -109,13 +109,13 @@ public class CheesyArcadeDrive extends CommandBase {
     }
 
     protected void calculateInput() {
-            move = oi.getRawAnalogStickALY();
+            move = oi.getRawAnalogStickALX();
             move = Math.abs(move) > threshold ? move : 0;
-            turn = oi.getRawAnalogStickALX();
+            turn = oi.getRawAnalogStickALY();
             turn = Math.abs(turn) > threshold ? turn : 0;
 
-            move += oi.getRawAnalogStickARY() / 2;
-            turn += oi.getRawAnalogStickARX() / 2;
+            move += oi.getRawAnalogStickARX() / 2;
+            turn += oi.getRawAnalogStickARY() / 2;
     }
 
     public static double limit(double v, double limit) {
