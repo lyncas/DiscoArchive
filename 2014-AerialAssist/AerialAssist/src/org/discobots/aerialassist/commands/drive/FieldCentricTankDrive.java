@@ -34,7 +34,7 @@ public class FieldCentricTankDrive extends CommandBase {
         if (ACO < .05) {
             magnitude = Math.sqrt(x * x + y * y);
         }
-        double left = magnitude + ACO;
+        double left = -magnitude - ACO;
         double right = magnitude - ACO;
         if (left > 1) {
             right /= left;

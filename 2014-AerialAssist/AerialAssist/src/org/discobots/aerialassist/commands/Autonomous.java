@@ -45,13 +45,15 @@ public class Autonomous extends CommandGroup {
     }
     
     private void autonomousMode1Init() {
+        addSequential(new ToggleCompressor());
         addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.5*Intake.IN, 2000));
         addSequential(new FirePneumatapult(true, 2));
         addSequential(new AutonomousTankDrive(1, 1, 300));
         addSequential(new WaitCommand(1.500));
-        addSequential(new AutonomousIntake(1*Intake.IN, 4000));
-        addSequential(new AutonomousTankDrive(-1, -1, 300));
+        addSequential(new AutonomousIntake(1*Intake.IN, 2500));
         addSequential(new FirePneumatapult(true, 2));
+        addSequential(new AutonomousTankDrive(-1, -1, 300));
+        addSequential(new AutonomousTankDrive(1, 1, 300));
     }
     
     private void autonomousMode2Init() {

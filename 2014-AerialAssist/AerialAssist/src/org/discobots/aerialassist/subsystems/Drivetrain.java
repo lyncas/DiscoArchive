@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
+import org.discobots.aerialassist.commands.drive.CheesyArcadeDrive;
 import org.discobots.aerialassist.commands.drive.TankDrive;
 import org.discobots.aerialassist.utils.AngleController;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
@@ -94,7 +95,7 @@ public class Drivetrain extends Subsystem {
 
     public void initDefaultCommand() {
 //        setDefaultCommand(new MecanumDrive());
-        setDefaultCommand(new TankDrive());
+        setDefaultCommand(new CheesyArcadeDrive());
         this.currentState = OMNI;
         gyro.reset(0);
     }

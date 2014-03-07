@@ -30,8 +30,8 @@ public class TankDrive extends CommandBase {
     }
 
     protected void execute() {
-        double l = oi.getRawAnalogStickALY();
-        double r = -oi.getRawAnalogStickARY();
+        double r = oi.getRawAnalogStickALY();      //I know this doesn't make sense.  We are driving backwards.
+        double l = -oi.getRawAnalogStickARY();       //I know this doesn't make sense.  We are driving backwards.
 
         if (lPrev - l > rampThreshold) {
             l = lPrev - rampThreshold;

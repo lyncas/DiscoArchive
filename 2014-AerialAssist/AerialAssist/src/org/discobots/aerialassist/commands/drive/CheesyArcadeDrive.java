@@ -80,17 +80,17 @@ public class CheesyArcadeDrive extends CommandBase {
 
         //The important part
         if (move >= 0 && turn >= 0) {//Q1
-            driveLeft = turn * b + move * (1 - turn * b);
-            driveRight = -1 * turn * b + move * ((1 - turn * (a + 1)) + turn * b);
+            driveRight = turn * b + move * (1 - turn * b);
+            driveLeft = -1 * turn * b + move * ((1 - turn * (a + 1)) + turn * b);
         } else if (move >= 0 && turn < 0) {//Q2
-            driveLeft = turn * b + move * (1 + turn * (1 + a) - turn * b);
-            driveRight = -1 * turn * b + move * (1 + turn * b);
+            driveRight = turn * b + move * (1 + turn * (1 + a) - turn * b);
+            driveLeft = -1 * turn * b + move * (1 + turn * b);
         } else if (move < 0 && turn >= 0) {//Q4
-            driveLeft = turn * b - move * (turn * (a + 1) - 1 - turn * b);
-            driveRight = -1 * turn * b - move * (-1 + turn * b);
+            driveRight = turn * b - move * (turn * (a + 1) - 1 - turn * b);
+            driveLeft = -1 * turn * b - move * (-1 + turn * b);
         } else if (move < 0 && turn < 0) {//Q3
-            driveLeft = turn * b - move * (-1 - turn * b);
-            driveRight = -1 * turn * b - move * (-1 - turn * (a + 1) + turn * b);
+            driveRight = turn * b - move * (-1 - turn * b);
+            driveLeft = -1 * turn * b - move * (-1 - turn * (a + 1) + turn * b);
         }
 
         drivetrainSub.tankDrive(driveLeft, driveRight);
