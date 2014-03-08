@@ -5,6 +5,7 @@
  */
 package org.discobots.aerialassist.commands;
 
+import org.discobots.aerialassist.commands.SetRunnable;
 import org.discobots.aerialassist.commands.upperbody.AutonomousIntake;
 import org.discobots.aerialassist.commands.drive.AutonomousTankDrive;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -46,6 +47,8 @@ public class Autonomous extends CommandGroup {
     
     private void autonomousMode1Init() {
         addSequential(new ToggleCompressor());
+        addSequential(new SetRunnable());
+        addSequential(new ToggleArm(true));
         addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.5*Intake.IN, 2000));
         addSequential(new FirePneumatapult(true, 2));
         addSequential(new AutonomousTankDrive(1, 1, 300));

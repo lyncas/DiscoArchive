@@ -14,6 +14,9 @@ import org.discobots.aerialassist.commands.CommandBase;
  * @author Patrick
  */
 public class FieldCentricDrive extends CommandBase {
+    
+    double magnitude = 0;    
+    
     public FieldCentricDrive() {
         requires(drivetrainSub);
     }
@@ -24,7 +27,6 @@ public class FieldCentricDrive extends CommandBase {
     }
 
     protected void execute() {
-        double magnitude = 0;
         double x = oi.getRawAnalogStickALX();
         double y = oi.getRawAnalogStickALY();
         double angle = MathUtils.atan2(y, x) * 180.0 / Math.PI;

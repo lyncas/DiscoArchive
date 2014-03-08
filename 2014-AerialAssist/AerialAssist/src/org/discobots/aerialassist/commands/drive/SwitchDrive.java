@@ -25,6 +25,7 @@ public class SwitchDrive extends CommandBase {
     public static final int MODE_CHEESYARCADE = 2;
     public static final int MODE_TANK = 3;
     public static final int MODE_TANKFIELDCENTRIC = 4;
+    public static final int MODE_STICKDRIVE = 5;
 
     public SwitchDrive(int omniOrTraction, int commandMode) {
         this.omniOrTraction = omniOrTraction;
@@ -50,12 +51,16 @@ public class SwitchDrive extends CommandBase {
             new TankDrive().start();
         } else if (commandMode == MODE_TANKFIELDCENTRIC) {
             new FieldCentricDrive().start();
+        } else if (commandMode == MODE_STICKDRIVE) {
+            new StickDrive().start();
         } else if (commandMode == MODE_AUTODETECT) {
             Command driveCommand = drivetrainSub.getCurrentCommand();
             if (driveCommand instanceof CheesyArcadeDrive) {
                 new TankDrive().start();
             } else if (driveCommand instanceof TankDrive) {
                 new FieldCentricDrive().start();
+            } else if (driveCommand instanceof FieldCentricDrive) {
+                new StickDrive().start();
             } else {
                 new CheesyArcadeDrive().start();
             }
