@@ -32,6 +32,7 @@ import org.discobots.aerialassist.subsystems.Drivetrain;
 public class Main extends IterativeRobot {
     
     SendableChooser autonomousChooser;
+    Command autonomousCommand;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -52,7 +53,9 @@ public class Main extends IterativeRobot {
 
     public void autonomousInit() {
         //((Integer) autonomousChooser.getSelected()).intValue()
-        new Autonomous((int) SmartDashboard.getNumber(AUTONCHOOSER_)).start();
+        autonomousCommand = new Autonomous((int) SmartDashboard.getNumber(AUTONCHOOSER_));
+        autonomousCommand.start();
+        
     }
     /**
      * This function is called periodically during autonomous
@@ -63,6 +66,7 @@ public class Main extends IterativeRobot {
     }
 
     public void teleopInit() {
+        autonomousCommand.cancel();
         new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL).start();
     }
 

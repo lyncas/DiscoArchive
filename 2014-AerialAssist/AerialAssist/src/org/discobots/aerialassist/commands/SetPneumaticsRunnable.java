@@ -9,9 +9,9 @@ package org.discobots.aerialassist.commands;
  *
  * @author Dylan
  */
-public class SetRunnable extends CommandBase {
+public class SetPneumaticsRunnable extends CommandBase {
     
-    public SetRunnable() {
+    public SetPneumaticsRunnable() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

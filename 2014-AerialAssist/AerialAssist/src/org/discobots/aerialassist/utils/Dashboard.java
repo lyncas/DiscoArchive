@@ -31,8 +31,7 @@ public class Dashboard {
         SmartDashboard.putString("Drive Shift Mode", driveSub.getShiftPosition() ? "Traction" : "Mecanum");
         SmartDashboard.putNumber("PID Controller Output", driveSub.getAngleControllerOutput());
         SmartDashboard.putBoolean("Field Centric Enabled?", driveSub.isFieldCentricEnabled());
-        boolean a = SmartDashboard.getBoolean("Should I Enable Field Centric", true);
-        driveSub.setFieldCentricEnabled(a);
+        //SmartDashboard.putNumber("Encoder Forward", driveSub.get);
         
         // Compressor
         SmartDashboard.putBoolean("Compressor On?", compSub.isEnabled());

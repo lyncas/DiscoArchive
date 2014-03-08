@@ -25,8 +25,8 @@ public class ToggleArm extends CommandBase {
         }
     }
     protected void execute() {
-        if (rollerSub.isExtended())
-            rollerSub.setIntakeSpeed(.2*Intake.IN);
+        /*if (rollerSub.isExtended())
+            rollerSub.setIntakeSpeed(.2*Intake.IN);*/
     }
     protected boolean isFinished() {
         return true;

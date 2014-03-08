@@ -33,13 +33,13 @@ public class RollerSub extends Subsystem {
     }
     
     public void setExtended(boolean on) {
-        if(on)
+        if(!on)
             extend.set(DoubleSolenoid.Value.kForward);
         else
             extend.set(DoubleSolenoid.Value.kReverse);
     }
     
     public boolean isExtended() {
-        return extend.get() == DoubleSolenoid.Value.kReverse;   //The robot thinks that down is false.
+        return !(extend.get() == DoubleSolenoid.Value.kReverse);
     }
 }
