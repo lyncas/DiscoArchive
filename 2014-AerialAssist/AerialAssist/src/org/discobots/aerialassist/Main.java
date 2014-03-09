@@ -66,6 +66,7 @@ public class Main extends IterativeRobot {
     }
 
     public void teleopInit() {
+        if (autonomousCommand != null)
         autonomousCommand.cancel();
         new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL).start();
     }

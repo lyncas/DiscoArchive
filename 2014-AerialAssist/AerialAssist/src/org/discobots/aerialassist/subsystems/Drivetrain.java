@@ -77,8 +77,13 @@ public class Drivetrain extends Subsystem {
 
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
-        //forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
-        //sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
+        /*forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
+        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
+        forwardEncoder.setDistancePerPulse(HW.distancePerPulse);
+        sidewayEncoder.setDistancePerPulse(HW.distancePerPulse);
+	forwardEncoder.start();
+	sidewayEncoder.start();*/
+        
         angleCont = new AngleController(-0.025, 0, 0, gyro);
         angleCont.setEnabled(true);
 
@@ -172,5 +177,10 @@ public class Drivetrain extends Subsystem {
     public void setFieldCentricEnabled(boolean a) {
         this.fieldCentricEnabled = a;
     }
-
+    public double getEncoderForwardDistance() {
+        return 0.0;//this.forwardEncoder.getDistance();
+    }
+    public double getEncoderSidewayDistance() {
+        return 0.0;//this.sidewayEncoder.getDistance();
+    }
 }

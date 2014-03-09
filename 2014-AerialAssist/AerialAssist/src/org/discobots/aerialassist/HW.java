@@ -1,7 +1,14 @@
 package org.discobots.aerialassist;
 
 public class HW {
+    
+    public static final double driveReduction = 1;
+    public static final double wheelRadius = 2;
+    public static final double encoderTicksPerRev=256/driveReduction;
+    public static final double distancePerRev=2*Math.PI*wheelRadius;
+    public static final double distancePerPulse=distancePerRev/encoderTicksPerRev;
 
+    
     /**---------------------------------
      * Motors
      ---------------------------------*/

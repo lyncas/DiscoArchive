@@ -11,14 +11,17 @@ package org.discobots.aerialassist.commands;
  */
 public class SetPneumaticsRunnable extends CommandBase {
     
+    private boolean set;
+    public SetPneumaticsRunnable(boolean a) {
+        set = a;
+    }
     public SetPneumaticsRunnable() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        set = !compressorSub.canRunPneumatics();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        compressorSub.setRun();
+        compressorSub.setRunPneumatics(set);
     }
 
     // Called repeatedly when this Command is scheduled to run
