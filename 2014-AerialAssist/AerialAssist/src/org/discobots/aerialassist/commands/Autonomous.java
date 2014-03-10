@@ -78,7 +78,7 @@ public class Autonomous extends CommandGroup {
         addSequential(new ToggleArm(true));
         addSequential(new AutonomousTankDrive(0, 0.6, 300)); // Move to the left a little
         addSequential(new ToggleArm(false));
-        addSequential(new WaitCommand(1.5)); // Move to the left a little
+//        addSequential(new WaitCommand(1.5)); // Move to the left a little
         addSequential(new FirePneumatapult(true, 2)); // Fire ball 2
         //addSequential(new AutonomousTankDrive(-0.25, -0.25, 450)); // Lower the catapult
         //addSequential(new AutonomousTankDrive(0.25, 0.25, 450)); // Lower the catapult
