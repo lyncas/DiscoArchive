@@ -31,13 +31,13 @@ public class Dashboard {
         SmartDashboard.putString("Drive Shift Mode", driveSub.getShiftPosition() ? "Traction" : "Mecanum");
         SmartDashboard.putNumber("PID Controller Output", driveSub.getAngleControllerOutput());
         SmartDashboard.putBoolean("Field Centric Enabled?", driveSub.isFieldCentricEnabled());
-        boolean a = SmartDashboard.getBoolean("Should I Enable Field Centric", true);
-        driveSub.setFieldCentricEnabled(a);
+        SmartDashboard.putNumber("Encoder Forward Distance", driveSub.getEncoderForwardDistance());
+        SmartDashboard.putNumber("Encoder Sideway Distance", driveSub.getEncoderSidewayDistance());
         
         // Compressor
         SmartDashboard.putBoolean("Compressor On?", compSub.isEnabled());
         SmartDashboard.putBoolean("Compressor Max Presure", compSub.isFull());
-        SmartDashboard.putBoolean("Is compressor enabled?", compSub.getCanRun());
+        SmartDashboard.putBoolean("Can Run Pneumatics?", compSub.canRunPneumatics());
         
         // Roller
         SmartDashboard.putBoolean("Intake Extended", rollSub.isExtended());

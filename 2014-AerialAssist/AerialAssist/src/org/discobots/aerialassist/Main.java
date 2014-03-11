@@ -19,6 +19,7 @@ import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.utils.Dashboard;
 import org.discobots.aerialassist.OI;
 import org.discobots.aerialassist.commands.Autonomous;
+import org.discobots.aerialassist.commands.drive.AutonomousStaticDrive;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 
@@ -32,6 +33,7 @@ import org.discobots.aerialassist.subsystems.Drivetrain;
 public class Main extends IterativeRobot {
     
     SendableChooser autonomousChooser;
+    Command autonomousCommand;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -45,14 +47,16 @@ public class Main extends IterativeRobot {
         autonomousChooser.addObject("Do Nothing", new Integer(0));
         autonomousChooser.addDefault("1", new Integer(1));
         autonomousChooser.addObject("2", new Integer(2));
-        autonomousChooser.addObject("3", new Integer(3));
+        autonomousChooser.addObject("Three Ball", new Integer(3));
         autonomousChooser.addObject("4", new Integer(4));
-        SmartDashboard.putNumber(AUTONCHOOSER_, 0);
+        SmartDashboard.putData(AUTONCHOOSER_, autonomousChooser);
     }
 
     public void autonomousInit() {
         //((Integer) autonomousChooser.getSelected()).intValue()
-        new Autonomous((int) SmartDashboard.getNumber(AUTONCHOOSER_)).start();
+        autonomousCommand = new Autonomous((int) SmartDashboard.getNumber(AUTONCHOOSER_));
+        autonomousCommand.start();
+        //new AutonomousStaticDrive(10, 0).start();
     }
     /**
      * This function is called periodically during autonomous
@@ -63,6 +67,8 @@ public class Main extends IterativeRobot {
     }
 
     public void teleopInit() {
+        if (autonomousCommand != null)
+        autonomousCommand.cancel();
         new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL).start();
     }
 

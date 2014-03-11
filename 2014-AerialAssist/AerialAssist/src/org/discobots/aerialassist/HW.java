@@ -1,7 +1,14 @@
 package org.discobots.aerialassist;
 
 public class HW {
+    
+    public static final double driveReduction = 1;
+    public static final double wheelRadius = 2;
+    public static final double encoderTicksPerRev=256/driveReduction;
+    public static final double distancePerRev=2*Math.PI*wheelRadius;
+    public static final double distancePerPulse=distancePerRev/encoderTicksPerRev;
 
+    
     /**---------------------------------
      * Motors
      ---------------------------------*/
@@ -34,7 +41,7 @@ public class HW {
      * Sensors
      ---------------------------------*/
     public static final int gyroChannel = 2, chooChooTouchSensor = 11,
-                            armLimitSwitchChannel = 2,
-                            forwardEncoderA = 1,forwardEncoderB = 2, 
-                            sidewayEncoderA = 3,sidewayEncoderB = 4;
+                            armLimitSwitchChannel = 6,
+                            forwardEncoderA = 2,forwardEncoderB = 3, 
+                            sidewayEncoderA = 4,sidewayEncoderB = 5;
 }

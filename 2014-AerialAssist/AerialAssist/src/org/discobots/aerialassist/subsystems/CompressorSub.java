@@ -15,27 +15,28 @@ import org.discobots.aerialassist.utils.BetterCompressor;
  * @author Dylan
  */
 public class CompressorSub extends Subsystem {
+
     BetterCompressor comp;
     public boolean canRun;
 
     public CompressorSub() {
         super("Compressor");
-        canRun=false;       
+        canRun = false;
         comp = new BetterCompressor(1, HW.pressureSwitch, 1, HW.compressorRelay, 1, HW.spikeReplacementVictor);
     }
 
     public void initDefaultCommand() {
     }
-    
-    public void setRun(){
-        canRun=!canRun;
+
+    public void setRunPneumatics(boolean a) {
+        canRun = a;
         SmartDashboard.putBoolean("Is compressor enabled?", canRun);
     }
-    
-    public boolean getCanRun(){
+
+    public boolean canRunPneumatics() {
         return canRun;
     }
-    
+
     public void on() {
         comp.start();
     }
@@ -47,7 +48,7 @@ public class CompressorSub extends Subsystem {
     public boolean isEnabled() {
         return comp.enabled();
     }
-    
+
     public boolean isFull() {
         return comp.getPressureSwitchValue();
     }
