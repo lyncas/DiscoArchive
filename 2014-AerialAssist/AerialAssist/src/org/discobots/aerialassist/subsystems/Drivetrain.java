@@ -80,8 +80,8 @@ public class Drivetrain extends Subsystem {
         forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
         sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
         
-        forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
-        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
+//        forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
+//        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
         forwardEncoder.setDistancePerPulse(HW.distancePerPulse);
         sidewayEncoder.setDistancePerPulse(HW.distancePerPulse);
 	forwardEncoder.start();
