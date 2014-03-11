@@ -49,7 +49,7 @@ public class Main extends IterativeRobot {
         autonomousChooser.addObject("2", new Integer(2));
         autonomousChooser.addObject("Three Ball", new Integer(3));
         autonomousChooser.addObject("4", new Integer(4));
-        SmartDashboard.putNumber(AUTONCHOOSER_, 0);
+        SmartDashboard.putData(AUTONCHOOSER_, autonomousChooser);
     }
 
     public void autonomousInit() {

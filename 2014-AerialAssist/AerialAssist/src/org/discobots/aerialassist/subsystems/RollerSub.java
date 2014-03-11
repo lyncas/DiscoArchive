@@ -1,5 +1,6 @@
 package org.discobots.aerialassist.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
@@ -15,11 +16,13 @@ public class RollerSub extends Subsystem {
 
     private Talon roller;
     private DoubleSolenoid extend;
+    private DigitalInput armLimitSwitch;
     
     public void initDefaultCommand() {
     }
     
     public RollerSub() {
+        armLimitSwitch = new DigitalInput(1, HW.armLimitSwitchChannel);
         roller = new Talon(1, HW.rollerMotor);
         extend = new DoubleSolenoid(HW.extenderSolenoidA,HW.extenderSolenoidB);
     }
@@ -42,4 +45,8 @@ public class RollerSub extends Subsystem {
     public boolean isExtended() {
         return !(extend.get() == DoubleSolenoid.Value.kReverse);
     }
+    public boolean getLimit() {
+        return this.armLimitSwitch.get();
+    }
+    
 }

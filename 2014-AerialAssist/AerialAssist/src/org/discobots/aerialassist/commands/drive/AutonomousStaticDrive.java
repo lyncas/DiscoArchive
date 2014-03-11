@@ -29,6 +29,9 @@ public class AutonomousStaticDrive extends CommandBase {
     private double initialGyroAngle = 0.0;
     private double initialEncoderValue = 0.0;
         
+    public AutonomousStaticDrive() throws Exception {
+        throw new Exception();
+    }
     public AutonomousStaticDrive(double distancesInchesSetpoint, double gyroAngleSetpoint) {
         requires(drivetrainSub);
         this.distanceInchesSetpoint = distancesInchesSetpoint;
@@ -39,6 +42,11 @@ public class AutonomousStaticDrive extends CommandBase {
             }
         };
         pidOutput_y = new PIDOutput() {
+
+
+            public boolean equals(Object obj) {
+                return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+            }
             public void pidWrite(double output) {
                 output_y = output;
             }

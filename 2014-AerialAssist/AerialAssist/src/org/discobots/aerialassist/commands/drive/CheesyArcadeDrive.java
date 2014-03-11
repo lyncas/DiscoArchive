@@ -1,5 +1,6 @@
 package org.discobots.aerialassist.commands.drive;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 
 public class CheesyArcadeDrive extends CommandBase {
@@ -21,9 +22,14 @@ public class CheesyArcadeDrive extends CommandBase {
     }
 
     protected void initialize() {
+        //SmartDashboard.putNumber("CheesyArcadeDrive a Constant", a);
+        //SmartDashboard.putNumber("CheesyArcadeDrive b Constant", b);
     }
 
     protected void execute() {
+        //a = SmartDashboard.getNumber("CheesyArcadeDrive a Constant", a);
+        //b = SmartDashboard.getNumber("CheesyArcadeDrive b Constant", b);
+        
         move = turn = 0;
         calculateInput();
 

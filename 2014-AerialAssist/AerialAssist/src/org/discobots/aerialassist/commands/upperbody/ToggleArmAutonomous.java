@@ -15,14 +15,11 @@ import org.discobots.aerialassist.commands.CommandBase;
  */
 public class ToggleArmAutonomous extends CommandBase {
     
-    DigitalInput armLimitSwitch;
     public boolean check;
     
-    public ToggleArmAutonomous(boolean on) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        check = on;
-        armLimitSwitch = new DigitalInput(HW.armLimitSwitchChannel);
+    public ToggleArmAutonomous(boolean on) throws Exception {
+        throw new Exception();
+        //check = on;
     }
 
     // Called just before this Command runs the first time
@@ -42,7 +39,7 @@ public class ToggleArmAutonomous extends CommandBase {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         if (!check)
-            return armLimitSwitch.get();
+            return rollerSub.getLimit();
         else
             return true;
         }
