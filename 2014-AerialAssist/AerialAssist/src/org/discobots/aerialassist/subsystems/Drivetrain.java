@@ -77,8 +77,8 @@ public class Drivetrain extends Subsystem {
 
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
-        //forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
-        //sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
+        forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
+        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
         angleCont = new AngleController(-0.025, 0, 0, gyro);
         angleCont.setEnabled(true);
 
