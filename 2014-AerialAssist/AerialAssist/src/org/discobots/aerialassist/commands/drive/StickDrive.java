@@ -36,6 +36,11 @@ public class StickDrive extends CommandBase {
         velocity = oi.getRawAnalogStickALY();
         turn = oi.getRawAnalogStickARX();
         
+        if (Math.abs(velocity)<.05)
+            velocity=0;
+        if (Math.abs(turn)<.05)
+            turn=0;
+        
         if (vPrev - velocity > rampThreshold) {
             velocity = vPrev - rampThreshold;
         } else if (velocity - vPrev > rampThreshold) {
