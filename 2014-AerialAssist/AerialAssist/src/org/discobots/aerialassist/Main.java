@@ -21,6 +21,7 @@ import org.discobots.aerialassist.utils.Dashboard;
 import org.discobots.aerialassist.OI;
 import org.discobots.aerialassist.commands.Autonomous;
 import org.discobots.aerialassist.commands.drive.AutonomousStaticDrive;
+import org.discobots.aerialassist.commands.drive.SetMiniCimUsage;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
 import org.discobots.aerialassist.subsystems.Drivetrain;
@@ -55,8 +56,7 @@ public class Main extends IterativeRobot {
     }
 
     public void autonomousInit() {
-        
-        autonomousCommand = new Autonomous((int) SmartDashboard.getNumber(AUTONCHOOSER_, 3));
+        autonomousCommand = new Autonomous(3);
         autonomousCommand.start();
         //new AutonomousStaticDrive(10, 0).start();
     }
@@ -72,6 +72,7 @@ public class Main extends IterativeRobot {
         if (autonomousCommand != null)
         autonomousCommand.cancel();
         new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL).start();
+        new SetMiniCimUsage(true).start();
     }
 
     /**
@@ -94,6 +95,7 @@ public class Main extends IterativeRobot {
     }
     
     public void disabledPeriodic() {
+        Dashboard.update();
         
     }
     

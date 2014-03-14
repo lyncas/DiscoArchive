@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.discobots.aerialassist.commands.SetPneumaticsRunnable;
 import org.discobots.aerialassist.commands.drive.ResetGyroAngle;
 import org.discobots.aerialassist.commands.ToggleCompressor;
+import org.discobots.aerialassist.commands.drive.SetMiniCimUsage;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
 import org.discobots.aerialassist.commands.upperbody.Intake;
@@ -74,6 +75,7 @@ public class OI {
         b_btnB.whenPressed(new ToggleCompressor());
         b_sBack.whenPressed(new SetPneumaticsRunnable());
         b_clicR.whileHeld(new ResetGyroAngle());
+        b_dpadL.whenPressed(new SetMiniCimUsage());
 // Controller 2
         b2_dpadU.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
         b2_dpadL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));

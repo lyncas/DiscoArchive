@@ -10,6 +10,7 @@ import org.discobots.aerialassist.commands.upperbody.AutonomousIntake;
 import org.discobots.aerialassist.commands.drive.AutonomousTankDrive;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import org.discobots.aerialassist.commands.drive.SetMiniCimUsage;
 import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
 import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
@@ -63,18 +64,18 @@ public class Autonomous extends CommandGroup {
     private void autonomousMode2Init() { // NO GOAL : NO BALL : MOVE ONLY
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
-        addSequential(new AutonomousTankDrive(-1.0, -1.0, 3000));
+        addSequential(new AutonomousTankDrive(-0.5, -0.5, 3000));
     }
     
     private void autonomousMode3Init() { // LOW/HIGH GOAL : TWO BALL : MOVE FIRST THEN FIRE
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
+        addSequential(new AutonomousTankDrive(-1, -1, 1550));
+        addSequential(new AutonomousTankDrive(0.7, 0.7, 900));
         addSequential(new ToggleArm(false));
-        addSequential(new AutonomousIntake(0.3*Intake.IN, 1500));
-        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.5*Intake.IN, 2500));
-        addSequential(new AutonomousTankDrive(0.5, 0.5, 0.5*Intake.IN, 500));
-        addSequential(new WaitCommand(1.500));
+        addSequential(new AutonomousIntake(0.4*Intake.IN, 3000));
         addSequential(new FirePneumatapult(true, 2));
+        addSequential(new WaitCommand(55));
         
    }
     

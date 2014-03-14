@@ -33,6 +33,7 @@ public class Dashboard {
         SmartDashboard.putBoolean("Field Centric Enabled?", driveSub.isFieldCentricEnabled());
         SmartDashboard.putNumber("Encoder Forward Distance", driveSub.getEncoderForwardDistance());
         SmartDashboard.putNumber("Encoder Sideway Distance", driveSub.getEncoderSidewayDistance());
+        SmartDashboard.putBoolean("Use MiniCims?", driveSub.getMiniCimUsage());
         
         // Compressor
         SmartDashboard.putBoolean("Compressor On?", compSub.isEnabled());

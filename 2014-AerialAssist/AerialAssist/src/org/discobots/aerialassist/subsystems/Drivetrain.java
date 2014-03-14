@@ -48,6 +48,7 @@ public class Drivetrain extends Subsystem {
     public static final boolean OMNI = false;
     public static final boolean TRACTION = true;
     private boolean currentState = OMNI;    //Why does it start out as mecanum if TRACTION is used as the default?
+    boolean useMini = true;
 
     public Drivetrain() {
         super("Drivetrain");
@@ -77,16 +78,16 @@ public class Drivetrain extends Subsystem {
 
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
-        forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
-        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
-        
+        forwardEncoder = new Encoder(HW.forwardEncoderA, HW.forwardEncoderB);
+        sidewayEncoder = new Encoder(HW.sidewayEncoderA, HW.sidewayEncoderB);
+
 //        forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
 //        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
         forwardEncoder.setDistancePerPulse(HW.distancePerPulse);
         sidewayEncoder.setDistancePerPulse(HW.distancePerPulse);
-	forwardEncoder.start();
-	sidewayEncoder.start();
-        
+        forwardEncoder.start();
+        sidewayEncoder.start();
+
         angleCont = new AngleController(-0.025, 0, 0, gyro);
         angleCont.setEnabled(true);
 
@@ -109,12 +110,16 @@ public class Drivetrain extends Subsystem {
 
     public void holonomicPolar(double mag, double dir, double rot) {
         drive.mecanumDrive_Polar(mag, dir, rot);
-        miniDrive.mecanumDrive_Polar(mag, dir, rot);
+        if (this.useMini) {
+            miniDrive.mecanumDrive_Polar(mag, dir, rot);
+        }
     }
 
     public void tankDrive(double leftVal, double rightVal) {
         drive.tankDrive(leftVal, rightVal);
-        miniDrive.tankDrive(leftVal, rightVal);
+        if (this.useMini) {
+            miniDrive.tankDrive(leftVal, rightVal);
+        }
     }
 
     public void shiftTraction() {
@@ -160,6 +165,7 @@ public class Drivetrain extends Subsystem {
     }
 
     private static final double kINCREMENT = 30.0;
+
     public void incrementSetpoint(double a) {
         angleCont.setSetpoint(angleCont.getSetpoint() + a * kINCREMENT);
     }
@@ -179,10 +185,20 @@ public class Drivetrain extends Subsystem {
     public void setFieldCentricEnabled(boolean a) {
         this.fieldCentricEnabled = a;
     }
+
     public double getEncoderForwardDistance() {
         return this.forwardEncoder.getDistance();
     }
+
     public double getEncoderSidewayDistance() {
         return this.sidewayEncoder.getDistance();
+    }
+
+    public void setMiniCimUsage(boolean a) {
+        this.useMini = a;
+    }
+
+    public boolean getMiniCimUsage() {
+        return this.useMini;
     }
 }
