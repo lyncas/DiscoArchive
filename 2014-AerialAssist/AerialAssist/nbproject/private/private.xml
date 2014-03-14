@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/ToggleCompressor.java</file>
+            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/HW.java</file>
             <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/StickDrive.java</file>
             <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/Drivetrain.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/ToggleArm.java</file>
             <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/TankDrive.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/OI.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/SetRunnable.java</file>
             <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/CheesyArcadeDrive.java</file>
             <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/SwitchDrive.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc2/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/Autonomous.java</file>
         </group>
     </open-files>
 </project-private>

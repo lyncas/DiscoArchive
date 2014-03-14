@@ -31,10 +31,11 @@ public class HW {
     
                            
     //Port 3 is bad so I changed driveShiftASolenoid to 5 and pressureSwitchAnalog to 6.
+    // On actual robot, port 4 is bad.
     public static final int extenderSolenoidA = 1, extenderSolenoidB = 5,
                             pneumatapultSolenoidA = 2, pneumatapultSolenoidB = 6,
                             driveShiftSolenoidForward = 8, driveShiftSolenoidReverse = 7,
-                            wingsSolenoid = 4,
+                            wingsSolenoid = 3,
                             solonoidModule = 1;
     
     /**---------------------------------

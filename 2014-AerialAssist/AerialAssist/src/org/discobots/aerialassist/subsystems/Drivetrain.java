@@ -102,7 +102,6 @@ public class Drivetrain extends Subsystem {
     }
 
     public void initDefaultCommand() {
-//        setDefaultCommand(new MecanumDrive());
         setDefaultCommand(new CheesyArcadeDrive());
         this.currentState = OMNI;
         gyro.reset(0);

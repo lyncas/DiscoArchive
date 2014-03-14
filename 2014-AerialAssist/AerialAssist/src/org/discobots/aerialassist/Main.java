@@ -10,6 +10,7 @@ package org.discobots.aerialassist;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -21,6 +22,7 @@ import org.discobots.aerialassist.OI;
 import org.discobots.aerialassist.commands.Autonomous;
 import org.discobots.aerialassist.commands.drive.AutonomousStaticDrive;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
+import org.discobots.aerialassist.commands.upperbody.ToggleArm;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 
 /**
@@ -49,12 +51,12 @@ public class Main extends IterativeRobot {
         autonomousChooser.addObject("2", new Integer(2));
         autonomousChooser.addObject("Three Ball", new Integer(3));
         autonomousChooser.addObject("4", new Integer(4));
-        SmartDashboard.putData(AUTONCHOOSER_, autonomousChooser);
+        SmartDashboard.putNumber(AUTONCHOOSER_, 1);
     }
 
     public void autonomousInit() {
-        //((Integer) autonomousChooser.getSelected()).intValue()
-        autonomousCommand = new Autonomous((int) SmartDashboard.getNumber(AUTONCHOOSER_));
+        
+        autonomousCommand = new Autonomous((int) SmartDashboard.getNumber(AUTONCHOOSER_, 3));
         autonomousCommand.start();
         //new AutonomousStaticDrive(10, 0).start();
     }
@@ -89,5 +91,14 @@ public class Main extends IterativeRobot {
         Scheduler.getInstance().run();
         Dashboard.update();
         LiveWindow.run();
+    }
+    
+    public void disabledPeriodic() {
+        
+    }
+    
+    public void disabledInit() {
+        System.out.println("Disabled.");
+        new ToggleArm(true).start();
     }
 }

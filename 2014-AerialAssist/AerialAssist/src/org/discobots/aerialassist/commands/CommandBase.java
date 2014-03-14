@@ -7,7 +7,6 @@ import org.discobots.aerialassist.subsystems.CompressorSub;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 import org.discobots.aerialassist.subsystems.RollerSub;
 import org.discobots.aerialassist.subsystems.Pneumatapult;
-import org.discobots.aerialassist.subsystems.VisionTracking;
 //import org.discobots.aerialassist.subsystems.VisionTracking;
 
 /**
@@ -27,7 +26,7 @@ public abstract class CommandBase extends Command {
     public static Drivetrain drivetrainSub = new Drivetrain();
     public static RollerSub rollerSub = new RollerSub();
     public static Pneumatapult pneumatapultSub = new Pneumatapult();
-    public static VisionTracking visionSub;// = new VisionTracking();
+    //public static VisionTracking visionSub = new VisionTracking();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

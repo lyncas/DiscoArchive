@@ -26,6 +26,7 @@ public class CompressorSub extends Subsystem {
     }
 
     public void initDefaultCommand() {
+        setRunPneumatics(true);
     }
 
     public void setRunPneumatics(boolean a) {

@@ -49,6 +49,30 @@ public class SwitchDrive extends CommandBase {
             new CheesyArcadeDrive().start();
         } else if (commandMode == MODE_TANK) {
             new TankDrive().start();
+        }  else if (commandMode == MODE_AUTODETECT) {
+            Command driveCommand = drivetrainSub.getCurrentCommand();
+            if (driveCommand instanceof CheesyArcadeDrive) {
+                new TankDrive().start();
+            } else {
+                new CheesyArcadeDrive().start();
+            }
+        }
+        /*if (omniOrTraction == MODE_OMNIWHEEL) {
+            drivetrainSub.shiftOmni();
+        } else if (omniOrTraction == MODE_TRACTION) {
+            drivetrainSub.shiftTraction();
+        } else if (omniOrTraction == MODE_AUTODETECT) {
+            if (drivetrainSub.getDriveState() == Drivetrain.OMNI) {
+                drivetrainSub.shiftTraction();
+            } else if (drivetrainSub.getDriveState() == Drivetrain.TRACTION) {
+                drivetrainSub.shiftOmni();
+            }
+        }
+        
+        if (commandMode == MODE_CHEESYARCADE) {
+            new CheesyArcadeDrive().start();
+        } else if (commandMode == MODE_TANK) {
+            new TankDrive().start();
         } else if (commandMode == MODE_TANKFIELDCENTRIC) {
             new FieldCentricDrive().start();
         } else if (commandMode == MODE_STICKDRIVE) {
@@ -64,7 +88,7 @@ public class SwitchDrive extends CommandBase {
             } else {
                 new CheesyArcadeDrive().start();
             }
-        }
+        }*/
     }
 
     protected void execute() {

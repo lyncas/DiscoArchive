@@ -36,7 +36,7 @@ public class Dashboard {
         
         // Compressor
         SmartDashboard.putBoolean("Compressor On?", compSub.isEnabled());
-        SmartDashboard.putBoolean("Compressor Max Presure", compSub.isFull());
+        SmartDashboard.putBoolean("Compressor Max Pressure?", compSub.isFull());
         SmartDashboard.putBoolean("Can Run Pneumatics?", compSub.canRunPneumatics());
         
         // Roller
@@ -46,6 +46,7 @@ public class Dashboard {
         // Pneumatapult
         SmartDashboard.putBoolean("Catapult Down?", cataSub.isDown());
         SmartDashboard.putNumber("Catapult Mode", cataSub.getMode());
-                
+               
+        
     }
 }

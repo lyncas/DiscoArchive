@@ -51,14 +51,13 @@ public class Autonomous extends CommandGroup {
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
         addSequential(new ToggleArm(false));
-        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.5*Intake.IN, 3000));
+        addSequential(new AutonomousIntake(0.3*Intake.IN, 1500));
+        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.5*Intake.IN, 2000));
+        addSequential(new WaitCommand(1.500));
         addSequential(new FirePneumatapult(true, 2));
-        addSequential(new AutonomousTankDrive(1, 1, 300));
         addSequential(new WaitCommand(1.500));
         addSequential(new AutonomousIntake(1*Intake.IN, 2500));
         addSequential(new FirePneumatapult(true, 2));
-        addSequential(new AutonomousTankDrive(-1, -1, 300));
-        addSequential(new AutonomousTankDrive(1, 1, 300));
     }
     
     private void autonomousMode2Init() { // NO GOAL : NO BALL : MOVE ONLY
@@ -67,24 +66,17 @@ public class Autonomous extends CommandGroup {
         addSequential(new AutonomousTankDrive(-1.0, -1.0, 3000));
     }
     
-    private void autonomousMode3Init() { // LOW/HIGH GOAL : THREE BALL : MOVE FIRST THEN FIRE
+    private void autonomousMode3Init() { // LOW/HIGH GOAL : TWO BALL : MOVE FIRST THEN FIRE
+        addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
-        addSequential(new AutonomousIntake(Intake.IN, 1000));
-        addParallel(new ToggleArm(false));
-        addParallel(new AutonomousTankDrive(0.5, 0.5, 1000));
-        addSequential(new AutonomousTankDrive(-1, -1, Intake.IN * 0.5, 1500)); // Move to the wall with three ball, let ball 1 enter the low goal
-        addSequential(new WaitCommand(1));
-        addSequential(new AutonomousTankDrive(0.7, 0.7, 500)); // Move back a tiny bit
-        addSequential(new AutonomousTankDrive(0, 0.7, 350)); // Move to the left a little
-        addSequential(new WaitCommand(2.5)); // DO NOT REMOVE THIS WAIT COMMAND
-        addSequential(new FirePneumatapult(true, 2)); // Fire ball 2
-        //addSequential(new AutonomousTankDrive(-0.25, -0.25, 450)); // Lower the catapult
-        //addSequential(new AutonomousTankDrive(0.25, 0.25, 450)); // Lower the catapult
-        addSequential(new WaitCommand(0.5));
-        addSequential(new AutonomousIntake(Intake.IN, 1500)); // Intake ball 3
-        addSequential(new WaitCommand(1));
-        addSequential(new FirePneumatapult(true, 2)); // Fire ball 3
-    }
+        addSequential(new ToggleArm(false));
+        addSequential(new AutonomousIntake(0.3*Intake.IN, 1500));
+        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.5*Intake.IN, 2500));
+        addSequential(new AutonomousTankDrive(0.5, 0.5, 0.5*Intake.IN, 500));
+        addSequential(new WaitCommand(1.500));
+        addSequential(new FirePneumatapult(true, 2));
+        
+   }
     
     private void autonomousMode4Init() { // LOW GOAL : ONE BALL
         addSequential(new AutonomousTankDrive(1.0, 1.0, 4000));

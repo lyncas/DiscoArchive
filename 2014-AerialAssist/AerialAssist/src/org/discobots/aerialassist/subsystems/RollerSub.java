@@ -19,6 +19,7 @@ public class RollerSub extends Subsystem {
     private DigitalInput armLimitSwitch;
     
     public void initDefaultCommand() {
+        setExtended(true);
     }
     
     public RollerSub() {
