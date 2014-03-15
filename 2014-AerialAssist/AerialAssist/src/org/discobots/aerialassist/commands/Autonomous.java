@@ -24,7 +24,6 @@ public class Autonomous extends CommandGroup {
     
         long time;
     public Autonomous(int mode) {
-        time = System.currentTimeMillis();
         switch (mode) {
             case 0:
                 autonomousMode0Init();
@@ -35,12 +34,6 @@ public class Autonomous extends CommandGroup {
             case 2:
                 autonomousMode2Init();
                 break;
-            case 3:
-                autonomousMode3Init();
-                break;
-            case 4:
-                autonomousMode4Init();
-                break;
         }
     }
     
@@ -48,12 +41,12 @@ public class Autonomous extends CommandGroup {
         // Do Nothing
     }
     
-    private void autonomousMode1Init() { // TWO BALL
+    private void autonomousMode1Init() { // TWO BALL: HIGH HIGH
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
         addSequential(new ToggleArm(false));
         addSequential(new AutonomousIntake(0.3*Intake.IN, 1500));
-        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.5*Intake.IN, 2000));
+        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.4*Intake.IN, 2000));
         addSequential(new WaitCommand(1.500));
         addSequential(new FirePneumatapult(true, 2));
         addSequential(new WaitCommand(1.500));
@@ -61,13 +54,7 @@ public class Autonomous extends CommandGroup {
         addSequential(new FirePneumatapult(true, 2));
     }
     
-    private void autonomousMode2Init() { // NO GOAL : NO BALL : MOVE ONLY
-        addSequential(new ToggleCompressor());
-        addSequential(new SetPneumaticsRunnable(true));
-        addSequential(new AutonomousTankDrive(-0.5, -0.5, 3000));
-    }
-    
-    private void autonomousMode3Init() { // LOW/HIGH GOAL : TWO BALL : MOVE FIRST THEN FIRE
+    private void autonomousMode2Init() { // TWO BALL: LOW HIGH
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
         addSequential(new AutonomousTankDrive(-1, -1, 1550));
@@ -76,17 +63,18 @@ public class Autonomous extends CommandGroup {
         addSequential(new AutonomousIntake(0.4*Intake.IN, 3000));
         addSequential(new FirePneumatapult(true, 2));
         addSequential(new WaitCommand(55));
-        
-   }
-    
-    private void autonomousMode4Init() { // LOW GOAL : ONE BALL
-        addSequential(new AutonomousTankDrive(1.0, 1.0, 4000));
-        addSequential(new SetPneumaticsRunnable(true));
-        addSequential(new ToggleArm(true));
-        addSequential(new AutonomousIntake(Intake.OUT, 2500));
     }
     
-    public void end() {
-        System.out.println(System.currentTimeMillis() - time);
+    public void initialize() {
+        super.initialize();
+        time = System.currentTimeMillis();
+    }
+    public boolean isFinished() {
+        if (super.isFinished()) {
+            System.out.println("Autonomous completed in " + (System.currentTimeMillis() - this.time) + " milliseconds.");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
