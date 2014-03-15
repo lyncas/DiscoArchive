@@ -5,6 +5,8 @@ import org.discobots.aerialassist.commands.CommandBase;
 
 public class CheesyArcadeDrive extends CommandBase {
  
+    private double movePrev, turnPrev;
+    private double rampThreshold = .1;
     private double move;
     private double turn;
     private double driveLeft = 0, driveRight = 0;
@@ -115,13 +117,34 @@ public class CheesyArcadeDrive extends CommandBase {
     }
 
     protected void calculateInput() {
+            
             move = oi.getRawAnalogStickALX();
             move = Math.abs(move) > threshold ? move : 0;
             turn = oi.getRawAnalogStickALY();
             turn = Math.abs(turn) > threshold ? turn : 0;
+            
+            double moveR = oi.getRawAnalogStickARX() / 2;
+            moveR = Math.abs(moveR) > threshold ? moveR : 0;
+            double turnR = oi.getRawAnalogStickARY() / 2;
+            turnR = Math.abs(turnR) > threshold ? turnR : 0;
+            
+            move+=moveR;
+            turn+=turnR;
+        
+            if (movePrev - move > rampThreshold) {
+                move = movePrev - rampThreshold;
+            } else if (move - movePrev > rampThreshold) {
+                move = movePrev + rampThreshold;
+            }
+            if (turnPrev - turn > rampThreshold) {
+                turn = turnPrev - rampThreshold;
+            } else if (turn - turnPrev > rampThreshold) {
+                turn = turnPrev + rampThreshold;
+            }          
 
-            move += oi.getRawAnalogStickARX() / 2;
-            turn += oi.getRawAnalogStickARY() / 2;
+            movePrev = move;
+            turnPrev = turn;
+            
     }
 
     public static double limit(double v, double limit) {
