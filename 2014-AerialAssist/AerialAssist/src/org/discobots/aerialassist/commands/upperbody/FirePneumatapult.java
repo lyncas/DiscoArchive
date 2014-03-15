@@ -18,7 +18,7 @@ public class FirePneumatapult extends CommandBase {
     private int check;
     public int count;
     public long startTime;
-    private final long maxRunTime;
+    private long maxRunTime;
     public static final boolean FIRE = true;
     public static final boolean LOAD = false;
     public static final int STUTTER = 0;
@@ -34,15 +34,54 @@ public class FirePneumatapult extends CommandBase {
         shoot = fire;
         count=0;
         maxRunTime=1500;
+        switch (check){
+            case 0:
+                maxRunTime=500;
+                break;
+            case 1:
+                maxRunTime=1000;
+                break;
+            case 2:
+                maxRunTime=1500;
+                break;
+            case 3:
+                maxRunTime=1500;
+                break;
+            case 4:
+                maxRunTime=250;
+                break;
+        }
     }
 
     protected void initialize() {
         startTime=System.currentTimeMillis();
+        System.out.println("Firing a shot of type " + check);
     }
 
     protected void execute() {
         if (rollerSub.isExtended()) {
+            switch (check){
+            case 0:
+                pneumatapultSub.fire(shoot);
+                break;
+            case 1:
+                pneumatapultSub.fire(shoot);
+                break;
+            case 2:
+                pneumatapultSub.fire(shoot);
+                break;
+            case 3:
+                if (count%80 != 0)
+                    pneumatapultSub.fire(shoot);
+                else
+                    pneumatapultSub.fire(false);
+                break;
+            case 4:
+                pneumatapultSub.fire(shoot);
+                break;
+        }
             pneumatapultSub.fire(shoot);
+            count+=20;
         }
     }
 
