@@ -34,6 +34,9 @@ public class Autonomous extends CommandGroup {
             case 2:
                 autonomousMode2Init();
                 break;
+            case 3:
+                autonomousMode3Init();
+                break;
         }
     }
     
@@ -63,6 +66,10 @@ public class Autonomous extends CommandGroup {
         addSequential(new AutonomousIntake(0.4*Intake.IN, 3000));
         addSequential(new FirePneumatapult(true, 2));
         addSequential(new WaitCommand(55));
+    }
+    
+    private void autonomousMode3Init() { // TEST
+        addSequential(new FirePneumatapult(true, 4));
     }
     
     public void initialize() {

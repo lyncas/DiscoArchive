@@ -28,7 +28,7 @@ public class Dashboard {
         
         // Drive
         SmartDashboard.putNumber("Drive Angle", driveSub.getGyroAngle());
-        SmartDashboard.putString("Drive Shift Mode", driveSub.getShiftPosition() ? "Traction" : "Mecanum");
+        SmartDashboard.putString("Drive Shift Mode", driveSub.getShiftPosition() ? "Traction" : "Omniwheel");
         SmartDashboard.putNumber("PID Controller Output", driveSub.getAngleControllerOutput());
         SmartDashboard.putBoolean("Field Centric Enabled?", driveSub.isFieldCentricEnabled());
         SmartDashboard.putNumber("Encoder Forward Distance", driveSub.getEncoderForwardDistance());

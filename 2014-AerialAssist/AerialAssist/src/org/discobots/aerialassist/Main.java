@@ -43,6 +43,7 @@ public class Main extends IterativeRobot {
         CommandBase.init();
         Dashboard.init();
         SmartDashboard.putNumber(AUTONCHOOSER_, 2);
+        SmartDashboard.getNumber("FirePneumatapult Shot Time", 1500);
     }
 
     public void autonomousInit() {
@@ -104,6 +105,9 @@ public class Main extends IterativeRobot {
                 break;
             case 2:
                 autonString = "TWO BALL: LOW HIGH";
+                break;
+            case 3:
+                autonString = "TESTING";
                 break;
             default:
                 autonMode = 0;
