@@ -1,5 +1,10 @@
 package org.discobots.aerialassist.utils.jama;
 
+/**
+ * JamaMath Math Utils for Jama
+ *
+ * Created by Nolan Shah to handle JAMA math for speedfrc
+ */
 public class JamaMath {
 
     /**

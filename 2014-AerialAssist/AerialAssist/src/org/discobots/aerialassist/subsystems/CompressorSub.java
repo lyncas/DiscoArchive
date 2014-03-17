@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,10 +5,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.utils.BetterCompressor;
 
-/**
- *
- * @author Dylan
- */
 public class CompressorSub extends Subsystem {
 
     BetterCompressor comp;

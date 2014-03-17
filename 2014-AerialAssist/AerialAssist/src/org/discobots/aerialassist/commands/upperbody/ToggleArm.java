@@ -1,13 +1,8 @@
 package org.discobots.aerialassist.commands.upperbody;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
 
-/**
- *
- * @author Developer
- */
 public class ToggleArm extends CommandBase {
 
     DigitalInput armLimitSwitch;
@@ -15,12 +10,11 @@ public class ToggleArm extends CommandBase {
 
     public ToggleArm(boolean on) {
         check = on;
-        //armLimitSwitch = new DigitalInput(HW.armLimitSwitchChannel);
     }
 
     protected void initialize() {
         if (compressorSub.canRunPneumatics()) {
-            rollerSub.setExtended(check);  //I reversed it because isExtended now returns the opposite.
+            rollerSub.setExtended(check);
         }
         if (!compressorSub.isEnabled()) {
             compressorSub.on();
@@ -35,7 +29,6 @@ public class ToggleArm extends CommandBase {
 
     protected boolean isFinished() {
         return true;
-        //       return armLimitSwitch.get();
     }
 
     protected void end() {

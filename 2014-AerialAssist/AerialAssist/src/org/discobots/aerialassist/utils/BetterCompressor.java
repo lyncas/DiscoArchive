@@ -22,6 +22,10 @@ import edu.wpi.first.wpilibj.tables.ITable;
  * relay for a FIRST robot pneumatics system. The Compressor object starts a task which runs in the
  * background and periodically polls the pressure sensor and operates the relay that controls the
  * compressor.
+ * 
+ * Modified by the Discobots in 2014
+ * Uses a Victor and a Relay to work with both the practice robot and the 
+ * competition robot. 
  */
 public class BetterCompressor extends SensorBase implements IDevice, LiveWindowSendable{
 

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.utils.Dashboard;
@@ -27,6 +26,8 @@ import org.discobots.aerialassist.commands.upperbody.ToggleArm;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
+ * 
+ * @authors Nolan Shah, Seth Taylor, Dylan Vener, Patrick Revilla
  */
 public class Main extends IterativeRobot {
     

@@ -6,13 +6,8 @@
 package org.discobots.aerialassist.commands.drive;
 
 import com.sun.squawk.util.MathUtils;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 
-/**
- *
- * @author Patrick
- */
 public class FieldCentricDrive extends CommandBase {
     
     double magnitude = 0;    

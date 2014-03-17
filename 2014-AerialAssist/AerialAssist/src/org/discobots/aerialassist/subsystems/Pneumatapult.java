@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Solenoid;
 import org.discobots.aerialassist.HW;
 
-/**
- *
- * @author Seth
- */
 public class Pneumatapult extends Subsystem {
 
     private Solenoid fire1;
@@ -41,7 +32,7 @@ public class Pneumatapult extends Subsystem {
         mode++;
         mode = mode % 3;
     }
-    
+
     public boolean isDown() {
         return !this.fire1.get();
     }

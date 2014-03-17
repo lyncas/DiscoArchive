@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 
 public class CheesyArcadeDrive extends CommandBase {
- 
+
     private double movePrev, turnPrev;
     private double rampThreshold = .1;
     private double move;
@@ -16,8 +16,8 @@ public class CheesyArcadeDrive extends CommandBase {
     private double oldTurn = 0.0;
     private double quickStopAccumulator;
     double negInertiaAccumulator = 0.0;
-    
-    private boolean isQuickTurn=true;
+
+    private boolean isQuickTurn = true;
 
     public CheesyArcadeDrive() {
         requires(drivetrainSub);
@@ -31,7 +31,7 @@ public class CheesyArcadeDrive extends CommandBase {
     protected void execute() {
         a = SmartDashboard.getNumber("CheesyArcadeDrive a Constant", a);
         b = SmartDashboard.getNumber("CheesyArcadeDrive b Constant", b);
-        
+
         move = turn = 0;
         calculateInput();
 
@@ -41,7 +41,7 @@ public class CheesyArcadeDrive extends CommandBase {
         //SINE SCALING OMITTED
         double sensitivity = 0.85;
         // Negative inertia!
-        
+
         double negInertiaScalar = 5.0;
 
         if (turn * negInertia > 0) {//same direction: accelerating
@@ -72,10 +72,10 @@ public class CheesyArcadeDrive extends CommandBase {
                 quickStopAccumulator = (1 - alpha) * quickStopAccumulator + alpha
                         * limit(turn, 1.0) * 5;
             }
-                sensitivity = 1.0;
-        } 
-        if(negInertia<-0.15) {//request decel a lot
-            turn-= quickStopAccumulator;
+            sensitivity = 1.0;
+        }
+        if (negInertia < -0.15) {//request decel a lot
+            turn -= quickStopAccumulator;
             if (quickStopAccumulator > 1) {
                 quickStopAccumulator -= 1;
             } else if (quickStopAccumulator < -1) {
@@ -84,7 +84,6 @@ public class CheesyArcadeDrive extends CommandBase {
                 quickStopAccumulator = 0.0;
             }
         }
-
 
         //The important part
         if (move >= 0 && turn >= 0) {//Q1
@@ -117,34 +116,34 @@ public class CheesyArcadeDrive extends CommandBase {
     }
 
     protected void calculateInput() {
-            
-            move = oi.getRawAnalogStickALX();
-            move = Math.abs(move) > threshold ? move : 0;
-            turn = oi.getRawAnalogStickALY();
-            turn = Math.abs(turn) > threshold ? turn : 0;
-            
-            double moveR = oi.getRawAnalogStickARX() / 2;
-            moveR = Math.abs(moveR) > threshold ? moveR : 0;
-            double turnR = oi.getRawAnalogStickARY() / 2;
-            turnR = Math.abs(turnR) > threshold ? turnR : 0;
-            
-            move+=moveR;
-            turn+=turnR;
-        
-            if (movePrev - move > rampThreshold) {
-                move = movePrev - rampThreshold;
-            } else if (move - movePrev > rampThreshold) {
-                move = movePrev + rampThreshold;
-            }
-            if (turnPrev - turn > rampThreshold) {
-                turn = turnPrev - rampThreshold;
-            } else if (turn - turnPrev > rampThreshold) {
-                turn = turnPrev + rampThreshold;
-            }          
 
-            movePrev = move;
-            turnPrev = turn;
-            
+        move = oi.getRawAnalogStickALX();
+        move = Math.abs(move) > threshold ? move : 0;
+        turn = oi.getRawAnalogStickALY();
+        turn = Math.abs(turn) > threshold ? turn : 0;
+
+        double moveR = oi.getRawAnalogStickARX() / 2;
+        moveR = Math.abs(moveR) > threshold ? moveR : 0;
+        double turnR = oi.getRawAnalogStickARY() / 2;
+        turnR = Math.abs(turnR) > threshold ? turnR : 0;
+
+        move += moveR;
+        turn += turnR;
+
+        if (movePrev - move > rampThreshold) {
+            move = movePrev - rampThreshold;
+        } else if (move - movePrev > rampThreshold) {
+            move = movePrev + rampThreshold;
+        }
+        if (turnPrev - turn > rampThreshold) {
+            turn = turnPrev - rampThreshold;
+        } else if (turn - turnPrev > rampThreshold) {
+            turn = turnPrev + rampThreshold;
+        }
+
+        movePrev = move;
+        turnPrev = turn;
+
     }
 
     public static double limit(double v, double limit) {

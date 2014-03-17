@@ -6,10 +6,6 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- * @author Patrick
- */
 public class AngleController implements PIDSource, PIDOutput {
 
     private final PIDController pidController;
@@ -54,7 +50,7 @@ public class AngleController implements PIDSource, PIDOutput {
     public double getSetpoint() {
         return pidController.getSetpoint();
     }
-    
+
     public void setSetpoint(double targetAngle) {
         updateLocalAngleData();
         SmartDashboard.putNumber("AngleController TargetAngle ", targetAngle);
@@ -94,9 +90,8 @@ public class AngleController implements PIDSource, PIDOutput {
             this.pidController.disable();
         }
     }
-    
+
     private void updateLocalAngleData() {
         this.localRawAngle = gyro.getAngle();
-        //this.localNormAngle = gyro.getNormalizedAngle();
     }
 }

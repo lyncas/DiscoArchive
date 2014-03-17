@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.utils.velocity;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.ADXL345_I2C.DataFormat_Range;
 import java.util.TimerTask;
 
-/**
- *
- * @author JAG
- */
 public class DiscoAccelerometer2011Simpson extends ADXL345_I2C {
 
     public static final double kDefaultPeriod = .1;

@@ -1,6 +1,9 @@
 package org.discobots.aerialassist.utils.jama;
 
    /** LU Decomposition.
+    * 
+    * Modified by Nolan Shah for speedfrc
+    * 
    <P>
    For an m-by-n matrix A with m >= n, the LU decomposition is an m-by-n
    unit lower triangular matrix L, an n-by-n upper triangular matrix U,

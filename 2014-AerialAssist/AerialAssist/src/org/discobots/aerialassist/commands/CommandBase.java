@@ -7,7 +7,6 @@ import org.discobots.aerialassist.subsystems.CompressorSub;
 import org.discobots.aerialassist.subsystems.Drivetrain;
 import org.discobots.aerialassist.subsystems.RollerSub;
 import org.discobots.aerialassist.subsystems.Pneumatapult;
-//import org.discobots.aerialassist.subsystems.VisionTracking;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -15,7 +14,6 @@ import org.discobots.aerialassist.subsystems.Pneumatapult;
  * subsystem elsewhere in your code in your code use
  * CommandBase.exampleSubsystem
  *
- * @author Author
  */
 public abstract class CommandBase extends Command {
 
@@ -35,7 +33,7 @@ public abstract class CommandBase extends Command {
         // yet. Thus, their requires() statements may grab null pointers. Bad
         // news. Don't move it.
         oi = new OI();
-        
+
         // Show what command your subsystem is running on the SmartDashboard
         SmartDashboard.putData(drivetrainSub);
         SmartDashboard.putData(compressorSub);
@@ -44,7 +42,7 @@ public abstract class CommandBase extends Command {
         //SmartDashboard.putData(visionSub);
 
     }
-    
+
     public CommandBase(String name) {
         super(name);
     }

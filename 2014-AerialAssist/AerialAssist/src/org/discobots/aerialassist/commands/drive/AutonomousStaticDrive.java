@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.commands.drive;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -11,10 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.utils.Constants;
 
-/**
- *
- * @author Nolan
- */
 public class AutonomousStaticDrive extends CommandBase {
 
     private double distanceInchesSetpoint, gyroAngleSetpoint;
@@ -28,10 +20,11 @@ public class AutonomousStaticDrive extends CommandBase {
     private double output_y = 0.0, output_x = 0.0;
     private double initialGyroAngle = 0.0;
     private double initialEncoderValue = 0.0;
-        
+
     public AutonomousStaticDrive() throws Exception {
         throw new Exception();
     }
+
     public AutonomousStaticDrive(double distancesInchesSetpoint, double gyroAngleSetpoint) {
         requires(drivetrainSub);
         this.distanceInchesSetpoint = distancesInchesSetpoint;
@@ -43,10 +36,10 @@ public class AutonomousStaticDrive extends CommandBase {
         };
         pidOutput_y = new PIDOutput() {
 
-
             public boolean equals(Object obj) {
                 return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
             }
+
             public void pidWrite(double output) {
                 output_y = output;
             }
@@ -64,6 +57,7 @@ public class AutonomousStaticDrive extends CommandBase {
         };
         pidController_x = new PIDController(Constants.AutonomousStraightTank_XkP, Constants.AutonomousStraightTank_XkI, Constants.AutonomousStraightTank_XkD, pidSource_x, pidOutput_x);
     }
+
     protected void initialize() {
         if (Constants.DEBUG) {
             System.out.println("Initializing Command " + this.getName() + " at " + (startTime = System.currentTimeMillis()));
@@ -79,7 +73,7 @@ public class AutonomousStaticDrive extends CommandBase {
     protected void execute() {
         SmartDashboard.putData("AutonomousStaticDrive PID X", this.pidController_x);
         SmartDashboard.putData("AutonomousStaticDrive PID Y", this.pidController_y);
-        
+
         drivetrainSub.tankDrive(output_y - output_x, output_y + output_x);
     }
 

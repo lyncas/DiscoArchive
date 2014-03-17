@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.utils;
 
 import edu.wpi.first.wpilibj.DigitalModule;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SensorBase;
 
-/**
- *
- * @author Nolan
- */
 public class ArduIMU extends SensorBase {
 
     float accX, accY, accZ, gyrYaw, gyrPit, gyrRol; // Raw

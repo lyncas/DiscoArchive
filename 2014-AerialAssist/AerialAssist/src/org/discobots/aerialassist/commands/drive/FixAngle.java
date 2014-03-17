@@ -3,14 +3,8 @@ package org.discobots.aerialassist.commands.drive;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
-import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.CommandBase;
-import org.discobots.aerialassist.utils.AngleController;
 
-/**
- *
- * @author Patrick
- */
 public class FixAngle extends CommandBase implements PIDSource, PIDOutput {
 
     private PIDController angleController = new PIDController(1f/45f, 0.0, 0.0, this, this);

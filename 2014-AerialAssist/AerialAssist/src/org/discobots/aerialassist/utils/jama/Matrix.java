@@ -1,11 +1,9 @@
 package org.discobots.aerialassist.utils.jama;
 
 /**
- * Matrix.java 
- * Part of Jama.
+ * Matrix.java Part of Jama.
  *
- * Matrix handling class from MathWorks.
- * Modified by Nolan Shah
+ * Matrix handling class from MathWorks. Modified by Nolan Shah for speedfrc
  *
  *
  * Jama = Java Matrix class.
@@ -39,7 +37,8 @@ package org.discobots.aerialassist.utils.jama;
  * <P>
  * <DD>Solve a linear system A x = b and compute the residual norm, ||b - A x||.
  * <P>
- * <PRE>
+ * <
+ * PRE>
  * double[][] vals = {{1.,2.,3},{4.,5.,6.},{7.,8.,10.}};
  * Matrix A = new Matrix(vals);
  * Matrix b = Matrix.random(3,1);
@@ -802,6 +801,7 @@ public class Matrix {
         }
         return X;
     }
+
     /**
      * Solve A*X = B
      *
@@ -830,7 +830,7 @@ public class Matrix {
     public double det() {
         return new LUDecomposition(this).det();
     }
-    
+
     /**
      * Generate identity matrix
      *
@@ -848,7 +848,7 @@ public class Matrix {
         }
         return A;
     }
-    
+
     /* ------------------------
      Private Methods
      * ------------------------ */

@@ -1,9 +1,5 @@
 package org.discobots.aerialassist.commands;
 
-/**
- *
- * @author Nolan Shah
- */
 public class ToggleCompressor extends CommandBase {
 
     public ToggleCompressor() {

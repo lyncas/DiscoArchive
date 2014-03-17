@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.commands.drive;
 
 import com.sun.squawk.util.MathUtils;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 
-/**
- *
- * @author Patrick
- */
 public class FieldCentricTankDrive extends CommandBase {
+
     public FieldCentricTankDrive() {
         requires(drivetrainSub);
     }
@@ -49,7 +40,6 @@ public class FieldCentricTankDrive extends CommandBase {
         } else {
             drivetrainSub.tankDrive(magnitude, magnitude);
         }
-
 
     }
 

@@ -5,7 +5,9 @@ import org.discobots.aerialassist.utils.jama.*;
 /**
  * Kalman Filter.
  *
- * @author Nolan Shah (Based on version by Sam Dietrich & Wikipedia)
+ * @author Nolan Shah from speedfrc (Based on version by Sam Dietrich &
+ * Wikipedia)
+ * @website github.com/nolanshah/speedfrc
  */
 public class KalmanFilter {
 

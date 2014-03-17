@@ -1,18 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.commands.drive;
 
-import com.sun.squawk.util.MathUtils;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 
-/**
- *
- * @author Patrick
- */
 public class TankDrive extends CommandBase {
 
     private float lPrev, rPrev;
@@ -33,11 +22,13 @@ public class TankDrive extends CommandBase {
         double r = oi.getRawAnalogStickALY();      //I know this doesn't make sense.  We are driving backwards.
         double l = -oi.getRawAnalogStickARY();       //I know this doesn't make sense.  We are driving backwards.
 
-        if (Math.abs(l)<.05)
-            l=0;
-        if (Math.abs(r)<.05)
-            r=0;
-        
+        if (Math.abs(l) < .05) {
+            l = 0;
+        }
+        if (Math.abs(r) < .05) {
+            r = 0;
+        }
+
         if (lPrev - l > rampThreshold) {
             l = lPrev - rampThreshold;
         } else if (l - lPrev > rampThreshold) {

@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.utils.velocity;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.ADXL345_I2C.DataFormat_Range;
 import java.util.TimerTask;
 
-/**
- *
- * @author JAG
- */
 public class DiscoAccelerometer2011 extends ADXL345_I2C {
 
     public static final double kDefaultPeriod = .1;
@@ -51,19 +43,19 @@ public class DiscoAccelerometer2011 extends ADXL345_I2C {
     }
 
     /**
-     * Put this in disabled Continuous, it will average
-     * the values of the accelerometer while at rest
+     * Put this in disabled Continuous, it will average the values of the
+     * accelerometer while at rest
      */
     public void calculateIntialAccel() {
         m_axes = getAccelerations();
         double x = m_axes.XAxis;
         double y = m_axes.YAxis;
-        if (x + y < .3){
+        if (x + y < .3) {
             m_sumIntialXAcc += x;
             m_sumIntialYAcc += y;
             m_numberOfReadings++;
-            m_intialXAccel = m_sumIntialXAcc/m_numberOfReadings;
-            m_intialYAccel = m_sumIntialYAcc/m_numberOfReadings;
+            m_intialXAccel = m_sumIntialXAcc / m_numberOfReadings;
+            m_intialYAccel = m_sumIntialYAcc / m_numberOfReadings;
         }
     }
 

@@ -1,20 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.commands;
 
-/**
- *
- * @author Dylan
- */
 public class SetPneumaticsRunnable extends CommandBase {
-    
+
     private boolean set;
+
     public SetPneumaticsRunnable(boolean a) {
         set = a;
     }
+
     public SetPneumaticsRunnable() {
         set = !compressorSub.canRunPneumatics();
     }

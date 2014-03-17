@@ -1,43 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.commands.drive;
 
 import org.discobots.aerialassist.commands.CommandBase;
 
-/**
- *
- * @author Seth
- */
 public class AutonomousTankDrive extends CommandBase {
-    
+
     private final long maxRunTime;
-    private long startTime; 
-    double magnitude; 
+    private long startTime;
+    double magnitude;
     double direction;
     double rotation;
-    double left; 
+    double left;
     double right;
     double power = 0;
-    
+
     public AutonomousTankDrive(double l, double r, int time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrainSub);
         requires(rollerSub);
-        maxRunTime=time;
+        maxRunTime = time;
         left = l;
         right = -r;
     }
-    
+
     public AutonomousTankDrive(double l, double r, double p, int time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrainSub);
         requires(rollerSub);
-        maxRunTime=time;
+        maxRunTime = time;
         left = l;
         right = -r;
         power = p;

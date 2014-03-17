@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
@@ -19,14 +14,8 @@ import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
 import org.discobots.aerialassist.utils.velocity.Velocity;
 
-/**
- *
- * @author Sam
- */
 public class Drivetrain extends Subsystem {
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
     private Talon leftFront;
     private Talon leftMiniFront;
     private Talon leftRear;
@@ -47,7 +36,7 @@ public class Drivetrain extends Subsystem {
     public boolean fieldCentricEnabled = true;
     public static final boolean OMNI = false;
     public static final boolean TRACTION = true;
-    private boolean currentState = OMNI;    //Why does it start out as mecanum if TRACTION is used as the default?
+    private boolean currentState = OMNI;
     boolean useMini = true;
 
     public Drivetrain() {
@@ -67,14 +56,14 @@ public class Drivetrain extends Subsystem {
         drive.setSafetyEnabled(false);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true); // Should be false
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true); // Should be false
 
         miniDrive.setSafetyEnabled(false);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);//should be false
-        miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);//should be false
+        miniDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true); // Should be false
+        miniDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true); // Should be false
 
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
@@ -97,8 +86,6 @@ public class Drivetrain extends Subsystem {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
-//        currentState=getShiftPosition();
         }
     }
 
