@@ -36,17 +36,36 @@ public class Autonomous extends CommandGroup {
     private void autonomousMode1Init() { // TWO BALL: HIGH HIGH
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
-        addSequential(new ToggleArm(false));
-        addSequential(new AutonomousIntake(0.3 * Intake.IN, 1500));
-        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.4 * Intake.IN, 2000));
-        addSequential(new WaitCommand(1.500));
+        addSequential(new ToggleArm(false)); // arm down
+        addSequential(new AutonomousIntake(0.3 * Intake.IN, 1500)); // intake
+        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.4 * Intake.IN, 2000)); // intake while moving to hold ball
+        addSequential(new WaitCommand(1));
         addSequential(new FirePneumatapult(true, 2));
-        addSequential(new WaitCommand(1.500));
-        addSequential(new AutonomousIntake(1 * Intake.IN, 2500));
+        addSequential(new WaitCommand(0.5));
+        addSequential(new AutonomousIntake(1 * Intake.IN, 2000));
+        addSequential(new AutonomousTankDrive(0.4, 0.4, 0.5 * Intake.IN, 250));
+        addSequential(new AutonomousTankDrive(-0.4, -0.4, 250));
+        addSequential(new WaitCommand(1.5));
         addSequential(new FirePneumatapult(true, 2));
     }
 
-    private void autonomousMode2Init() { // TWO BALL: LOW HIGH
+    private void autonomousMode2Init() {
+        addSequential(new ToggleCompressor());
+        addSequential(new SetPneumaticsRunnable(true));
+        addSequential(new ToggleArm(false)); // arm down
+        addSequential(new AutonomousIntake(0.3 * Intake.IN, 1500)); // intake
+        addSequential(new AutonomousTankDrive(-0.6, -0.6, 0.4 * Intake.IN, 2000)); // intake while moving to hold ball
+        addSequential(new AutonomousTankDrive(0.8, 0.8, 0.5 * Intake.IN, 250));
+        addSequential(new AutonomousTankDrive(-0.8, -0.8, 250));
+        addSequential(new WaitCommand(1));
+        addSequential(new FirePneumatapult(true, 2));
+        addSequential(new WaitCommand(0.5));
+        addSequential(new AutonomousIntake(1 * Intake.IN, 2000));
+        addSequential(new AutonomousTankDrive(0.8, 0.8, 0.5 * Intake.IN, 250));
+        addSequential(new AutonomousTankDrive(-0.8, -0.8, 250));
+    }
+    
+    /*private void autonomousMode2Init() { // TWO BALL: LOW HIGH
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
         addSequential(new AutonomousTankDrive(-1, -1, 1550));
@@ -55,7 +74,7 @@ public class Autonomous extends CommandGroup {
         addSequential(new AutonomousIntake(0.4 * Intake.IN, 3000));
         addSequential(new FirePneumatapult(true, 2));
         addSequential(new WaitCommand(55));
-    }
+    }*/
 
     private void autonomousMode3Init() { // TEST
         addSequential(new FirePneumatapult(true, 4));

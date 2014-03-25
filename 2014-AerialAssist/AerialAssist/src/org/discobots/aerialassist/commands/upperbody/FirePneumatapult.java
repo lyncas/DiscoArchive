@@ -44,6 +44,7 @@ public class FirePneumatapult extends CommandBase {
 
     protected void initialize() {
         startTime = System.currentTimeMillis();
+        
         System.out.println("Firing a shot of type " + check);
     }
 

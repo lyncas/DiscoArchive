@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.aerialassist.HW;
 import org.discobots.aerialassist.commands.drive.CheesyArcadeDrive;
-import org.discobots.aerialassist.commands.drive.TankDrive;
 import org.discobots.aerialassist.utils.AngleController;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
@@ -67,11 +66,9 @@ public class Drivetrain extends Subsystem {
 
         gyro = new DiscoGyro(HW.gyroChannel);
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
+
         forwardEncoder = new Encoder(HW.forwardEncoderA, HW.forwardEncoderB);
         sidewayEncoder = new Encoder(HW.sidewayEncoderA, HW.sidewayEncoderB);
-
-//        forwardEncoder = new Encoder(HW.forwardEncoderA,HW.forwardEncoderB);
-//        sidewayEncoder = new Encoder(HW.sidewayEncoderA,HW.sidewayEncoderB);
         forwardEncoder.setDistancePerPulse(HW.distancePerPulse);
         sidewayEncoder.setDistancePerPulse(HW.distancePerPulse);
         forwardEncoder.start();

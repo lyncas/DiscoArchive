@@ -44,7 +44,7 @@ public class Main extends IterativeRobot {
         CommandBase.init();
         Dashboard.init();
         SmartDashboard.putNumber(AUTONCHOOSER_, 2);
-        SmartDashboard.getNumber("FirePneumatapult Shot Time", 1500);
+        SmartDashboard.putNumber("FirePneumatapult Shot Time", 1500);
     }
 
     public void autonomousInit() {
@@ -99,13 +99,12 @@ public class Main extends IterativeRobot {
     public void updateAutonomousSelection() {
         this.autonMode = (int) SmartDashboard.getNumber(AUTONCHOOSER_, 2);
         String autonString = "error";
-        SmartDashboard.putString("545454", "545454545454545454545454545454545454");
         switch(autonMode) {
             case 1:
                 autonString = "TWO BALL: HIGH HIGH";
                 break;
             case 2:
-                autonString = "TWO BALL: LOW HIGH";
+                autonString = "TWO BALL: HIGH HOLD";
                 break;
             case 3:
                 autonString = "TESTING";

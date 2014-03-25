@@ -29,13 +29,16 @@ public class Dashboard {
         SmartDashboard.putNumber("PID Controller Output", driveSub.getAngleControllerOutput());
         SmartDashboard.putBoolean("Field Centric Enabled?", driveSub.isFieldCentricEnabled());
         SmartDashboard.putNumber("Encoder Forward Distance", driveSub.getEncoderForwardDistance());
-        SmartDashboard.putNumber("Encoder Sideway Distance", driveSub.getEncoderSidewayDistance());
+        //SmartDashboard.putNumber("Encoder Sideway Distance", driveSub.getEncoderSidewayDistance());
         SmartDashboard.putBoolean("Use MiniCims?", driveSub.getMiniCimUsage());
 
         // Compressor
         SmartDashboard.putBoolean("Compressor On?", compSub.isEnabled());
         SmartDashboard.putBoolean("Compressor Max Pressure?", compSub.isFull());
         SmartDashboard.putBoolean("Can Run Pneumatics?", compSub.canRunPneumatics());
+        SmartDashboard.putNumber("Pressure", compSub.getPressurePSI());
+        SmartDashboard.putBoolean("Optimal Shooting PSI?", compSub.getPressurePSI() > 60);
+        SmartDashboard.putNumber("Pressure Sensor Voltage", compSub.getPressureVoltage());
 
         // Roller
         SmartDashboard.putBoolean("Intake Extended", rollSub.isExtended());

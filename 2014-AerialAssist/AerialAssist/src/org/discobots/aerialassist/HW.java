@@ -27,7 +27,7 @@ public class HW {
      ---------------------------------*/
     public static final int /*compressorDigital = 2,*/ compressorRelay = 1,
                              pressureSwitch = 1, spikeReplacementVictor=10,
-                             pressureSwitchPrototype = 3;
+                             pressureSwitchPrototype = 3, pressureSensor = 5;
     
                            
     //Port 3 is bad so I changed driveShiftASolenoid to 5 and pressureSwitchAnalog to 6.
