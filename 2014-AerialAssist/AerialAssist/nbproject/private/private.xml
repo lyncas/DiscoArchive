@@ -3,40 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/jama/Matrix.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/velocity/Velocity.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/GamePad.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/jama/QRDecomposition.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/BetterRobotDrive.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/Constants.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/HW.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/velocity/DiscoAccelerometer2011.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/OI.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/Dashboard.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/velocity/DiscoAccelerometer2011Simpson.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/Intake.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/DiscoGyro.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/SwitchDrive.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/Pneumatapult.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/CompressorSub.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/RollerSub.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/ArduIMU.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/KalmanFilter.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/Main.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/jama/LUDecomposition.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/BetterCompressor.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/SwitchShot.java</file>
+            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/Autonomous.java</file>
             <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/FirePneumatapult.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/TankDrive.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/AutonomousIntake.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/StickDrive.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/drive/SetMiniCimUsage.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/jama/JamaMath.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/AngleController.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/subsystems/Drivetrain.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/ToggleArmAutonomous.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/commands/upperbody/ToggleArm.java</file>
-            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/utils/velocity/DiscoAccelerometer2011Boole.java</file>
+            <file>file:/C:/Users/Developer/Documents/Programming/disco-frc/2014-AerialAssist/AerialAssist/src/org/discobots/aerialassist/OI.java</file>
         </group>
     </open-files>
 </project-private>

@@ -33,6 +33,7 @@ public class Main extends IterativeRobot {
     
     Command autonomousCommand;
     int autonMode = 2;
+    double speed = .6;
     public static final String AUTONCHOOSER_ = "Autonomous Chooser";
     public static final String AUTONMODE_ = "Autonomous Mode";
     /**
@@ -44,10 +45,12 @@ public class Main extends IterativeRobot {
         CommandBase.init();
         Dashboard.init();
         SmartDashboard.putNumber(AUTONCHOOSER_, 2);
+        SmartDashboard.putNumber("Speed", 2);
         SmartDashboard.getNumber("FirePneumatapult Shot Time", 1500);
     }
 
     public void autonomousInit() {
+        updateAutonomousSelection();
         autonomousCommand = new Autonomous(autonMode);
         autonomousCommand.start();
     }
@@ -108,6 +111,9 @@ public class Main extends IterativeRobot {
                 break;
             case 3:
                 autonString = "TESTING";
+                break;
+            case 4:
+                autonString = "ONLY DRIVING";
                 break;
             default:
                 autonMode = 0;
