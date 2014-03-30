@@ -8,6 +8,10 @@ public class ToggleArm extends CommandBase {
     DigitalInput armLimitSwitch;
     public boolean check;
 
+    public ToggleArm() {
+        check = check;
+    }
+    
     public ToggleArm(boolean on) {
         check = on;
     }
@@ -22,9 +26,9 @@ public class ToggleArm extends CommandBase {
     }
 
     protected void execute() {
-        if (rollerSub.isExtended()) {
-            rollerSub.setIntakeSpeed(.2 * Intake.IN);
-        }
+//        if (rollerSub.isExtended()) {
+//            rollerSub.setIntakeSpeed(.2 * Intake.IN);
+//        }
     }
 
     protected boolean isFinished() {

@@ -122,9 +122,9 @@ public class CheesyArcadeDrive extends CommandBase {
         turn = oi.getRawAnalogStickALY();
         turn = Math.abs(turn) > threshold ? turn : 0;
 
-        double moveR = oi.getRawAnalogStickARX() / 2;
+        double moveR = oi.getRawAnalogStickARX()* 3 / 4;    //I changed this because the right stick is too sluggish.
         moveR = Math.abs(moveR) > threshold ? moveR : 0;
-        double turnR = oi.getRawAnalogStickARY() / 2;
+        double turnR = oi.getRawAnalogStickARY() * 3 / 4;   //I changed this because the right stick is too sluggish.
         turnR = Math.abs(turnR) > threshold ? turnR : 0;
 
         move += moveR;
