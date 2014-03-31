@@ -61,11 +61,7 @@ public class FirePneumatapult extends CommandBase {
                     pneumatapultSub.fire(shoot);
                     break;
                 case 3:
-                    if (count % 80 != 0) {
-                        pneumatapultSub.fire(shoot);
-                    } else {
-                        pneumatapultSub.fire(false);
-                    }
+                    pneumatapultSub.fire(shoot);
                     break;
                 case 4:
                     pneumatapultSub.fire(shoot);
