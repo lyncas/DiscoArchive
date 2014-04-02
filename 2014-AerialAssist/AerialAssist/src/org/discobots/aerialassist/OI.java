@@ -78,6 +78,8 @@ public class OI {
         b_btnA.whenPressed(new ToggleCompressor()); //These are Seth's controls.  They will eventually be moved to the second controller.
         b_dpadU.whenPressed(new ToggleArm(true));//arm up
         b_dpadD.whenPressed(new ToggleArm(false));//arm down
+        b_dpadR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 4));    //Variable Time
+        b_dpadL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 5));    //Variable Cycle
         b_sBack.whenPressed(new SetPneumaticsRunnable());
         b_clicR.whileHeld(new ResetGyroAngle());
 //        b_dpadL.whenPressed(new SetMiniCimUsage());

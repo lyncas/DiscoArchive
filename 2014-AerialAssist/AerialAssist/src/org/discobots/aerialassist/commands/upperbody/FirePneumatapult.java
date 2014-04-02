@@ -39,6 +39,9 @@ public class FirePneumatapult extends CommandBase {
             case 4:
                 maxRunTime = (int) SmartDashboard.getNumber("FirePneumatapult Shot Time", 1500);
                 break;
+            case 5:
+                maxRunTime = 1500;
+                break;
         }
     }
 
@@ -65,6 +68,12 @@ public class FirePneumatapult extends CommandBase {
                     break;
                 case 4:
                     pneumatapultSub.fire(shoot);
+                    break;
+                case 5:
+                    if (SmartDashboard.getNumber("FirePneumatapult Cycle", 4)!= 0 && count%(SmartDashboard.getNumber("FirePneumatapult Cycle", 4)*20)==0)
+                        pneumatapultSub.fire(false);
+                    else
+                        pneumatapultSub.fire(shoot);
                     break;
             }
             pneumatapultSub.fire(shoot);

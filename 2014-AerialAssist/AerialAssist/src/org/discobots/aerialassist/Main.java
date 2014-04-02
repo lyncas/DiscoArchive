@@ -48,7 +48,8 @@ public class Main extends IterativeRobot {
         Dashboard.init();
         SmartDashboard.putNumber(AUTONCHOOSER_, 2);
         SmartDashboard.putNumber("Speed", 2);
-        SmartDashboard.getNumber("FirePneumatapult Shot Time", 1500);
+        SmartDashboard.putNumber("FirePneumatapult Shot Time", 1500);
+        SmartDashboard.putNumber("FirePneumatapult Cycle", 4);
     }
 
     public void autonomousInit() {
