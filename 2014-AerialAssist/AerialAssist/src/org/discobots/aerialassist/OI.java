@@ -65,35 +65,34 @@ public class OI {
         b_btnX.whenPressed(new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL));
         b_btnY.whenPressed(new SwitchDrive(SwitchDrive.MODE_TRACTION, SwitchDrive.MODE_NULL));
         b_sStar.whenPressed(new SwitchDrive(SwitchDrive.MODE_NULL, SwitchDrive.MODE_AUTODETECT));
-//        b_bumpR.whenPressed(new ToggleArm(true));//arm up
-//        b_trigR.whenPressed(new ToggleArm(false));//arm down
-        b_bumpR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));    //These are Seth's controls.  They will eventually be moved to the second controller.
-        b_trigR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 3));    //These are Seth's controls.  They will eventually be moved to the second controller.
+        b_bumpR.whenPressed(new ToggleArm(true));//arm up
+        b_trigR.whenPressed(new ToggleArm(false));//arm down
         b_bumpL.whileHeld(new Intake(Intake.IN));
         b_bumpL.whenReleased(new Intake(0));
         b_trigL.whileHeld(new Intake(Intake.OUT));
         b_trigL.whenReleased(new Intake(0));
-//        b_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));
-//        b_btnB.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 3));
-        b_btnA.whenPressed(new ToggleCompressor()); //These are Seth's controls.  They will eventually be moved to the second controller.
-        b_dpadU.whenPressed(new ToggleArm(true));//arm up
-        b_dpadD.whenPressed(new ToggleArm(false));//arm down
-        b_dpadR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 4));    //Variable Time
-        b_dpadL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 5));    //Variable Cycle
+        b_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));
+        b_btnB.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 3));
         b_sBack.whenPressed(new SetPneumaticsRunnable());
         b_clicR.whileHeld(new ResetGyroAngle());
-//        b_dpadL.whenPressed(new SetMiniCimUsage());
-//        b_dpadL.whenPressed(new ToggleCompressor());
+        b_dpadL.whenPressed(new ToggleCompressor());
 // Controller 2
-        b2_dpadU.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));
-        b2_dpadL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));
-        b2_dpadD.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 3));
-        b2_dpadR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 4));
         b2_btnX.whenPressed(new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL));
         b2_btnY.whenPressed(new SwitchDrive(SwitchDrive.MODE_TRACTION, SwitchDrive.MODE_NULL));
-        b2_bumpR.whenPressed(new ToggleArm(true));//arm up
-        b2_trigR.whenPressed(new ToggleArm(false));//arm down
-        b2_btnB.whenPressed(new ToggleCompressor());
+        b2_sStar.whenPressed(new SwitchDrive(SwitchDrive.MODE_NULL, SwitchDrive.MODE_AUTODETECT));
+        b2_bumpR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));    //These are Seth's controls.  They will eventually be moved to the second controller.
+        b2_trigR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 3));    //These are Seth's controls.  They will eventually be moved to the second controller.
+        b2_bumpL.whileHeld(new Intake(Intake.IN));
+        b2_bumpL.whenReleased(new Intake(0));
+        b2_trigL.whileHeld(new Intake(Intake.OUT));
+        b2_trigL.whenReleased(new Intake(0));
+        b2_btnA.whenPressed(new ToggleCompressor()); //These are Seth's controls.  They will eventually be moved to the second controller.
+        b2_dpadU.whenPressed(new ToggleArm(true));//arm up
+        b2_dpadD.whenPressed(new ToggleArm(false));//arm down
+        b2_dpadR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 4));    //Variable Time
+        b2_dpadL.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 5));    //Variable Cycle
+        b2_sBack.whenPressed(new SetPneumaticsRunnable());
+        b2_clicR.whileHeld(new ResetGyroAngle());
         
         
     }
