@@ -9,7 +9,6 @@ public class ToggleArm extends CommandBase {
     public boolean check;
 
     public ToggleArm() {
-        check = check;
     }
     
     public ToggleArm(boolean on) {
