@@ -37,7 +37,7 @@ public class Autonomous extends CommandGroup {
         // Do Nothing
     }
 
-    private void autonomousMode1Init() { // TWO BALL: HIGH HIGH
+    private void autonomousMode1Init() { // TWO BALL: HIGH HIGH     This has been tested and works.
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
         addSequential(new ToggleArm(false)); // arm down
