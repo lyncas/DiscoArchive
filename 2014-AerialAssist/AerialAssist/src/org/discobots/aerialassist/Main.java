@@ -46,8 +46,10 @@ public class Main extends IterativeRobot {
         previousLoopAuton = false;
         CommandBase.init();
         Dashboard.init();
-        SmartDashboard.putNumber(AUTONCHOOSER_, 2);
-        SmartDashboard.putNumber("Speed", 2);
+        SmartDashboard.putNumber(AUTONCHOOSER_, 1);
+        SmartDashboard.putNumber("Speed", .6);
+        SmartDashboard.putNumber("Autonomous Intake Speed", .5);
+        SmartDashboard.putNumber("Autonomous Outake Speed", .5);
         SmartDashboard.putNumber("FirePneumatapult Shot Time", 1500);
         SmartDashboard.putNumber("FirePneumatapult Cycle", 4);
     }
@@ -103,14 +105,15 @@ public class Main extends IterativeRobot {
 
     public void disabledInit() {
         System.out.println("Robot Disabled");
-        if (!previousLoopAuton) {
-            new ToggleArm(true).start();
-        }
+//        if (!previousLoopAuton) {
+//            new ToggleArm(false).start();
+//        }
         previousLoopAuton = false;
     }
 
     public void updateAutonomousSelection() {
-        this.autonMode = (int) SmartDashboard.getNumber(AUTONCHOOSER_, 2);
+//        this.autonMode = (int) SmartDashboard.getNumber(AUTONCHOOSER_, 2);
+        this.autonMode = 2;
         String autonString = "ERROR";
         switch (autonMode) {
             case 1:

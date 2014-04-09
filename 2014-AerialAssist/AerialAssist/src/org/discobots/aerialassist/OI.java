@@ -80,8 +80,8 @@ public class OI {
         b2_btnX.whenPressed(new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL));
         b2_btnY.whenPressed(new SwitchDrive(SwitchDrive.MODE_TRACTION, SwitchDrive.MODE_NULL));
         b2_sStar.whenPressed(new SwitchDrive(SwitchDrive.MODE_NULL, SwitchDrive.MODE_AUTODETECT));
-        b2_bumpR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));    //These are Seth's controls.  They will eventually be moved to the second controller.
-        b2_trigR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 3));    //These are Seth's controls.  They will eventually be moved to the second controller.
+        b2_bumpR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 0));    //These are Seth's controls.  They will eventually be moved to the second controller.
+        b2_trigR.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 2));    //These are Seth's controls.  They will eventually be moved to the second controller.
         b2_bumpL.whileHeld(new Intake(Intake.IN));
         b2_bumpL.whenReleased(new Intake(0));
         b2_trigL.whileHeld(new Intake(Intake.OUT));
