@@ -112,8 +112,8 @@ public class Main extends IterativeRobot {
     }
 
     public void updateAutonomousSelection() {
-//        this.autonMode = (int) SmartDashboard.getNumber(AUTONCHOOSER_, 2);
-        this.autonMode = 2;
+        this.autonMode = (int) SmartDashboard.getNumber(AUTONCHOOSER_, 2);
+//        this.autonMode = 2;
         String autonString = "ERROR";
         switch (autonMode) {
             case 1:
@@ -123,7 +123,7 @@ public class Main extends IterativeRobot {
                 autonString = "TWO BALL: HIGH INTAKE";
                 break;
             case 3:
-                autonString = "TWO BALL: HIGH HOLD";
+                autonString = "TWO BALL: DOBULE TRUSS";
                 break;
             case 4:
                 autonString = "ONE BALL: HIGH";
@@ -133,6 +133,7 @@ public class Main extends IterativeRobot {
                 autonString = "ONLY DRIVING";
                 break;
         }
+        //System.out.println("Auton Mode: " + autonString);
         SmartDashboard.putString(AUTONMODE_, autonString);
     }
 }

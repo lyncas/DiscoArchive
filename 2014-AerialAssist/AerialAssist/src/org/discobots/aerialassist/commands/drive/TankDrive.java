@@ -43,7 +43,7 @@ public class TankDrive extends CommandBase {
         lPrev = (float) l;
         rPrev = (float) r;
 
-        drivetrainSub.tankDrive(l, r);
+        drivetrainSub.tankDrive(-l, -r);
     }
 
     protected boolean isFinished() {

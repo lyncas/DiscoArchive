@@ -28,13 +28,13 @@ public class FirePneumatapult extends CommandBase {
                 maxRunTime = 150;
                 break;
             case 1:
-                maxRunTime = 190;
+                maxRunTime = 330 ;
                 break;
             case 2:
                 maxRunTime = 170;
                 break;
             case 3:
-                maxRunTime = 1500;
+                maxRunTime = 500;
                 break;
             case 4:
                 //maxRunTime = (int) SmartDashboard.getNumber("FirePneumatapult Shot Time");

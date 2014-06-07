@@ -1,4 +1,4 @@
-package org.discobots.aerialassist.commands.drive;
+  package org.discobots.aerialassist.commands.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
@@ -117,14 +117,14 @@ public class CheesyArcadeDrive extends CommandBase {
 
     protected void calculateInput() {
 
-        move = oi.getRawAnalogStickALX() + oi.getRawAnalogStickBLX();
+        move = -oi.getRawAnalogStickALX();
         move = Math.abs(move) > threshold ? move : 0;
-        turn = oi.getRawAnalogStickALY() + oi.getRawAnalogStickBLY();
+        turn = oi.getRawAnalogStickALY();
         turn = Math.abs(turn) > threshold ? turn : 0;
 
-        double moveR = (oi.getRawAnalogStickARX() + oi.getRawAnalogStickBRX())* 3 / 4;    //I changed this because the right stick is too sluggish.
+        double moveR = -oi.getRawAnalogStickARX()* 3 / 4;    //I changed this because the right stick is too sluggish.
         moveR = Math.abs(moveR) > threshold ? moveR : 0;
-        double turnR = (oi.getRawAnalogStickARY() + oi.getRawAnalogStickBRY())* 3 / 4;   //I changed this because the right stick is too sluggish.
+        double turnR = oi.getRawAnalogStickARY()* 3 / 4;   //I changed this because the right stick is too sluggish.
         turnR = Math.abs(turnR) > threshold ? turnR : 0;
 
         move += moveR;
