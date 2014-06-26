@@ -12,10 +12,10 @@ public class HW {
     /**---------------------------------
      * Motors
      ---------------------------------*/
-    public static final int leftRearMotor = 1, rightRearMotor = 6,
-                            leftRearMiniMotor = 3, rightRearMiniMotor = 8,
-                            leftFrontMotor = 2, rightFrontMotor= 7,
-                            leftFrontMiniMotor = 4, rightFrontMiniMotor= 9,
+    public static final int leftRearMotor = 6, rightRearMotor = 1,
+                            leftRearMiniMotor = 8, rightRearMiniMotor = 3,
+                            leftFrontMotor = 7, rightFrontMotor= 2,
+                            leftFrontMiniMotor = 9, rightFrontMiniMotor= 4,
                             rollerMotor = 5, //catapultMotor = 11,
                             //leftRearMotor = 1, rightRearMotor = 2,
                             //leftFrontMotor = 3, rightFrontMotor= 4,

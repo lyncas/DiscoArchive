@@ -14,7 +14,9 @@ public class Autonomous extends CommandGroup {
     long time;
 
     public Autonomous(int mode) {
-        switch (mode) {
+        autonomousMode3Init(); 
+        
+        /*switch (mode) {
             case 1:
                 autonomousMode1Init();
                 break;
@@ -25,12 +27,12 @@ public class Autonomous extends CommandGroup {
                 autonomousMode3Init();
                 break;
             case 4:
-                autonomousMode4Init();
+                autonomousMode4Init();// MOVE FOWARD then ONE BALL: HIGH
                 break;
             default:
                 autonomousMode5Init();
                 break;
-        }
+        }*/
     }
 
     private void autonomousMode0Init() {
@@ -74,26 +76,28 @@ public class Autonomous extends CommandGroup {
         addSequential(new SetPneumaticsRunnable(true));
         addSequential(new ToggleArm(false)); // arm down
         addSequential(new WaitCommand(.5));
-        addSequential(new AutonomousTankDrive(-.65, -.6, 750));
+        addSequential(new AutonomousTankDrive(-.6, -.65, 750));
         addSequential(new WaitCommand(.5));
         addSequential(new FirePneumatapult(true, 3));
         addSequential(new WaitCommand(.5));
-        addSequential(new AutonomousTankDrive(.65, .6, 900));
+        addSequential(new AutonomousTankDrive(.6, .65, 900));
         addSequential(new AutonomousIntake(1 * Intake.IN, 2000));
-        addSequential(new AutonomousTankDrive(-0.65, -0.6, 2200));
+        addSequential(new AutonomousTankDrive(-0.6, -0.65, 2200));
         addSequential(new FirePneumatapult(true, 3));
         addSequential(new WaitCommand(5));
     }
     
     private void autonomousMode4Init() { // ONE BALL: HIGH
+        //THIS IS THE MODE WE ARE USING 
         addSequential(new ToggleCompressor());
         addSequential(new SetPneumaticsRunnable(true));
         addSequential(new ToggleArm(false)); // arm down
-        addSequential(new WaitCommand(.5));
-        addSequential(new AutonomousTankDrive(-.4, -.4, 500));
+        addSequential(new WaitCommand(3.0));
+        addSequential(new FirePneumatapult(true, 3));
+        addSequential(new AutonomousTankDrive(-.6, -.6, 1000));
         addSequential(new WaitCommand(.5));
  //       addSequential(new AutonomousIntake(.1 * Intake.IN, 100));
-        addSequential(new FirePneumatapult(true, 3));
+       
     }
 
     private void autonomousMode5Init() { // ONLY DRIVING

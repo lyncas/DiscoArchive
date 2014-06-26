@@ -100,7 +100,7 @@ public class CheesyArcadeDrive extends CommandBase {
             driveLeft = -1 * turn * b - move * (-1 - turn * (a + 1) + turn * b);
         }
 
-        drivetrainSub.tankDrive(driveLeft, driveRight);
+        drivetrainSub.tankDrive(-driveLeft, -driveRight);
     }
 
     protected boolean isFinished() {

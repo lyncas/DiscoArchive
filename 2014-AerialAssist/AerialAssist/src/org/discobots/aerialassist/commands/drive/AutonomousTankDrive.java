@@ -19,8 +19,8 @@ public class AutonomousTankDrive extends CommandBase {
         requires(drivetrainSub);
         requires(rollerSub);
         maxRunTime = time;
-        left = l;
-        right = -r;
+        left = -l;
+        right = r;
     }
 
     public AutonomousTankDrive(double l, double r, double p, int time) {

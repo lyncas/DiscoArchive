@@ -28,7 +28,7 @@ public class FirePneumatapult extends CommandBase {
                 maxRunTime = 150;
                 break;
             case 1:
-                maxRunTime = 330 ;
+                maxRunTime = 230;
                 break;
             case 2:
                 maxRunTime = 170;
