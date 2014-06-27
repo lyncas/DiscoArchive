@@ -21,7 +21,7 @@ public class HW {
             flip2slot=1,    flip2channel=8;
     
     public static final int 
-            compressorslot=1,   compressorchannel=6;
+            compressorslot=1,   compressorchannel=1;
     
     public static final int armsolenoid1channel=1,  armsolenoid2channel=2,
                             armstage2channel1=3,    armstage2channel2=4;

@@ -22,7 +22,7 @@ public class HW {
                             //rollerMotor = 5, catapultMotor=7,
                             motorModule=1;
 
-    /**---------------------------------
+    /**--------------------------------
      * Pneumatics
      ---------------------------------*/
     public static final int /*compressorDigital = 2,*/ compressorRelay = 1,

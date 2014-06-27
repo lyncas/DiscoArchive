@@ -69,7 +69,7 @@ public class Autonomous extends CommandGroup {
         addSequential(new AutonomousTankDrive(-0.65, -0.6, 2500));
         addSequential(new FirePneumatapult(true, 1));
         addSequential(new WaitCommand(5));
-    }
+    } 
     
     private void autonomousMode3Init() { // TWO BALL: Double Truss
         addSequential(new ToggleCompressor());

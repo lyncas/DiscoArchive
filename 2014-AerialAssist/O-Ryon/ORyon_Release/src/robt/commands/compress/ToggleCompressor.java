@@ -26,6 +26,7 @@ public class ToggleCompressor extends CommandBase {
     protected void execute() {
         if(compressor.getEnabled()){
             compressor.disable();
+            
         }
         else{
             compressor.enable();

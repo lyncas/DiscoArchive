@@ -6,6 +6,7 @@ import org.discobots.aerialassist.commands.CommandBase;
 public class CheesyArcadeDrive extends CommandBase {
 
     private double movePrev, turnPrev;
+    
     private double rampThreshold = .1;
     private double move;
     private double turn;
