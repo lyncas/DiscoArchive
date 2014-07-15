@@ -43,6 +43,9 @@ public class HW {
      ---------------------------------*/
     public static final int gyroChannel = 2, chooChooTouchSensor = 11,
                             armLimitSwitchChannel = 6,
-                            forwardEncoderA = 2,forwardEncoderB = 3, 
+                            forwardEncoderA = 10,forwardEncoderB = 11, 
                             sidewayEncoderA = 4,sidewayEncoderB = 5;
+    
+    public static final int ledRelay = 8;
 }
+ 

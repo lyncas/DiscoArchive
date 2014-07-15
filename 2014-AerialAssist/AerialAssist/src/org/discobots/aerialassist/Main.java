@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.discobots.aerialassist.commands.CommandBase;
 import org.discobots.aerialassist.utils.Dashboard;
 import org.discobots.aerialassist.commands.Autonomous;
+import org.discobots.aerialassist.commands.upperbody.ControlLEDState;
 import org.discobots.aerialassist.commands.drive.SetMiniCimUsage;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
@@ -76,6 +77,7 @@ public class Main extends IterativeRobot {
         }
         new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL).start();
         new SetMiniCimUsage(true).start();
+        new ControlLEDState().start();
     }
 
     /**

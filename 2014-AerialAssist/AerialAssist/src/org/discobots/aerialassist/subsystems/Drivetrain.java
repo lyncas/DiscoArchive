@@ -1,8 +1,10 @@
 package org.discobots.aerialassist.subsystems;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,6 +13,7 @@ import org.discobots.aerialassist.commands.drive.CheesyArcadeDrive;
 import org.discobots.aerialassist.utils.AngleController;
 import org.discobots.aerialassist.utils.BetterRobotDrive;
 import org.discobots.aerialassist.utils.DiscoGyro;
+import org.discobots.aerialassist.utils.UltrasonicSRF02_I2C;
 import org.discobots.aerialassist.utils.velocity.Velocity;
 
 public class Drivetrain extends Subsystem {
@@ -29,9 +32,13 @@ public class Drivetrain extends Subsystem {
     public DiscoGyro gyro;
     private ADXL345_I2C accelerometer;
     private Encoder forwardEncoder;
-    private Encoder sidewayEncoder;
     private AngleController angleCont;
     private Velocity velocityReporter;
+    private UltrasonicSRF02_I2C ultrasonicIntake;
+    private UltrasonicSRF02_I2C ultrasonicShooter;
+    private Relay leds;
+  
+    
     public boolean fieldCentricEnabled = true;
     public static final boolean OMNI = false;
     public static final boolean TRACTION = true;
@@ -68,15 +75,17 @@ public class Drivetrain extends Subsystem {
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k4G);
 
         forwardEncoder = new Encoder(HW.forwardEncoderA, HW.forwardEncoderB);
-        sidewayEncoder = new Encoder(HW.sidewayEncoderA, HW.sidewayEncoderB);
         forwardEncoder.setDistancePerPulse(HW.distancePerPulse);
-        sidewayEncoder.setDistancePerPulse(HW.distancePerPulse);
         forwardEncoder.start();
-        sidewayEncoder.start();
-
+        
+        ultrasonicIntake = new UltrasonicSRF02_I2C(224);
+        ultrasonicShooter = new UltrasonicSRF02_I2C(242);
+        
         angleCont = new AngleController(-0.025, 0, 0, gyro);
         angleCont.setEnabled(true);
-
+        
+        leds = new Relay(1, HW.ledRelay);
+        
         if (Velocity.ENABLE_VELOCITY) {
             try {
                 velocityReporter = new Velocity(accelerometer);
@@ -174,15 +183,31 @@ public class Drivetrain extends Subsystem {
         return this.forwardEncoder.getDistance();
     }
 
-    public double getEncoderSidewayDistance() {
-        return this.sidewayEncoder.getDistance();
-    }
-
     public void setMiniCimUsage(boolean a) {
         this.useMini = a;
     }
-
+    
+    public int getUltrasonicIntakeAverageValue() {
+        return this.ultrasonicIntake.getAverageValue();
+    }
+    public int getUltrasonicShooterAverageValue() {
+        return this.ultrasonicShooter.getAverageValue();
+    }
+    
     public boolean getMiniCimUsage() {
         return this.useMini;
+    }
+    boolean state;
+    public void writeLEDState(boolean state) {
+        if (state) {
+            this.leds.set(Relay.Value.kOn);
+        } else {
+            this.leds.set(Relay.Value.kOff);
+        }
+        this.state = state;
+    }
+    
+    public boolean getLEDState() {
+        return this.state;
     }
 }
