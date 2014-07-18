@@ -1,7 +1,6 @@
 package org.discobots.aerialassist.commands.upperbody;
 
 import org.discobots.aerialassist.commands.CommandBase;
-import org.discobots.aerialassist.commands.upperbody.Intake;
 
 public class AutonomousIntake extends CommandBase {
 

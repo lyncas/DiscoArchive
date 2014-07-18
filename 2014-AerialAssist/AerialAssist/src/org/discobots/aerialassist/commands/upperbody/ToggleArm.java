@@ -16,18 +16,13 @@ public class ToggleArm extends CommandBase {
     }
 
     protected void initialize() {
-        if (compressorSub.canRunPneumatics()) {
-            rollerSub.setExtended(check);
-        }
+        rollerSub.setExtended(check);
         if (!compressorSub.isEnabled()) {
             compressorSub.on();
         }
     }
 
     protected void execute() {
-//        if (rollerSub.isExtended()) {
-//            rollerSub.setIntakeSpeed(.2 * Intake.IN);
-//        }
     }
 
     protected boolean isFinished() {

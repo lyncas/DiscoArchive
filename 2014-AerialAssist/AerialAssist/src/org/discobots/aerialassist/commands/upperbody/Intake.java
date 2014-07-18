@@ -21,7 +21,7 @@ public class Intake extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return false;
+        return false; // Automatically terminated by OI
     }
 
     protected void end() {

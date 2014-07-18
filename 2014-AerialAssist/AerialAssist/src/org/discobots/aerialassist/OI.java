@@ -3,12 +3,9 @@ package org.discobots.aerialassist;
 import org.discobots.aerialassist.utils.GamePad;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.discobots.aerialassist.commands.SetPneumaticsRunnable;
-import org.discobots.aerialassist.commands.drive.ResetGyroAngle;
 import org.discobots.aerialassist.commands.ToggleCompressor;
-import org.discobots.aerialassist.commands.drive.SetMiniCimUsage;
 import org.discobots.aerialassist.commands.drive.SwitchDrive;
-import org.discobots.aerialassist.commands.upperbody.FirePneumatapult;
+import org.discobots.aerialassist.commands.upperbody.FireLauncher;
 import org.discobots.aerialassist.commands.upperbody.Intake;
 import org.discobots.aerialassist.commands.upperbody.ToggleArm;
 import org.discobots.aerialassist.utils.GamePad.AxisButton;
@@ -62,19 +59,17 @@ public class OI {
 
     private void mapButtons() {
 // Controller 1
-        b_btnX.whenPressed(new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL));
-        b_btnY.whenPressed(new SwitchDrive(SwitchDrive.MODE_TRACTION, SwitchDrive.MODE_NULL));
-        b_sStar.whenPressed(new SwitchDrive(SwitchDrive.MODE_NULL, SwitchDrive.MODE_AUTODETECT));
+        b_btnX.whenPressed(new SwitchDrive(SwitchDrive.MODE_NULL));
+        b_btnY.whenPressed(new SwitchDrive(SwitchDrive.MODE_NULL));
+        b_sStar.whenPressed(new SwitchDrive(SwitchDrive.MODE_AUTODETECT));
         b_bumpR.whenPressed(new ToggleArm(true));//arm up
         b_trigR.whenPressed(new ToggleArm(false));//arm down
         b_bumpL.whileHeld(new Intake(Intake.IN));
         b_bumpL.whenReleased(new Intake(0));
         b_trigL.whileHeld(new Intake(Intake.OUT));
         b_trigL.whenReleased(new Intake(0));
-        b_btnA.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 1));
-        b_btnB.whenPressed(new FirePneumatapult(FirePneumatapult.FIRE, 3));
-        b_sBack.whenPressed(new SetPneumaticsRunnable());
-        b_clicR.whileHeld(new ResetGyroAngle());
+        b_btnA.whenPressed(new FireLauncher(FireLauncher.FIRE, 1));
+        b_btnB.whenPressed(new FireLauncher(FireLauncher.FIRE, 3));
         b_dpadL.whenPressed(new ToggleCompressor());
 // Controller 2
         /*b2_btnX.whenPressed(new SwitchDrive(SwitchDrive.MODE_OMNIWHEEL, SwitchDrive.MODE_NULL));

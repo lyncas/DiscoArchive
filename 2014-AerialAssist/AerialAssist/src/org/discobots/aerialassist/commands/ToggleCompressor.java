@@ -9,10 +9,10 @@ public class ToggleCompressor extends CommandBase {
     protected void initialize() {
         if (compressorSub.isEnabled()) {
             compressorSub.off();
-            System.out.println("Compressor off");
+            System.out.println("Compressor toggled always OFF");
         } else {
             compressorSub.on();
-            System.out.println("Compressor on");
+            System.out.println("Compressor toggled ON when PSI < 120");
         }
     }
 

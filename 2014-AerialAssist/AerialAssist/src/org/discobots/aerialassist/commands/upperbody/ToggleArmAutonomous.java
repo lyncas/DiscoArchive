@@ -4,16 +4,17 @@ import org.discobots.aerialassist.commands.CommandBase;
 
 public class ToggleArmAutonomous extends CommandBase {
 
-    public boolean check;
+    public static int maxRunTime = 500; // milli
+    private long endTime;
+    private boolean check;
 
     public ToggleArmAutonomous(boolean on) throws Exception {
         throw new Exception();
     }
 
     protected void initialize() {
-        if (compressorSub.canRunPneumatics()) {
-            rollerSub.setExtended(check);
-        }
+        rollerSub.setExtended(check);
+        endTime = System.currentTimeMillis() + maxRunTime;
         if (!compressorSub.isEnabled()) {
             compressorSub.on();
         }
@@ -26,10 +27,10 @@ public class ToggleArmAutonomous extends CommandBase {
     }
 
     protected boolean isFinished() {
-        if (!check) {
-            return rollerSub.getLimit();
-        } else {
+        if (System.currentTimeMillis() > endTime) {
             return true;
+        } else {
+            return false;
         }
     }
 

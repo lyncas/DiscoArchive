@@ -13,11 +13,18 @@ public class PressureSensor extends SensorBase {
      * 
      * @return Pressure in PSI
      */
-    public int get() {
+    public int getInteger() {
         double voltage = analogChannel.getAverageVoltage();
         double voltage0to4 = (voltage - 0.5);
         voltage0to4 = (voltage0to4 < 0) ? 0 : voltage0to4;
-        return (int) ((voltage0to4) * 150.0 / 4.0 * 120 / 112);
+        return (int) ((voltage0to4) * 40.1785714286);
+    }
+    
+    public double getDouble() {
+        double voltage = analogChannel.getAverageVoltage();
+        double voltage0to4 = (voltage - 0.5);
+        voltage0to4 = (voltage0to4 < 0) ? 0 : voltage0to4;
+        return (voltage0to4) * 40.1785714286;
     }
     
     public double getVoltage() {

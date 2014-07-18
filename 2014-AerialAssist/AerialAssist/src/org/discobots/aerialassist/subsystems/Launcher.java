@@ -4,36 +4,28 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Solenoid;
 import org.discobots.aerialassist.HW;
 
-public class Pneumatapult extends Subsystem {
+public class Launcher extends Subsystem {
 
-    private Solenoid fire1;
-    private Solenoid fire2;
-    private int mode;
+    private Solenoid launcherSolenoid1;
+    private Solenoid launcherSolenoid2;
+    private Solenoid launcherSolenoid3;
 
     public void initDefaultCommand() {
     }
 
-    public Pneumatapult() {
-        fire1 = new Solenoid(HW.pneumatapultSolenoidA);
-        fire2 = new Solenoid(HW.pneumatapultSolenoidB);
-        mode = 2;
+    public Launcher() {
+        launcherSolenoid1 = new Solenoid(HW.launcherSolenoidA);
+        launcherSolenoid2 = new Solenoid(HW.launcherSolenoidB);
+        launcherSolenoid3 = new Solenoid(HW.launcherSolenoidC);
     }
 
     public void fire(boolean shoot) {
-        fire1.set(shoot);
-        fire2.set(shoot);
-    }
-
-    public int getMode() {
-        return mode;
-    }
-
-    public void changeMode() {
-        mode++;
-        mode = mode % 3;
+        launcherSolenoid1.set(shoot);
+        launcherSolenoid2.set(shoot);
+        launcherSolenoid3.set(shoot);
     }
 
     public boolean isDown() {
-        return !this.fire1.get();
+        return !this.launcherSolenoid1.get();
     }
 }
