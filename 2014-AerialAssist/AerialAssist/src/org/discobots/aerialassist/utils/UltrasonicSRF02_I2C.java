@@ -20,12 +20,12 @@ public class UltrasonicSRF02_I2C extends SensorBase {
     public UltrasonicSRF02_I2C(int address) {
         UltrasonicSRF02_I2C.setDeviceAddress(242);
         i2cBus = DigitalModule.getInstance(getDefaultDigitalModule()).getI2C(address);
-            System.out.println("[I2C SRF02] Created i2c bus object at address " + address);
+            System.out.println("[Debug I2C SRF02] Created i2c bus object at address " + address);
         if (!i2cBus.addressOnly()) {
-            System.out.println("[I2C SRF02] Test for device successful, address " + address);
+            System.out.println("[Debug I2C SRF02] Test for device successful, address " + address);
         } else {
-            System.err.println("[I2C SRF02] Test for device FAILED, address " + address);
-            System.out.println("[I2C SRF02] Continuing...");
+            System.err.println("[Debug I2C SRF02] Test for device FAILED, address " + address);
+            System.out.println("[Debug I2C SRF02] Continuing...");
         }
         updateThread = new UltrasonicUpdateThread();
         updateThread.start();
@@ -41,7 +41,7 @@ public class UltrasonicSRF02_I2C extends SensorBase {
                 if (latestData > 0) {
                     sampleData[pointer] = latestData;
                     pointer = (pointer == (sampleData.length - 1)) ? 0 : pointer + 1;
-                    System.out.println(buffer[0] + " " + buffer[1]);
+                    //System.out.println(buffer[0] + " " + buffer[1] + latestData);
                 }
                 try {
                     Thread.sleep(15); // <------------------- Update Wait Time

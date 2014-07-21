@@ -26,7 +26,7 @@ public class Dashboard {
 
         // Drive
         SmartDashboard.putNumber("Encoder Distance", driveSub.getEncoderForwardDistance());
-        SmartDashboard.putNumber("Ultrasonic Shooter", driveSub.getUltrasonicShooterAverageValue());
+        SmartDashboard.putNumber("Ultrasonic Launcher", driveSub.getUltrasonicLauncherrAverageValue());
         SmartDashboard.putNumber("Ultrasonic Intake", driveSub.getUltrasonicIntakeAverageValue());
         SmartDashboard.putBoolean("Use MiniCims", driveSub.getMiniCimUsage());
 

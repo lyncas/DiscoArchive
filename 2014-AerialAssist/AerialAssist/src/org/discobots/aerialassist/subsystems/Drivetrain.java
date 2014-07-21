@@ -24,7 +24,7 @@ public class Drivetrain extends Subsystem {
     
     private Encoder forwardEncoder;
     private UltrasonicSRF02_I2C ultrasonicIntake;
-    private UltrasonicSRF02_I2C ultrasonicShooter;
+    private UltrasonicSRF02_I2C ultrasonicLauncher;
     
     private Relay leds;
     
@@ -60,7 +60,7 @@ public class Drivetrain extends Subsystem {
         forwardEncoder.start();
         
         ultrasonicIntake = new UltrasonicSRF02_I2C(224);
-        ultrasonicShooter = new UltrasonicSRF02_I2C(242);
+        ultrasonicLauncher = new UltrasonicSRF02_I2C(242);
         
         leds = new Relay(1, HW.ledRelay);
     }
@@ -87,8 +87,8 @@ public class Drivetrain extends Subsystem {
     public int getUltrasonicIntakeAverageValue() {
         return this.ultrasonicIntake.getAverageValue();
     }
-    public int getUltrasonicShooterAverageValue() {
-        return this.ultrasonicShooter.getAverageValue();
+    public int getUltrasonicLauncherrAverageValue() {
+        return this.ultrasonicLauncher.getAverageValue();
     }
     
     public boolean getMiniCimUsage() {
