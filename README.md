@@ -1,8 +1,6 @@
-disco-frc
+DiscoArchive
 =========
 
-FIRST Robotics Competition - FRC - Code for Robot
+FIRST Robotics Competition Code for the Discobots. Years 2011-2014.
 
-Please don't create folders at this level.  This is only for folders by year. 
-
-Please add your name to the list in the readme for the year that code was worked on (not this one).
+This is an archive. All new year projects should be put into their own repos.
